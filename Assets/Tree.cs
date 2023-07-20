@@ -5,8 +5,10 @@ using Random = System.Random;
 
 public class Tree : MonoBehaviour
 {
+    public GameObject fruit;
 
     public static int Fertility = 80;
+    public Vector3 offset = new Vector3(0.05f, 0, 0.05f);
 
     private void Start()
     {
@@ -20,6 +22,7 @@ public class Tree : MonoBehaviour
         if (chance <= Fertility)
         {
             Debug.Log("I feel fruity today!");
+            Instantiate(fruit, transform.position + offset, Quaternion.identity);
             GameStats.FruitsAvailable++;
         }
     }

@@ -111,3 +111,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6a253acd536e6349bc96338cffe4ccd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fruitTag: fruit
+  speed: 1

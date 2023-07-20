@@ -7,4 +7,5 @@ public class GameStats : MonoBehaviour
     public static int Wood;
     public static int Food;
 
+    public static int FruitsAvailable;
 }

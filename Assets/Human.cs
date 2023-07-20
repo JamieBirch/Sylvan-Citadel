@@ -1,14 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Human : MonoBehaviour
 {
-
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        //each day
+        GameManager.newDay += StartDay;
+    }
+
+
+    void StartDay()
+    {
+        Debug.Log("I'm starting my day!");
+        
         //TODO find food
         //TODO find water
         //TODO find shelter

@@ -1,15 +1,26 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+
+using Random = System.Random;
+
 
 public class Tree : MonoBehaviour
 {
 
-    // Update is called once per frame
-    void Update()
+    public static int Fertility = 80;
+
+    private void Start()
     {
-        //each day
+        GameManager.newDay += StartDay;
+    }
+    
+    void StartDay()
+    {
         //TODO spawn fruit with 80% chance
-        
+        double chance = new Random().NextDouble() * 100;
+        if (chance <= Fertility)
+        {
+            Debug.Log("I feel fruity today!");
+            GameStats.FruitsAvailable++;
+        }
     }
 }

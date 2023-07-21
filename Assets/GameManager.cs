@@ -43,7 +43,6 @@ public class GameManager : MonoBehaviour
 
         // spawn humans
         SpawnHumans();
-        
 
         // start world time
         countdown = dayLength;

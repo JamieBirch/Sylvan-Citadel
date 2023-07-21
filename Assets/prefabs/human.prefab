@@ -111,5 +111,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6a253acd536e6349bc96338cffe4ccd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Name: 
+  isThirsty: 0
+  isHungry: 0
+  hasHome: 0
+  houseTag: house
   fruitTag: fruit
+  waterTag: water
+  _currentTarget: {fileID: 0}
   speed: 1

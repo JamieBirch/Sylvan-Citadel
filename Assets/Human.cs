@@ -30,16 +30,14 @@ public class Human : MonoBehaviour
             {
                 RunToTarget();
             }
-        }
-        if (isHungry)
+        } else if (isHungry)
         {
             FindFood();
             if (_currentTarget != null)
             {
                 RunToTarget();
             }
-        }
-        if (!hasHome)
+        } else if(!hasHome)
         {
             FindHome();
             if (_currentTarget != null)
@@ -153,7 +151,7 @@ public class Human : MonoBehaviour
         transform.Translate(dir.normalized * distanceThisFrame, Space.World);
         transform.LookAt(_currentTarget.transform);
         
-        if (dir.magnitude <= distanceThisFrame)
+        if (dir.magnitude  <= distanceThisFrame)
         {
             if (_currentTarget.CompareTag(fruitTag))
             {
@@ -167,7 +165,7 @@ public class Human : MonoBehaviour
                 Drink();
             }
 
-            _currentTarget = null;
+            // _currentTarget = null;
         }
     }
 

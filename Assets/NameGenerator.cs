@@ -7,8 +7,8 @@ public static class NameGenerator
         
     public static String CreateName()
     {
-        int prefixIndex = new Random().Next(1, prefixes.Length + 1);
-        int postfixIndex = new Random().Next(1, postfixes.Length + 1);
+        int prefixIndex = new Random().Next(0, prefixes.Length);
+        int postfixIndex = new Random().Next(0, postfixes.Length);
 
         return prefixes[prefixIndex] + postfixes[postfixIndex];
     }

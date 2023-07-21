@@ -7,7 +7,7 @@ public class Tree : MonoBehaviour
 {
     public GameObject fruit;
 
-    public static int Fertility = 20;
+    public int Fertility;
     public Vector3 offset = new Vector3(0.05f, 0.1f, 0.05f);
 
     private void Start()

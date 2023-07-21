@@ -1,5 +1,4 @@
 using UnityEngine;
-using Random = System.Random;
 
 public class ConstructionManager : MonoBehaviour
 {
@@ -29,13 +28,7 @@ public class ConstructionManager : MonoBehaviour
         float minZ = hexCenter.z - HexRadius;
         float maxZ = hexCenter.z + HexRadius;
 
-        return new Vector3(GenerateRandom(minX, maxX), 0f, GenerateRandom(minZ, maxZ));
+        return new Vector3(Utils.GenerateRandom(minX, maxX), 0f, Utils.GenerateRandom(minZ, maxZ));
     }
     
-    private static float GenerateRandom(float min, float max)
-    {
-        Random random = new Random();
-        return (float)((random.NextDouble() * (max - min)) + min);
-    }
-
 }

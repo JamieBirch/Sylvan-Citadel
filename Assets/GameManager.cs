@@ -108,6 +108,8 @@ public class GameManager : MonoBehaviour
     private void SpawnTree()
     {
         var position = ConstructionManager.instance.PositionOnHex(firstTileCenter) + new Vector3(0, 1f, 0);
-        Instantiate(tree, position, Quaternion.identity);
+        GameObject newTree = Instantiate(tree, position, Quaternion.identity);
+        float randomScale = Utils.GenerateRandom(0.5f, 1.5f);
+        newTree.transform.localScale = new Vector3(randomScale, randomScale, randomScale);
     }
 }

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 397639803382010223}
   m_Layer: 0
   m_Name: house
-  m_TagString: Untagged
+  m_TagString: house
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -96,3 +96,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b301b1a23119c742a4b2663c78d210f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  capacity: 5
+  bedsAvailable: 0

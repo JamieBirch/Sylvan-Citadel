@@ -9,6 +9,7 @@ public class House : MonoBehaviour
 
     private void Start()
     {
+        _tenants = new List<Human>();
         bedsAvailable = capacity;
     }
 

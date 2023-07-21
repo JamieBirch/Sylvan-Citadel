@@ -162,7 +162,7 @@ MonoBehaviour:
   StartStorageFood: 100
   firstTileCenter: {x: 0, y: 0, z: 0}
   countdown: 0
-  dayLength: 15
+  dayLength: 30
   daysText: {fileID: 923402974}
   countdownText: {fileID: 1765088319}
   fruits: {fileID: 312585311}

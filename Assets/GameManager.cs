@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
     public Text countdownText;
     public Text fruits;
 
-    public static event Action newDay;
+    public static event Action NewDay;
 
     // Start is called before the first frame update
     void Start()
@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour
         countdown = dayLength;
         day = 1;
         
-        newDay?.Invoke();
+        NewDay?.Invoke();
     }
 
     private void SpawnHumans()
@@ -60,7 +60,7 @@ public class GameManager : MonoBehaviour
 
     private void SpawnHuman()
     {
-        var position = PositionOnHex(firstTileCenter) + new Vector3(0, 2.125f, 0);
+        var position = PositionOnHex(firstTileCenter) + new Vector3(0, 1.25f, 0);
         Instantiate(human, position, Quaternion.identity);
     }
 
@@ -69,20 +69,19 @@ public class GameManager : MonoBehaviour
     {
         fruits.text = GameStats.FruitsAvailable.ToString();
         
-        //todo smooth sun movement between days
-        
-        var sunRotation = sun.transform;
+        var sunTransform = sun.transform;
 
         countdown -= Time.deltaTime;
         countdown = Mathf.Clamp(countdown, 0f, Mathf.Infinity);
-        sunRotation.Rotate(Time.deltaTime * (360/dayLength),0, 0);
+        sunTransform.Rotate(Time.deltaTime * (360/dayLength),0, 0);
         
         if (countdown <= 0)
         {
+            //start new day
             day++;
             countdown = dayLength;
-            sunRotation.rotation = Quaternion.Euler(0, -60, 0);
-            newDay?.Invoke();
+            sunTransform.rotation = Quaternion.Euler(0, -60, 0);
+            NewDay?.Invoke();
         }
 
         countdownText.text = string.Format("{0:00.00}", countdown);
@@ -100,7 +99,7 @@ public class GameManager : MonoBehaviour
 
     private void SpawnTree()
     {
-        var position = PositionOnHex(firstTileCenter) + new Vector3(0, 1.875f, 0);
+        var position = PositionOnHex(firstTileCenter) + new Vector3(0, 1f, 0);
         Instantiate(tree, position, Quaternion.identity);
     }
 

@@ -7,12 +7,12 @@ public class Tree : MonoBehaviour
 {
     public GameObject fruit;
 
-    public static int Fertility = 80;
-    public Vector3 offset = new Vector3(0.05f, 0, 0.05f);
+    public static int Fertility = 20;
+    public Vector3 offset = new Vector3(0.05f, 0.1f, 0.05f);
 
     private void Start()
     {
-        GameManager.newDay += StartDay;
+        GameManager.NewDay += StartDay;
     }
     
     void StartDay()
@@ -25,5 +25,10 @@ public class Tree : MonoBehaviour
             Instantiate(fruit, transform.position + offset, Quaternion.identity);
             GameStats.FruitsAvailable++;
         }
+    }
+    
+    public void OnDestroy()
+    {
+        GameManager.NewDay -= StartDay;
     }
 }

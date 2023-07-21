@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fruit: {fileID: 5558580003177826399, guid: 5d5f09b773c33d3449d039969e32e7fd, type: 3}
-  offset: {x: 0.15, y: 0, z: 0.15}
+  offset: {x: 0.15, y: 0.0625, z: 0.15}
 --- !u!1001 &1443927584696376621
 PrefabInstance:
   m_ObjectHideFlags: 0

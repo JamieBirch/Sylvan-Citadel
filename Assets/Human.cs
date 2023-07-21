@@ -3,20 +3,23 @@ using UnityEngine;
 
 public class Human : MonoBehaviour
 {
-    private bool isHungry = false;
+    public bool isHungry = false;
     public string fruitTag = "fruit";
     private GameObject _currentTarget;
 
-    public int speed = 3;
-
+    public int speed;
     
     private void Start()
     {
-        GameManager.newDay += StartDay;
+        GameManager.NewDay += StartDay;
     }
 
     private void Update()
     {
+        if (isHungry)
+        {
+            FindFood();
+        }
         if (_currentTarget != null)
         {
             RunToTarget();
@@ -45,14 +48,13 @@ public class Human : MonoBehaviour
 
     void StartDay()
     {
-        Debug.Log("I'm starting my day!");
-        isHungry = true;
-        
-        //TODO find food
         if (isHungry)
         {
-            FindFood();
+            Debug.Log("I'm dying of hunger! :(");
+            Destroy(gameObject);
         }
+        Debug.Log("I'm starting my day!");
+        isHungry = true;
         
         //TODO find water
         //TODO find shelter
@@ -92,5 +94,10 @@ public class Human : MonoBehaviour
         isHungry = false;
 
         GameStats.FruitsAvailable--;
+    }
+
+    public void OnDestroy()
+    {
+        GameManager.NewDay -= StartDay;
     }
 }

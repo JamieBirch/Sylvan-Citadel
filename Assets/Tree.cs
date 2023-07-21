@@ -1,8 +1,5 @@
 using UnityEngine;
 
-using Random = System.Random;
-
-
 public class Tree : MonoBehaviour
 {
     public GameObject fruit;
@@ -17,8 +14,7 @@ public class Tree : MonoBehaviour
     
     void StartDay()
     {
-        //TODO spawn fruit with 80% chance
-        double chance = new Random().NextDouble() * 100;
+        double chance = Utils.GenerateRandomChance();
         if (chance <= Fertility)
         {
             Debug.Log("I feel fruity today!");

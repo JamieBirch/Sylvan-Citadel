@@ -7,4 +7,10 @@ public static class Utils
         Random random = new Random();
         return (float)((random.NextDouble() * (max - min)) + min);
     }
+    
+    public static float GenerateRandomChance()
+    {
+        Random random = new Random();
+        return (float)random.NextDouble() * 100;
+    }
 }

@@ -11,11 +11,13 @@ public class House : MonoBehaviour
     {
         _tenants = new List<Human>();
         bedsAvailable = capacity;
+        GameStats.BedsAvailable += capacity;
     }
 
     public void PlaceHuman(Human human)
     {
         _tenants.Add(human);
         bedsAvailable--;
+        GameStats.BedsAvailable--;
     }
 }

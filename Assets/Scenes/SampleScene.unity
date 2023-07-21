@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 107134972}
   - component: {fileID: 107134971}
   - component: {fileID: 107134973}
+  - component: {fileID: 107134974}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -155,7 +156,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sun: {fileID: 705507993}
   tree: {fileID: 1890554757794199227, guid: 085bfeaebcf90de4c8afd16cdf964086, type: 3}
-  human: {fileID: 3321652418783683364, guid: 29074b5d32fa9374dabd446018d22a54, type: 3}
   StartHumans: 5
   StartTrees: 15
   StartStorageWood: 50
@@ -195,9 +195,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   house: {fileID: 8740147566341597934, guid: d063275df0b3c354385010dfa968ea7a, type: 3}
-  HexRadius: 3.5
+  HexRadius: 3
   offsetVector: {x: 0, y: 1.375, z: 0}
   firstTileCenter: {x: 0, y: 0, z: 0}
+--- !u!114 &107134974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 107134970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1aa568d269e940a49bd4613cd9319914, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  human: {fileID: 3321652418783683364, guid: 29074b5d32fa9374dabd446018d22a54, type: 3}
 --- !u!1001 &127762663
 PrefabInstance:
   m_ObjectHideFlags: 0

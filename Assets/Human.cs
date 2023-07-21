@@ -1,7 +1,10 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Human : MonoBehaviour
 {
+    private PopulationManager _populationManager;
+    
     public string Name;
     
     public bool isThirsty = false;
@@ -13,12 +16,16 @@ public class Human : MonoBehaviour
     public GameObject _currentTarget;
 
     public int speed;
+    
+    public int fertility;
+    public Vector3 offset = new Vector3(0.05f, 0.1f, 0.05f);
 
     private GameObject _home;
     
     private void Start()
     {
         GameManager.NewDay += StartDay;
+        _populationManager = PopulationManager.instance;
     }
 
     private void Update()
@@ -45,13 +52,32 @@ public class Human : MonoBehaviour
                 RunToTarget();
             }
         }
+
+        if (!isHungry && !isThirsty && hasHome)
+        {
+            GoHome();
+        }
+    }
+
+    private void GoHome()
+    {
+        // _currentTarget = _home;
+        Vector3 dir = new Vector3(
+            _home.transform.position.x - transform.position.x, 
+            0,
+            _home.transform.position.z - transform.position.z);
+        float distanceThisFrame = speed * Time.deltaTime;
+        
+        transform.Translate(dir.normalized * distanceThisFrame, Space.World);
+        transform.LookAt(_home.transform);
+        
+        // RunToTarget();
     }
 
     private void FindWater()
     {
         GameObject[] waterSources = GameObject.FindGameObjectsWithTag(waterTag);
         
-        //find nearest food
         float shortestDistance = Mathf.Infinity;
         GameObject nearestWater = null;
         foreach (GameObject waterSource in waterSources)
@@ -101,19 +127,21 @@ public class Human : MonoBehaviour
 
     private void FindHome()
     {
-        //TODO find shelter
         GameObject[] houses = GameObject.FindGameObjectsWithTag(houseTag);
         
-        //find nearest food
         float shortestDistance = Mathf.Infinity;
         GameObject nearestHouse = null;
         foreach (GameObject house in houses)
         {
-            float distanceToHouse = Vector3.Distance(transform.position, house.transform.position);
-            if (distanceToHouse < shortestDistance)
+            House thisHouse = house.GetComponent<House>();
+            if (thisHouse.bedsAvailable > 0)
             {
-                shortestDistance = distanceToHouse;
-                nearestHouse = house;
+                float distanceToHouse = Vector3.Distance(transform.position, house.transform.position);
+                if (distanceToHouse < shortestDistance)
+                {
+                    shortestDistance = distanceToHouse;
+                    nearestHouse = house;
+                }
             }
         }
 
@@ -135,6 +163,16 @@ public class Human : MonoBehaviour
             Destroy(gameObject);
             GameStats.Population--;
         }
+
+        if (GameStats.BedsAvailable > 0)
+        {
+            double chance = Utils.GenerateRandomChance();
+            if (chance <= fertility)
+            {
+                GiveBirth();
+            }
+        }
+        
         Debug.Log("I'm starting my day!");
         isHungry = true;
         isThirsty = true;
@@ -159,13 +197,12 @@ public class Human : MonoBehaviour
             } else if (_currentTarget.CompareTag(houseTag))
             {
                 _currentTarget.GetComponent<House>().PlaceHuman(this);
+                _home = _currentTarget;
                 hasHome = true;
             } else if (_currentTarget.CompareTag(waterTag))
             {
                 Drink();
             }
-
-            // _currentTarget = null;
         }
     }
 
@@ -183,6 +220,12 @@ public class Human : MonoBehaviour
         isHungry = false;
 
         GameStats.FruitsAvailable--;
+    }
+
+    private void GiveBirth()
+    {
+        Debug.Log("I'm having a child!");
+        _populationManager.SpawnHuman(gameObject.transform.position + offset);
     }
 
     public void OnDestroy()

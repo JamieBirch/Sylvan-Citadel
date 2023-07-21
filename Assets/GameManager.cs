@@ -4,10 +4,10 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject sun;
+    private PopulationManager _populationManager;
     
+    public GameObject sun;
     public GameObject tree;
-    public GameObject human;
     
     public int StartHumans;
     public int StartTrees;
@@ -33,6 +33,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         GameStats.Population = 0;
+        _populationManager = PopulationManager.instance;
         
         // spawn fruit trees
         SpawnTrees();
@@ -42,33 +43,13 @@ public class GameManager : MonoBehaviour
         GameStats.Wood = StartStorageWood;
 
         // spawn humans
-        SpawnHumans();
+        _populationManager.SpawnHumans(StartHumans, firstTileCenter);
 
         // start world time
         countdown = dayLength;
         day = 1;
         
         NewDay?.Invoke();
-    }
-
-    private void SpawnHumans()
-    {
-        for (int i = 0; i < StartHumans; i++)
-        {
-            SpawnHuman();
-        }
-    }
-
-    private void SpawnHuman()
-    {
-        var position = ConstructionManager.instance.PositionOnHex(firstTileCenter) + new Vector3(0, 1.25f, 0);
-        GameObject humanGameObject = Instantiate(human, position, Quaternion.identity);
-        GameStats.Population++;
-
-        string name = NameGenerator.CreateName();
-        humanGameObject.name = name;
-
-        humanGameObject.GetComponent<Human>().Name = name;
     }
 
     // Update is called once per frame

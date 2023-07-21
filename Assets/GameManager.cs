@@ -10,8 +10,8 @@ public class GameManager : MonoBehaviour
     public GameObject tree;
     public GameObject human;
     
-    public int StartHumans = 20;
-    public int StartTrees = 30;
+    public int StartHumans;
+    public int StartTrees;
     
     //initial resources
     public int StartStorageWood = 50;
@@ -27,12 +27,15 @@ public class GameManager : MonoBehaviour
     public Text daysText;
     public Text countdownText;
     public Text fruits;
+    public Text humans;
 
     public static event Action NewDay;
 
     // Start is called before the first frame update
     void Start()
     {
+        GameStats.Population = 0;
+        
         // spawn fruit trees
         SpawnTrees();
 
@@ -42,6 +45,7 @@ public class GameManager : MonoBehaviour
 
         // spawn humans
         SpawnHumans();
+        
 
         // start world time
         countdown = dayLength;
@@ -62,12 +66,14 @@ public class GameManager : MonoBehaviour
     {
         var position = PositionOnHex(firstTileCenter) + new Vector3(0, 1.25f, 0);
         Instantiate(human, position, Quaternion.identity);
+        GameStats.Population++;
     }
 
     // Update is called once per frame
     void Update()
     {
         fruits.text = GameStats.FruitsAvailable.ToString();
+        humans.text = GameStats.Population.ToString();
         
         var sunTransform = sun.transform;
 

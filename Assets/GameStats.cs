@@ -8,4 +8,5 @@ public class GameStats : MonoBehaviour
     public static int Food;
 
     public static int FruitsAvailable;
+    public static int Population;
 }

@@ -51,7 +51,9 @@ public class Human : MonoBehaviour
         if (isHungry)
         {
             Debug.Log("I'm dying of hunger! :(");
+            //die
             Destroy(gameObject);
+            GameStats.Population--;
         }
         Debug.Log("I'm starting my day!");
         isHungry = true;

@@ -1,7 +1,6 @@
 using System;
 using UnityEngine;
 using UnityEngine.UI;
-using Random = System.Random;
 
 public class GameManager : MonoBehaviour
 {
@@ -18,7 +17,6 @@ public class GameManager : MonoBehaviour
     public int StartStorageFood = 100;
 
     public Vector3 firstTileCenter = Vector3.zero;
-    public float HexRadius;
 
     public static int day;
     public float countdown;
@@ -64,7 +62,7 @@ public class GameManager : MonoBehaviour
 
     private void SpawnHuman()
     {
-        var position = PositionOnHex(firstTileCenter) + new Vector3(0, 1.25f, 0);
+        var position = ConstructionManager.instance.PositionOnHex(firstTileCenter) + new Vector3(0, 1.25f, 0);
         Instantiate(human, position, Quaternion.identity);
         GameStats.Population++;
     }
@@ -105,24 +103,7 @@ public class GameManager : MonoBehaviour
 
     private void SpawnTree()
     {
-        var position = PositionOnHex(firstTileCenter) + new Vector3(0, 1f, 0);
+        var position = ConstructionManager.instance.PositionOnHex(firstTileCenter) + new Vector3(0, 1f, 0);
         Instantiate(tree, position, Quaternion.identity);
-    }
-
-    private Vector3 PositionOnHex(Vector3 hexCenter)
-    {
-        float minX = hexCenter.x - HexRadius;
-        float maxX = hexCenter.x + HexRadius;
-        
-        float minZ = hexCenter.z - HexRadius;
-        float maxZ = hexCenter.z + HexRadius;
-
-        return new Vector3(generateRandom(minX, maxX), 0f, generateRandom(minZ, maxZ));
-    } 
-    
-    private static float generateRandom(float min, float max)
-    {
-        Random random = new Random();
-        return (float)((random.NextDouble() * (max - min)) + min);
     }
 }

@@ -4,10 +4,14 @@ using UnityEngine;
 public class Human : MonoBehaviour
 {
     public bool isHungry = false;
+    //TODO
+    public bool hasHome = true;
     public string fruitTag = "fruit";
     private GameObject _currentTarget;
 
     public int speed;
+
+    private GameObject _home;
     
     private void Start()
     {
@@ -24,25 +28,9 @@ public class Human : MonoBehaviour
         {
             RunToTarget();
         }
-    }
-
-    private void RunToTarget()
-    {
-        Vector3 dir = new Vector3(
-            _currentTarget.transform.position.x - transform.position.x, 
-            0,
-            _currentTarget.transform.position.z - transform.position.z);
-        float distanceThisFrame = speed * Time.deltaTime;
-        
-        transform.Translate(dir.normalized * distanceThisFrame, Space.World);
-        transform.LookAt(_currentTarget.transform);
-        
-        if (dir.magnitude <= distanceThisFrame)
+        if (!hasHome)
         {
-            if (_currentTarget.CompareTag(fruitTag))
-            {
-                Consume();
-            }
+            FindHome();
         }
     }
 
@@ -59,7 +47,13 @@ public class Human : MonoBehaviour
         isHungry = true;
         
         //TODO find water
+
+    }
+
+    private void FindHome()
+    {
         //TODO find shelter
+        return;
     }
 
     private void FindFood()
@@ -85,6 +79,26 @@ public class Human : MonoBehaviour
         } else
         {
             _currentTarget = null;
+        }
+    }
+    
+    private void RunToTarget()
+    {
+        Vector3 dir = new Vector3(
+            _currentTarget.transform.position.x - transform.position.x, 
+            0,
+            _currentTarget.transform.position.z - transform.position.z);
+        float distanceThisFrame = speed * Time.deltaTime;
+        
+        transform.Translate(dir.normalized * distanceThisFrame, Space.World);
+        transform.LookAt(_currentTarget.transform);
+        
+        if (dir.magnitude <= distanceThisFrame)
+        {
+            if (_currentTarget.CompareTag(fruitTag))
+            {
+                Consume();
+            }
         }
     }
     

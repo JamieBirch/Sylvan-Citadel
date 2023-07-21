@@ -1,13 +1,16 @@
-using System;
 using UnityEngine;
 
 public class Human : MonoBehaviour
 {
+    public string Name;
+    
+    public bool isThirsty = false;
     public bool isHungry = false;
     public bool hasHome = false;
     public string houseTag = "house";
     public string fruitTag = "fruit";
-    private GameObject _currentTarget;
+    public string waterTag = "water";
+    public GameObject _currentTarget;
 
     public int speed;
 
@@ -20,34 +23,82 @@ public class Human : MonoBehaviour
 
     private void Update()
     {
-        if (_currentTarget != null)
+        if (isThirsty)
         {
-            RunToTarget();
+            FindWater();
+            if (_currentTarget != null)
+            {
+                RunToTarget();
+            }
         }
         if (isHungry)
         {
             FindFood();
+            if (_currentTarget != null)
+            {
+                RunToTarget();
+            }
         }
         if (!hasHome)
         {
             FindHome();
+            if (_currentTarget != null)
+            {
+                RunToTarget();
+            }
         }
     }
 
-    void StartDay()
+    private void FindWater()
     {
-        if (isHungry)
-        {
-            Debug.Log("I'm dying of hunger! :(");
-            //die
-            Destroy(gameObject);
-            GameStats.Population--;
-        }
-        Debug.Log("I'm starting my day!");
-        isHungry = true;
+        GameObject[] waterSources = GameObject.FindGameObjectsWithTag(waterTag);
         
-        //TODO find water
+        //find nearest food
+        float shortestDistance = Mathf.Infinity;
+        GameObject nearestWater = null;
+        foreach (GameObject waterSource in waterSources)
+        {
+            float distanceToWater = Vector3.Distance(transform.position, waterSource.transform.position);
+            if (distanceToWater < shortestDistance)
+            {
+                shortestDistance = distanceToWater;
+                nearestWater = waterSource;
+            }
+        }
 
+        if (nearestWater != null)
+        {
+            _currentTarget = nearestWater;
+        } else
+        {
+            _currentTarget = null;
+        }
+    }
+    
+    private void FindFood()
+    {
+        GameObject[] fruits = GameObject.FindGameObjectsWithTag(fruitTag);
+        
+        //find nearest food
+        float shortestDistance = Mathf.Infinity;
+        GameObject nearestFood = null;
+        foreach (GameObject fruit in fruits)
+        {
+            float distanceToFood = Vector3.Distance(transform.position, fruit.transform.position);
+            if (distanceToFood < shortestDistance)
+            {
+                shortestDistance = distanceToFood;
+                nearestFood = fruit;
+            }
+        }
+
+        if (nearestFood != null)
+        {
+            _currentTarget = nearestFood;
+        } else
+        {
+            _currentTarget = null;
+        }
     }
 
     private void FindHome()
@@ -77,30 +128,18 @@ public class Human : MonoBehaviour
         }
     }
 
-    private void FindFood()
+    void StartDay()
     {
-        GameObject[] fruits = GameObject.FindGameObjectsWithTag(fruitTag);
-        
-        //find nearest food
-        float shortestDistance = Mathf.Infinity;
-        GameObject nearestFood = null;
-        foreach (GameObject fruit in fruits)
+        if (isHungry || isThirsty)
         {
-            float distanceToFood = Vector3.Distance(transform.position, fruit.transform.position);
-            if (distanceToFood < shortestDistance)
-            {
-                shortestDistance = distanceToFood;
-                nearestFood = fruit;
-            }
+            Debug.Log("I'm dying! :(");
+            //die
+            Destroy(gameObject);
+            GameStats.Population--;
         }
-
-        if (nearestFood != null)
-        {
-            _currentTarget = nearestFood;
-        } else
-        {
-            _currentTarget = null;
-        }
+        Debug.Log("I'm starting my day!");
+        isHungry = true;
+        isThirsty = true;
     }
     
     private void RunToTarget()
@@ -119,17 +158,25 @@ public class Human : MonoBehaviour
             if (_currentTarget.CompareTag(fruitTag))
             {
                 Consume();
-            }
-            if (_currentTarget.CompareTag(houseTag))
+            } else if (_currentTarget.CompareTag(houseTag))
             {
                 _currentTarget.GetComponent<House>().PlaceHuman(this);
                 hasHome = true;
+            } else if (_currentTarget.CompareTag(waterTag))
+            {
+                Drink();
             }
 
             _currentTarget = null;
         }
     }
-    
+
+    private void Drink()
+    {
+        //TODO effect
+        isThirsty = false;
+    }
+
     private void Consume()
     {
         Destroy(_currentTarget);

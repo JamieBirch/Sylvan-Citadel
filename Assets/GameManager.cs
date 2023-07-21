@@ -63,8 +63,13 @@ public class GameManager : MonoBehaviour
     private void SpawnHuman()
     {
         var position = ConstructionManager.instance.PositionOnHex(firstTileCenter) + new Vector3(0, 1.25f, 0);
-        Instantiate(human, position, Quaternion.identity);
+        GameObject humanGameObject = Instantiate(human, position, Quaternion.identity);
         GameStats.Population++;
+
+        string name = NameGenerator.CreateName();
+        humanGameObject.name = name;
+
+        humanGameObject.GetComponent<Human>().Name = name;
     }
 
     // Update is called once per frame

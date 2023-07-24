@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 9067027873437890267}
   m_Layer: 0
   m_Name: tree
-  m_TagString: Untagged
+  m_TagString: tree
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -48,7 +48,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fruit: {fileID: 5558580003177826399, guid: 5d5f09b773c33d3449d039969e32e7fd, type: 3}
   Fertility: 60
-  offset: {x: 0.15, y: 0.0625, z: 0.15}
 --- !u!1001 &1443927584696376621
 PrefabInstance:
   m_ObjectHideFlags: 0

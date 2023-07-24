@@ -7,6 +7,8 @@ TagManager:
   - fruit
   - house
   - water
+  - tree
+  - human
   layers:
   - Default
   - TransparentFX

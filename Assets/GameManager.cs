@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -29,15 +30,18 @@ public class GameManager : MonoBehaviour
     public Text food;
     public Text wood;
 
+    public List<Task> availableTasks;
     public static event Action NewDay;
 
     // Start is called before the first frame update
     void Start()
     {
-        GameStats.Population = 0;
         _populationManager = PopulationManager.instance;
         _terrainManager = TerrainManager.instance;
         
+        GameStats.Population = 0;
+        availableTasks = new List<Task>();
+
         // spawn fruit trees
         _terrainManager.SpawnTrees(StartTrees);
 

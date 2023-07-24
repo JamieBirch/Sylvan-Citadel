@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class Human : MonoBehaviour
 {
@@ -14,6 +13,8 @@ public class Human : MonoBehaviour
     public string fruitTag = "fruit";
     public string waterTag = "water";
     public GameObject _currentTarget;
+
+    public bool hasWork = false;
 
     public int speed;
     
@@ -32,19 +33,27 @@ public class Human : MonoBehaviour
     {
         if (_currentTarget == null)
         {
-            if (isThirsty)
+            if (Satisfied() && !hasWork)
             {
-                FindWater();
-            } else if (isHungry)
+                GoHome();
+            }
+            else if(!Satisfied())
             {
-                FindFood();
-            } else if (!hasHome)
-            {
-                FindHome();
+                if (isThirsty)
+                {
+                    FindWater();
+                } else if (isHungry)
+                {
+                    FindFood();
+                } else if (!hasHome)
+                {
+                    FindHome();
+                }
             }
             else
             {
-                GoHome();
+                //Do task
+                Debug.Log(name + " is ready to work");
             }
         }
         else
@@ -114,7 +123,7 @@ public class Human : MonoBehaviour
         {
             _currentTarget = nearestFood;
             nearestFood.GetComponent<Fruit>().isClaimed = true;
-            Debug.Log(name + " claimed food");
+            // Debug.Log(name + " claimed food");
         } else
         {
             _currentTarget = null;
@@ -169,7 +178,7 @@ public class Human : MonoBehaviour
             }
         }
         
-        Debug.Log("I'm starting my day!");
+        // Debug.Log("I'm starting my day!");
         isHungry = true;
         isThirsty = true;
     }
@@ -229,5 +238,10 @@ public class Human : MonoBehaviour
     public void OnDestroy()
     {
         GameManager.NewDay -= StartDay;
+    }
+
+    public bool Satisfied()
+    {
+        return !isThirsty && !isHungry && hasHome;
     }
 }

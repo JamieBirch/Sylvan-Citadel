@@ -30,32 +30,26 @@ public class Human : MonoBehaviour
 
     private void Update()
     {
-        if (isThirsty)
+        if (_currentTarget == null)
         {
-            FindWater();
-            if (_currentTarget != null)
+            if (isThirsty)
             {
-                RunToTarget();
+                FindWater();
+            } else if (isHungry)
+            {
+                FindFood();
+            } else if (!hasHome)
+            {
+                FindHome();
             }
-        } else if (isHungry)
-        {
-            FindFood();
-            if (_currentTarget != null)
+            else
             {
-                RunToTarget();
-            }
-        } else if(!hasHome)
-        {
-            FindHome();
-            if (_currentTarget != null)
-            {
-                RunToTarget();
+                GoHome();
             }
         }
-
-        if (!isHungry && !isThirsty && hasHome)
+        else
         {
-            GoHome();
+            RunToTarget();
         }
     }
 
@@ -108,17 +102,22 @@ public class Human : MonoBehaviour
         GameObject nearestFood = null;
         foreach (GameObject fruit in fruits)
         {
-            float distanceToFood = Vector3.Distance(transform.position, fruit.transform.position);
-            if (distanceToFood < shortestDistance)
+            if (!fruit.GetComponent<Fruit>().isClaimed)
             {
-                shortestDistance = distanceToFood;
-                nearestFood = fruit;
+                float distanceToFood = Vector3.Distance(transform.position, fruit.transform.position);
+                if (distanceToFood < shortestDistance)
+                {
+                    shortestDistance = distanceToFood;
+                    nearestFood = fruit;
+                }
             }
         }
 
         if (nearestFood != null)
         {
             _currentTarget = nearestFood;
+            nearestFood.GetComponent<Fruit>().isClaimed = true;
+            Debug.Log(name + " claimed food");
         } else
         {
             _currentTarget = null;
@@ -199,6 +198,7 @@ public class Human : MonoBehaviour
                 _currentTarget.GetComponent<House>().PlaceHuman(this);
                 _home = _currentTarget;
                 hasHome = true;
+                _currentTarget = null;
             } else if (_currentTarget.CompareTag(waterTag))
             {
                 Drink();
@@ -210,16 +210,17 @@ public class Human : MonoBehaviour
     {
         //TODO effect
         isThirsty = false;
+        _currentTarget = null;
     }
 
     private void Consume()
     {
         Destroy(_currentTarget);
+        _currentTarget = null;
         //TODO effect
+        GameStats.FruitsAvailable--;
 
         isHungry = false;
-
-        GameStats.FruitsAvailable--;
     }
 
     private void GiveBirth()

@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     private PopulationManager _populationManager;
+    private TerrainManager _terrainManager;
     
     public GameObject sun;
     public GameObject tree;
@@ -34,9 +35,10 @@ public class GameManager : MonoBehaviour
     {
         GameStats.Population = 0;
         _populationManager = PopulationManager.instance;
+        _terrainManager = TerrainManager.instance;
         
         // spawn fruit trees
-        SpawnTrees();
+        _terrainManager.SpawnTrees(StartTrees);
 
         // put storage resources to storage
         GameStats.Food = StartStorageFood;
@@ -78,19 +80,4 @@ public class GameManager : MonoBehaviour
         
     }
 
-    void SpawnTrees()
-    {
-        for (int i = 0; i < StartTrees; i++)
-        {
-            SpawnTree();
-        }
-    }
-
-    private void SpawnTree()
-    {
-        var position = ConstructionManager.instance.PositionOnHex(firstTileCenter) + new Vector3(0, 1f, 0);
-        GameObject newTree = Instantiate(tree, position, Quaternion.identity);
-        float randomScale = Utils.GenerateRandom(0.5f, 1.5f);
-        newTree.transform.localScale = new Vector3(randomScale, randomScale, randomScale);
-    }
 }

@@ -8,7 +8,6 @@ public class GameManager : MonoBehaviour
     private TerrainManager _terrainManager;
     
     public GameObject sun;
-    public GameObject tree;
     
     public int StartHumans;
     public int StartTrees;

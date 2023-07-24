@@ -29,11 +29,18 @@ public class TerrainManager : MonoBehaviour
         }
     }
 
-    private void SpawnTree()
+    public void SpawnTree()
     {
-        var position = ConstructionManager.instance.PositionOnHex(firstTileCenter) + new Vector3(0, 1f, 0);
+        Vector3 position = ConstructionManager.instance.PositionOnHex(firstTileCenter) + new Vector3(0, 1f, 0);
         GameObject newTree = Instantiate(tree, position, Quaternion.identity);
         float randomScale = Utils.GenerateRandom(0.5f, 1.5f);
+        newTree.transform.localScale = new Vector3(randomScale, randomScale, randomScale);
+    }
+    
+    public void SpawnTreeAt(Vector3 position)
+    {
+        GameObject newTree = Instantiate(tree, position, Quaternion.identity);
+        float randomScale = Utils.GenerateRandom(0.3f, 0.8f);
         newTree.transform.localScale = new Vector3(randomScale, randomScale, randomScale);
     }
 }

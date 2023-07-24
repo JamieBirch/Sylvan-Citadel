@@ -3,22 +3,31 @@ using UnityEngine;
 public class Tree : MonoBehaviour
 {
     public GameObject fruit;
+    public float size;
+    public float growthSpeed;
 
     public int Fertility;
 
     private void Start()
     {
+        size = gameObject.transform.localScale.magnitude * 10;
         GameManager.NewDay += StartDay;
     }
     
     void StartDay()
     {
-        double chance = Utils.GenerateRandomChance();
-        if (chance <= Fertility)
+        gameObject.transform.localScale *= growthSpeed;
+        size = gameObject.transform.localScale.magnitude * 10;
+
+        if (size > 12)
         {
-            // Debug.Log("I feel fruity today!");
-            Instantiate(fruit, transform.position + fruitPositionOffset(), Quaternion.identity);
-            GameStats.FruitsAvailable++;
+            double chance = Utils.GenerateRandomChance();
+            if (chance <= Fertility)
+            {
+                // Debug.Log("I feel fruity today!");
+                Instantiate(fruit, transform.position + fruitPositionOffset(), Quaternion.identity);
+                GameStats.FruitsAvailable++;
+            }
         }
     }
 

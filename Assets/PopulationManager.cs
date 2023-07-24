@@ -5,6 +5,8 @@ public class PopulationManager : MonoBehaviour
     public static PopulationManager instance;
     
     public GameObject human;
+    
+    public string humanTag = "human";
    
     private void Awake()
     {
@@ -30,4 +32,22 @@ public class PopulationManager : MonoBehaviour
 
         humanGameObject.GetComponent<Human>().Name = name;
     }
+
+    /*public Human FindAvailableHuman()
+    {
+        Human humanComponent = null;
+        
+        GameObject[] humans = GameObject.FindGameObjectsWithTag(humanTag);
+        foreach (GameObject _human in humans)
+        {
+            Human _humanComponent = _human.GetComponent<Human>();
+            if (_humanComponent.Satisfied())
+            {
+                humanComponent = _humanComponent;
+                return humanComponent;
+            }
+        }
+
+        return humanComponent;
+    }*/
 }

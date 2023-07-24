@@ -30,7 +30,6 @@ public class GameManager : MonoBehaviour
     public Text food;
     public Text wood;
 
-    public List<Task> availableTasks;
     public static event Action NewDay;
 
     // Start is called before the first frame update
@@ -40,7 +39,6 @@ public class GameManager : MonoBehaviour
         _terrainManager = TerrainManager.instance;
         
         GameStats.Population = 0;
-        availableTasks = new List<Task>();
 
         // spawn fruit trees
         _terrainManager.SpawnTrees(StartTrees);

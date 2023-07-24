@@ -163,10 +163,7 @@ public class Human : MonoBehaviour
     {
         if (isHungry || isThirsty)
         {
-            Debug.Log("I'm dying! :(");
-            //die
-            Destroy(gameObject);
-            GameStats.Population--;
+            Die();
         }
 
         if (GameStats.BedsAvailable > 0)
@@ -182,7 +179,16 @@ public class Human : MonoBehaviour
         isHungry = true;
         isThirsty = true;
     }
-    
+
+    private void Die()
+    {
+        Debug.Log("I'm dying! :(");
+        //die
+        _home.GetComponent<House>().MoveOut(this);
+        Destroy(gameObject);
+        GameStats.Population--;
+    }
+
     private void RunToTarget()
     {
         Vector3 dir = new Vector3(

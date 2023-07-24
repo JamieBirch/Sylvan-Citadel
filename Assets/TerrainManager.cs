@@ -58,8 +58,8 @@ public class TerrainManager : MonoBehaviour
                 biggestTree = _tree;
             }
 
-            float distanceToWater = Vector3.Distance(biggestTree.transform.localScale, _tree.transform.localScale);
-            if (distanceToWater < 0)
+            float sizeDifference = biggestTree.GetComponent<Tree>().size - _tree.GetComponent<Tree>().size;
+            if (sizeDifference < 0)
             {
                 biggestTree = _tree;
             }
@@ -67,7 +67,7 @@ public class TerrainManager : MonoBehaviour
         
         //chop tree
         Destroy(biggestTree);
-        int woodAmount = (int)(biggestTree.transform.localScale.magnitude * 10);
+        int woodAmount = (int)biggestTree.GetComponent<Tree>().size;
         Debug.Log("chop tree, " + woodAmount);
         GameStats.Wood += woodAmount;
     }

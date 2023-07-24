@@ -96,5 +96,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b301b1a23119c742a4b2663c78d210f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  woodPrice: 40
   capacity: 5
   bedsAvailable: 0

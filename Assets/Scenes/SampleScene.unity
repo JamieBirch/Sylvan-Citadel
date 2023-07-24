@@ -476,8 +476,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sun: {fileID: 705507993}
   StartHumans: 5
-  StartTrees: 5
-  StartStorageWood: 50
+  StartTrees: 10
+  StartStorageWood: 70
   StartStorageFood: 100
   firstTileCenter: {x: 0, y: 0, z: 0}
   countdown: 0

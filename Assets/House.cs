@@ -22,4 +22,11 @@ public class House : MonoBehaviour
         bedsAvailable--;
         GameStats.BedsAvailable--;
     }
+    
+    public void MoveOut(Human human)
+    {
+        _tenants.Remove(human);
+        bedsAvailable++;
+        GameStats.BedsAvailable++;
+    }
 }

@@ -26,6 +26,8 @@ public class GameManager : MonoBehaviour
     public Text countdownText;
     public Text fruits;
     public Text humans;
+    public Text food;
+    public Text wood;
 
     public static event Action NewDay;
 
@@ -58,6 +60,8 @@ public class GameManager : MonoBehaviour
     {
         fruits.text = GameStats.FruitsAvailable.ToString();
         humans.text = GameStats.Population.ToString();
+        food.text = GameStats.Food.ToString();
+        wood.text = GameStats.Wood.ToString();
         
         var sunTransform = sun.transform;
 

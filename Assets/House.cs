@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class House : MonoBehaviour
 {
+    public int woodPrice = 20;
+    
     public int capacity = 5;
     public int bedsAvailable;
     private List<Human> _tenants;

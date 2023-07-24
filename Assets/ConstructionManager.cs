@@ -18,8 +18,17 @@ public class ConstructionManager : MonoBehaviour
 
     public void BuildHouse()
     {
-        var position = PositionOnHex(firstTileCenter) + offsetVector;
-        Instantiate(house, position, Quaternion.identity);
+        if (GameStats.Wood < 20)
+        {
+            Debug.Log("Not enough wood to build!");
+            return;
+        }
+        else
+        {
+            var position = PositionOnHex(firstTileCenter) + offsetVector;
+            Instantiate(house, position, Quaternion.identity);
+            GameStats.Wood -= house.GetComponent<House>().woodPrice;
+        }
     }
     
     public Vector3 PositionOnHex(Vector3 hexCenter)

@@ -120,5 +120,5 @@ MonoBehaviour:
   waterTag: water
   _currentTarget: {fileID: 0}
   speed: 1
-  fertility: 50
+  fertility: 10
   offset: {x: 0.05, y: 0.1, z: 0.05}

@@ -55,7 +55,6 @@ public class Human : MonoBehaviour
 
     private void GoHome()
     {
-        // _currentTarget = _home;
         Vector3 dir = new Vector3(
             _home.transform.position.x - transform.position.x, 
             0,
@@ -64,8 +63,6 @@ public class Human : MonoBehaviour
         
         transform.Translate(dir.normalized * distanceThisFrame, Space.World);
         transform.LookAt(_home.transform);
-        
-        // RunToTarget();
     }
 
     private void FindWater()

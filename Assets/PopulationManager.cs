@@ -27,7 +27,7 @@ public class PopulationManager : MonoBehaviour
         GameObject humanGameObject = Instantiate(human, position, Quaternion.identity);
         GameStats.Population++;
 
-        string name = NameGenerator.CreateName();
+        string name = NameGenerator.CreateHumanName();
         humanGameObject.name = name;
 
         humanGameObject.GetComponent<Human>().Name = name;

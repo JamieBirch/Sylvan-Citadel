@@ -4,12 +4,13 @@ public class OwnedHex : Hex
 {
     public Color hoverColor;
     private Color defaultColor;
-    
-    private Renderer rend;
+    public Renderer rend;
+
+    public GameObject waterway;
+    public GameObject woodland;
     
     private void Start()
     {
-        rend = GetComponent<Renderer>();
         defaultColor = rend.material.color;
     }
 

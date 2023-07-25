@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,11 +10,10 @@ public class GameManager : MonoBehaviour
     public GameObject sun;
     
     public int StartHumans;
-    public int StartTrees;
     
     //initial resources
-    public int StartStorageWood = 50;
-    public int StartStorageFood = 100;
+    public int StartStorageWood;
+    public int StartStorageFood;
 
     public Vector3 firstTileCenter = Vector3.zero;
 
@@ -40,14 +38,15 @@ public class GameManager : MonoBehaviour
         
         GameStats.Population = 0;
 
-        // spawn fruit trees
-        _terrainManager.SpawnTrees(StartTrees);
+        //create terrain by creating hexes 
+        _terrainManager.CreateTerrain();
 
         // put storage resources to storage
         GameStats.Food = StartStorageFood;
         GameStats.Wood = StartStorageWood;
 
         // spawn humans
+        // move to hex
         _populationManager.SpawnHumans(StartHumans, firstTileCenter);
 
         // start world time

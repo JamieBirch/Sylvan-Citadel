@@ -219,6 +219,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a678a9330f0c3346be2dae6259e980e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Name: 
   hoverOffset: {x: 0, y: 1, z: 0}
   canvas: {fileID: 1396463904356364872}
 --- !u!65 &5765409841354726004
@@ -390,9 +391,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: bordering_hex
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: -3746051237811015799, guid: f5af6d03b64517c4fafe89f99ea53162, type: 3}
-    - {fileID: -5658227418888260268, guid: f5af6d03b64517c4fafe89f99ea53162, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f5af6d03b64517c4fafe89f99ea53162, type: 3}
 --- !u!4 &6536081148757860716 stripped
 Transform:

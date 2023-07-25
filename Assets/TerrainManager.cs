@@ -9,10 +9,11 @@ public class TerrainManager : MonoBehaviour
     public GameObject borderingHex;
     public GameObject farHex;
     public GameObject ownedHex;
-    
-    public GameObject lake;
+
+    public GameObject woodland;
     public GameObject tree;
-    
+    public GameObject lake;
+
     public string treeTag = "tree";
     
     public Vector3 firstTileCenter = Vector3.zero;
@@ -29,17 +30,22 @@ public class TerrainManager : MonoBehaviour
     public void CreateTerrain()
     {
         //instantiate start hex
-        GameObject startHex = Instantiate(ownedHex, firstTileCenter, Quaternion.identity, gameObject.transform);
-        string name = NameGenerator.CreateDistrictName();
-        startHex.name = name;
-        startHex.GetComponent<Hex>().Name = name;
-        //TODO instantiate trees and lake ON START HEX
-        SpawnTrees(startHex, StartTrees);
-        SpawnLake(startHex);
+        // CreateStartHex();
 
         //TODO instantiate bordering hexes
 
         //TODO instantiate far hexes
+    }
+
+    public GameObject CreateStartHex()
+    {
+        GameObject startHex = Instantiate(ownedHex, firstTileCenter, Quaternion.identity, gameObject.transform);
+        string name = NameGenerator.CreateDistrictName();
+        startHex.name = name;
+        startHex.GetComponent<Hex>().Name = name;
+        SpawnTrees(startHex, StartTrees);
+        SpawnLake(startHex);
+        return startHex;
     }
 
     private void SpawnLake(GameObject hex)
@@ -54,32 +60,33 @@ public class TerrainManager : MonoBehaviour
 
     public void SpawnTrees(GameObject hex, int treesNumber)
     {
-        GameObject woodland = hex.GetComponent<OwnedHex>().woodland;
-        if (woodland == null)
-        {
-            woodland = new GameObject("woodland");
-            woodland.transform.SetParent(hex.transform);
-        }
+        // GameObject _woodland = hex.GetComponent<OwnedHex>().woodland;
+        // if (woodland == null)
+        // {
+            GameObject _woodland = Instantiate(woodland, hex.transform.position, Quaternion.identity, hex.transform);
+            _woodland.name = "woodland";
+            hex.GetComponent<OwnedHex>().woodland = _woodland;
+        // }
 
         for (int i = 0; i < treesNumber; i++)
         {
-            GameObject newTree = SpawnTree(hex.transform.position);
-            newTree.transform.SetParent(woodland.transform);
+            GameObject newTree = SpawnTree(_woodland);
+            newTree.transform.SetParent(_woodland.transform);
         }
     }
 
-    public GameObject SpawnTree(Vector3 tileCenter)
+    public GameObject SpawnTree(GameObject woodland)
     {
-        Vector3 position = ConstructionManager.instance.PositionOnHex(tileCenter) + new Vector3(0, 1f, 0);
-        GameObject newTree = Instantiate(tree, position, Quaternion.identity);
+        Vector3 position = ConstructionManager.instance.PositionOnHex(woodland.transform.position) + new Vector3(0, 1f, 0);
+        GameObject newTree = Instantiate(tree, position, Quaternion.identity, woodland.transform);
         float randomScale = Utils.GenerateRandom(0.5f, 1.5f);
         newTree.transform.localScale = new Vector3(randomScale, randomScale, randomScale);
         return newTree;
     }
     
-    public void SpawnTreeAt(Vector3 position)
+    public void SpawnTreeAt(Transform woodland, Vector3 position)
     {
-        GameObject newTree = Instantiate(tree, position, Quaternion.identity);
+        GameObject newTree = Instantiate(tree, position, Quaternion.identity, woodland);
         float randomScale = Utils.GenerateRandom(0.3f, 0.8f);
         newTree.transform.localScale = new Vector3(randomScale, randomScale, randomScale);
     }
@@ -116,5 +123,11 @@ public class TerrainManager : MonoBehaviour
             Debug.Log("No trees to chop! :(");
         }
 
+    }
+
+    public void CreateConcealedHexes()
+    {
+        //TODO implement
+        return;
     }
 }

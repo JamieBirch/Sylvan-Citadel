@@ -4,11 +4,9 @@ public class ConstructionManager : MonoBehaviour
 {
     public static ConstructionManager instance;
     public GameObject house;
-    private float _hexRadius;
+    public Vector3 houseOffset = new Vector3(0, 1.5f, 0);
     
-    // public float HexRadius;
-    public Vector3 offsetVector = new Vector3(0, 0, 0);
-    public Vector3 firstTileCenter = Vector3.zero;
+    private float _hexRadius;
 
     private void Awake()
     {
@@ -16,7 +14,7 @@ public class ConstructionManager : MonoBehaviour
         _hexRadius = TerrainManager.HexRadius;
     }
 
-    public void BuildHouse()
+    public void BuildHouse(GameObject hex)
     {
         if (GameStats.Wood < house.GetComponent<House>().woodPrice)
         {
@@ -25,9 +23,11 @@ public class ConstructionManager : MonoBehaviour
         }
         else
         {
-            var position = PositionOnHex(firstTileCenter) + offsetVector;
-            Instantiate(house, position, Quaternion.identity);
+            var position = PositionOnHex(hex.transform.position) + houseOffset;
+            GameObject newHouse = Instantiate(house, position, Quaternion.identity, hex.transform);
+
             GameStats.Wood -= house.GetComponent<House>().woodPrice;
+            hex.GetComponent<OwnedHex>().buildings.Add(newHouse);
         }
     }
     

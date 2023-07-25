@@ -13,8 +13,13 @@ public class Fruit : MonoBehaviour
     
     void StartDay()
     {
-        _terrainManager.SpawnTreeAt(transform.position);
+        double chance = Utils.GenerateRandomChance();
+        if (chance < 80)
+        {
+            _terrainManager.SpawnTreeAt(gameObject.GetComponentInParent<Woodland>().transform, transform.position);
+        }
         Destroy(gameObject);
+        GameStats.FruitsAvailable--;
     }
     
     public void OnDestroy()

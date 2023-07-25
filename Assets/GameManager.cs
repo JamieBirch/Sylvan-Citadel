@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
 {
     private PopulationManager _populationManager;
     private TerrainManager _terrainManager;
+    private ConstructionManager _constructionManager;
     
     public GameObject sun;
     
@@ -15,7 +16,7 @@ public class GameManager : MonoBehaviour
     public int StartStorageWood;
     public int StartStorageFood;
 
-    public Vector3 firstTileCenter = Vector3.zero;
+    public GameObject startHex;
 
     public static int day;
     public float countdown;
@@ -35,19 +36,21 @@ public class GameManager : MonoBehaviour
     {
         _populationManager = PopulationManager.instance;
         _terrainManager = TerrainManager.instance;
+        _constructionManager = ConstructionManager.instance;
         
         GameStats.Population = 0;
 
         //create terrain by creating hexes 
-        _terrainManager.CreateTerrain();
+        startHex = _terrainManager.CreateStartHex();
+        //create other hexes
+        _terrainManager.CreateConcealedHexes();
 
         // put storage resources to storage
         GameStats.Food = StartStorageFood;
         GameStats.Wood = StartStorageWood;
 
         // spawn humans
-        // move to hex
-        _populationManager.SpawnHumans(StartHumans, firstTileCenter);
+        _populationManager.SpawnHumans(StartHumans, startHex);
 
         // start world time
         countdown = dayLength;
@@ -82,6 +85,11 @@ public class GameManager : MonoBehaviour
         countdownText.text = string.Format("{0:00.00}", countdown);
         daysText.text = day.ToString();
         
+    }
+
+    public void BuildHouse()
+    {
+        _constructionManager.BuildHouse(startHex);
     }
 
 }

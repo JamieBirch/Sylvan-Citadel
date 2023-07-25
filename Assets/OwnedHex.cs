@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class OwnedHex : Hex
@@ -8,10 +9,13 @@ public class OwnedHex : Hex
 
     public GameObject waterway;
     public GameObject woodland;
-    
+    public GameObject village;
+    public List<GameObject> buildings;
+
     private void Start()
     {
         defaultColor = rend.material.color;
+        buildings = new List<GameObject>();
     }
 
     public override void OnMouseEnter()

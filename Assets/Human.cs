@@ -166,7 +166,7 @@ public class Human : MonoBehaviour
             Die();
         }
 
-        if (GameStats.BedsAvailable > 0)
+        if (GameStats.BedsAvailable > 0 && Satisfied())
         {
             double chance = Utils.GenerateRandomChance();
             if (chance <= fertility)
@@ -241,7 +241,7 @@ public class Human : MonoBehaviour
     private void GiveBirth()
     {
         Debug.Log("I'm having a child!");
-        _populationManager.SpawnHuman(gameObject.transform.position + offset);
+        _populationManager.SpawnHuman(gameObject.GetComponentInParent<Village>().gameObject);
     }
 
     public void OnDestroy()

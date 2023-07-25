@@ -25,7 +25,7 @@ public class Tree : MonoBehaviour
             if (chance <= Fertility)
             {
                 // Debug.Log("I feel fruity today!");
-                Instantiate(fruit, transform.position + fruitPositionOffset(), Quaternion.identity);
+                Instantiate(fruit, transform.position + fruitPositionOffset(), Quaternion.identity, gameObject.GetComponentInParent<Woodland>().transform);
                 GameStats.FruitsAvailable++;
             }
         }

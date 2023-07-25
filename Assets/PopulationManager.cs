@@ -4,6 +4,7 @@ public class PopulationManager : MonoBehaviour
 {
     public static PopulationManager instance;
     
+    public GameObject village;
     public GameObject human;
     
     public string humanTag = "human";
@@ -13,24 +14,35 @@ public class PopulationManager : MonoBehaviour
         instance = this;
     }
     
-    public void SpawnHumans(int humansCount, Vector3 hexCenter)
+    public void SpawnHumans(int humansCount, GameObject hex)
     {
+        // GameObject village = hex.GetComponent<OwnedHex>().village;
+        // if (village == null)
+        // {
+            GameObject _village = Instantiate(village, hex.transform.position, Quaternion.identity, hex.transform);
+            _village.name = "village";
+            hex.GetComponent<OwnedHex>().village = _village;
+        // }
+        
         for (int i = 0; i < humansCount; i++)
         {
-            SpawnHuman(hexCenter);
+            GameObject newHuman = SpawnHuman(_village);
+            newHuman.transform.SetParent(_village.transform);
         }
     }
 
-    public void SpawnHuman(Vector3 hexCenter)
+    public GameObject SpawnHuman(GameObject village)
     {
-        var position = ConstructionManager.instance.PositionOnHex(hexCenter) + new Vector3(0, 1.25f, 0);
-        GameObject humanGameObject = Instantiate(human, position, Quaternion.identity);
+        var position = ConstructionManager.instance.PositionOnHex(village.transform.position) + new Vector3(0, 1.25f, 0);
+        GameObject humanGameObject = Instantiate(human, position, Quaternion.identity, village.transform);
         GameStats.Population++;
 
         string name = NameGenerator.CreateHumanName();
         humanGameObject.name = name;
 
         humanGameObject.GetComponent<Human>().Name = name;
+
+        return humanGameObject;
     }
 
     /*public Human FindAvailableHuman()

@@ -64,11 +64,19 @@ public class TerrainManager : MonoBehaviour
                 biggestTree = _tree;
             }
         }
-        
-        //chop tree
-        Destroy(biggestTree);
-        int woodAmount = (int)biggestTree.GetComponent<Tree>().size;
-        Debug.Log("chop tree, " + woodAmount);
-        GameStats.Wood += woodAmount;
+
+        if (biggestTree != null)
+        {
+            //chop tree
+            Destroy(biggestTree);
+            int woodAmount = (int)biggestTree.GetComponent<Tree>().size;
+            Debug.Log("chop tree, " + woodAmount);
+            GameStats.Wood += woodAmount;
+        }
+        else
+        {
+            Debug.Log("No trees to chop! :(");
+        }
+
     }
 }

@@ -18,7 +18,7 @@ public class ConstructionManager : MonoBehaviour
 
     public void BuildHouse()
     {
-        if (GameStats.Wood < 20)
+        if (GameStats.Wood < house.GetComponent<House>().woodPrice)
         {
             Debug.Log("Not enough wood to build!");
             return;

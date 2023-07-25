@@ -184,7 +184,10 @@ public class Human : MonoBehaviour
     {
         Debug.Log("I'm dying! :(");
         //die
-        _home.GetComponent<House>().MoveOut(this);
+        if (_home != null)
+        {
+            _home.GetComponent<House>().MoveOut(this);
+        }
         Destroy(gameObject);
         GameStats.Population--;
     }

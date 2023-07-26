@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
         //create terrain by creating hexes 
         startHex = _terrainManager.CreateStartHex();
         //create other hexes
-        _terrainManager.CreateConcealedHexes();
+        _terrainManager.CreateConcealedHexesAround(startHex);
 
         // put storage resources to storage
         GameStats.Food = StartStorageFood;

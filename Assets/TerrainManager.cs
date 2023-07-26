@@ -27,7 +27,7 @@ public class TerrainManager : MonoBehaviour
         instance = this;
     }
 
-    public void CreateTerrain()
+    /*public void CreateTerrain()
     {
         //instantiate start hex
         // CreateStartHex();
@@ -35,7 +35,7 @@ public class TerrainManager : MonoBehaviour
         //TODO instantiate bordering hexes
 
         //TODO instantiate far hexes
-    }
+    }*/
 
     public GameObject CreateStartHex()
     {
@@ -125,9 +125,57 @@ public class TerrainManager : MonoBehaviour
 
     }
 
-    public void CreateConcealedHexes()
+    public void CreateConcealedHexesAround(GameObject hex)
     {
-        //TODO implement
-        return;
+        Vector3 hexPosition = hex.transform.position;
+        
+        //right
+        GameObject rightHex = CreateBorderingHexAt(hexPosition + xHexOffset);
+        RandomizeResources(rightHex);
+
+        //left
+        GameObject leftHex = CreateBorderingHexAt(hexPosition + -xHexOffset);
+        RandomizeResources(leftHex);
+        
+        //top right
+        GameObject toprightHex = CreateBorderingHexAt(hexPosition + xHexOffset/2 + zHexOffset);
+        RandomizeResources(toprightHex);
+        
+        //top left
+        GameObject toplefttHex = CreateBorderingHexAt(hexPosition + -xHexOffset/2 + zHexOffset);
+        RandomizeResources(toplefttHex);
+        
+        //bottom right
+        GameObject bottomrightHex = CreateBorderingHexAt(hexPosition + xHexOffset/2 - zHexOffset);
+        RandomizeResources(bottomrightHex);
+        
+        //bottom left
+        GameObject bottomleft = CreateBorderingHexAt(hexPosition + -xHexOffset/2 - zHexOffset);
+        RandomizeResources(bottomleft);
+    }
+
+    private static void RandomizeResources(GameObject hex)
+    {
+        BorderingHex borderingHexComponent = hex.GetComponent<BorderingHex>();
+        
+        borderingHexComponent.hasWater = Utils.TossCoin();
+        borderingHexComponent.hasWood = Utils.TossCoin();
+        borderingHexComponent.hasFood = Utils.TossCoin();
+    }
+
+    private GameObject CreateBorderingHexAt(Vector3 hexPosition)
+    {
+        var overlapSphere = Physics.OverlapSphere(hexPosition, 1);
+        if (overlapSphere.Length == 0)
+        {
+            Debug.Log("no obstruction here");
+            GameObject newHex = Instantiate(borderingHex, hexPosition, Quaternion.identity, gameObject.transform);
+            return newHex;
+        }
+        else
+        {
+            Debug.Log("there's something here");
+            return null;
+        }
     }
 }

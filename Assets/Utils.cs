@@ -13,4 +13,11 @@ public static class Utils
         Random random = new Random();
         return (float)random.NextDouble() * 100;
     }
+    
+    public static bool TossCoin()
+    {
+        Random random = new Random();
+        float nextDouble = (float)random.NextDouble() * 100;
+        return nextDouble > 50;
+    }
 }

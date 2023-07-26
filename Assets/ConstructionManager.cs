@@ -4,7 +4,7 @@ public class ConstructionManager : MonoBehaviour
 {
     public static ConstructionManager instance;
     public GameObject house;
-    public Vector3 houseOffset = new Vector3(0, 1.5f, 0);
+    public Vector3 houseOffset;
     
     private float _hexRadius;
 

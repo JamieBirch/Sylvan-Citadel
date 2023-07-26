@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     public int StartStorageFood;
 
     public GameObject startHex;
+    public GameObject activeHex;
 
     public static int day;
     public float countdown;

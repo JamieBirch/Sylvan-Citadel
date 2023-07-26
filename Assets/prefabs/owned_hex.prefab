@@ -48,7 +48,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: 
   hoverColor: {r: 0.7254902, g: 1, b: 0.5176471, a: 0}
+  selectOffset: {x: 0, y: 1, z: 0}
   rend: {fileID: 199010083080033213}
+  waterway: {fileID: 0}
+  woodland: {fileID: 0}
+  village: {fileID: 0}
+  buildings: []
 --- !u!65 &8349748933488940630
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -49,7 +49,7 @@ MonoBehaviour:
   fruit: {fileID: 5558580003177826399, guid: 5d5f09b773c33d3449d039969e32e7fd, type: 3}
   size: 0
   growthSpeed: 1.02
-  Fertility: 60
+  Fertility: 70
 --- !u!1001 &1443927584696376621
 PrefabInstance:
   m_ObjectHideFlags: 0

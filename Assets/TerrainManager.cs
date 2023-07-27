@@ -11,7 +11,8 @@ public class TerrainManager : MonoBehaviour
     public GameObject ownedHex;
 
     public GameObject woodland;
-    public GameObject tree;
+    public GameObject fruitTree;
+    public GameObject pineTree;
     public GameObject lake;
 
     public string treeTag = "tree";
@@ -78,7 +79,7 @@ public class TerrainManager : MonoBehaviour
     public GameObject SpawnTree(GameObject woodland)
     {
         Vector3 position = ConstructionManager.instance.PositionOnHex(woodland.transform.position) + new Vector3(0, 1f, 0);
-        GameObject newTree = Instantiate(tree, position, Quaternion.identity, woodland.transform);
+        GameObject newTree = Instantiate(fruitTree, position, Quaternion.identity, woodland.transform);
         float randomScale = Utils.GenerateRandom(0.5f, 1.5f);
         newTree.transform.localScale = new Vector3(randomScale, randomScale, randomScale);
         return newTree;
@@ -86,7 +87,7 @@ public class TerrainManager : MonoBehaviour
     
     public void SpawnTreeAt(Transform woodland, Vector3 position)
     {
-        GameObject newTree = Instantiate(tree, position, Quaternion.identity, woodland);
+        GameObject newTree = Instantiate(fruitTree, position, Quaternion.identity, woodland);
         float randomScale = Utils.GenerateRandom(0.3f, 0.8f);
         newTree.transform.localScale = new Vector3(randomScale, randomScale, randomScale);
     }
@@ -168,13 +169,13 @@ public class TerrainManager : MonoBehaviour
         var overlapSphere = Physics.OverlapSphere(hexPosition, 1);
         if (overlapSphere.Length == 0)
         {
-            Debug.Log("no obstruction here");
+            // Debug.Log("no obstruction here");
             GameObject newHex = Instantiate(borderingHex, hexPosition, Quaternion.identity, gameObject.transform);
             return newHex;
         }
         else
         {
-            Debug.Log("there's something here");
+            Debug.Log("can't spawn hex at" + hexPosition+ ". There's something here");
             return null;
         }
     }

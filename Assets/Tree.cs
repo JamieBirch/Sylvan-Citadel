@@ -8,6 +8,10 @@ public class Tree : MonoBehaviour
 
     public int Fertility;
 
+    public const int sizeOvergrown = 60;
+    public const int sizeSmall = 12;
+    public const int sizeMiddle = 30;
+    public const int sizeOld = 50;
     private void Start()
     {
         size = gameObject.transform.localScale.magnitude * 10;
@@ -16,19 +20,52 @@ public class Tree : MonoBehaviour
     
     void StartDay()
     {
-        gameObject.transform.localScale *= growthSpeed;
-        size = gameObject.transform.localScale.magnitude * 10;
-
-        if (size > 12)
+        if (size < sizeOvergrown)
         {
-            double chance = Utils.GenerateRandomChance();
-            if (chance <= Fertility)
+            gameObject.transform.localScale *= growthSpeed;
+            size = gameObject.transform.localScale.magnitude * 10;
+        }
+
+        switch (size)
+        {
+            case < sizeSmall:
             {
-                // Debug.Log("I feel fruity today!");
-                Instantiate(fruit, transform.position + fruitPositionOffset(), Quaternion.identity, gameObject.GetComponentInParent<Woodland>().transform);
-                GameStats.FruitsAvailable++;
+                break;
+            }
+            case < sizeMiddle:
+            {
+                double chance = Utils.GenerateRandomChance();
+                if (chance <= Fertility)
+                {
+                    // Debug.Log("I feel fruity today!");
+                    BearFruit();
+                }
+                break;
+            }
+            case < sizeOld:
+            {
+                double chance = Utils.GenerateRandomChance();
+                if (chance <= Fertility)
+                {
+                    Debug.Log("I feel very fruity today!");
+                    BearFruit();
+                    BearFruit();
+                }
+                break;
+            }
+            default:
+            {
+                Debug.Log("I don't bear fruits anymore!");
+                break;
             }
         }
+    }
+
+    private void BearFruit()
+    {
+        Instantiate(fruit, transform.position + fruitPositionOffset(), Quaternion.identity,
+            gameObject.GetComponentInParent<Woodland>().transform);
+        GameStats.FruitsAvailable++;
     }
 
     private Vector3 fruitPositionOffset()

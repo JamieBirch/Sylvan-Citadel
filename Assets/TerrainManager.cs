@@ -16,6 +16,7 @@ public class TerrainManager : MonoBehaviour
     public GameObject lake;
 
     public string treeTag = "tree";
+    public float overlapRadius = 1;
     
     public Vector3 firstTileCenter = Vector3.zero;
     public static float HexRadius = 3f;
@@ -40,12 +41,18 @@ public class TerrainManager : MonoBehaviour
 
     public GameObject CreateStartHex()
     {
-        GameObject startHex = Instantiate(ownedHex, firstTileCenter, Quaternion.identity, gameObject.transform);
+        GameObject startHex = CreateOwnedHex(firstTileCenter);
+        SpawnTrees(startHex, StartTrees);
+        SpawnLake(startHex);
+        return startHex;
+    }
+
+    private GameObject CreateOwnedHex(Vector3 hexCenter)
+    {
+        GameObject startHex = Instantiate(ownedHex, hexCenter, Quaternion.identity, gameObject.transform);
         string name = NameGenerator.CreateDistrictName();
         startHex.name = name;
         startHex.GetComponent<Hex>().Name = name;
-        SpawnTrees(startHex, StartTrees);
-        SpawnLake(startHex);
         return startHex;
     }
 
@@ -132,27 +139,21 @@ public class TerrainManager : MonoBehaviour
         
         //right
         GameObject rightHex = CreateBorderingHexAt(hexPosition + xHexOffset);
-        RandomizeResources(rightHex);
 
         //left
         GameObject leftHex = CreateBorderingHexAt(hexPosition + -xHexOffset);
-        RandomizeResources(leftHex);
         
         //top right
         GameObject toprightHex = CreateBorderingHexAt(hexPosition + xHexOffset/2 + zHexOffset);
-        RandomizeResources(toprightHex);
         
         //top left
         GameObject toplefttHex = CreateBorderingHexAt(hexPosition + -xHexOffset/2 + zHexOffset);
-        RandomizeResources(toplefttHex);
         
         //bottom right
         GameObject bottomrightHex = CreateBorderingHexAt(hexPosition + xHexOffset/2 - zHexOffset);
-        RandomizeResources(bottomrightHex);
         
         //bottom left
         GameObject bottomleft = CreateBorderingHexAt(hexPosition + -xHexOffset/2 - zHexOffset);
-        RandomizeResources(bottomleft);
     }
 
     private static void RandomizeResources(GameObject hex)
@@ -166,11 +167,12 @@ public class TerrainManager : MonoBehaviour
 
     private GameObject CreateBorderingHexAt(Vector3 hexPosition)
     {
-        var overlapSphere = Physics.OverlapSphere(hexPosition, 1);
+        var overlapSphere = Physics.OverlapSphere(hexPosition, overlapRadius);
         if (overlapSphere.Length == 0)
         {
             // Debug.Log("no obstruction here");
             GameObject newHex = Instantiate(borderingHex, hexPosition, Quaternion.identity, gameObject.transform);
+            RandomizeResources(newHex);
             return newHex;
         }
         else
@@ -178,5 +180,31 @@ public class TerrainManager : MonoBehaviour
             Debug.Log("can't spawn hex at" + hexPosition+ ". There's something here");
             return null;
         }
+        
+    }
+
+    public void CreateOwnedHex(GameObject _borderingHex)
+    {
+        BorderingHex borderingHexComponent = _borderingHex.GetComponent<BorderingHex>();
+        bool hasWater = borderingHexComponent.hasWater;
+        bool hasWood = borderingHexComponent.hasWood;
+        bool hasFood = borderingHexComponent.hasFood;
+
+        Vector3 position = _borderingHex.transform.position;
+        Destroy(_borderingHex);
+
+        GameObject hex = CreateOwnedHex(position - borderingHexComponent.hoverOffset);
+        if (hasWater)
+        {
+            SpawnLake(hex);
+        }
+        if (hasWood)
+        {
+            SpawnTrees(hex, Utils.GenerateRandomIntMax(20));
+        }
+        
+        CreateConcealedHexesAround(hex);
+        
+        GameStats.OwnedHexes++;
     }
 }

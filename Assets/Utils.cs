@@ -14,6 +14,12 @@ public static class Utils
         return (float)random.NextDouble() * 100;
     }
     
+    public static int GenerateRandomIntMax(int max)
+    {
+        Random random = new Random();
+        return (int)(random.NextDouble() * max);
+    }
+    
     public static bool TossCoin()
     {
         Random random = new Random();

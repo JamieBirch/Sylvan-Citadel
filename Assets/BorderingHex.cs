@@ -36,6 +36,12 @@ public class BorderingHex : Hex
         canvas.enabled = true;
     }
     
+    public void OnMouseDown()
+    {
+        //explore bordering hex
+        TerrainManager.instance.CreateOwnedHex(gameObject);
+    }
+    
     private void OnMouseExit()
     {
         gameObject.transform.position -= hoverOffset;

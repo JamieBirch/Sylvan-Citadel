@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
     public Text humans;
     public Text food;
     public Text wood;
+    public Text tiles;
 
     public static event Action NewDay;
 
@@ -43,6 +44,7 @@ public class GameManager : MonoBehaviour
 
         //create terrain by creating hexes 
         startHex = _terrainManager.CreateStartHex();
+        GameStats.OwnedHexes++;
         //create other hexes
         _terrainManager.CreateConcealedHexesAround(startHex);
 
@@ -67,6 +69,7 @@ public class GameManager : MonoBehaviour
         humans.text = GameStats.Population.ToString();
         food.text = GameStats.Food.ToString();
         wood.text = GameStats.Wood.ToString();
+        tiles.text = GameStats.OwnedHexes.ToString();
         
         var sunTransform = sun.transform;
 

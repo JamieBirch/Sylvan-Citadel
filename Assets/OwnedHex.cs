@@ -10,6 +10,7 @@ public class OwnedHex : Hex
     
     public Vector3 selectOffset;
 
+    public GameObject hexStats;
     
     public Renderer rend;
 

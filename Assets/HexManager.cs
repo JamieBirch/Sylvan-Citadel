@@ -4,6 +4,7 @@ public class HexManager : MonoBehaviour
 {
     public static HexManager instance;
     public GameObject activeHex;
+    public GameObject buttons;
     private ConstructionManager _constructionManager;
     private TerrainManager _terrainManager;
     
@@ -39,10 +40,12 @@ public class HexManager : MonoBehaviour
             activeHex.GetComponent<OwnedHex>().Unselect();
             activeHex = hex;
         }
+        buttons.SetActive(true);
     }
 
     public void SetHexAsInActive(GameObject hex)
     {
         activeHex = null;
+        buttons.SetActive(false);
     }
 }

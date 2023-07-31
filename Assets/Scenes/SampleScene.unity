@@ -1666,8 +1666,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 107134971}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+      - m_Target: {fileID: 107134975}
+        m_TargetAssemblyTypeName: HexManager, Assembly-CSharp
         m_MethodName: BuildHouse
         m_Mode: 1
         m_Arguments:
@@ -2543,8 +2543,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1789882336}
-        m_TargetAssemblyTypeName: TerrainManager, Assembly-CSharp
+      - m_Target: {fileID: 107134975}
+        m_TargetAssemblyTypeName: HexManager, Assembly-CSharp
         m_MethodName: ChopTree
         m_Mode: 1
         m_Arguments:

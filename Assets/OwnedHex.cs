@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class OwnedHex : Hex
 {
+    private HexManager _hexManager;
+    
     public Color hoverColor;
     private Color defaultColor;
     
@@ -19,6 +21,8 @@ public class OwnedHex : Hex
 
     private void Start()
     {
+        _hexManager = HexManager.instance;
+        
         defaultColor = rend.material.color;
         buildings = new List<GameObject>();
         selected = false;
@@ -37,15 +41,31 @@ public class OwnedHex : Hex
         {
             gameObject.transform.position += selectOffset;
             selected = true;
+            _hexManager.SetHexAsActive(gameObject);
         }
         else
         {
-            gameObject.transform.position -= selectOffset;
-            selected = false;
+            Unselect();
         }
     }
     
     private void OnMouseExit()
+    {
+        if (!selected)
+        {
+            ColorToDefault();
+        }
+    }
+
+    public void Unselect()
+    {
+        gameObject.transform.position -= selectOffset;
+        selected = false;
+        _hexManager.SetHexAsInActive(gameObject);
+        ColorToDefault();
+    }
+
+    private void ColorToDefault()
     {
         rend.material.color = defaultColor;
     }

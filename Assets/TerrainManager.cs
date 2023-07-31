@@ -78,59 +78,57 @@ public class TerrainManager : MonoBehaviour
 
         for (int i = 0; i < treesNumber; i++)
         {
-            GameObject newTree = SpawnTree(_woodland);
-            newTree.transform.SetParent(_woodland.transform);
+            SpawnTree(_woodland);
         }
     }
 
-    public GameObject SpawnTree(GameObject woodland)
+    public GameObject SpawnTree(GameObject _woodland)
     {
-        Vector3 position = ConstructionManager.instance.PositionOnHex(woodland.transform.position) + new Vector3(0, 1f, 0);
-        GameObject newTree = Instantiate(fruitTree, position, Quaternion.identity, woodland.transform);
+        Vector3 position = ConstructionManager.instance.PositionOnHex(_woodland.transform.position) + new Vector3(0, 1f, 0);
+        GameObject newTree = Instantiate(fruitTree, position, Quaternion.identity, _woodland.transform);
         float randomScale = Utils.GenerateRandom(0.5f, 1.5f);
         newTree.transform.localScale = new Vector3(randomScale, randomScale, randomScale);
+        //FIXME ugly and expensive
+        _woodland.GetComponent<Woodland>().trees.Add(newTree.GetComponent<Tree>());
+        
         return newTree;
     }
     
-    public void SpawnTreeAt(Transform woodland, Vector3 position)
+    public void SpawnTreeAt(Transform _woodland, Vector3 position)
     {
-        GameObject newTree = Instantiate(fruitTree, position, Quaternion.identity, woodland);
+        GameObject newTree = Instantiate(fruitTree, position, Quaternion.identity, _woodland);
         float randomScale = Utils.GenerateRandom(0.3f, 0.8f);
         newTree.transform.localScale = new Vector3(randomScale, randomScale, randomScale);
+        //FIXME ugly and expensive
+        _woodland.GetComponent<Woodland>().trees.Add(newTree.GetComponent<Tree>());
     }
 
-    public void ChopTree()
+    public void ChopTree(GameObject activeHex)
     {
-        //choose biggest tree
-        GameObject biggestTree = null;
-        GameObject[] trees = GameObject.FindGameObjectsWithTag(treeTag);
-        foreach (GameObject _tree in trees)
+        OwnedHex activeHexComponent = activeHex.GetComponent<OwnedHex>();
+        if (activeHexComponent.woodland != null)
         {
-            if (biggestTree == null)
-            {
-                biggestTree = _tree;
-            }
+            //choose biggest tree
+            GameObject biggestTree = activeHexComponent.woodland.GetComponent<Woodland>().ChooseBiggestTree();
 
-            float sizeDifference = biggestTree.GetComponent<Tree>().size - _tree.GetComponent<Tree>().size;
-            if (sizeDifference < 0)
+            if (biggestTree != null)
             {
-                biggestTree = _tree;
+                //chop tree
+                Destroy(biggestTree);
+                int woodAmount = (int)biggestTree.GetComponent<Tree>().size;
+                Debug.Log("chop tree, " + woodAmount);
+                GameStats.Wood += woodAmount;
             }
-        }
-
-        if (biggestTree != null)
-        {
-            //chop tree
-            Destroy(biggestTree);
-            int woodAmount = (int)biggestTree.GetComponent<Tree>().size;
-            Debug.Log("chop tree, " + woodAmount);
-            GameStats.Wood += woodAmount;
+            else
+            {
+                Debug.Log("No trees to chop! :(");
+            }
         }
         else
         {
-            Debug.Log("No trees to chop! :(");
+            Debug.Log("No trees to chop");
+            return;
         }
-
     }
 
     public void CreateConcealedHexesAround(GameObject hex)
@@ -177,7 +175,7 @@ public class TerrainManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("can't spawn hex at" + hexPosition+ ". There's something here");
+            // Debug.Log("can't spawn hex at" + hexPosition+ ". There's something here");
             return null;
         }
         

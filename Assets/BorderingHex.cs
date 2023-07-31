@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class BorderingHex : Hex
 {
@@ -39,6 +40,10 @@ public class BorderingHex : Hex
     public void OnMouseDown()
     {
         //explore bordering hex
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            return;
+        }
         TerrainManager.instance.CreateOwnedHex(gameObject);
     }
     

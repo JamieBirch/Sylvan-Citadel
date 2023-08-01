@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class OwnedHex : Hex
 {
@@ -37,17 +38,24 @@ public class OwnedHex : Hex
 
     void OnMouseDown()
     {
-        //TODO select this Hex
-        if (!selected)
+        if (EventSystem.current.IsPointerOverGameObject())
         {
-            gameObject.transform.position += selectOffset;
-            selected = true;
-            _hexManager.SetHexAsActive(gameObject);
+            return;
         }
         else
         {
-            Unselect();
+            if (!selected)
+            {
+                gameObject.transform.position += selectOffset;
+                selected = true;
+                _hexManager.SetHexAsActive(gameObject);
+            }
+            else
+            {
+                Unselect();
+            }
         }
+        
     }
     
     private void OnMouseExit()

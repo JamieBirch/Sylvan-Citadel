@@ -11,6 +11,7 @@ public class TerrainManager : MonoBehaviour
     public GameObject ownedHex;
 
     public GameObject woodland;
+    public GameObject waterway;
     public GameObject fruitTree;
     public GameObject pineTree;
     public GameObject lake;
@@ -29,21 +30,11 @@ public class TerrainManager : MonoBehaviour
         instance = this;
     }
 
-    /*public void CreateTerrain()
-    {
-        //instantiate start hex
-        // CreateStartHex();
-
-        //TODO instantiate bordering hexes
-
-        //TODO instantiate far hexes
-    }*/
-
     public GameObject CreateStartHex()
     {
         GameObject startHex = CreateOwnedHex(firstTileCenter);
         SpawnTrees(startHex, StartTrees);
-        SpawnLake(startHex);
+        SpawnLakes(startHex, Utils.GenerateRandomIntMax(5));
         return startHex;
     }
 
@@ -56,14 +47,26 @@ public class TerrainManager : MonoBehaviour
         return startHex;
     }
 
-    private void SpawnLake(GameObject hex)
+    private void SpawnLakes(GameObject hex, int lakesNumber)
     {
-        Vector3 position = ConstructionManager.instance.PositionOnHex(hex.transform.position) + new Vector3(0, 0.875f, 0);
-        GameObject _lake = Instantiate(lake, position, Quaternion.identity, hex.transform);
-        float randomScale = Utils.GenerateRandom(0.5f, 1f);
-        _lake.transform.localScale = new Vector3(randomScale, 1, randomScale);
+        GameObject _waterway = Instantiate(waterway, hex.transform.position, Quaternion.identity, hex.transform);
+        _waterway.name = "waterway";
+        hex.GetComponent<OwnedHex>().waterway = _waterway;
+        
+        for (int i = 0; i < lakesNumber; i++)
+        {
+            SpawnLake(_waterway);
+        }
+    }
 
-        hex.GetComponent<OwnedHex>().waterway = _lake;
+    private void SpawnLake(GameObject _waterway)
+    {
+        Vector3 position = ConstructionManager.instance.PositionOnHex(_waterway.transform.position) + new Vector3(0, 0.875f, 0);
+        GameObject newLake = Instantiate(lake, position, Quaternion.identity, _waterway.transform);
+        float randomScale = Utils.GenerateRandom(0.3f, 1.5f);
+        newLake.transform.localScale = new Vector3(randomScale, 1, randomScale);
+        
+        _waterway.GetComponent<Waterway>().lakes.Add(newLake.GetComponent<Lake>());
     }
 
     public void SpawnTrees(GameObject hex, int treesNumber)
@@ -82,7 +85,7 @@ public class TerrainManager : MonoBehaviour
         }
     }
 
-    public GameObject SpawnTree(GameObject _woodland)
+    public void SpawnTree(GameObject _woodland)
     {
         Vector3 position = ConstructionManager.instance.PositionOnHex(_woodland.transform.position) + new Vector3(0, 1f, 0);
         GameObject newTree = Instantiate(fruitTree, position, Quaternion.identity, _woodland.transform);
@@ -90,8 +93,6 @@ public class TerrainManager : MonoBehaviour
         newTree.transform.localScale = new Vector3(randomScale, randomScale, randomScale);
         //FIXME ugly and expensive
         _woodland.GetComponent<Woodland>().trees.Add(newTree.GetComponent<Tree>());
-        
-        return newTree;
     }
     
     public void SpawnTreeAt(Transform _woodland, Vector3 position)
@@ -194,7 +195,7 @@ public class TerrainManager : MonoBehaviour
         GameObject hex = CreateOwnedHex(position - borderingHexComponent.hoverOffset);
         if (hasWater)
         {
-            SpawnLake(hex);
+            SpawnLakes(hex, Utils.GenerateRandomIntMax(5));
         }
         if (hasWood)
         {

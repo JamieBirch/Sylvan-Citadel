@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class TerrainManager : MonoBehaviour
@@ -97,11 +98,15 @@ public class TerrainManager : MonoBehaviour
     
     public void SpawnTreeAt(Transform _woodland, Vector3 position)
     {
-        GameObject newTree = Instantiate(fruitTree, position, Quaternion.identity, _woodland);
-        float randomScale = Utils.GenerateRandom(0.3f, 0.8f);
-        newTree.transform.localScale = new Vector3(randomScale, randomScale, randomScale);
-        //FIXME ugly and expensive
-        _woodland.GetComponent<Woodland>().trees.Add(newTree.GetComponent<Tree>());
+        List<Tree> trees = _woodland.GetComponent<Woodland>().trees;
+        if (trees.Count <= 100)
+        {
+            GameObject newTree = Instantiate(fruitTree, position, Quaternion.identity, _woodland);
+            float randomScale = Utils.GenerateRandom(0.3f, 0.8f);
+            newTree.transform.localScale = new Vector3(randomScale, randomScale, randomScale);
+            //FIXME ugly and expensive
+            trees.Add(newTree.GetComponent<Tree>());
+        }
     }
 
     public void ChopTree(GameObject activeHex)

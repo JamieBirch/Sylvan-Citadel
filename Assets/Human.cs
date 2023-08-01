@@ -19,7 +19,6 @@ public class Human : MonoBehaviour
     public int speed;
     
     public int fertility;
-    public Vector3 offset = new Vector3(0.05f, 0.1f, 0.05f);
 
     private GameObject _home;
     
@@ -132,6 +131,7 @@ public class Human : MonoBehaviour
 
     private void FindHome()
     {
+        //FIXME fix overcrowded houses
         GameObject[] houses = GameObject.FindGameObjectsWithTag(houseTag);
         
         float shortestDistance = Mathf.Infinity;
@@ -202,8 +202,10 @@ public class Human : MonoBehaviour
         
         transform.Translate(dir.normalized * distanceThisFrame, Space.World);
         transform.LookAt(_currentTarget.transform);
-        
-        if (dir.magnitude  <= distanceThisFrame)
+
+        float distance = Vector3.Distance(transform.position, _currentTarget.transform.position);
+
+        if (distance <= 0.4)
         {
             if (_currentTarget.CompareTag(fruitTag))
             {

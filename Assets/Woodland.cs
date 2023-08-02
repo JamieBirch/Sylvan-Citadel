@@ -33,4 +33,15 @@ public class Woodland : MonoBehaviour
 
         return biggestTree.gameObject;
     }
+    
+    public void ChopTree(GameObject _tree)
+    {
+        Tree treeComponent = _tree.GetComponent<Tree>();
+
+        trees.Remove(treeComponent);
+        Destroy(_tree);
+        int woodAmount = (int)treeComponent.size;
+        Debug.Log("chop tree, " + woodAmount);
+        GameStats.Wood += woodAmount;
+    }
 }

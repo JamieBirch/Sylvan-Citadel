@@ -114,16 +114,14 @@ public class TerrainManager : MonoBehaviour
         OwnedHex activeHexComponent = activeHex.GetComponent<OwnedHex>();
         if (activeHexComponent.woodland != null)
         {
+            Woodland _woodland = activeHexComponent.woodland.GetComponent<Woodland>();
+
             //choose biggest tree
-            GameObject biggestTree = activeHexComponent.woodland.GetComponent<Woodland>().ChooseBiggestTree();
+            GameObject biggestTree = _woodland.ChooseBiggestTree();
 
             if (biggestTree != null)
             {
-                //chop tree
-                Destroy(biggestTree);
-                int woodAmount = (int)biggestTree.GetComponent<Tree>().size;
-                Debug.Log("chop tree, " + woodAmount);
-                GameStats.Wood += woodAmount;
+                _woodland.ChopTree(biggestTree);
             }
             else
             {

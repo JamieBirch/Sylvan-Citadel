@@ -7,7 +7,7 @@ public class Fruit : MonoBehaviour
 
     private void Start()
     {
-        GameManager.NewDay += StartDay;
+        Calendar.NewDay += StartDay;
         _terrainManager = TerrainManager.instance;
     }
     
@@ -24,6 +24,6 @@ public class Fruit : MonoBehaviour
     
     public void OnDestroy()
     {
-        GameManager.NewDay -= StartDay;
+        Calendar.NewDay -= StartDay;
     }
 }

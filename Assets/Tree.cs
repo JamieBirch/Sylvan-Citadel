@@ -15,7 +15,7 @@ public class Tree : MonoBehaviour
     private void Start()
     {
         size = gameObject.transform.localScale.magnitude * 10;
-        GameManager.NewDay += StartDay;
+        Calendar.NewDay += StartDay;
     }
     
     void StartDay()
@@ -76,6 +76,6 @@ public class Tree : MonoBehaviour
     
     public void OnDestroy()
     {
-        GameManager.NewDay -= StartDay;
+        Calendar.NewDay -= StartDay;
     }
 }

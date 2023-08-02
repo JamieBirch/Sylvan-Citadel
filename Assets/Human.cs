@@ -24,7 +24,7 @@ public class Human : MonoBehaviour
     
     private void Start()
     {
-        GameManager.NewDay += StartDay;
+        Calendar.NewDay += StartDay;
         _populationManager = PopulationManager.instance;
     }
 
@@ -246,13 +246,13 @@ public class Human : MonoBehaviour
         _populationManager.SpawnHuman(gameObject.GetComponentInParent<Village>().gameObject);
     }
 
-    public void OnDestroy()
-    {
-        GameManager.NewDay -= StartDay;
-    }
-
     public bool Satisfied()
     {
         return !isThirsty && !isHungry && hasHome;
+    }
+
+    public void OnDestroy()
+    {
+        Calendar.NewDay -= StartDay;
     }
 }

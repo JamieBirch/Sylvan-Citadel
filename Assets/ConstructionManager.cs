@@ -24,7 +24,8 @@ public class ConstructionManager : MonoBehaviour
         else
         {
             var position = PositionOnHex(hex.transform.position) + houseOffset;
-            GameObject newHouse = Instantiate(house, position, Quaternion.identity, hex.transform);
+            float houseRotation = Utils.GenerateRandom(0, 360f);
+            GameObject newHouse = Instantiate(house, position, Quaternion.AngleAxis(houseRotation, Vector3.up) , hex.transform);
 
             GameStats.Wood -= house.GetComponent<House>().woodPrice;
             hex.GetComponent<OwnedHex>().buildings.Add(newHouse);

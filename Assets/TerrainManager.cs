@@ -89,7 +89,8 @@ public class TerrainManager : MonoBehaviour
     public void SpawnTree(GameObject _woodland)
     {
         Vector3 position = ConstructionManager.instance.PositionOnHex(_woodland.transform.position) + new Vector3(0, 1f, 0);
-        GameObject newTree = Instantiate(fruitTree, position, Quaternion.identity, _woodland.transform);
+        float treeRotation = Utils.GenerateRandom(0, 360f);
+        GameObject newTree = Instantiate(fruitTree, position, Quaternion.AngleAxis(treeRotation, Vector3.up), _woodland.transform);
         float randomScale = Utils.GenerateRandom(0.5f, 1.5f);
         newTree.transform.localScale = new Vector3(randomScale, randomScale, randomScale);
         //FIXME ugly and expensive
@@ -101,7 +102,8 @@ public class TerrainManager : MonoBehaviour
         List<Tree> trees = _woodland.GetComponent<Woodland>().trees;
         if (trees.Count <= 100)
         {
-            GameObject newTree = Instantiate(fruitTree, position, Quaternion.identity, _woodland);
+            float treeRotation = Utils.GenerateRandom(0, 360f);
+            GameObject newTree = Instantiate(fruitTree, position, Quaternion.AngleAxis(treeRotation, Vector3.up), _woodland.transform);
             float randomScale = Utils.GenerateRandom(0.3f, 0.8f);
             newTree.transform.localScale = new Vector3(randomScale, randomScale, randomScale);
             //FIXME ugly and expensive

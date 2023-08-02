@@ -3,6 +3,7 @@ using UnityEngine;
 public class Tree : MonoBehaviour
 {
     public GameObject fruit;
+    public GameObject leaves;
     public float size;
     public float growthSpeed;
 
@@ -55,6 +56,7 @@ public class Tree : MonoBehaviour
             }
             default:
             {
+                leaves.SetActive(false);
                 Debug.Log("I don't bear fruits anymore!");
                 break;
             }

@@ -212,7 +212,7 @@ public class Human : MonoBehaviour
                 Consume();
             } else if (_currentTarget.CompareTag(houseTag))
             {
-                _currentTarget.GetComponent<House>().PlaceHuman(this);
+                _currentTarget.GetComponent<House>().MoveIn(this);
                 _home = _currentTarget;
                 hasHome = true;
                 _currentTarget = null;

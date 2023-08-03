@@ -16,11 +16,19 @@ public class House : MonoBehaviour
         GameStats.BedsAvailable += capacity;
     }
 
-    public void MoveIn(Human human)
+    public bool MoveIn(Human human)
     {
-        _tenants.Add(human);
-        bedsAvailable--;
-        GameStats.BedsAvailable--;
+        if (bedsAvailable > 0)
+        {
+            _tenants.Add(human);
+            bedsAvailable--;
+            GameStats.BedsAvailable--;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
     
     public void MoveOut(Human human)

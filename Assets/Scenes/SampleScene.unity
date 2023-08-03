@@ -636,7 +636,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c773e15fb9e9da418722cc696c1794c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartHumans: 5
+  StartHumans: 1
   StartStorageWood: 70
   StartStorageFood: 0
   startHex: {fileID: 0}
@@ -1359,7 +1359,7 @@ GameObject:
   - component: {fileID: 705507995}
   - component: {fileID: 705507994}
   m_Layer: 0
-  m_Name: Directional Light
+  m_Name: Sun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2725,7 +2725,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 675f670d64e39ec418a145788794a183, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartTrees: 12
+  StartTrees: 15
   borderingHex: {fileID: 5828220953014600915, guid: 72a4f5cafaf2dab43a5e901325b331c4, type: 3}
   farHex: {fileID: 3180673953241494959, guid: bfa893911798cef478682e7dc867ee72, type: 3}
   ownedHex: {fileID: 3193132197810865085, guid: 04f7847a0e009b3489b5fbb5dc98f219, type: 3}

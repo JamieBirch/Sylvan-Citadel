@@ -26,8 +26,7 @@ public class PopulationManager : MonoBehaviour
         
         for (int i = 0; i < humansCount; i++)
         {
-            GameObject newHuman = SpawnHuman(_village);
-            newHuman.transform.SetParent(_village.transform);
+            /*GameObject newHuman = */SpawnHuman(_village);
         }
     }
 
@@ -40,7 +39,10 @@ public class PopulationManager : MonoBehaviour
         string name = NameGenerator.CreateHumanName();
         humanGameObject.name = name;
 
-        humanGameObject.GetComponent<Human>().Name = name;
+        Human humanComponent = humanGameObject.GetComponent<Human>();
+        humanComponent.Name = name;
+        humanComponent.homeHex = village.GetComponentInParent<OwnedHex>();
+        // humanGameObject.transform.SetParent(village.transform);
 
         return humanGameObject;
     }

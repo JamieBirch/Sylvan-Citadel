@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Human : MonoBehaviour
@@ -9,154 +10,34 @@ public class Human : MonoBehaviour
     public bool isThirsty = false;
     public bool isHungry = false;
     public bool hasHome = false;
-    public string houseTag = "house";
-    public string fruitTag = "fruit";
-    public string waterTag = "water";
-    public GameObject _currentTarget;
+    public GameObject currentTarget;
+    public OwnedHex homeHex;
 
     public bool hasWork = false;
-
     public int speed;
-    
     public int fertility;
 
-    private GameObject _home;
+    public GameObject _home;
+    private IHumanState state;
+    public String stateName;
+    public FindWaterState findWater = new FindWaterState();
+    public FindFoodState findFood = new FindFoodState();
+    public FindShelterState findShelter = new FindShelterState();
+    public DoWanderState doWander = new DoWanderState();
+    public GoHomeState goHome = new GoHomeState();
+    public DoWorkState doWork = new DoWorkState();
     
     private void Start()
     {
         Calendar.NewDay += StartDay;
         _populationManager = PopulationManager.instance;
+        state = doWander;
     }
 
     private void Update()
     {
-        if (_currentTarget == null)
-        {
-            if (Satisfied() && !hasWork)
-            {
-                GoHome();
-            }
-            else if(!Satisfied())
-            {
-                if (isThirsty)
-                {
-                    FindWater();
-                } else if (isHungry)
-                {
-                    FindFood();
-                } else if (!hasHome)
-                {
-                    FindHome();
-                }
-            }
-            else
-            {
-                //Do task
-                Debug.Log(name + " is ready to work");
-            }
-        }
-        else
-        {
-            RunToTarget();
-        }
-    }
-
-    private void GoHome()
-    {
-        Vector3 dir = new Vector3(
-            _home.transform.position.x - transform.position.x, 
-            0,
-            _home.transform.position.z - transform.position.z);
-        float distanceThisFrame = speed * Time.deltaTime;
-        
-        transform.Translate(dir.normalized * distanceThisFrame, Space.World);
-        transform.LookAt(_home.transform);
-    }
-
-    private void FindWater()
-    {
-        GameObject[] waterSources = GameObject.FindGameObjectsWithTag(waterTag);
-        
-        float shortestDistance = Mathf.Infinity;
-        GameObject nearestWater = null;
-        foreach (GameObject waterSource in waterSources)
-        {
-            float distanceToWater = Vector3.Distance(transform.position, waterSource.transform.position);
-            if (distanceToWater < shortestDistance)
-            {
-                shortestDistance = distanceToWater;
-                nearestWater = waterSource;
-            }
-        }
-
-        if (nearestWater != null)
-        {
-            _currentTarget = nearestWater;
-        } else
-        {
-            _currentTarget = null;
-        }
-    }
-    
-    private void FindFood()
-    {
-        GameObject[] fruits = GameObject.FindGameObjectsWithTag(fruitTag);
-        
-        //find nearest food
-        float shortestDistance = Mathf.Infinity;
-        GameObject nearestFood = null;
-        foreach (GameObject fruit in fruits)
-        {
-            if (!fruit.GetComponent<Fruit>().isClaimed)
-            {
-                float distanceToFood = Vector3.Distance(transform.position, fruit.transform.position);
-                if (distanceToFood < shortestDistance)
-                {
-                    shortestDistance = distanceToFood;
-                    nearestFood = fruit;
-                }
-            }
-        }
-
-        if (nearestFood != null)
-        {
-            _currentTarget = nearestFood;
-            nearestFood.GetComponent<Fruit>().isClaimed = true;
-            // Debug.Log(name + " claimed food");
-        } else
-        {
-            _currentTarget = null;
-        }
-    }
-
-    private void FindHome()
-    {
-        //FIXME fix overcrowded houses
-        GameObject[] houses = GameObject.FindGameObjectsWithTag(houseTag);
-        
-        float shortestDistance = Mathf.Infinity;
-        GameObject nearestHouse = null;
-        foreach (GameObject house in houses)
-        {
-            House thisHouse = house.GetComponent<House>();
-            if (thisHouse.bedsAvailable > 0)
-            {
-                float distanceToHouse = Vector3.Distance(transform.position, house.transform.position);
-                if (distanceToHouse < shortestDistance)
-                {
-                    shortestDistance = distanceToHouse;
-                    nearestHouse = house;
-                }
-            }
-        }
-
-        if (nearestHouse != null)
-        {
-            _currentTarget = nearestHouse;
-        } else
-        {
-            _currentTarget = null;
-        }
+        state = state.DoState(this);
+        stateName = state.ToString();
     }
 
     void StartDay()
@@ -192,52 +73,26 @@ public class Human : MonoBehaviour
         GameStats.Population--;
     }
 
-    private void RunToTarget()
+    public void RunToTarget()
     {
+        Transform humanTransform = transform;
+        Transform currentTargetTransform = currentTarget.transform;
+
         Vector3 dir = new Vector3(
-            _currentTarget.transform.position.x - transform.position.x, 
+            currentTargetTransform.position.x - humanTransform.position.x, 
             0,
-            _currentTarget.transform.position.z - transform.position.z);
+            currentTargetTransform.position.z - humanTransform.position.z);
         float distanceThisFrame = speed * Time.deltaTime;
+
+        humanTransform.Translate(dir.normalized * distanceThisFrame, Space.World);
+        humanTransform.LookAt(currentTargetTransform);
+
+        float distance = Vector3.Distance(humanTransform.position, currentTargetTransform.position);
         
-        transform.Translate(dir.normalized * distanceThisFrame, Space.World);
-        transform.LookAt(_currentTarget.transform);
-
-        float distance = Vector3.Distance(transform.position, _currentTarget.transform.position);
-
         if (distance <= 0.4)
         {
-            if (_currentTarget.CompareTag(fruitTag))
-            {
-                Consume();
-            } else if (_currentTarget.CompareTag(houseTag))
-            {
-                _currentTarget.GetComponent<House>().MoveIn(this);
-                _home = _currentTarget;
-                hasHome = true;
-                _currentTarget = null;
-            } else if (_currentTarget.CompareTag(waterTag))
-            {
-                Drink();
-            }
+            state.UseCurrentTarget(this);
         }
-    }
-
-    private void Drink()
-    {
-        //TODO effect
-        isThirsty = false;
-        _currentTarget = null;
-    }
-
-    private void Consume()
-    {
-        Destroy(_currentTarget);
-        _currentTarget = null;
-        //TODO effect
-        GameStats.FruitsAvailable--;
-
-        isHungry = false;
     }
 
     private void GiveBirth()
@@ -249,6 +104,11 @@ public class Human : MonoBehaviour
     public bool Satisfied()
     {
         return !isThirsty && !isHungry && hasHome;
+    }
+    
+    public void DestroyCurrentTarget()
+    {
+        Destroy(currentTarget);
     }
 
     public void OnDestroy()

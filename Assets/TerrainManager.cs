@@ -140,24 +140,30 @@ public class TerrainManager : MonoBehaviour
     public void CreateConcealedHexesAround(GameObject hex)
     {
         Vector3 hexPosition = hex.transform.position;
-        
+
         //right
-        GameObject rightHex = CreateBorderingHexAt(hexPosition + xHexOffset);
+        Vector3 rightHexPosition = hexPosition + xHexOffset;
+        CreateBorderingHexAt(rightHexPosition);
 
         //left
-        GameObject leftHex = CreateBorderingHexAt(hexPosition + -xHexOffset);
+        Vector3 leftHexPosition = hexPosition + -xHexOffset;
+        CreateBorderingHexAt(leftHexPosition);
         
         //top right
-        GameObject toprightHex = CreateBorderingHexAt(hexPosition + xHexOffset/2 + zHexOffset);
+        Vector3 topRightHexPosition = hexPosition + xHexOffset/2 + zHexOffset;
+        CreateBorderingHexAt(topRightHexPosition);
         
         //top left
-        GameObject toplefttHex = CreateBorderingHexAt(hexPosition + -xHexOffset/2 + zHexOffset);
+        Vector3 topLeftHexPosition = hexPosition + -xHexOffset/2 + zHexOffset;
+        CreateBorderingHexAt(topLeftHexPosition);
         
         //bottom right
-        GameObject bottomrightHex = CreateBorderingHexAt(hexPosition + xHexOffset/2 - zHexOffset);
+        Vector3 bottomRightHexPosition = hexPosition + xHexOffset/2 - zHexOffset;
+        CreateBorderingHexAt(bottomRightHexPosition);
         
         //bottom left
-        GameObject bottomleft = CreateBorderingHexAt(hexPosition + -xHexOffset/2 - zHexOffset);
+        Vector3 bottomLeftHexPosition = hexPosition + -xHexOffset/2 - zHexOffset;
+        CreateBorderingHexAt(bottomLeftHexPosition);
     }
 
     private static void RandomizeResources(GameObject hex)

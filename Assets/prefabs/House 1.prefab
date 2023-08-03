@@ -106,7 +106,7 @@ GameObject:
   - component: {fileID: 3828534887035531546}
   m_Layer: 0
   m_Name: House 1
-  m_TagString: Untagged
+  m_TagString: house
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -198,7 +198,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: house
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8740147566341597934, guid: d063275df0b3c354385010dfa968ea7a, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 397639803382010223, guid: d063275df0b3c354385010dfa968ea7a, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: d063275df0b3c354385010dfa968ea7a, type: 3}
 --- !u!4 &4133044059746465885 stripped
 Transform:

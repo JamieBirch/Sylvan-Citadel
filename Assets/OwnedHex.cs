@@ -11,7 +11,7 @@ public class OwnedHex : Hex
     
     public Vector3 selectOffset;
 
-    public GameObject hexStats;
+    // public GameObject hexStats = new GameObject();
     
     public Renderer rend;
 
@@ -20,6 +20,8 @@ public class OwnedHex : Hex
     public GameObject village;
     public List<GameObject> buildings;
     private bool selected;
+    
+    public int BedsAvailable;
 
     private void Start()
     {
@@ -28,6 +30,8 @@ public class OwnedHex : Hex
         defaultColor = rend.material.color;
         buildings = new List<GameObject>();
         selected = false;
+
+        BedsAvailable = 0;
     }
 
     public override void OnMouseEnter()

@@ -636,7 +636,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c773e15fb9e9da418722cc696c1794c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartHumans: 1
+  StartHumans: 5
   StartStorageWood: 70
   StartStorageFood: 0
   startHex: {fileID: 0}

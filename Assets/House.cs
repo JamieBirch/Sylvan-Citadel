@@ -1,8 +1,10 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class House : MonoBehaviour
 {
+    public OwnedHex hex;
     public int woodPrice;
     public int capacity;
     public int bedsAvailable;
@@ -13,7 +15,7 @@ public class House : MonoBehaviour
     {
         _tenants = new List<Human>();
         bedsAvailable = capacity;
-        GameStats.BedsAvailable += capacity;
+        hex = this.GetComponentInParent<OwnedHex>();
     }
 
     public bool MoveIn(Human human)
@@ -22,7 +24,7 @@ public class House : MonoBehaviour
         {
             _tenants.Add(human);
             bedsAvailable--;
-            GameStats.BedsAvailable--;
+            hex.BedsAvailable--;
             return true;
         }
         else
@@ -35,6 +37,6 @@ public class House : MonoBehaviour
     {
         _tenants.Remove(human);
         bedsAvailable++;
-        GameStats.BedsAvailable++;
+        hex.BedsAvailable++;
     }
 }

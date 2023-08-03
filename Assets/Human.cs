@@ -47,7 +47,7 @@ public class Human : MonoBehaviour
             Die();
         }
 
-        if (GameStats.BedsAvailable > 0 && Satisfied())
+        if (homeHex.BedsAvailable > 0 && Satisfied())
         {
             double chance = Utils.GenerateRandomChance();
             if (chance <= fertility)

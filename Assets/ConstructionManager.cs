@@ -16,7 +16,9 @@ public class ConstructionManager : MonoBehaviour
 
     public void BuildHouse(GameObject hex)
     {
-        if (GameStats.Wood < house.GetComponent<House>().woodPrice)
+        House houseComponent = house.GetComponent<House>();
+        
+        if (GameStats.Wood < houseComponent.woodPrice)
         {
             Debug.Log("Not enough wood to build!");
             return;
@@ -27,8 +29,11 @@ public class ConstructionManager : MonoBehaviour
             float houseRotation = Utils.GenerateRandom(0, 360f);
             GameObject newHouse = Instantiate(house, position, Quaternion.AngleAxis(houseRotation, Vector3.up) , hex.transform);
 
-            GameStats.Wood -= house.GetComponent<House>().woodPrice;
-            hex.GetComponent<OwnedHex>().buildings.Add(newHouse);
+            GameStats.Wood -= houseComponent.woodPrice;
+
+            OwnedHex hexComponent = hex.GetComponent<OwnedHex>();
+            hexComponent.buildings.Add(newHouse);
+            hexComponent.BedsAvailable += houseComponent.capacity;
         }
     }
     

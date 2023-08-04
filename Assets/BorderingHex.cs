@@ -4,6 +4,9 @@ using UnityEngine.EventSystems;
 public class BorderingHex : Hex
 {
     public Vector3 hoverOffset;
+
+    public Biome biome;
+    
     public Canvas canvas;
     public bool hasWater;
     public bool hasWood;
@@ -15,6 +18,7 @@ public class BorderingHex : Hex
 
     private void Start()
     {
+        //ui
         if (hasWater)
         {
             water.SetActive(true);
@@ -39,12 +43,12 @@ public class BorderingHex : Hex
     
     public void OnMouseDown()
     {
-        //explore bordering hex
         if (EventSystem.current.IsPointerOverGameObject())
         {
             return;
         }
-        TerrainManager.instance.CreateOwnedHex(gameObject);
+        //explore bordering hex
+        TerrainManager.instance.BuyHex(gameObject);
     }
     
     private void OnMouseExit()
@@ -52,6 +56,10 @@ public class BorderingHex : Hex
         gameObject.transform.position -= hoverOffset;
         canvas.enabled = false;
     }
-    
 
+    public string createDescription()
+    {
+        //TODO
+        return "default description";
+    }
 }

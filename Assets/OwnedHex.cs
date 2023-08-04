@@ -9,6 +9,8 @@ public class OwnedHex : Hex
     public Color hoverColor;
     private Color defaultColor;
     
+    public Biome biome;
+    
     public Vector3 selectOffset;
 
     // public GameObject hexStats = new GameObject();

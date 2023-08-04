@@ -25,6 +25,8 @@ public class TerrainManager : MonoBehaviour
 
     public Vector3 xHexOffset = new Vector3(9f, 0f, 0f);
     public Vector3 zHexOffset = new Vector3(0f, 0f, 7.75f);
+
+    private Biome startBiome = Biome.grove;
     
     private void Awake()
     {
@@ -33,19 +35,21 @@ public class TerrainManager : MonoBehaviour
 
     public GameObject CreateStartHex()
     {
-        GameObject startHex = CreateOwnedHex(firstTileCenter);
+        GameObject startHex = CreateOwnedHex(startBiome, firstTileCenter);
         SpawnTrees(startHex, StartTrees);
         SpawnLakes(startHex, Utils.GenerateRandomIntMax(5));
         return startHex;
     }
 
-    private GameObject CreateOwnedHex(Vector3 hexCenter)
+    private GameObject CreateOwnedHex(Biome biome, Vector3 hexCenter)
     {
-        GameObject startHex = Instantiate(ownedHex, hexCenter, Quaternion.identity, gameObject.transform);
-        string name = NameGenerator.CreateDistrictName();
-        startHex.name = name;
-        startHex.GetComponent<Hex>().Name = name;
-        return startHex;
+        GameObject newOwnedHex = Instantiate(ownedHex, hexCenter, Quaternion.identity, gameObject.transform);
+        string districtName = NameGenerator.CreateDistrictName();
+        newOwnedHex.name = districtName;
+        OwnedHex hexComponent = newOwnedHex.GetComponent<OwnedHex>();
+        hexComponent.Name = districtName;
+        hexComponent.biome = biome;
+        return newOwnedHex;
     }
 
     private void SpawnLakes(GameObject hex, int lakesNumber)
@@ -208,17 +212,19 @@ public class TerrainManager : MonoBehaviour
         
     }
 
-    public void CreateOwnedHex(GameObject _borderingHex)
+    public void BuyHex(GameObject _borderingHex)
     {
         BorderingHex borderingHexComponent = _borderingHex.GetComponent<BorderingHex>();
         bool hasWater = borderingHexComponent.hasWater;
         bool hasWood = borderingHexComponent.hasWood;
         bool hasFood = borderingHexComponent.hasFood;
 
-        Vector3 position = _borderingHex.transform.position;
+        //FIXME floating bug here?
+        Vector3 position = _borderingHex.transform.position - borderingHexComponent.hoverOffset;
+        
         Destroy(_borderingHex);
 
-        GameObject hex = CreateOwnedHex(position - borderingHexComponent.hoverOffset);
+        GameObject hex = CreateOwnedHex(borderingHexComponent.biome, position);
         if (hasWater)
         {
             SpawnLakes(hex, Utils.GenerateRandomIntMax(5));

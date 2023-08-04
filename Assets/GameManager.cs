@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        fruits.text = GameStats.FruitsAvailable.ToString();
+        // fruits.text = GameStats.FruitsAvailable.ToString();
         humans.text = GameStats.Population.ToString();
         food.text = GameStats.Food.ToString();
         wood.text = GameStats.Wood.ToString();

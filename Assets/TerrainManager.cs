@@ -77,38 +77,53 @@ public class TerrainManager : MonoBehaviour
         // {
             GameObject _woodland = Instantiate(woodland, hex.transform.position, Quaternion.identity, hex.transform);
             _woodland.name = "woodland";
-            hex.GetComponent<OwnedHex>().woodland = _woodland;
+
+            OwnedHex hexComponent = hex.GetComponent<OwnedHex>();
+            hexComponent.woodland = _woodland;
         // }
+        List<Tree> trees = _woodland.GetComponent<Woodland>().trees;
 
         for (int i = 0; i < treesNumber; i++)
         {
-            SpawnTree(_woodland);
+            SpawnTree(hexComponent, _woodland.transform, trees);
         }
     }
 
-    public void SpawnTree(GameObject _woodland)
+    public void SpawnTree(OwnedHex hex, Transform _woodland, List<Tree> trees)
     {
         Vector3 position = ConstructionManager.instance.PositionOnHex(_woodland.transform.position) + new Vector3(0, 1f, 0);
-        float treeRotation = Utils.GenerateRandom(0, 360f);
-        GameObject newTree = Instantiate(fruitTree, position, Quaternion.AngleAxis(treeRotation, Vector3.up), _woodland.transform);
+        
         float randomScale = Utils.GenerateRandom(0.5f, 1.5f);
+        CreateTree(hex, _woodland, position, randomScale, trees);
+        /*float treeRotation = Utils.GenerateRandom(0, 360f);
+        GameObject newTree = Instantiate(fruitTree, position, Quaternion.AngleAxis(treeRotation, Vector3.up), _woodland.transform);
         newTree.transform.localScale = new Vector3(randomScale, randomScale, randomScale);
-        //FIXME ugly and expensive
-        _woodland.GetComponent<Woodland>().trees.Add(newTree.GetComponent<Tree>());
+        
+        Tree treeComponent = newTree.GetComponent<Tree>();
+        trees.Add(treeComponent);
+        treeComponent.hex = hex;*/
     }
     
-    public void SpawnTreeAt(Transform _woodland, Vector3 position)
+    public void SpawnTreeAt(OwnedHex hex, Transform _woodland, Vector3 position)
     {
         List<Tree> trees = _woodland.GetComponent<Woodland>().trees;
         if (trees.Count <= 100)
         {
-            float treeRotation = Utils.GenerateRandom(0, 360f);
-            GameObject newTree = Instantiate(fruitTree, position, Quaternion.AngleAxis(treeRotation, Vector3.up), _woodland.transform);
             float randomScale = Utils.GenerateRandom(0.3f, 0.8f);
-            newTree.transform.localScale = new Vector3(randomScale, randomScale, randomScale);
-            //FIXME ugly and expensive
-            trees.Add(newTree.GetComponent<Tree>());
+            CreateTree(hex, _woodland, position, randomScale, trees);
         }
+    }
+
+    private void CreateTree(OwnedHex hex, Transform _woodland, Vector3 position, float scale, List<Tree> trees)
+    {
+        float treeRotation = Utils.GenerateRandom(0, 360f);
+        GameObject newTree = Instantiate(fruitTree, position, Quaternion.AngleAxis(treeRotation, Vector3.up),
+            _woodland.transform);
+        newTree.transform.localScale = new Vector3(scale, scale, scale);
+
+        Tree treeComponent = newTree.GetComponent<Tree>();
+        trees.Add(treeComponent);
+        treeComponent.hex = hex;
     }
 
     public void ChopTree(GameObject activeHex)

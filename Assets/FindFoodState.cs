@@ -71,7 +71,7 @@ public class FindFoodState : IHumanState
         human.DestroyCurrentTarget();
         human.currentTarget = null;
         //TODO effect
-        GameStats.FruitsAvailable--;
+        human.homeHex.FruitsAvailable--;
 
         human.isHungry = false;
     }

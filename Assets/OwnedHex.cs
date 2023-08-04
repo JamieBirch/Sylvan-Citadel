@@ -21,7 +21,10 @@ public class OwnedHex : Hex
     public List<GameObject> buildings;
     private bool selected;
     
+    //Stats
     public int BedsAvailable;
+    public int FruitsAvailable;
+    public int HexPopulation;
 
     private void Start()
     {
@@ -32,6 +35,7 @@ public class OwnedHex : Hex
         selected = false;
 
         BedsAvailable = 0;
+        FruitsAvailable = 0;
     }
 
     public override void OnMouseEnter()

@@ -41,9 +41,10 @@ public class PopulationManager : MonoBehaviour
 
         Human humanComponent = humanGameObject.GetComponent<Human>();
         humanComponent.Name = name;
-        humanComponent.homeHex = village.GetComponentInParent<OwnedHex>();
-        // humanGameObject.transform.SetParent(village.transform);
-
+        OwnedHex homeHex = village.GetComponentInParent<OwnedHex>();
+        humanComponent.homeHex = homeHex;
+        homeHex.HexPopulation++;
+        
         return humanGameObject;
     }
 

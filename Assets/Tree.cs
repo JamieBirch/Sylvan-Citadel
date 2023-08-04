@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class Tree : MonoBehaviour
 {
-    public GameObject fruit;
+    public OwnedHex hex;
+    public GameObject fruitPrefab;
     public GameObject leaves;
     public float size;
     public float growthSpeed;
@@ -65,9 +66,14 @@ public class Tree : MonoBehaviour
 
     private void BearFruit()
     {
-        Instantiate(fruit, transform.position + fruitPositionOffset(), Quaternion.identity,
-            gameObject.GetComponentInParent<Woodland>().transform);
-        GameStats.FruitsAvailable++;
+        Woodland _woodland = gameObject.GetComponentInParent<Woodland>();
+        GameObject _fruit = Instantiate(fruitPrefab, transform.position + fruitPositionOffset(), Quaternion.identity,
+            _woodland.transform);
+
+        Fruit fruitComponent = _fruit.GetComponent<Fruit>();
+        fruitComponent.woodland = _woodland;
+        fruitComponent.hex = hex;
+        hex.FruitsAvailable++;
     }
 
     private Vector3 fruitPositionOffset()

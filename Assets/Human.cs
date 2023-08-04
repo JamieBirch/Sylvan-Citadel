@@ -61,16 +61,10 @@ public class Human : MonoBehaviour
         isThirsty = true;
     }
 
-    private void Die()
+    public void Hire()
     {
-        Debug.Log("I'm dying! :(");
-        //die
-        if (_home != null)
-        {
-            _home.GetComponent<House>().MoveOut(this);
-        }
-        Destroy(gameObject);
-        GameStats.Population--;
+        //TODO
+        hasWork = true;
     }
 
     public void RunToTarget()
@@ -95,20 +89,33 @@ public class Human : MonoBehaviour
         }
     }
 
+    public bool Satisfied()
+    {
+        return !isThirsty && !isHungry && hasHome;
+    }
+
+    public void DestroyCurrentTarget()
+    {
+        Destroy(currentTarget);
+    }
+
     private void GiveBirth()
     {
         Debug.Log("I'm having a child!");
         _populationManager.SpawnHuman(gameObject.GetComponentInParent<Village>().gameObject);
     }
 
-    public bool Satisfied()
+    private void Die()
     {
-        return !isThirsty && !isHungry && hasHome;
-    }
-    
-    public void DestroyCurrentTarget()
-    {
-        Destroy(currentTarget);
+        Debug.Log("I'm dying! :(");
+        //die
+        if (_home != null)
+        {
+            _home.GetComponent<House>().MoveOut(this);
+        }
+        Destroy(gameObject);
+        homeHex.HexPopulation--;
+        GameStats.Population--;
     }
 
     public void OnDestroy()

@@ -2,8 +2,12 @@ using UnityEngine;
 
 public class Fruit : MonoBehaviour
 {
+    public OwnedHex hex;
+    public Woodland woodland;
     public bool isClaimed = false;
+    
     private TerrainManager _terrainManager;
+    private int _chanceToGrowTree = 80;
 
     private void Start()
     {
@@ -14,12 +18,13 @@ public class Fruit : MonoBehaviour
     void StartDay()
     {
         double chance = Utils.GenerateRandomChance();
-        if (chance < 80)
+        if (chance < _chanceToGrowTree)
         {
-            _terrainManager.SpawnTreeAt(gameObject.GetComponentInParent<Woodland>().transform, transform.position);
+            _terrainManager.SpawnTreeAt(hex, woodland.transform, transform.position);
         }
         Destroy(gameObject);
-        GameStats.FruitsAvailable--;
+        
+        hex.FruitsAvailable--;
     }
     
     public void OnDestroy()

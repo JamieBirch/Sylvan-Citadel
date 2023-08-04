@@ -13,8 +13,6 @@ public class OwnedHex : Hex
     
     public Vector3 selectOffset;
 
-    // public GameObject hexStats = new GameObject();
-    
     public Renderer rend;
 
     public GameObject waterway;
@@ -80,7 +78,7 @@ public class OwnedHex : Hex
     {
         gameObject.transform.position -= selectOffset;
         selected = false;
-        _hexManager.SetHexAsInActive(gameObject);
+        _hexManager.SetHexAsInActive();
         ColorToDefault();
     }
 

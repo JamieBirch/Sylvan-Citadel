@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HexManager : MonoBehaviour
 {
@@ -7,6 +8,11 @@ public class HexManager : MonoBehaviour
     public GameObject buttons;
     private ConstructionManager _constructionManager;
     private TerrainManager _terrainManager;
+    
+    public GameObject hexStats;
+    public Text hexPopulationText;
+    public Text hexFruitsText;
+    public Text hexBedsText;
     
     private void Awake()
     {
@@ -17,6 +23,14 @@ public class HexManager : MonoBehaviour
     {
         _constructionManager = ConstructionManager.instance;
         _terrainManager = TerrainManager.instance;
+    }
+
+    private void Update()
+    {
+        if (activeHex != null)
+        {
+            SetHexStats();
+        }
     }
 
     public void BuildHouse()
@@ -41,11 +55,22 @@ public class HexManager : MonoBehaviour
             activeHex = hex;
         }
         buttons.SetActive(true);
+        hexStats.SetActive(true);
+        SetHexStats();
     }
 
-    public void SetHexAsInActive(GameObject hex)
+    private void SetHexStats()
+    {
+        OwnedHex activeHexComponent = activeHex.GetComponent<OwnedHex>();
+        hexPopulationText.text = activeHexComponent.HexPopulation.ToString();
+        hexFruitsText.text = activeHexComponent.FruitsAvailable.ToString();
+        hexBedsText.text = activeHexComponent.BedsAvailable.ToString();
+    }
+
+    public void SetHexAsInActive()
     {
         activeHex = null;
         buttons.SetActive(false);
+        hexStats.SetActive(false);
     }
 }

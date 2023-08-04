@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class BorderingHex : Hex
@@ -74,8 +73,25 @@ public class BorderingHex : Hex
 
     public string createDescription()
     {
+        //TODO make Biome-specific
+        string _features;
+        if (!hasWater && !hasWood)
+        {
+            _features = "Serene";
+        } else if (hasWater && hasWood)
+        {
+            _features = "Bountiful";
+        } else if (hasWater)
+        {
+            _features = "Lakeside";
+        } else 
+        {
+            _features = "Fruitful";
+        }
+
+        string _biome = "Grove";
         //TODO
-        return "default description";
+        return _features + " " + _biome;
     }
 
     private int definePrice()

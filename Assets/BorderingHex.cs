@@ -1,13 +1,16 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 public class BorderingHex : Hex
 {
     public Vector3 hoverOffset;
 
     public Biome biome;
+    public string description;
     
-    public Canvas canvas;
+    // public Canvas features_canvas;
     public bool hasWater;
     public bool hasWood;
     public bool hasFood;
@@ -15,11 +18,23 @@ public class BorderingHex : Hex
     public GameObject water;
     public GameObject wood;
     public GameObject food;
+    
+    public Canvas hexInfoCanvas;
+    public Text descriptionText;
+    public Text priceText;
+    
+    private int humanPrice;
 
     private void Start()
     {
+        humanPrice = 0;
+        description = createDescription();
+
+        descriptionText.text = description;
+        priceText.text = humanPrice.ToString();
+        
         //ui
-        if (hasWater)
+        /*if (hasWater)
         {
             water.SetActive(true);
         }
@@ -30,15 +45,15 @@ public class BorderingHex : Hex
         if (hasFood)
         {
             food.SetActive(true);
-        }
-        canvas.enabled = false;
+        }*/
+        hexInfoCanvas.enabled = false;
     }
 
     public override void OnMouseEnter()
     {
         base.OnMouseEnter();
         gameObject.transform.position += hoverOffset;
-        canvas.enabled = true;
+        hexInfoCanvas.enabled = true;
     }
     
     public void OnMouseDown()
@@ -54,12 +69,18 @@ public class BorderingHex : Hex
     private void OnMouseExit()
     {
         gameObject.transform.position -= hoverOffset;
-        canvas.enabled = false;
+        hexInfoCanvas.enabled = false;
     }
 
     public string createDescription()
     {
         //TODO
         return "default description";
+    }
+
+    private int definePrice()
+    {
+        //TODO
+        return 0;
     }
 }

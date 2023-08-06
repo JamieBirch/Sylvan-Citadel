@@ -23,8 +23,8 @@ public class TerrainManager : MonoBehaviour
     public Vector3 firstTileCenter = Vector3.zero;
     public static float HexRadius = 3f;
 
-    public Vector3 xHexOffset = new Vector3(9f, 0f, 0f);
-    public Vector3 zHexOffset = new Vector3(0f, 0f, 7.75f);
+    /*public Vector3 xHexOffset = new Vector3(9f, 0f, 0f);
+    public Vector3 zHexOffset = new Vector3(0f, 0f, 7.75f);*/
 
     private Biome startBiome = Biome.grove;
     
@@ -160,29 +160,12 @@ public class TerrainManager : MonoBehaviour
     {
         Vector3 hexPosition = hex.transform.position;
 
-        //right
-        Vector3 rightHexPosition = hexPosition + xHexOffset;
-        CreateBorderingHexAt(rightHexPosition);
+        Vector3[] positionsOfHexesAround = HexUtils.PositionsOfHexesAround(hexPosition);
 
-        //left
-        Vector3 leftHexPosition = hexPosition + -xHexOffset;
-        CreateBorderingHexAt(leftHexPosition);
-        
-        //top right
-        Vector3 topRightHexPosition = hexPosition + xHexOffset/2 + zHexOffset;
-        CreateBorderingHexAt(topRightHexPosition);
-        
-        //top left
-        Vector3 topLeftHexPosition = hexPosition + -xHexOffset/2 + zHexOffset;
-        CreateBorderingHexAt(topLeftHexPosition);
-        
-        //bottom right
-        Vector3 bottomRightHexPosition = hexPosition + xHexOffset/2 - zHexOffset;
-        CreateBorderingHexAt(bottomRightHexPosition);
-        
-        //bottom left
-        Vector3 bottomLeftHexPosition = hexPosition + -xHexOffset/2 - zHexOffset;
-        CreateBorderingHexAt(bottomLeftHexPosition);
+        foreach (var borderingPosition in positionsOfHexesAround)
+        {
+            CreateBorderingHexAt(borderingPosition);
+        }
     }
 
     private static void RandomizeResources(GameObject hex)
@@ -196,8 +179,7 @@ public class TerrainManager : MonoBehaviour
 
     private GameObject CreateBorderingHexAt(Vector3 hexPosition)
     {
-        var overlapSphere = Physics.OverlapSphere(hexPosition, overlapRadius);
-        if (overlapSphere.Length == 0)
+        if (!Physics.CheckSphere(hexPosition, overlapRadius))
         {
             // Debug.Log("no obstruction here");
             GameObject newHex = Instantiate(borderingHex, hexPosition, Quaternion.identity, gameObject.transform);
@@ -217,7 +199,6 @@ public class TerrainManager : MonoBehaviour
         BorderingHex borderingHexComponent = _borderingHex.GetComponent<BorderingHex>();
         bool hasWater = borderingHexComponent.hasWater;
         bool hasWood = borderingHexComponent.hasWood;
-        bool hasFood = borderingHexComponent.hasFood;
 
         //FIXME floating bug here?
         Vector3 position = _borderingHex.transform.position - borderingHexComponent.hoverOffset;

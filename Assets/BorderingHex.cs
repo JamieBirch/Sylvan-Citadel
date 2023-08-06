@@ -22,11 +22,14 @@ public class BorderingHex : Hex
     public Text descriptionText;
     public Text priceText;
     
+    private int defaultPrice = 6;
     private int humanPrice;
+    
+    public static float overlapRadius = HexUtils.HexSize;
 
     private void Start()
     {
-        humanPrice = 0;
+        humanPrice = definePrice();
         description = createDescription();
 
         descriptionText.text = description;
@@ -52,6 +55,8 @@ public class BorderingHex : Hex
     {
         base.OnMouseEnter();
         gameObject.transform.position += hoverOffset;
+        humanPrice = definePrice();
+        priceText.text = humanPrice.ToString();
         hexInfoCanvas.enabled = true;
     }
     
@@ -96,7 +101,27 @@ public class BorderingHex : Hex
 
     private int definePrice()
     {
-        //TODO
-        return 0;
+        int price = defaultPrice;
+        
+        Vector3 hexPosition = transform.position;
+
+        var overlapColliders = Physics.OverlapSphere(hexPosition, overlapRadius);
+        foreach (Collider _collider in overlapColliders)
+        {
+            if (_collider.TryGetComponent(out OwnedHex hexComponent))
+            {
+                price--;
+                // Debug.Log("Got one!");
+            }
+        }
+        
+        return price;
+    }
+
+    //debug
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, overlapRadius);
     }
 }

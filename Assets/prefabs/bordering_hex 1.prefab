@@ -578,6 +578,7 @@ MonoBehaviour:
   hexInfoCanvas: {fileID: 4410798472700602043}
   descriptionText: {fileID: 2082792455105867326}
   priceText: {fileID: 6901396806160983421}
+  aaaaa: {fileID: 781444086887482964, guid: baa36bc0dd9280844818d92a5679dc7a, type: 3}
 --- !u!65 &5765409841354726004
 BoxCollider:
   m_ObjectHideFlags: 0

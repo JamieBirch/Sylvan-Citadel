@@ -67,7 +67,8 @@ public class TerrainManager : MonoBehaviour
     private void SpawnLake(GameObject _waterway)
     {
         Vector3 position = ConstructionManager.instance.PositionOnHex(_waterway.transform.position) + new Vector3(0, 0.875f, 0);
-        GameObject newLake = Instantiate(lake, position, Quaternion.identity, _waterway.transform);
+        float lakeRotation = Utils.GenerateRandom(0, 360f);
+        GameObject newLake = Instantiate(lake, position, Quaternion.AngleAxis(lakeRotation, Vector3.up), _waterway.transform);
         float randomScale = Utils.GenerateRandom(0.3f, 1.5f);
         newLake.transform.localScale = new Vector3(randomScale, 1, randomScale);
         

@@ -4,8 +4,11 @@ public static class HexUtils
 {
     public static int HexSize = 9;
     
-    public static Vector3 xHexOffset = new Vector3(9f, 0f, 0f);
-    public static Vector3 zHexOffset = new Vector3(0f, 0f, 7.75f);
+    // public static Vector3 xHexOffset = new Vector3(9f, 0f, 0f);
+    // public static Vector3 zHexOffset = new Vector3(0f, 0f, 7.75f);
+    
+    public static Vector3 xHexOffset = new Vector3(8.75f, 0f, 0f);
+    public static Vector3 zHexOffset = new Vector3(0f, 0f, 7.625f);
 
     public static Vector3[] PositionsOfHexesAround(Vector3 hexPosition)
     {

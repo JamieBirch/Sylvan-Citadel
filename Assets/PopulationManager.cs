@@ -7,7 +7,7 @@ public class PopulationManager : MonoBehaviour
     public GameObject village;
     public GameObject human;
     
-    public string humanTag = "human";
+    // public string humanTag = "human";
    
     private void Awake()
     {
@@ -16,18 +16,22 @@ public class PopulationManager : MonoBehaviour
     
     public void SpawnHumans(int humansCount, GameObject hex)
     {
-        // GameObject village = hex.GetComponent<OwnedHex>().village;
-        // if (village == null)
-        // {
-            GameObject _village = Instantiate(village, hex.transform.position, Quaternion.identity, hex.transform);
-            _village.name = "village";
-            hex.GetComponent<OwnedHex>().village = _village;
-        // }
+        var _village = CreateVillage(hex);
         
         for (int i = 0; i < humansCount; i++)
         {
-            /*GameObject newHuman = */SpawnHuman(_village);
+            SpawnHuman(_village);
         }
+    }
+
+    public GameObject CreateVillage(GameObject hex)
+    {
+        //TODO check if village already exists
+        
+        GameObject _village = Instantiate(village, hex.transform.position, Quaternion.identity, hex.transform);
+        _village.name = "village";
+        hex.GetComponent<OwnedHex>().village = _village;
+        return _village;
     }
 
     public GameObject SpawnHuman(GameObject village)
@@ -42,27 +46,26 @@ public class PopulationManager : MonoBehaviour
         Human humanComponent = humanGameObject.GetComponent<Human>();
         humanComponent.Name = name;
         OwnedHex homeHex = village.GetComponentInParent<OwnedHex>();
-        humanComponent.homeHex = homeHex;
-        homeHex.HexPopulation++;
-        
+        SettleHumanInHex(homeHex, humanComponent);
+
         return humanGameObject;
     }
-
-    /*public Human FindAvailableHuman()
+    
+    public void SettleHumanInHex(OwnedHex newHomeHex, Human humanComponent)
     {
-        Human humanComponent = null;
-        
-        GameObject[] humans = GameObject.FindGameObjectsWithTag(humanTag);
-        foreach (GameObject _human in humans)
+        if (humanComponent.homeHex != null)
         {
-            Human _humanComponent = _human.GetComponent<Human>();
-            if (_humanComponent.Satisfied())
-            {
-                humanComponent = _humanComponent;
-                return humanComponent;
-            }
-        }
+            Village homeVillage = humanComponent.homeHex.gameObject.GetComponentInChildren<Village>();
+            homeVillage.humans.Remove(humanComponent);
+            humanComponent.homeHex.HexPopulation--;
 
-        return humanComponent;
-    }*/
+            GameObject newHomeVillage = newHomeHex.gameObject.GetComponentInChildren<Village>().gameObject;
+            humanComponent.gameObject.transform.SetParent(newHomeVillage.transform);
+        }
+        
+        newHomeHex.village.GetComponent<Village>().humans.Add(humanComponent);
+        humanComponent.homeHex = newHomeHex;
+        newHomeHex.HexPopulation++;
+    }
+
 }

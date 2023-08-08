@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using Random = System.Random;
 
 public class TerrainManager : MonoBehaviour
 {
@@ -27,6 +29,8 @@ public class TerrainManager : MonoBehaviour
     public Vector3 zHexOffset = new Vector3(0f, 0f, 7.75f);*/
 
     private Biome startBiome = Biome.grove;
+    
+    private Random rnd = new Random();
     
     private void Awake()
     {
@@ -100,13 +104,6 @@ public class TerrainManager : MonoBehaviour
         
         float randomScale = Utils.GenerateRandom(0.5f, 1.5f);
         CreateTree(hex, _woodland, position, randomScale, trees);
-        /*float treeRotation = Utils.GenerateRandom(0, 360f);
-        GameObject newTree = Instantiate(fruitTree, position, Quaternion.AngleAxis(treeRotation, Vector3.up), _woodland.transform);
-        newTree.transform.localScale = new Vector3(randomScale, randomScale, randomScale);
-        
-        Tree treeComponent = newTree.GetComponent<Tree>();
-        trees.Add(treeComponent);
-        treeComponent.hex = hex;*/
     }
     
     public void SpawnTreeAt(OwnedHex hex, Transform _woodland, Vector3 position)
@@ -175,7 +172,6 @@ public class TerrainManager : MonoBehaviour
         
         borderingHexComponent.hasWater = Utils.TossCoin();
         borderingHexComponent.hasWood = Utils.TossCoin();
-        borderingHexComponent.hasFood = Utils.TossCoin();
     }
 
     private GameObject CreateBorderingHexAt(Vector3 hexPosition)
@@ -198,26 +194,68 @@ public class TerrainManager : MonoBehaviour
     public void BuyHex(GameObject _borderingHex)
     {
         BorderingHex borderingHexComponent = _borderingHex.GetComponent<BorderingHex>();
-        bool hasWater = borderingHexComponent.hasWater;
-        bool hasWood = borderingHexComponent.hasWood;
-
-        //FIXME floating bug here?
-        Vector3 position = _borderingHex.transform.position - borderingHexComponent.hoverOffset;
         
-        Destroy(_borderingHex);
-
-        GameObject hex = CreateOwnedHex(borderingHexComponent.biome, position);
-        if (hasWater)
+        List<OwnedHex> ownedHexesAround = borderingHexComponent.GetOwnedHexesAround();
+        int hexPrice = borderingHexComponent.humanPrice;
+        //collect new village of nearby villages and check if there's enough to buy new hex
+        // List<Human> pickedHumans = new List<Human>();
+        var allAvailableHumans = AllAvailableHumans(ownedHexesAround);
+        if (allAvailableHumans.Count < hexPrice)
         {
-            SpawnLakes(hex, Utils.GenerateRandomIntMax(5));
+            Debug.Log("Not enough humans!");
         }
-        if (hasWood)
+        else
         {
-            SpawnTrees(hex, Utils.GenerateRandomIntMax(20));
+            bool hasWater = borderingHexComponent.hasWater;
+            bool hasWood = borderingHexComponent.hasWood;
+
+            //FIXME floating bug here?
+            Vector3 position = _borderingHex.transform.position - borderingHexComponent.hoverOffset;
+
+            Destroy(_borderingHex);
+
+            //create landscape features
+            GameObject hex = CreateOwnedHex(borderingHexComponent.biome, position);
+            if (hasWater)
+            {
+                SpawnLakes(hex, Utils.GenerateRandomIntMax(5));
+            }
+            if (hasWood)
+            {
+                SpawnTrees(hex, Utils.GenerateRandomIntMax(20));
+            }
+
+            IEnumerable<Human> pickedHumans = allAvailableHumans.OrderBy(x => rnd.Next()).Take(borderingHexComponent.humanPrice);
+
+            //move in to new hex
+            PopulationManager pm = PopulationManager.instance;
+            pm.CreateVillage(hex);
+            foreach (Human pickedHuman in pickedHumans)
+            {
+                pm.SettleHumanInHex(hex.GetComponent<OwnedHex>(), pickedHuman);
+            }
+
+            CreateConcealedHexesAround(hex);
+        
+            GameStats.OwnedHexes++;
         }
-        
-        CreateConcealedHexesAround(hex);
-        
-        GameStats.OwnedHexes++;
+    }
+
+    private List<Human> AllAvailableHumans(List<OwnedHex> ownedHexesAround)
+    {
+        List<Human> allAvailableHumans = new List<Human>();
+        foreach (OwnedHex ownedHex in ownedHexesAround)
+        {
+            //should leave at least 1 human in each Hex
+            int ownedHexAvailablePopulation = ownedHex.HexPopulation - 1;
+            List<Human> hexHumans = ownedHex.village.GetComponent<Village>().humans;
+            //pick humans randomly
+            // Random rnd = new Random();
+            var pickedHumansFromHex = hexHumans.OrderBy(x => rnd.Next()).Take(ownedHexAvailablePopulation);
+            allAvailableHumans.AddRange(pickedHumansFromHex);
+        }
+
+        List<Human> availableHumans = allAvailableHumans;
+        return allAvailableHumans;
     }
 }

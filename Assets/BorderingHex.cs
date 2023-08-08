@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -12,7 +13,6 @@ public class BorderingHex : Hex
     // public Canvas features_canvas;
     public bool hasWater;
     public bool hasWood;
-    public bool hasFood;
 
     public GameObject water;
     public GameObject wood;
@@ -23,7 +23,7 @@ public class BorderingHex : Hex
     public Text priceText;
     
     private int defaultPrice = 6;
-    private int humanPrice;
+    public int humanPrice;
     
     public static float overlapRadius = HexUtils.HexSize;
 
@@ -103,18 +103,9 @@ public class BorderingHex : Hex
     {
         int price = defaultPrice;
         
-        Vector3 hexPosition = transform.position;
+        List<OwnedHex> ownedHexesAround = GetOwnedHexesAround();
+        price -= ownedHexesAround.Count;
 
-        var overlapColliders = Physics.OverlapSphere(hexPosition, overlapRadius);
-        foreach (Collider _collider in overlapColliders)
-        {
-            if (_collider.TryGetComponent(out OwnedHex hexComponent))
-            {
-                price--;
-                // Debug.Log("Got one!");
-            }
-        }
-        
         return price;
     }
 
@@ -124,4 +115,22 @@ public class BorderingHex : Hex
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, overlapRadius);
     }
+
+    public List<OwnedHex> GetOwnedHexesAround()
+    {
+        List<OwnedHex> listOfAdjacentOwnedHexes = new List<OwnedHex>();
+        Vector3 hexPosition = transform.position;
+
+        var overlapColliders = Physics.OverlapSphere(hexPosition, overlapRadius);
+        foreach (Collider _collider in overlapColliders)
+        {
+            if (_collider.TryGetComponent(out OwnedHex hexComponent))
+            {
+                listOfAdjacentOwnedHexes.Add(hexComponent);
+                // Debug.Log("Got one!");
+            }
+        }
+
+        return listOfAdjacentOwnedHexes;
+    } 
 }

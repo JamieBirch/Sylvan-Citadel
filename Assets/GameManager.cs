@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject startHex;
 
-    public Text fruits;
+    // public Text fruits;
     public Text humans;
     public Text food;
     public Text wood;

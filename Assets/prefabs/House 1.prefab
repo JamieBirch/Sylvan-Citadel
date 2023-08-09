@@ -140,6 +140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b301b1a23119c742a4b2663c78d210f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hex: {fileID: 0}
   woodPrice: 40
   capacity: 5
   bedsAvailable: 0
@@ -160,7 +161,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8214826627154669652, guid: d063275df0b3c354385010dfa968ea7a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 8214826627154669652, guid: d063275df0b3c354385010dfa968ea7a, type: 3}
       propertyPath: m_LocalPosition.z

@@ -10,6 +10,7 @@ public class Human : MonoBehaviour
     public bool isThirsty = false;
     public bool isHungry = false;
     public bool hasHome = false;
+    public bool isRelocating = false;
     public GameObject currentTarget;
     public OwnedHex homeHex;
 
@@ -26,6 +27,7 @@ public class Human : MonoBehaviour
     public DoWanderState doWander = new DoWanderState();
     public GoHomeState goHome = new GoHomeState();
     public DoWorkState doWork = new DoWorkState();
+    public RelocateState relocate = new RelocateState();
     
     private void Start()
     {
@@ -79,7 +81,7 @@ public class Human : MonoBehaviour
         float distanceThisFrame = speed * Time.deltaTime;
 
         humanTransform.Translate(dir.normalized * distanceThisFrame, Space.World);
-        humanTransform.LookAt(currentTargetTransform);
+        // humanTransform.LookAt(currentTargetTransform);
 
         float distance = Vector3.Distance(humanTransform.position, currentTargetTransform.position);
         

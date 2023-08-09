@@ -15,13 +15,13 @@ public class FindWaterState : IHumanState
                 return human.findShelter;
             }
             Debug.Log(human.Name + " is satisfied and not sure what to do");
-        } else if (human.currentTarget == null)
-        {
-            FindWater(human);
-        }
-        else
-        {
-            human.RunToTarget();
+        } else {
+            GameObject nearestWater = FindWater(human);
+            if (nearestWater != null)
+            {
+                human.RunToTarget();
+
+            }
         }
 
         return this;
@@ -32,7 +32,7 @@ public class FindWaterState : IHumanState
         Drink(human);
     }
 
-    private void FindWater(Human human)
+    private GameObject FindWater(Human human)
     {
         GameObject homeHexWaterway = human.homeHex.waterway;
 
@@ -53,10 +53,12 @@ public class FindWaterState : IHumanState
 
         if (nearestWater != null)
         {
-            human.currentTarget = nearestWater;
+            // human.currentTarget = nearestWater;
+            return nearestWater;
         } else
         {
-            human.currentTarget = null;
+            // human.currentTarget = null;
+            return null;
         }
     }
     

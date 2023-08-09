@@ -78,7 +78,8 @@ public class Tree : MonoBehaviour
 
     private Vector3 fruitPositionOffset()
     {
-        Vector3 offset = new Vector3(Utils.GenerateRandom(-0.5f, 0.5f), 0.5f, Utils.GenerateRandom(-0.5f, 0.5f));
+        // Vector3 offset = new Vector3(Utils.GenerateRandom(-0.5f, 0.5f), 0.5f, Utils.GenerateRandom(-0.5f, 0.5f));
+        Vector3 offset = new Vector3(Utils.GenerateRandom(-0.5f, 0.5f), 0f, Utils.GenerateRandom(-0.5f, 0.5f));
         return offset;
     }
     

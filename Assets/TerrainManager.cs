@@ -70,7 +70,7 @@ public class TerrainManager : MonoBehaviour
 
     private void SpawnLake(GameObject _waterway)
     {
-        Vector3 position = ConstructionManager.instance.PositionOnHex(_waterway.transform.position) + new Vector3(0, 0.875f, 0);
+        Vector3 position = ConstructionManager.instance.PositionOnHex(_waterway.transform.position)/* + new Vector3(0, 0.875f, 0)*/;
         float lakeRotation = Utils.GenerateRandom(0, 360f);
         GameObject newLake = Instantiate(lake, position, Quaternion.AngleAxis(lakeRotation, Vector3.up), _waterway.transform);
         float randomScale = Utils.GenerateRandom(0.3f, 1.5f);
@@ -100,7 +100,7 @@ public class TerrainManager : MonoBehaviour
 
     public void SpawnTree(OwnedHex hex, Transform _woodland, List<Tree> trees)
     {
-        Vector3 position = ConstructionManager.instance.PositionOnHex(_woodland.transform.position) + new Vector3(0, 1f, 0);
+        Vector3 position = ConstructionManager.instance.PositionOnHex(_woodland.transform.position)/* + new Vector3(0, 1f, 0)*/;
         
         float randomScale = Utils.GenerateRandom(0.5f, 1.5f);
         CreateTree(hex, _woodland, position, randomScale, trees);

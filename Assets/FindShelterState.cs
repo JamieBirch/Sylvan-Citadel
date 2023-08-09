@@ -6,19 +6,35 @@ public class FindShelterState : IHumanState
 
     public IHumanState DoState(Human human)
     {
-        if (human.currentTarget == null)
+        /*if (human.currentTarget == null)
         {
             FindHome(human);
+            
         }
         else
         {
             human.RunToTarget();
+            return human.doWander;
         }
 
-        return human.doWander;
+        return this;*/
+
+        GameObject nearestHouse = FindHome(human);
+        if (nearestHouse != null)
+        {
+            human.currentTarget = nearestHouse;
+            human.RunToTarget();
+            return human.doWander;
+        }
+        else
+        {
+            human.currentTarget = null;
+            return human.doWander;
+        }
+        // return this;
     }
     
-    private void FindHome(Human human)
+    private GameObject FindHome(Human human)
     {
         
         //FIXME fix overcrowded houses
@@ -47,10 +63,12 @@ public class FindShelterState : IHumanState
 
         if (nearestHouse != null)
         {
-            human.currentTarget = nearestHouse;
+            // human.currentTarget = nearestHouse;
+            return nearestHouse;
         } else
         {
-            human.currentTarget = null;
+            // human.currentTarget = null;
+            return null;
         }
     }
 

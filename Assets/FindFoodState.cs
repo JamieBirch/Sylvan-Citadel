@@ -29,6 +29,7 @@ public class FindFoodState : IHumanState
         GameObject homeHex = human.homeHex.gameObject;
 
         //TODO replace
+        //FIXME for tiles without woodland
         GameObject _woodland = homeHex.GetComponent<OwnedHex>().woodland;
 
         //find nearest food

@@ -9,6 +9,9 @@ public static class HexUtils
     
     public static Vector3 xHexOffset = new Vector3(8.75f, 0f, 0f);
     public static Vector3 zHexOffset = new Vector3(0f, 0f, 7.625f);
+    
+    public static Vector3 selectOffset = new Vector3(0f, 1f, 0f);
+
 
     public static Vector3[] PositionsOfHexesAround(Vector3 hexPosition)
     {

@@ -48,12 +48,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: 
   hoverColor: {r: 0.7254902, g: 1, b: 0.5176471, a: 0}
+  biome: 0
   selectOffset: {x: 0, y: 1, z: 0}
   rend: {fileID: 199010083080033213}
   waterway: {fileID: 0}
   woodland: {fileID: 0}
   village: {fileID: 0}
   buildings: []
+  BedsAvailable: 0
+  FruitsAvailable: 0
+  HexPopulation: 0
 --- !u!65 &8349748933488940630
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -65,8 +69,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 8.660254, y: 2, z: 10}
-  m_Center: {x: 0, y: 0.1, z: 0}
+  m_Size: {x: 8.660254, y: 0.2, z: 10}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1001 &3193132197913676201
 PrefabInstance:
   m_ObjectHideFlags: 0

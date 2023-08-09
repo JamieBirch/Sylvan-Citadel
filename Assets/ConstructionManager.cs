@@ -25,7 +25,7 @@ public class ConstructionManager : MonoBehaviour
         }
         else
         {
-            var position = PositionOnHex(hex.transform.position) + houseOffset;
+            var position = PositionOnHex(hex.transform.position)/* + houseOffset*/ + HexUtils.selectOffset;
             float houseRotation = Utils.GenerateRandom(0, 360f);
             GameObject newHouse = Instantiate(house, position, Quaternion.AngleAxis(houseRotation, Vector3.up) , hex.transform);
 

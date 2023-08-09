@@ -4,6 +4,10 @@ public class DoWanderState : IHumanState
 {
     public IHumanState DoState(Human human)
     {
+        if (human.isRelocating)
+        {
+            return human.relocate;
+        }
         if (human.Satisfied() && !human.hasWork)
         {
             return human.goHome;

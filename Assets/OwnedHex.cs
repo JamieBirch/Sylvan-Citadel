@@ -11,7 +11,7 @@ public class OwnedHex : Hex
     
     public Biome biome;
     
-    public Vector3 selectOffset;
+    // public Vector3 selectOffset;
 
     public Renderer rend;
 
@@ -54,7 +54,7 @@ public class OwnedHex : Hex
         {
             if (!selected)
             {
-                gameObject.transform.position += selectOffset;
+                gameObject.transform.position += HexUtils.selectOffset;
                 selected = true;
                 _hexManager.SetHexAsActive(gameObject);
             }
@@ -76,7 +76,7 @@ public class OwnedHex : Hex
 
     public void Unselect()
     {
-        gameObject.transform.position -= selectOffset;
+        gameObject.transform.position -= HexUtils.selectOffset;
         selected = false;
         _hexManager.SetHexAsInActive();
         ColorToDefault();

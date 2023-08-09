@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hex: {fileID: 0}
-  fruitPrefab: {fileID: 5558580003177826399, guid: 5d5f09b773c33d3449d039969e32e7fd, type: 3}
+  fruitPrefab: {fileID: 4328736735578813185, guid: 982b625b4d9fa8246b89402921114733, type: 3}
   leaves: {fileID: 5565187192639751436}
   size: 0
   growthSpeed: 1.02

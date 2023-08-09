@@ -36,7 +36,7 @@ public class PopulationManager : MonoBehaviour
 
     public GameObject SpawnHuman(GameObject village)
     {
-        var position = ConstructionManager.instance.PositionOnHex(village.transform.position) + new Vector3(0, 1.25f, 0);
+        var position = ConstructionManager.instance.PositionOnHex(village.transform.position) /*+ new Vector3(0, 1.25f, 0)*/;
         GameObject humanGameObject = Instantiate(human, position, Quaternion.identity, village.transform);
         GameStats.Population++;
 
@@ -61,6 +61,9 @@ public class PopulationManager : MonoBehaviour
 
             GameObject newHomeVillage = newHomeHex.gameObject.GetComponentInChildren<Village>().gameObject;
             humanComponent.gameObject.transform.SetParent(newHomeVillage.transform);
+
+            humanComponent._home.GetComponent<House>().MoveOut(humanComponent);
+            humanComponent.isRelocating = true;
         }
         
         newHomeHex.village.GetComponent<Village>().humans.Add(humanComponent);

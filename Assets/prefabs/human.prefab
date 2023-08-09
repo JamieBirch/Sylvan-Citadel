@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3321652418783683364}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.125, z: 0}
+  m_LocalPosition: {x: 0, y: 1.25, z: 0}
   m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -115,11 +115,11 @@ MonoBehaviour:
   isThirsty: 0
   isHungry: 0
   hasHome: 0
-  houseTag: house
-  fruitTag: fruit
-  waterTag: water
-  _currentTarget: {fileID: 0}
+  isRelocating: 0
+  currentTarget: {fileID: 0}
+  homeHex: {fileID: 0}
   hasWork: 0
   speed: 1
   fertility: 20
-  offset: {x: 0.05, y: 0.1, z: 0.05}
+  _home: {fileID: 0}
+  stateName: 

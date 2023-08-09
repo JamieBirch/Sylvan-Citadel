@@ -35,6 +35,8 @@ public class House : MonoBehaviour
     
     public void MoveOut(Human human)
     {
+        human.hasHome = false;
+        human._home = null;
         _tenants.Remove(human);
         bedsAvailable++;
         hex.BedsAvailable++;

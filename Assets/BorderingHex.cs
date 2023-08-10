@@ -73,6 +73,7 @@ public class BorderingHex : Hex
     public void OnMouseUp()
     {
         holdTimer = holdTimerDefault;
+        holdTimerText.enabled = false;
     }
 
     private void OnMouseExit()

@@ -660,6 +660,8 @@ MonoBehaviour:
   holdTimerText: {fileID: 4315980105771756412}
   humanPrice: 0
   holdTimerDefault: 4
+  humansPricePreText: 'humans to populate: '
+  holdTimerPreText: 'hold for: '
 --- !u!65 &5765409841354726004
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1043,11 +1045,11 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 3078335a23c27394f91734e45ae1ac8c, type: 3}
-    m_FontSize: 150
-    m_FontStyle: 0
+    m_FontSize: 170
+    m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 1
-    m_MaxSize: 150
+    m_MaxSize: 170
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1

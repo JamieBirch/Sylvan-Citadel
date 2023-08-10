@@ -1,5 +1,8 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
+using Random = System.Random;
 
 public class HexManager : MonoBehaviour
 {
@@ -8,11 +11,14 @@ public class HexManager : MonoBehaviour
     public GameObject buttons;
     private ConstructionManager _constructionManager;
     private TerrainManager _terrainManager;
+    private PopulationManager _populationManager;
     
     public GameObject hexStats;
     public Text hexPopulationText;
     public Text hexFruitsText;
     public Text hexBedsText;
+    
+    private Random rnd = new Random();
     
     private void Awake()
     {
@@ -23,6 +29,7 @@ public class HexManager : MonoBehaviour
     {
         _constructionManager = ConstructionManager.instance;
         _terrainManager = TerrainManager.instance;
+        _populationManager = PopulationManager.instance;
     }
 
     private void Update()
@@ -72,5 +79,35 @@ public class HexManager : MonoBehaviour
         activeHex = null;
         buttons.SetActive(false);
         hexStats.SetActive(false);
+    }
+
+    public void BuyHex(GameObject _borderingHex)
+    {
+        BorderingHex borderingHexComponent = _borderingHex.GetComponent<BorderingHex>();
+        
+        List<OwnedHex> ownedHexesAround = borderingHexComponent.GetOwnedHexesAround();
+        int hexPrice = borderingHexComponent.humanPrice;
+        var allAvailableHumans = _populationManager.AllAvailableHumans(ownedHexesAround);
+        if (allAvailableHumans.Count < hexPrice)
+        {
+            Debug.Log("Not enough humans!");
+        }
+        else
+        {
+            GameObject hex = _terrainManager.ConvertToOwnedHex(borderingHexComponent);
+
+            IEnumerable<Human> pickedHumans = allAvailableHumans.OrderBy(x => rnd.Next()).Take(borderingHexComponent.humanPrice);
+
+            //move in to new hex
+            _populationManager.CreateVillage(hex);
+            foreach (Human pickedHuman in pickedHumans)
+            {
+                _populationManager.SettleHumanInHex(hex.GetComponent<OwnedHex>(), pickedHuman);
+            }
+
+            _terrainManager.CreateConcealedHexesAround(hex);
+        
+            GameStats.OwnedHexes++;
+        }
     }
 }

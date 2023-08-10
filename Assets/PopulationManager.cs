@@ -1,4 +1,7 @@
+using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
+using Random = System.Random;
 
 public class PopulationManager : MonoBehaviour
 {
@@ -6,6 +9,8 @@ public class PopulationManager : MonoBehaviour
     
     public GameObject village;
     public GameObject human;
+    
+    private Random rnd = new Random();
     
     // public string humanTag = "human";
    
@@ -72,6 +77,22 @@ public class PopulationManager : MonoBehaviour
         newHomeHex.village.GetComponent<Village>().humans.Add(humanComponent);
         humanComponent.homeHex = newHomeHex;
         newHomeHex.HexPopulation++;
+    }
+    
+    public List<Human> AllAvailableHumans(List<OwnedHex> ownedHexesAround)
+    {
+        List<Human> allAvailableHumans = new List<Human>();
+        foreach (OwnedHex ownedHex in ownedHexesAround)
+        {
+            //should leave at least 1 human in each Hex
+            int ownedHexAvailablePopulation = ownedHex.HexPopulation - 1;
+            List<Human> hexHumans = ownedHex.village.GetComponent<Village>().humans;
+            //pick humans randomly
+            var pickedHumansFromHex = hexHumans.OrderBy(x => rnd.Next()).Take(ownedHexAvailablePopulation);
+            allAvailableHumans.AddRange(pickedHumansFromHex);
+        }
+
+        return allAvailableHumans;
     }
 
 }

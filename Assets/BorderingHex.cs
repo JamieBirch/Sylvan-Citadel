@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class BorderingHex : Hex
 {
+    public static HexManager _hexManager;
+    
     public Vector3 hoverOffset;
 
     public Biome biome;
@@ -35,6 +37,8 @@ public class BorderingHex : Hex
 
     private void Start()
     {
+        _hexManager = HexManager.instance;
+        
         humanPrice = definePrice();
         description = createDescription();
 
@@ -66,7 +70,8 @@ public class BorderingHex : Hex
         holdTimerText.text = holdTimerPreText + (int)holdTimer;
         if (holdTimer <= 0)
         {
-            TerrainManager.instance.BuyHex(gameObject);
+            // TerrainManager.instance.BuyHex(gameObject);
+            _hexManager.BuyHex(gameObject);
         }
     }
 

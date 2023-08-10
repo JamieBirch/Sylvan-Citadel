@@ -21,11 +21,17 @@ public class BorderingHex : Hex
     public Canvas hexInfoCanvas;
     public Text descriptionText;
     public Text priceText;
+    public Text holdTimerText;
     
     private int defaultPrice = 6;
     public int humanPrice;
     
     public static float overlapRadius = HexUtils.HexSize;
+    private float holdTimer;
+    public float holdTimerDefault;
+
+    public string humansPricePreText = "humans to populate: ";
+    public string holdTimerPreText = "hold for: ";
 
     private void Start()
     {
@@ -33,22 +39,11 @@ public class BorderingHex : Hex
         description = createDescription();
 
         descriptionText.text = description;
-        priceText.text = humanPrice.ToString();
+        priceText.text = humansPricePreText + humanPrice;
         
-        //ui
-        /*if (hasWater)
-        {
-            water.SetActive(true);
-        }
-        if (hasWood)
-        {
-            wood.SetActive(true);
-        }
-        if (hasFood)
-        {
-            food.SetActive(true);
-        }*/
         hexInfoCanvas.enabled = false;
+        holdTimer = holdTimerDefault;
+        holdTimerText.enabled = false;
     }
 
     public override void OnMouseEnter()
@@ -56,20 +51,30 @@ public class BorderingHex : Hex
         base.OnMouseEnter();
         gameObject.transform.position += hoverOffset;
         humanPrice = definePrice();
-        priceText.text = humanPrice.ToString();
+        priceText.text = humansPricePreText + humanPrice;
         hexInfoCanvas.enabled = true;
     }
     
-    public void OnMouseDown()
+    public void OnMouseDrag()
     {
         if (EventSystem.current.IsPointerOverGameObject())
         {
             return;
         }
-        //explore bordering hex
-        TerrainManager.instance.BuyHex(gameObject);
+        holdTimerText.enabled = true;
+        holdTimer -= Time.deltaTime;
+        holdTimerText.text = holdTimerPreText + (int)holdTimer;
+        if (holdTimer <= 0)
+        {
+            TerrainManager.instance.BuyHex(gameObject);
+        }
     }
-    
+
+    public void OnMouseUp()
+    {
+        holdTimer = holdTimerDefault;
+    }
+
     private void OnMouseExit()
     {
         gameObject.transform.position -= hoverOffset;

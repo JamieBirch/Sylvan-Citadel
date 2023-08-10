@@ -76,7 +76,7 @@ public class TerrainManager : MonoBehaviour
         float randomScale = Utils.GenerateRandom(0.3f, 1.5f);
         newLake.transform.localScale = new Vector3(randomScale, 1, randomScale);
         
-        _waterway.GetComponent<Waterway>().lakes.Add(newLake.GetComponent<Lake>());
+        _waterway.GetComponent<Waterway>().lakes.Add(newLake);
     }
 
     public void SpawnTrees(GameObject hex, int treesNumber)

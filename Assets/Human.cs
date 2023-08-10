@@ -115,6 +115,7 @@ public class Human : MonoBehaviour
         {
             _home.GetComponent<House>().MoveOut(this);
         }
+        homeHex.village.GetComponent<Village>().humans.Remove(this);
         Destroy(gameObject);
         homeHex.HexPopulation--;
         GameStats.Population--;

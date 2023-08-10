@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
+using System.Linq;
 
 public class FindFoodState : IHumanState
 {
@@ -26,27 +28,32 @@ public class FindFoodState : IHumanState
     
     private void FindFood(Human human)
     {
-        GameObject homeHex = human.homeHex.gameObject;
+        GameObject homeHexWoodland = human.homeHex.woodland;
 
-        //TODO replace
-        //FIXME for tiles without woodland
-        GameObject _woodland = homeHex.GetComponent<OwnedHex>().woodland;
-
-        //find nearest food
+        IEnumerable fruits;
+        if (homeHexWoodland != null)
+        {
+            Woodland _woodland = homeHexWoodland.GetComponent<Woodland>();
+            Transform[] objectsInWoodland = _woodland.transform.GetComponentsInChildren<Transform>();
+            fruits = objectsInWoodland.Where(child => child.CompareTag(fruitTag));
+        }
+        else
+        {
+            fruits = GameObject.FindGameObjectsWithTag(fruitTag).Select(fruit => fruit.transform);
+        }
+        
         float shortestDistance = Mathf.Infinity;
         GameObject nearestFood = null;
-        foreach (Transform child in _woodland.transform)
+        
+        foreach (Transform fruit in fruits)
         {
-            if (child.CompareTag(fruitTag))
+            if (!fruit.GetComponent<Fruit>().isClaimed)
             {
-                if (!child.GetComponent<Fruit>().isClaimed)
+                float distanceToFood = Vector3.Distance(human.transform.position, fruit.transform.position);
+                if (distanceToFood < shortestDistance)
                 {
-                    float distanceToFood = Vector3.Distance(human.transform.position, child.transform.position);
-                    if (distanceToFood < shortestDistance)
-                    {
-                        shortestDistance = distanceToFood;
-                        nearestFood = child.gameObject;
-                    }
+                    shortestDistance = distanceToFood;
+                    nearestFood = fruit.gameObject;
                 }
             }
         }

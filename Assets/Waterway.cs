@@ -3,14 +3,14 @@ using UnityEngine;
 
 public class Waterway : MonoBehaviour
 {
-    public List<Lake> lakes;
+    public List<GameObject> lakes;
     
     // Start is called before the first frame update
     void Start()
     {
         if (lakes.Count == 0)
         {
-            lakes = new List<Lake>();
+            lakes = new List<GameObject>();
         }
     }
 }

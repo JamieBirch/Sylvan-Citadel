@@ -62,7 +62,10 @@ public class PopulationManager : MonoBehaviour
             GameObject newHomeVillage = newHomeHex.gameObject.GetComponentInChildren<Village>().gameObject;
             humanComponent.gameObject.transform.SetParent(newHomeVillage.transform);
 
-            humanComponent._home.GetComponent<House>().MoveOut(humanComponent);
+            if (humanComponent._home != null)
+            {
+                humanComponent._home.GetComponent<House>().MoveOut(humanComponent);
+            }
             humanComponent.isRelocating = true;
         }
         

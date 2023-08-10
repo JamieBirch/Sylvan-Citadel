@@ -636,7 +636,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c773e15fb9e9da418722cc696c1794c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartHumans: 8
+  StartHumans: 6
   StartStorageWood: 70
   StartStorageFood: 0
   startHex: {fileID: 0}
@@ -3126,7 +3126,7 @@ MonoBehaviour:
   ownedHex: {fileID: 3193132197810865085, guid: 04f7847a0e009b3489b5fbb5dc98f219, type: 3}
   woodland: {fileID: 8905510410652168901, guid: d1287a04d19b95e46a60152eb71c2575, type: 3}
   waterway: {fileID: 3394585399397844934, guid: ea274c76920fd234c94f9a4140d12bd9, type: 3}
-  fruitTree: {fileID: 1890554757794199227, guid: 085bfeaebcf90de4c8afd16cdf964086, type: 3}
+  fruitTree: {fileID: 5287768650643275152, guid: 8a64369d31df14d4081c4b899890d244, type: 3}
   pineTree: {fileID: 8092224611952666084, guid: 6cd81bb135e55274a9084fa88bf7ebeb, type: 3}
   lake: {fileID: 3889763215182566413, guid: 9ae68023581e33743a9a67b1cb33ac65, type: 3}
   treeTag: tree

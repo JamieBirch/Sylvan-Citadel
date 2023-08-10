@@ -1,8 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class FindWaterState : IHumanState
 {
+    public string waterTag = "water";
+    
     public IHumanState DoState(Human human)
     {
         if (!human.isThirsty)
@@ -19,8 +22,9 @@ public class FindWaterState : IHumanState
             GameObject nearestWater = FindWater(human);
             if (nearestWater != null)
             {
+                human.currentTarget = nearestWater;
                 human.RunToTarget();
-
+                return human.doWander;
             }
         }
 
@@ -36,18 +40,26 @@ public class FindWaterState : IHumanState
     {
         GameObject homeHexWaterway = human.homeHex.waterway;
 
-        //TODO replace
-        List<Lake> waterSources = homeHexWaterway.GetComponent<Waterway>().lakes;
+        IEnumerable lakes;
+        if (homeHexWaterway != null)
+        {
+            Waterway waterway = homeHexWaterway.GetComponent<Waterway>();
+            lakes = waterway.lakes;
+        }
+        else
+        {
+            lakes = GameObject.FindGameObjectsWithTag(waterTag);
+        }
         
         float shortestDistance = Mathf.Infinity;
         GameObject nearestWater = null;
-        foreach (Lake waterSource in waterSources)
+        foreach (var waterSource in lakes)
         {
-            float distanceToWater = Vector3.Distance(human.transform.position, waterSource.transform.position);
+            float distanceToWater = Vector3.Distance(human.transform.position, ((GameObject)waterSource).transform.position);
             if (distanceToWater < shortestDistance)
             {
                 shortestDistance = distanceToWater;
-                nearestWater = waterSource.gameObject;
+                nearestWater = (GameObject)waterSource;
             }
         }
 

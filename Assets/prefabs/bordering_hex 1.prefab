@@ -646,14 +646,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: 
+  availableColor: {r: 0.6753265, g: 0.5556706, b: 0.7529412, a: 0}
+  nonAvailableColor: {r: 0.32941177, g: 0.30980393, b: 0.34117648, a: 0}
+  rend: {fileID: 5404319486185118211}
   hoverOffset: {x: 0, y: 1, z: 0}
   biome: 0
   description: 
   hasWater: 0
   hasWood: 0
-  water: {fileID: 2535812025697995871}
-  wood: {fileID: 2508015135933823430}
-  food: {fileID: 8326782537297120835}
   hexInfoCanvas: {fileID: 4410798472700602043}
   descriptionText: {fileID: 2082792455105867326}
   priceText: {fileID: 6901396806160983421}
@@ -1114,6 +1114,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f5af6d03b64517c4fafe89f99ea53162, type: 3}
+--- !u!23 &5404319486185118211 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 3741008160262471822, guid: f5af6d03b64517c4fafe89f99ea53162, type: 3}
+  m_PrefabInstance: {fileID: 8724955623378213517}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6536081148757860716 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2567500136860597217, guid: f5af6d03b64517c4fafe89f99ea53162, type: 3}

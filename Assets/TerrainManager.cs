@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using Random = System.Random;
 
 public class TerrainManager : MonoBehaviour
 {
@@ -18,18 +17,13 @@ public class TerrainManager : MonoBehaviour
     public GameObject pineTree;
     public GameObject lake;
 
-    public string treeTag = "tree";
     public float overlapRadius = 1;
     
     public Vector3 firstTileCenter = Vector3.zero;
     public static float HexRadius = 3f;
 
-    /*public Vector3 xHexOffset = new Vector3(9f, 0f, 0f);
-    public Vector3 zHexOffset = new Vector3(0f, 0f, 7.75f);*/
 
     private Biome startBiome = Biome.grove;
-    
-    private Random rnd = new Random();
     
     private void Awake()
     {

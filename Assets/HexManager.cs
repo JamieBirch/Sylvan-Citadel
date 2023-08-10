@@ -85,21 +85,23 @@ public class HexManager : MonoBehaviour
     {
         BorderingHex borderingHexComponent = _borderingHex.GetComponent<BorderingHex>();
         
-        List<OwnedHex> ownedHexesAround = borderingHexComponent.GetOwnedHexesAround();
+        /*List<OwnedHex> ownedHexesAround = borderingHexComponent.GetOwnedHexesAround();
         int hexPrice = borderingHexComponent.humanPrice;
-        var allAvailableHumans = _populationManager.AllAvailableHumans(ownedHexesAround);
-        if (allAvailableHumans.Count < hexPrice)
+        var allAvailableHumans = _populationManager.AllAvailableHumans(ownedHexesAround);*/
+        if (!isHexObtainable(borderingHexComponent))
         {
+            //TODO can't call buyHex on !isHexObtainable, optimize
             Debug.Log("Not enough humans!");
         }
         else
         {
             GameObject hex = _terrainManager.ConvertToOwnedHex(borderingHexComponent);
+            _populationManager.CreateVillage(hex);
 
+            var allAvailableHumans = _populationManager.AllAvailableHumans(borderingHexComponent.GetOwnedHexesAround());
             IEnumerable<Human> pickedHumans = allAvailableHumans.OrderBy(x => rnd.Next()).Take(borderingHexComponent.humanPrice);
 
             //move in to new hex
-            _populationManager.CreateVillage(hex);
             foreach (Human pickedHuman in pickedHumans)
             {
                 _populationManager.SettleHumanInHex(hex.GetComponent<OwnedHex>(), pickedHuman);
@@ -109,5 +111,17 @@ public class HexManager : MonoBehaviour
         
             GameStats.OwnedHexes++;
         }
+    }
+
+    public bool isHexObtainable(BorderingHex hex)
+    {
+        List<OwnedHex> ownedHexesAround = hex.GetOwnedHexesAround();
+        int hexPrice = hex.humanPrice;
+        var allAvailableHumans = _populationManager.AllAvailableHumans(ownedHexesAround);
+        if (allAvailableHumans.Count < hexPrice)
+        {
+            return false;
+        }
+        else return true;
     }
 }

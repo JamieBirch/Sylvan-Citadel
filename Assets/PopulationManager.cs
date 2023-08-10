@@ -12,8 +12,6 @@ public class PopulationManager : MonoBehaviour
     
     private Random rnd = new Random();
     
-    // public string humanTag = "human";
-   
     private void Awake()
     {
         instance = this;
@@ -85,11 +83,15 @@ public class PopulationManager : MonoBehaviour
         foreach (OwnedHex ownedHex in ownedHexesAround)
         {
             //should leave at least 1 human in each Hex
-            int ownedHexAvailablePopulation = ownedHex.HexPopulation - 1;
-            List<Human> hexHumans = ownedHex.village.GetComponent<Village>().humans;
-            //pick humans randomly
-            var pickedHumansFromHex = hexHumans.OrderBy(x => rnd.Next()).Take(ownedHexAvailablePopulation);
-            allAvailableHumans.AddRange(pickedHumansFromHex);
+            int ownedHexAvailablePopulation = ownedHex.HexPopulation/2;
+            GameObject ownedHexVillage = ownedHex.village;
+            if (ownedHexVillage != null)
+            {
+                List<Human> hexHumans = ownedHexVillage.GetComponent<Village>().humans;
+                //pick humans randomly
+                var pickedHumansFromHex = hexHumans.OrderBy(x => rnd.Next()).Take(ownedHexAvailablePopulation);
+                allAvailableHumans.AddRange(pickedHumansFromHex);
+            }
         }
 
         return allAvailableHumans;

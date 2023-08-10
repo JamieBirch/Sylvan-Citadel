@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -6,6 +7,10 @@ using UnityEngine.UI;
 public class BorderingHex : Hex
 {
     public static HexManager _hexManager;
+    
+    public Color availableColor;
+    public Color nonAvailableColor;
+    public Renderer rend;
     
     public Vector3 hoverOffset;
 
@@ -16,10 +21,6 @@ public class BorderingHex : Hex
     public bool hasWater;
     public bool hasWood;
 
-    public GameObject water;
-    public GameObject wood;
-    public GameObject food;
-    
     public Canvas hexInfoCanvas;
     public Text descriptionText;
     public Text priceText;
@@ -48,6 +49,18 @@ public class BorderingHex : Hex
         hexInfoCanvas.enabled = false;
         holdTimer = holdTimerDefault;
         holdTimerText.enabled = false;
+    }
+
+    private void Update()
+    {
+        if (_hexManager.isHexObtainable(this))
+        {
+            rend.material.color = availableColor;
+        }
+        else
+        {
+            rend.material.color = nonAvailableColor;
+        }
     }
 
     public override void OnMouseEnter()

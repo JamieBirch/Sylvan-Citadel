@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.12731439, g: 0.13414562, b: 0.121082075, a: 1}
+  m_IndirectSpecularColor: {r: 0.15611956, g: 0.17869103, b: 0.19231355, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1762,14 +1762,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 705507993}
-  m_LocalRotation: {x: 0, y: -0.5, z: 0, w: 0.8660254}
+  m_LocalRotation: {x: 0.03490616, y: -0.4995937, z: 0.020153081, w: 0.86532164}
   m_LocalPosition: {x: 0, y: 12, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: -60, z: 0}
+  m_LocalEulerAnglesHint: {x: 4.62, y: -60, z: 0}
 --- !u!1 &737257974
 GameObject:
   m_ObjectHideFlags: 0
@@ -2453,7 +2453,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.32941177, g: 0.30980393, b: 0.34117648, a: 0}
+  m_BackGroundColor: {r: 0.4844918, g: 0.4743681, b: 0.49056602, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -3129,7 +3129,6 @@ MonoBehaviour:
   fruitTree: {fileID: 5287768650643275152, guid: 8a64369d31df14d4081c4b899890d244, type: 3}
   pineTree: {fileID: 8092224611952666084, guid: 6cd81bb135e55274a9084fa88bf7ebeb, type: 3}
   lake: {fileID: 3889763215182566413, guid: 9ae68023581e33743a9a67b1cb33ac65, type: 3}
-  treeTag: tree
   overlapRadius: 1
   firstTileCenter: {x: 0, y: 0, z: 0}
 --- !u!1 &1797072520

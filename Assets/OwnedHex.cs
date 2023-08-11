@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class OwnedHex : Hex
 {
@@ -26,6 +27,9 @@ public class OwnedHex : Hex
     public int FruitsAvailable;
     public int HexPopulation;
 
+    public GameObject settlersAvailableCanvas;
+    public Text settlersAvailableText;
+    
     private void Start()
     {
         _hexManager = HexManager.instance;
@@ -63,7 +67,17 @@ public class OwnedHex : Hex
                 Unselect();
             }
         }
-        
+    }
+
+    public void ShowSettlersAvailable()
+    {
+        settlersAvailableCanvas.SetActive(true);
+        settlersAvailableText.text = (HexPopulation / 2).ToString();
+    }
+    
+    public void StopShowSettlersAvailable()
+    {
+        settlersAvailableCanvas.SetActive(false);
     }
     
     private void OnMouseExit()

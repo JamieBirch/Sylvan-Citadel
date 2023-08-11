@@ -33,7 +33,7 @@ public class BorderingHex : Hex
     private float holdTimer;
     public float holdTimerDefault;
 
-    public string humansPricePreText = "humans to populate: ";
+    public string humansPricePreText = "settlers required: ";
     public string holdTimerPreText = "hold for: ";
 
     private void Start()
@@ -72,6 +72,11 @@ public class BorderingHex : Hex
         humanPrice = definePrice();
         priceText.text = humansPricePreText + humanPrice;
         hexInfoCanvas.enabled = true;
+        List<OwnedHex> ownedHexesAround = GetOwnedHexesAround();
+        foreach (OwnedHex ownedHex in ownedHexesAround)
+        {
+            ownedHex.ShowSettlersAvailable();
+        }
     }
     
     public void OnMouseDrag()
@@ -105,6 +110,12 @@ public class BorderingHex : Hex
     {
         gameObject.transform.position -= hoverOffset;
         hexInfoCanvas.enabled = false;
+        
+        List<OwnedHex> ownedHexesAround = GetOwnedHexesAround();
+        foreach (OwnedHex ownedHex in ownedHexesAround)
+        {
+            ownedHex.StopShowSettlersAvailable();
+        }
     }
 
     public string createDescription()

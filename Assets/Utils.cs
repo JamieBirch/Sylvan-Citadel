@@ -20,6 +20,12 @@ public static class Utils
         return (int)(random.NextDouble() * (max-1) + 1);
     }
     
+    public static int GenerateRandomIntBetween(int min, int max)
+    {
+        Random random = new Random();
+        return (int)(random.NextDouble() * (max-min) + min);
+    }
+    
     public static bool TossCoin()
     {
         Random random = new Random();

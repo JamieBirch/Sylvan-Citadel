@@ -137,11 +137,13 @@ public class TerrainManager : MonoBehaviour
             }
             else
             {
+                PlayerMessageService.instance.ShowMessage("No trees to chop! :(");
                 Debug.Log("No trees to chop! :(");
             }
         }
         else
         {
+            PlayerMessageService.instance.ShowMessage("No trees to chop");
             Debug.Log("No trees to chop");
             return;
         }
@@ -201,7 +203,7 @@ public class TerrainManager : MonoBehaviour
         }
         if (hasWood)
         {
-            SpawnTrees(hex, Utils.GenerateRandomIntMax(20));
+            SpawnTrees(hex, Utils.GenerateRandomIntBetween(5, 20));
         }
         return hex;
     }

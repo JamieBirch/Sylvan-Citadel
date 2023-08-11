@@ -20,8 +20,8 @@ public class ConstructionManager : MonoBehaviour
         
         if (GameStats.Wood < houseComponent.woodPrice)
         {
+            PlayerMessageService.instance.ShowMessage("Not enough wood to build!");
             Debug.Log("Not enough wood to build!");
-            return;
         }
         else
         {

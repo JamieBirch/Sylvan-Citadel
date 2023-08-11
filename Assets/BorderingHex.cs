@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -11,13 +10,14 @@ public class BorderingHex : Hex
     public Color availableColor;
     public Color nonAvailableColor;
     public Renderer rend;
+
+    public bool isObtainable = false;
     
     public Vector3 hoverOffset;
 
     public Biome biome;
     public string description;
     
-    // public Canvas features_canvas;
     public bool hasWater;
     public bool hasWood;
 
@@ -55,10 +55,12 @@ public class BorderingHex : Hex
     {
         if (_hexManager.isHexObtainable(this))
         {
+            isObtainable = true;
             rend.material.color = availableColor;
         }
         else
         {
+            isObtainable = false;
             rend.material.color = nonAvailableColor;
         }
     }
@@ -78,12 +80,17 @@ public class BorderingHex : Hex
         {
             return;
         }
+        if (!isObtainable)
+        {
+            PlayerMessageService.instance.ShowMessage("Not enough population in nearby tiles");
+            Debug.Log("Not enough population in nearby tiles");
+            return;
+        }
         holdTimerText.enabled = true;
         holdTimer -= Time.deltaTime;
         holdTimerText.text = holdTimerPreText + (int)holdTimer;
         if (holdTimer <= 0)
         {
-            // TerrainManager.instance.BuyHex(gameObject);
             _hexManager.BuyHex(gameObject);
         }
     }

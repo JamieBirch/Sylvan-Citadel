@@ -646,8 +646,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: 
-  availableColor: {r: 0.6753265, g: 0.5556706, b: 0.7529412, a: 0}
-  nonAvailableColor: {r: 0.32941177, g: 0.30980393, b: 0.34117648, a: 0}
+  availableColor: {r: 0.4745098, g: 0.42352942, b: 0.5019608, a: 0}
+  nonAvailableColor: {r: 0.23921569, g: 0.21176471, b: 0.2509804, a: 0}
   rend: {fileID: 5404319486185118211}
   hoverOffset: {x: 0, y: 1, z: 0}
   biome: 0

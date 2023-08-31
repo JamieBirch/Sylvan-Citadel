@@ -40,25 +40,27 @@ public class FindShelterState : IHumanState
         //FIXME fix overcrowded houses
         // GameObject[] houses = GameObject.FindGameObjectsWithTag(houseTag);
         
-        GameObject homeHex = human.homeHex.gameObject;
+        // GameObject homeHex = human.homeHex.gameObject;
         
         float shortestDistance = Mathf.Infinity;
         GameObject nearestHouse = null;
-        foreach (Transform child in homeHex.transform)
+        GameObject[] houseGamebjects = GameObject.FindGameObjectsWithTag(houseTag);
+        // foreach (Transform child in homeHex.transform)
+        foreach (GameObject houseGO in houseGamebjects)
         {
-            if (child.CompareTag(houseTag))
-            {
-                House thisHouse = child.GetComponent<House>();
+            // if (child.CompareTag(houseTag))
+            // {
+                House thisHouse = houseGO.GetComponent<House>();
                 if (thisHouse.bedsAvailable > 0)
                 {
-                    float distanceToHouse = Vector3.Distance(human.transform.position, child.transform.position);
+                    float distanceToHouse = Vector3.Distance(human.transform.position, houseGO.transform.position);
                     if (distanceToHouse < shortestDistance)
                     {
                         shortestDistance = distanceToHouse;
-                        nearestHouse = child.gameObject;
+                        nearestHouse = houseGO.gameObject;
                     }
                 }
-            }
+            // }
         }
 
         if (nearestHouse != null)
@@ -79,6 +81,7 @@ public class FindShelterState : IHumanState
         {
             human._home = human.currentTarget;
             human.hasHome = true;
+            human.homeHex.SettleInHex(human);
         }
         human.currentTarget = null;
     }

@@ -88,7 +88,7 @@ public class HexManager : MonoBehaviour
         /*List<OwnedHex> ownedHexesAround = borderingHexComponent.GetOwnedHexesAround();
         int hexPrice = borderingHexComponent.humanPrice;
         var allAvailableHumans = _populationManager.AllAvailableHumans(ownedHexesAround);*/
-        if (!isHexObtainable(borderingHexComponent))
+        if (!IsHexObtainable(borderingHexComponent))
         {
             //TODO can't call buyHex on !isHexObtainable, optimize
             Debug.Log("Not enough humans!");
@@ -98,14 +98,14 @@ public class HexManager : MonoBehaviour
             GameObject hex = _terrainManager.ConvertToOwnedHex(borderingHexComponent);
             _populationManager.CreateVillage(hex);
 
-            var allAvailableHumans = _populationManager.AllAvailableHumans(borderingHexComponent.GetOwnedHexesAround());
-            IEnumerable<Human> pickedHumans = allAvailableHumans.OrderBy(x => rnd.Next()).Take(borderingHexComponent.humanPrice);
+            // var allAvailableHumans = _populationManager.AllAvailableHumans(borderingHexComponent.GetOwnedHexesAround());
+            // IEnumerable<Human> pickedHumans = allAvailableHumans.OrderBy(x => rnd.Next()).Take(borderingHexComponent.humanPrice);
 
             //move in to new hex
-            foreach (Human pickedHuman in pickedHumans)
+            /*foreach (Human pickedHuman in pickedHumans)
             {
                 _populationManager.SettleHumanInHex(hex.GetComponent<OwnedHex>(), pickedHuman);
-            }
+            }*/
 
             _terrainManager.CreateConcealedHexesAround(hex);
         
@@ -113,7 +113,12 @@ public class HexManager : MonoBehaviour
         }
     }
 
-    public bool isHexObtainable(BorderingHex hex)
+    public void RelocateHumanTo(OwnedHex hex, Human human)
+    {
+        _populationManager.RelocateHuman(hex, human);
+    }
+
+    public bool IsHexObtainable(BorderingHex hex)
     {
         List<OwnedHex> ownedHexesAround = hex.GetOwnedHexesAround();
         int hexPrice = hex.humanPrice;
@@ -122,6 +127,6 @@ public class HexManager : MonoBehaviour
         {
             return false;
         }
-        else return true;
+        return true;
     }
 }

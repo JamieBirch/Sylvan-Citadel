@@ -76,6 +76,22 @@ public class PopulationManager : MonoBehaviour
         humanComponent.homeHex = newHomeHex;
         newHomeHex.HexPopulation++;
     }
+
+    public void RelocateHuman(OwnedHex newHomeHex, Human humanComponent)
+    {
+        Village homeVillage = humanComponent.homeHex.gameObject.GetComponentInChildren<Village>();
+        homeVillage.humans.Remove(humanComponent);
+        humanComponent.homeHex.HexPopulation--;
+
+        GameObject newHomeVillage = newHomeHex.gameObject.GetComponentInChildren<Village>().gameObject;
+        humanComponent.gameObject.transform.SetParent(newHomeVillage.transform);
+
+        /*if (humanComponent._home != null)
+        {
+            humanComponent._home.GetComponent<House>().MoveOut(humanComponent);
+        }*/
+        humanComponent.isRelocating = true;
+    }
     
     public List<Human> AllAvailableHumans(List<OwnedHex> ownedHexesAround)
     {
@@ -83,7 +99,7 @@ public class PopulationManager : MonoBehaviour
         foreach (OwnedHex ownedHex in ownedHexesAround)
         {
             //should leave at least 1 human in each Hex
-            int ownedHexAvailablePopulation = ownedHex.HexPopulation/2;
+            int ownedHexAvailablePopulation = ownedHex.GetSettlersAvailable();
             GameObject ownedHexVillage = ownedHex.village;
             if (ownedHexVillage != null)
             {

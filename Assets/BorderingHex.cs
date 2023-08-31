@@ -35,7 +35,7 @@ public class BorderingHex : Hex
     public float holdTimerDefault;
 
     public string humansPricePreText = "settlers required: ";
-    public string holdTimerPreText = "hold for: ";
+    // public string holdTimerPreText = "hold for: ";
 
     private void Start()
     {
@@ -55,7 +55,8 @@ public class BorderingHex : Hex
 
     private void Update()
     {
-        if (_hexManager.isHexObtainable(this))
+        humanPrice = definePrice();
+        if (_hexManager.IsHexObtainable(this))
         {
             isObtainable = true;
             rend.material.color = availableColor;

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -29,6 +30,7 @@ public class OwnedHex : Hex
 
     public GameObject settlersAvailableCanvas;
     public Text settlersAvailableText;
+    private int settlersAvailable;
     
     private void Start()
     {
@@ -40,6 +42,29 @@ public class OwnedHex : Hex
 
         BedsAvailable = 0;
         FruitsAvailable = 0;
+    }
+
+    public void Update()
+    {
+        settlersAvailable = CalculateSettlersAvailable();
+    }
+
+    private int CalculateSettlersAvailable()
+    {
+        return HexPopulation / 2;
+    }
+
+    public int GetSettlersAvailable()
+    {
+        return settlersAvailable;
+    }
+
+    public void SettleInHex(Human human)
+    {
+        if (human.homeHex != this)
+        {
+            _hexManager.RelocateHumanTo(this, human);
+        }
     }
 
     public override void OnMouseEnter()
@@ -72,7 +97,7 @@ public class OwnedHex : Hex
     public void ShowSettlersAvailable()
     {
         settlersAvailableCanvas.SetActive(true);
-        settlersAvailableText.text = (HexPopulation / 2).ToString();
+        settlersAvailableText.text = settlersAvailable.ToString();
     }
     
     public void StopShowSettlersAvailable()

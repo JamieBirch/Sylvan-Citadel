@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class House : MonoBehaviour
@@ -15,7 +14,7 @@ public class House : MonoBehaviour
     {
         _tenants = new List<Human>();
         bedsAvailable = capacity;
-        hex = this.GetComponentInParent<OwnedHex>();
+        hex = GetComponentInParent<OwnedHex>();
     }
 
     public bool MoveIn(Human human)
@@ -25,6 +24,7 @@ public class House : MonoBehaviour
             _tenants.Add(human);
             bedsAvailable--;
             hex.BedsAvailable--;
+            human.homeHex = hex;
             return true;
         }
         else

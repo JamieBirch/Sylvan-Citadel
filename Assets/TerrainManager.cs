@@ -192,7 +192,7 @@ public class TerrainManager : MonoBehaviour
         bool hasWood = borderingHexComponent.hasWood;
 
         //FIXME floating bug here?
-        Vector3 position = borderingHexComponent.gameObject.transform.position - borderingHexComponent.hoverOffset;
+        Vector3 position = borderingHexComponent.gameObject.transform.position/* - borderingHexComponent.hoverOffset*/;
 
         Destroy(borderingHexComponent.gameObject);
         

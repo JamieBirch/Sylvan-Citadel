@@ -68,7 +68,7 @@ public class BorderingHex : Hex
     public override void OnMouseEnter()
     {
         base.OnMouseEnter();
-        gameObject.transform.position += hoverOffset;
+        // gameObject.transform.position += hoverOffset;
         humanPrice = definePrice();
         priceText.text = humansPricePreText + humanPrice;
         hexInfoCanvas.enabled = true;
@@ -108,7 +108,7 @@ public class BorderingHex : Hex
 
     private void OnMouseExit()
     {
-        gameObject.transform.position -= hoverOffset;
+        // gameObject.transform.position -= hoverOffset;
         hexInfoCanvas.enabled = false;
         
         List<OwnedHex> ownedHexesAround = GetOwnedHexesAround();

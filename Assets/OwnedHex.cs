@@ -58,7 +58,7 @@ public class OwnedHex : Hex
         {
             if (!selected)
             {
-                gameObject.transform.position += HexUtils.selectOffset;
+                // gameObject.transform.position += HexUtils.selectOffset;
                 selected = true;
                 _hexManager.SetHexAsActive(gameObject);
             }
@@ -90,7 +90,7 @@ public class OwnedHex : Hex
 
     public void Unselect()
     {
-        gameObject.transform.position -= HexUtils.selectOffset;
+        // gameObject.transform.position -= HexUtils.selectOffset;
         selected = false;
         _hexManager.SetHexAsInActive();
         ColorToDefault();

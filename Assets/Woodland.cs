@@ -24,7 +24,7 @@ public class Woodland : MonoBehaviour
                 biggestTree = _tree;
             }
 
-            float sizeDifference = biggestTree.size - _tree.size;
+            float sizeDifference = biggestTree.treeSize.GetSize() - _tree.treeSize.GetSize();
             if (sizeDifference < 0)
             {
                 biggestTree = _tree;
@@ -40,7 +40,7 @@ public class Woodland : MonoBehaviour
 
         trees.Remove(treeComponent);
         Destroy(_tree);
-        int woodAmount = (int)treeComponent.size;
+        int woodAmount = (int)treeComponent.treeSize.GetSize();
         Debug.Log("chop tree, " + woodAmount);
         GameStats.Wood += woodAmount;
     }

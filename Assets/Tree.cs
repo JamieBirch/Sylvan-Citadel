@@ -5,7 +5,7 @@ public class Tree : MonoBehaviour
     public OwnedHex hex;
     public GameObject fruitPrefab;
     public GameObject leaves;
-    public float size;
+    public TreeSize treeSize;
     public float growthSpeed;
 
     public int Fertility;
@@ -16,19 +16,21 @@ public class Tree : MonoBehaviour
     public const int sizeOld = 50;
     private void Start()
     {
-        size = gameObject.transform.localScale.magnitude * 10;
+        // size = gameObject.transform.localScale.magnitude * 10;
         Calendar.NewDay += StartDay;
     }
     
     void StartDay()
     {
-        if (size < sizeOvergrown)
+        if (treeSize.GetSize() < sizeOvergrown)
         {
-            gameObject.transform.localScale *= growthSpeed;
-            size = gameObject.transform.localScale.magnitude * 10;
+            treeSize.Grow(growthSpeed);
+            
+            /*gameObject.transform.localScale *= growthSpeed;
+            size = gameObject.transform.localScale.magnitude * 10;*/
         }
 
-        switch (size)
+        switch (treeSize.GetSize())
         {
             case < sizeSmall:
             {

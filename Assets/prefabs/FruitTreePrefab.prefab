@@ -48,7 +48,7 @@ MonoBehaviour:
   hex: {fileID: 0}
   fruitPrefab: {fileID: 4328736735578813185, guid: 982b625b4d9fa8246b89402921114733, type: 3}
   leaves: {fileID: 97404451276443468}
-  size: 0
+  treeSize: {fileID: 6169985016727711850}
   growthSpeed: 1.02
   Fertility: 70
 --- !u!1001 &5503830376109787712
@@ -114,13 +114,31 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 9067027873437890267, guid: 085bfeaebcf90de4c8afd16cdf964086, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 085bfeaebcf90de4c8afd16cdf964086, type: 3}
 --- !u!1 &97404451276443468 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5565187192639751436, guid: 085bfeaebcf90de4c8afd16cdf964086, type: 3}
   m_PrefabInstance: {fileID: 5503830376109787712}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &6223149055253953787 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1890554757794199227, guid: 085bfeaebcf90de4c8afd16cdf964086, type: 3}
+  m_PrefabInstance: {fileID: 5503830376109787712}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6169985016727711850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6223149055253953787}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2ae590dfaf64ce488caebabda0b0ac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &7216747520704586566 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2902149067494680838, guid: 085bfeaebcf90de4c8afd16cdf964086, type: 3}

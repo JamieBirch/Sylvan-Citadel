@@ -24,7 +24,8 @@ public class BorderingHex : Hex
     public Canvas hexInfoCanvas;
     public Text descriptionText;
     public Text priceText;
-    public Text holdTimerText;
+    // public Text holdTimerText;
+    public Image holdTimerCircle;
     
     private int defaultPrice = 6;
     public int humanPrice;
@@ -48,7 +49,8 @@ public class BorderingHex : Hex
         
         hexInfoCanvas.enabled = false;
         holdTimer = holdTimerDefault;
-        holdTimerText.enabled = false;
+        // holdTimerText.enabled = false;
+        holdTimerCircle.enabled = false;
     }
 
     private void Update()
@@ -91,9 +93,11 @@ public class BorderingHex : Hex
             Debug.Log("Not enough population in nearby tiles");
             return;
         }
-        holdTimerText.enabled = true;
+        // holdTimerText.enabled = true;
+        holdTimerCircle.enabled = true;
         holdTimer -= Time.deltaTime;
-        holdTimerText.text = holdTimerPreText + (int)holdTimer;
+        // holdTimerText.text = holdTimerPreText + (int)holdTimer;
+        holdTimerCircle.fillAmount = holdTimer / holdTimerDefault;
         if (holdTimer <= 0)
         {
             _hexManager.BuyHex(gameObject);
@@ -103,7 +107,8 @@ public class BorderingHex : Hex
     public void OnMouseUp()
     {
         holdTimer = holdTimerDefault;
-        holdTimerText.enabled = false;
+        // holdTimerText.enabled = false;
+        holdTimerCircle.enabled = false;
     }
 
     private void OnMouseExit()

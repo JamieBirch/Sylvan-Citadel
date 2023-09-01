@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -61,9 +60,11 @@ public class OwnedHex : Hex
 
     public void SettleInHex(Human human)
     {
+        Debug.Log("settling " + human.Name + " in " + Name);
         if (human.homeHex != this)
         {
-            _hexManager.RelocateHumanTo(this, human);
+            Debug.Log("new Hex!");
+            _hexManager.RelocateHumanTo(this, village.GetComponent<Village>(), human);
         }
     }
 
@@ -124,5 +125,20 @@ public class OwnedHex : Hex
     private void ColorToDefault()
     {
         rend.material.color = defaultColor;
+    }
+
+    public bool NeighborsHaveAvailableBeds()
+    {
+        // Debug.Log("checking for available beds in nearby hexes");
+        List<OwnedHex> ownedHexesAround = GetOwnedHexesAround();
+        foreach (var ownedHex in ownedHexesAround)
+        {
+            if (ownedHex.BedsAvailable > 0)
+            {
+                // Debug.Log("there are available beds in nearby hexes");
+                return true;
+            } 
+        }
+        return false;
     }
 }

@@ -49,18 +49,23 @@ public class Human : MonoBehaviour
             Die();
         }
 
-        if (homeHex.BedsAvailable > 0 && Satisfied())
+        if ((HasAvailableBeds() || homeHex.NeighborsHaveAvailableBeds()) && Satisfied())
         {
             double chance = Utils.GenerateRandomChance();
             if (chance <= fertility)
             {
                 GiveBirth();
             }
-        }
+        } 
         
         // Debug.Log("I'm starting my day!");
         isHungry = true;
         isThirsty = true;
+    }
+
+    private bool HasAvailableBeds()
+    {
+        return homeHex.BedsAvailable > 0;
     }
 
     public void Hire()

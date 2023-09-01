@@ -39,45 +39,59 @@ public class PopulationManager : MonoBehaviour
 
     public GameObject SpawnHuman(GameObject village)
     {
+        //create
         var position = ConstructionManager.instance.PositionOnHex(village.transform.position) /*+ new Vector3(0, 1.25f, 0)*/;
         GameObject humanGameObject = Instantiate(human, position, Quaternion.identity, village.transform);
         GameStats.Population++;
 
+        //name
         string name = NameGenerator.CreateHumanName();
         humanGameObject.name = name;
-
         Human humanComponent = humanGameObject.GetComponent<Human>();
         humanComponent.Name = name;
+        
+        //settle
         OwnedHex homeHex = village.GetComponentInParent<OwnedHex>();
-        SettleHumanInHex(homeHex, humanComponent);
+        Village villageComponent = village.GetComponent<Village>();
+        SettleHumanInHex(homeHex, villageComponent, humanComponent);
 
         return humanGameObject;
     }
     
-    public void SettleHumanInHex(OwnedHex newHomeHex, Human humanComponent)
+    public void SettleHumanInHex(OwnedHex newHomeHex, Village newVillage, Human humanComponent)
     {
         if (humanComponent.homeHex != null)
         {
+            // move out of hex  
             Village homeVillage = humanComponent.homeHex.gameObject.GetComponentInChildren<Village>();
             homeVillage.humans.Remove(humanComponent);
             humanComponent.homeHex.HexPopulation--;
-
-            GameObject newHomeVillage = newHomeHex.gameObject.GetComponentInChildren<Village>().gameObject;
-            humanComponent.gameObject.transform.SetParent(newHomeVillage.transform);
-
-            if (humanComponent._home != null)
+            
+            //TODO !!!
+            //move out of house
+            /*if (humanComponent._home != null)
             {
                 humanComponent._home.GetComponent<House>().MoveOut(humanComponent);
-            }
-            humanComponent.isRelocating = true;
+            }*/
+
+            
+            // GameObject newHomeVillage = newHomeHex.gameObject.GetComponentInChildren<Village>().gameObject;
+
+
+            // humanComponent.isRelocating = true;
         }
         
-        newHomeHex.village.GetComponent<Village>().humans.Add(humanComponent);
+        //move in to new Village
+        humanComponent.gameObject.transform.SetParent(newVillage.transform.transform);
+        newVillage.humans.Add(humanComponent);
+        
+        //move in to new hex
         humanComponent.homeHex = newHomeHex;
+        Debug.Log(humanComponent.name + " is settling in " + newHomeHex.Name);
         newHomeHex.HexPopulation++;
     }
 
-    public void RelocateHuman(OwnedHex newHomeHex, Human humanComponent)
+    /*public void RelocateHuman(OwnedHex newHomeHex, Human humanComponent)
     {
         Village homeVillage = humanComponent.homeHex.gameObject.GetComponentInChildren<Village>();
         homeVillage.humans.Remove(humanComponent);
@@ -89,9 +103,13 @@ public class PopulationManager : MonoBehaviour
         /*if (humanComponent._home != null)
         {
             humanComponent._home.GetComponent<House>().MoveOut(humanComponent);
-        }*/
+        }#1#
         humanComponent.isRelocating = true;
-    }
+        
+        newHomeHex.village.GetComponent<Village>().humans.Add(humanComponent);
+        humanComponent.homeHex = newHomeHex;
+        newHomeHex.HexPopulation++;
+    }*/
     
     public List<Human> AllAvailableHumans(List<OwnedHex> ownedHexesAround)
     {

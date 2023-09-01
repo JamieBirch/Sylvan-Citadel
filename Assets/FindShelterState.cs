@@ -81,7 +81,7 @@ public class FindShelterState : IHumanState
         {
             human._home = human.currentTarget;
             human.hasHome = true;
-            human.homeHex.SettleInHex(human);
+            human._home.GetComponent<House>().hex.SettleInHex(human);
         }
         human.currentTarget = null;
     }

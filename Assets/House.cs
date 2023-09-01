@@ -24,7 +24,7 @@ public class House : MonoBehaviour
             _tenants.Add(human);
             bedsAvailable--;
             hex.BedsAvailable--;
-            human.homeHex = hex;
+            // human.homeHex = hex;
             return true;
         }
         else

@@ -113,9 +113,10 @@ public class HexManager : MonoBehaviour
         }
     }
 
-    public void RelocateHumanTo(OwnedHex hex, Human human)
+    public void RelocateHumanTo(OwnedHex hex, Village village, Human human)
     {
-        _populationManager.RelocateHuman(hex, human);
+        // _populationManager.RelocateHuman(hex, human);
+        _populationManager.SettleHumanInHex(hex, village, human);
     }
 
     public bool IsHexObtainable(BorderingHex hex)

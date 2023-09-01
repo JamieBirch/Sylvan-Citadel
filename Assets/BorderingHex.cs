@@ -13,7 +13,7 @@ public class BorderingHex : Hex
 
     public bool isObtainable = false;
     
-    public Vector3 hoverOffset;
+    // public Vector3 hoverOffset;
 
     public Biome biome;
     public string description;
@@ -30,7 +30,7 @@ public class BorderingHex : Hex
     private int defaultPrice = 6;
     public int humanPrice;
     
-    public static float overlapRadius = HexUtils.HexSize;
+    // public static float overlapRadius = HexUtils.HexSize;
     private float holdTimer;
     public float holdTimerDefault;
 
@@ -158,13 +158,13 @@ public class BorderingHex : Hex
     }
 
     //debug
-    private void OnDrawGizmosSelected()
+    /*private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, overlapRadius);
-    }
+    }*/
 
-    public List<OwnedHex> GetOwnedHexesAround()
+    /*public List<OwnedHex> GetOwnedHexesAround()
     {
         List<OwnedHex> listOfAdjacentOwnedHexes = new List<OwnedHex>();
         Vector3 hexPosition = transform.position;
@@ -180,5 +180,5 @@ public class BorderingHex : Hex
         }
 
         return listOfAdjacentOwnedHexes;
-    } 
+    } */
 }

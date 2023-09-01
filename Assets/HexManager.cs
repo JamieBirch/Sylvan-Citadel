@@ -1,8 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Linq;
-using Random = System.Random;
 
 public class HexManager : MonoBehaviour
 {
@@ -18,7 +16,7 @@ public class HexManager : MonoBehaviour
     public Text hexFruitsText;
     public Text hexBedsText;
     
-    private Random rnd = new Random();
+    // private Random rnd = new Random();
     
     private void Awake()
     {
@@ -71,7 +69,7 @@ public class HexManager : MonoBehaviour
         OwnedHex activeHexComponent = activeHex.GetComponent<OwnedHex>();
         hexPopulationText.text = activeHexComponent.HexPopulation.ToString();
         hexFruitsText.text = activeHexComponent.FruitsAvailable.ToString();
-        hexBedsText.text = activeHexComponent.BedsAvailable.ToString();
+        hexBedsText.text = activeHexComponent.GetBedsAvailable().ToString();
     }
 
     public void SetHexAsInActive()

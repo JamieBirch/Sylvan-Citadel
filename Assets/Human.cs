@@ -65,7 +65,7 @@ public class Human : MonoBehaviour
 
     private bool HasAvailableBeds()
     {
-        return homeHex.BedsAvailable > 0;
+        return homeHex.GetBedsAvailable() > 0;
     }
 
     public void Hire()
@@ -118,12 +118,26 @@ public class Human : MonoBehaviour
         //die
         if (_home != null)
         {
-            _home.GetComponent<House>().MoveOut(this);
+            MoveOut();
         }
         homeHex.village.GetComponent<Village>().humans.Remove(this);
         Destroy(gameObject);
         homeHex.HexPopulation--;
         GameStats.Population--;
+    }
+
+    public void MoveOut()
+    {
+        _home.GetComponent<House>().MoveOut(this);
+        hasHome = false;
+        _home = null;
+    }
+
+    public void MoveIn(House house)
+    {
+        _home = house.gameObject;
+        hasHome = true;
+       _home.GetComponent<House>().hex.SettleInHex(this);
     }
 
     public void OnDestroy()

@@ -51,7 +51,7 @@ public class Tree : MonoBehaviour
                 double chance = Utils.GenerateRandomChance();
                 if (chance <= Fertility)
                 {
-                    Debug.Log("I feel very fruity today!");
+                    // Debug.Log("I feel very fruity today!");
                     BearFruit();
                     BearFruit();
                 }
@@ -60,7 +60,7 @@ public class Tree : MonoBehaviour
             default:
             {
                 leaves.SetActive(false);
-                Debug.Log("I don't bear fruits anymore!");
+                // Debug.Log("I don't bear fruits anymore!");
                 break;
             }
         }

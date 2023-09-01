@@ -87,7 +87,7 @@ public class PopulationManager : MonoBehaviour
         
         //move in to new hex
         humanComponent.homeHex = newHomeHex;
-        Debug.Log(humanComponent.name + " is settling in " + newHomeHex.Name);
+        // Debug.Log(humanComponent.name + " is settling in " + newHomeHex.Name);
         newHomeHex.HexPopulation++;
     }
 

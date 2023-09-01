@@ -32,8 +32,7 @@ public class ConstructionManager : MonoBehaviour
             GameStats.Wood -= houseComponent.woodPrice;
 
             OwnedHex hexComponent = hex.GetComponent<OwnedHex>();
-            hexComponent.buildings.Add(newHouse);
-            hexComponent.BedsAvailable += houseComponent.capacity;
+            hexComponent.AddHouseToHex(newHouse.GetComponent<House>());
         }
     }
     

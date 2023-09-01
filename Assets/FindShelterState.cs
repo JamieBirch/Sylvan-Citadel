@@ -51,7 +51,7 @@ public class FindShelterState : IHumanState
             // if (child.CompareTag(houseTag))
             // {
                 House thisHouse = houseGO.GetComponent<House>();
-                if (thisHouse.bedsAvailable > 0)
+                if (thisHouse.GetBedsAvailable() > 0)
                 {
                     float distanceToHouse = Vector3.Distance(human.transform.position, houseGO.transform.position);
                     if (distanceToHouse < shortestDistance)
@@ -76,12 +76,14 @@ public class FindShelterState : IHumanState
 
     public void UseCurrentTarget(Human human)
     {
-        bool movedIn = human.currentTarget.GetComponent<House>().MoveIn(human);
+        House house = human.currentTarget.GetComponent<House>();
+        bool movedIn = house.MoveIn(human);
         if (movedIn)
         {
-            human._home = human.currentTarget;
-            human.hasHome = true;
-            human._home.GetComponent<House>().hex.SettleInHex(human);
+            human.MoveIn(house);
+            // human._home = human.currentTarget;
+            // human.hasHome = true;
+            // human._home.GetComponent<House>().hex.SettleInHex(human);
         }
         human.currentTarget = null;
     }

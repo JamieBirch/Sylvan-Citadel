@@ -19,11 +19,11 @@ public class OwnedHex : Hex
     public GameObject waterway;
     public GameObject woodland;
     public GameObject village;
-    public List<GameObject> buildings;
+    public List<House> houses;
     private bool selected;
     
     //Stats
-    public int BedsAvailable;
+    private int BedsAvailable;
     public int FruitsAvailable;
     public int HexPopulation;
 
@@ -36,7 +36,7 @@ public class OwnedHex : Hex
         _hexManager = HexManager.instance;
         
         defaultColor = rend.material.color;
-        buildings = new List<GameObject>();
+        houses = new List<House>();
         selected = false;
 
         BedsAvailable = 0;
@@ -46,6 +46,34 @@ public class OwnedHex : Hex
     public void Update()
     {
         settlersAvailable = CalculateSettlersAvailable();
+        
+        if (houses.Count > 0)
+        {
+            BedsAvailable = CalcBedsAvailableSum();
+            // Debug.Log("total beds: " + BedsAvailable);
+        } 
+    }
+
+    public int GetBedsAvailable()
+    {
+        return BedsAvailable;
+    }
+
+    public void AddHouseToHex(House houseComponent)
+    {
+        houses.Add(houseComponent);
+    }
+
+    private int CalcBedsAvailableSum()
+    {
+        int BedsAvailableSum = 0;
+
+        foreach (House house in houses)
+        {
+            BedsAvailableSum += house.GetBedsAvailable();
+            // Debug.Log("adding beds: " + house.GetBedsAvailable() + "current sum: " + BedsAvailable);
+        }
+        return BedsAvailableSum;
     }
 
     private int CalculateSettlersAvailable()
@@ -60,10 +88,10 @@ public class OwnedHex : Hex
 
     public void SettleInHex(Human human)
     {
-        Debug.Log("settling " + human.Name + " in " + Name);
+        // Debug.Log("settling " + human.Name + " in " + Name);
         if (human.homeHex != this)
         {
-            Debug.Log("new Hex!");
+            // Debug.Log("new Hex!");
             _hexManager.RelocateHumanTo(this, village.GetComponent<Village>(), human);
         }
     }

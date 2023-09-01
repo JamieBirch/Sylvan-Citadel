@@ -6,7 +6,7 @@ public class House : MonoBehaviour
     public OwnedHex hex;
     public int woodPrice;
     public int capacity;
-    public int bedsAvailable;
+    private int bedsAvailable;
     
     private List<Human> _tenants;
 
@@ -23,7 +23,7 @@ public class House : MonoBehaviour
         {
             _tenants.Add(human);
             bedsAvailable--;
-            hex.BedsAvailable--;
+            // hex.BedsAvailable--;
             // human.homeHex = hex;
             return true;
         }
@@ -32,13 +32,16 @@ public class House : MonoBehaviour
             return false;
         }
     }
+
+    public int GetBedsAvailable()
+    {
+        return bedsAvailable;
+    }
     
     public void MoveOut(Human human)
     {
-        human.hasHome = false;
-        human._home = null;
         _tenants.Remove(human);
         bedsAvailable++;
-        hex.BedsAvailable++;
+        // hex.BedsAvailable++;
     }
 }

@@ -34,7 +34,7 @@ public class BorderingHex : Hex
     private float holdTimer;
     public float holdTimerDefault;
 
-    public string humansPricePreText = "settlers required: ";
+    public string humansPricePreText/* = "settlers required: "*/;
     // public string holdTimerPreText = "hold for: ";
 
     private void Start()

@@ -722,11 +722,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: 
-  availableColor: {r: 0.4745098, g: 0.42352942, b: 0.5019608, a: 0}
-  nonAvailableColor: {r: 0.23921569, g: 0.21176471, b: 0.2509804, a: 0}
+  availableColor: {r: 0.3529412, g: 0.28627452, b: 0.38431373, a: 0}
+  nonAvailableColor: {r: 0.39215687, g: 0.38039216, b: 0.4, a: 0}
   rend: {fileID: 5404319486185118211}
   isObtainable: 0
-  hoverOffset: {x: 0, y: 1, z: 0}
   biome: 0
   description: 
   hasWater: 0
@@ -734,12 +733,10 @@ MonoBehaviour:
   hexInfoCanvas: {fileID: 4410798472700602043}
   descriptionText: {fileID: 2082792455105867326}
   priceText: {fileID: 6901396806160983421}
-  holdTimerText: {fileID: 4315980105771756412}
   holdTimerCircle: {fileID: 1586202263494279017}
   humanPrice: 0
   holdTimerDefault: 4
-  humansPricePreText: 'humans to populate: '
-  holdTimerPreText: 'hold for: '
+  humansPricePreText: 'settlers required: '
 --- !u!65 &5765409841354726004
 BoxCollider:
   m_ObjectHideFlags: 0

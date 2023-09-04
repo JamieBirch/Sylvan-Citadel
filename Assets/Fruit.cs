@@ -24,7 +24,7 @@ public class Fruit : MonoBehaviour
         }
         Destroy(gameObject);
         
-        hex.FruitsAvailable--;
+        // hex.FruitsAvailable--;
     }
     
     public void OnDestroy()

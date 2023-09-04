@@ -24,7 +24,7 @@ public class OwnedHex : Hex
     
     //Stats
     private int BedsAvailable;
-    public int FruitsAvailable;
+    // public int FruitsAvailable;
     public int HexPopulation;
 
     public GameObject settlersAvailableCanvas;
@@ -40,7 +40,7 @@ public class OwnedHex : Hex
         selected = false;
 
         BedsAvailable = 0;
-        FruitsAvailable = 0;
+        // FruitsAvailable = 0;
     }
 
     public void Update()

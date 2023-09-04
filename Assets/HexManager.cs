@@ -68,7 +68,7 @@ public class HexManager : MonoBehaviour
     {
         OwnedHex activeHexComponent = activeHex.GetComponent<OwnedHex>();
         hexPopulationText.text = activeHexComponent.HexPopulation.ToString();
-        hexFruitsText.text = activeHexComponent.FruitsAvailable.ToString();
+        // hexFruitsText.text = activeHexComponent.FruitsAvailable.ToString();
         hexBedsText.text = activeHexComponent.GetBedsAvailable().ToString();
     }
 

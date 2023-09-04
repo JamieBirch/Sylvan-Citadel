@@ -79,7 +79,7 @@ public class FindFoodState : IHumanState
         human.DestroyCurrentTarget();
         human.currentTarget = null;
         //TODO effect
-        human.homeHex.FruitsAvailable--;
+        // human.homeHex.FruitsAvailable--;
 
         human.isHungry = false;
     }

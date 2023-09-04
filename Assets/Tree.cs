@@ -75,7 +75,7 @@ public class Tree : MonoBehaviour
         Fruit fruitComponent = _fruit.GetComponent<Fruit>();
         fruitComponent.woodland = _woodland;
         fruitComponent.hex = hex;
-        hex.FruitsAvailable++;
+        // hex.FruitsAvailable++;
     }
 
     private Vector3 fruitPositionOffset()

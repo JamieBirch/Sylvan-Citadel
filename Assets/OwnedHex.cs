@@ -7,6 +7,11 @@ public class OwnedHex : Hex
 {
     private HexManager _hexManager;
     
+    public GameObject groveTile;
+    public GameObject forestTile;
+    public GameObject grasslandTile;
+    public GameObject riverTile;
+    
     public Color hoverColor;
     private Color defaultColor;
     

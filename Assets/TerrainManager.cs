@@ -8,7 +8,6 @@ public class TerrainManager : MonoBehaviour
     public int StartTrees;
     
     public GameObject borderingHex;
-    public GameObject farHex;
     public GameObject ownedHex;
 
     public GameObject woodland;
@@ -45,7 +44,37 @@ public class TerrainManager : MonoBehaviour
         newOwnedHex.name = districtName;
         OwnedHex hexComponent = newOwnedHex.GetComponent<OwnedHex>();
         hexComponent.Name = districtName;
+
+        switch (biome)
+        {
+            case Biome.grove:
+            {
+                hexComponent.groveTile.SetActive(true);
+                break;
+            }
+            case Biome.forest:
+            {
+                hexComponent.forestTile.SetActive(true);
+                break;
+            }
+            case Biome.grassland:
+            {
+                hexComponent.grasslandTile.SetActive(true);
+                break;
+            }
+            case Biome.river:
+            {
+                hexComponent.riverTile.SetActive(true);
+                break;
+            }
+            default:
+            {
+                Debug.Log("no tile for this biome");
+                break;
+            }
+        }
         hexComponent.biome = biome;
+        
         return newOwnedHex;
     }
 
@@ -161,10 +190,8 @@ public class TerrainManager : MonoBehaviour
         }
     }
 
-    private static void RandomizeResources(GameObject hex)
+    private static void RandomizeResources(BorderingHex borderingHexComponent)
     {
-        BorderingHex borderingHexComponent = hex.GetComponent<BorderingHex>();
-        
         borderingHexComponent.hasWater = Utils.TossCoin();
         borderingHexComponent.hasWood = Utils.TossCoin();
     }
@@ -175,7 +202,10 @@ public class TerrainManager : MonoBehaviour
         {
             // Debug.Log("no obstruction here");
             GameObject newHex = Instantiate(borderingHex, hexPosition, Quaternion.identity, gameObject.transform);
-            RandomizeResources(newHex);
+            BorderingHex newHexComponent = newHex.GetComponent<BorderingHex>();
+
+            DefineBiome(hexPosition, newHexComponent);
+            RandomizeResources(newHexComponent);
             return newHex;
         }
         else
@@ -186,6 +216,11 @@ public class TerrainManager : MonoBehaviour
         
     }
 
+    private void DefineBiome(Vector3 hexPosition, BorderingHex newHexComponent)
+    {
+        newHexComponent.biome = Biome.grove;
+    }
+
     public GameObject ConvertToOwnedHex(BorderingHex borderingHexComponent)
     {
         bool hasWater = borderingHexComponent.hasWater;
@@ -194,9 +229,10 @@ public class TerrainManager : MonoBehaviour
         //FIXME floating bug here?
         Vector3 position = borderingHexComponent.gameObject.transform.position/* - borderingHexComponent.hoverOffset*/;
 
+        Biome biome = borderingHexComponent.biome;
         Destroy(borderingHexComponent.gameObject);
         
-        GameObject hex = CreateOwnedHex(borderingHexComponent.biome, position);
+        GameObject hex = CreateOwnedHex(biome, position);
         if (hasWater)
         {
             SpawnLakes(hex, Utils.GenerateRandomIntMax(5));

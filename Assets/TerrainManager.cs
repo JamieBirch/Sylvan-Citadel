@@ -246,7 +246,6 @@ public class TerrainManager : MonoBehaviour
         {
             biome = GetHexBiomeByPosition(hexPosition);
         }
-        Debug.Log(biome.ToString());
 
         newHexComponent.biome = biome;
     }

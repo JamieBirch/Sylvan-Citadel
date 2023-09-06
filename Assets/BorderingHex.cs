@@ -142,7 +142,47 @@ public class BorderingHex : Hex
             _features = "Fruitful";
         }
 
-        string _biome = "Grove";
+        string _biome;
+
+        switch (biome)
+        {
+            case Biome.grove:
+            {
+                _biome = "Grove";
+                break;
+            }
+            case Biome.forest:
+            {
+                _biome = "Forest";
+                break;
+            }
+            case Biome.grassland:
+            {
+                _biome = "Grassland";
+                break;
+            }
+            case Biome.river:
+            {
+                _biome = "River";
+                break;
+            }
+            case Biome.swamp:
+            {
+                _biome = "Swamp";
+                break;
+            }
+            case Biome.mountain:
+            {
+                _biome = "Mountains";
+                break;
+            }
+            default:
+            {
+                Debug.Log("no tile for this biome");
+                _biome = "???";
+                break;
+            }
+        }
         //TODO
         return _features + " " + _biome;
     }

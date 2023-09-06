@@ -232,7 +232,7 @@ public class TerrainManager : MonoBehaviour
     private void DefineBiome(Vector3 hexPosition, BorderingHex newHexComponent)
     {
         // Vector3[] positionsOfHexesAround = HexUtils.PositionsOfHexesAround(hexPosition);
-        List<Hex> hexesAround = newHexComponent.GetHexesAround();
+        List<OwnedHex> hexesAround = newHexComponent.GetOwnedHexesAround();
         int randomHexIndex = Utils.GenerateRandomIntMax(6);
 
         Hex randomHex = hexesAround.ElementAtOrDefault(randomHexIndex - 1);

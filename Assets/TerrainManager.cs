@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class TerrainManager : MonoBehaviour
@@ -20,6 +21,7 @@ public class TerrainManager : MonoBehaviour
     
     public Vector3 firstTileCenter = Vector3.zero;
     public static float HexRadius = 3f;
+    public int beltWideness = 3;
 
 
     private Biome startBiome = Biome.grove;
@@ -65,6 +67,16 @@ public class TerrainManager : MonoBehaviour
             case Biome.river:
             {
                 hexComponent.riverTile.SetActive(true);
+                break;
+            }
+            case Biome.swamp:
+            {
+                hexComponent.swampTile.SetActive(true);
+                break;
+            }
+            case Biome.mountain:
+            {
+                hexComponent.mountainTile.SetActive(true);
                 break;
             }
             default:
@@ -206,6 +218,7 @@ public class TerrainManager : MonoBehaviour
 
             DefineBiome(hexPosition, newHexComponent);
             RandomizeResources(newHexComponent);
+
             return newHex;
         }
         else
@@ -218,7 +231,60 @@ public class TerrainManager : MonoBehaviour
 
     private void DefineBiome(Vector3 hexPosition, BorderingHex newHexComponent)
     {
-        newHexComponent.biome = Biome.grove;
+        // Vector3[] positionsOfHexesAround = HexUtils.PositionsOfHexesAround(hexPosition);
+        List<Hex> hexesAround = newHexComponent.GetHexesAround();
+        int randomHexIndex = Utils.GenerateRandomIntMax(6);
+
+        Hex randomHex = hexesAround.ElementAtOrDefault(randomHexIndex - 1);
+
+        Biome biome;
+        if (randomHex != null)
+        {
+            biome = randomHex.biome;
+        }
+        else
+        {
+            biome = GetHexBiomeByPosition(hexPosition);
+        }
+        Debug.Log(biome.ToString());
+
+        newHexComponent.biome = biome;
+    }
+
+    private Biome GetHexBiomeByPosition(Vector3 hexPosition)
+    {
+        float aaaaa = hexPosition.z / HexUtils.zHexOffset.z;
+        int beltIndex = (int)(aaaaa / beltWideness);
+        // Debug.Log(beltIndex);
+
+        Biome biome = RandomBiomeByBelt(beltIndex);
+        
+        return biome;
+    }
+
+    private Biome RandomBiomeByBelt(int beltIndex)
+    {
+        switch (beltIndex)
+        {
+            case 0:
+            {
+                return Utils.TossCoin() ? Biome.grove : Biome.river;
+            }
+            case 1:
+            {
+                return Utils.TossCoin() ? Biome.grassland : Biome.swamp;
+            }
+            case -1:
+            {
+                return Utils.TossCoin() ? Biome.forest : Biome.mountain;
+            }
+            //TODO add others
+            default:
+            {
+                Debug.Log("DEFAULT BIOME");
+                return Biome.grove;
+            }
+        }
     }
 
     public GameObject ConvertToOwnedHex(BorderingHex borderingHexComponent)

@@ -11,11 +11,13 @@ public class OwnedHex : Hex
     public GameObject forestTile;
     public GameObject grasslandTile;
     public GameObject riverTile;
+    public GameObject mountainTile;
+    public GameObject swampTile;
     
     public Color hoverColor;
     private Color defaultColor;
     
-    public Biome biome;
+    // public Biome biome;
     
     // public Vector3 selectOffset;
 

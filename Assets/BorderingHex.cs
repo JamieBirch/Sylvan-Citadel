@@ -15,7 +15,7 @@ public class BorderingHex : Hex
     
     // public Vector3 hoverOffset;
 
-    public Biome biome;
+    // public Biome biome;
     public string description;
     
     public bool hasWater;

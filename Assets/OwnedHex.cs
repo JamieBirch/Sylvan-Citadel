@@ -14,10 +14,9 @@ public class OwnedHex : Hex
     public GameObject mountainTile;
     public GameObject swampTile;
     
-    public Color hoverColor;
-    private Color defaultColor;
     
-    // public Biome biome;
+    private Color defaultColor = new Color(1f, 1f, 1f, 0f);
+    private Color selectColor = new Color(1f, 1f, 1f, 0.7f);
     
     // public Vector3 selectOffset;
 
@@ -42,7 +41,6 @@ public class OwnedHex : Hex
     {
         _hexManager = HexManager.instance;
         
-        defaultColor = rend.material.color;
         houses = new List<House>();
         selected = false;
 
@@ -106,7 +104,12 @@ public class OwnedHex : Hex
     public override void OnMouseEnter()
     {
         base.OnMouseEnter();
-        rend.material.color = hoverColor;
+        highlight();
+    }
+
+    private void highlight()
+    {
+        rend.materials[1].color = selectColor;
     }
 
     void OnMouseDown()
@@ -120,14 +123,20 @@ public class OwnedHex : Hex
             if (!selected)
             {
                 // gameObject.transform.position += HexUtils.selectOffset;
-                selected = true;
-                _hexManager.SetHexAsActive(gameObject);
+                Select();
             }
             else
             {
                 Unselect();
             }
         }
+    }
+
+    private void Select()
+    {
+        selected = true;
+        _hexManager.SetHexAsActive(gameObject);
+        highlight();
     }
 
     public void ShowSettlersAvailable()
@@ -159,7 +168,7 @@ public class OwnedHex : Hex
 
     private void ColorToDefault()
     {
-        rend.material.color = defaultColor;
+        rend.materials[1].color = defaultColor;
     }
 
     public bool NeighborsHaveAvailableBeds()

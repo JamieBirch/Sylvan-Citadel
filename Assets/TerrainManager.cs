@@ -52,31 +52,37 @@ public class TerrainManager : MonoBehaviour
             case Biome.grove:
             {
                 hexComponent.groveTile.SetActive(true);
+                hexComponent.rend = hexComponent.groveTile.GetComponent<Renderer>();
                 break;
             }
             case Biome.forest:
             {
                 hexComponent.forestTile.SetActive(true);
+                hexComponent.rend = hexComponent.forestTile.GetComponent<Renderer>();
                 break;
             }
             case Biome.grassland:
             {
                 hexComponent.grasslandTile.SetActive(true);
+                hexComponent.rend = hexComponent.grasslandTile.GetComponent<Renderer>();
                 break;
             }
             case Biome.river:
             {
                 hexComponent.riverTile.SetActive(true);
+                hexComponent.rend = hexComponent.riverTile.GetComponent<Renderer>();
                 break;
             }
             case Biome.swamp:
             {
                 hexComponent.swampTile.SetActive(true);
+                hexComponent.rend = hexComponent.swampTile.GetComponent<Renderer>();
                 break;
             }
             case Biome.mountain:
             {
                 hexComponent.mountainTile.SetActive(true);
+                hexComponent.rend = hexComponent.mountainTile.GetComponent<Renderer>();
                 break;
             }
             default:

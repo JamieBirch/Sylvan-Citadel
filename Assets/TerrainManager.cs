@@ -252,8 +252,8 @@ public class TerrainManager : MonoBehaviour
 
     private Biome GetHexBiomeByPosition(Vector3 hexPosition)
     {
-        float aaaaa = hexPosition.z / HexUtils.zHexOffset.z;
-        int beltIndex = (int)(aaaaa / beltWideness);
+        // float aaaaa = hexPosition.z / HexUtils.zHexOffset.z;
+        int beltIndex = (int)(hexPosition.z / HexUtils.zHexOffset.z / beltWideness);
         // Debug.Log(beltIndex);
 
         Biome biome = RandomBiomeByBelt(beltIndex);
@@ -270,12 +270,12 @@ public class TerrainManager : MonoBehaviour
                 return Utils.TossCoin() ? Biome.grove : Biome.river;
             }
             case 1:
-            {
-                return Utils.TossCoin() ? Biome.grassland : Biome.swamp;
+            {                
+                return Utils.TossCoin() ? Biome.forest : Biome.mountain;
             }
             case -1:
             {
-                return Utils.TossCoin() ? Biome.forest : Biome.mountain;
+                return Utils.TossCoin() ? Biome.grassland : Biome.swamp;
             }
             //TODO add others
             default:
@@ -291,7 +291,6 @@ public class TerrainManager : MonoBehaviour
         bool hasWater = borderingHexComponent.hasWater;
         bool hasWood = borderingHexComponent.hasWood;
 
-        //FIXME floating bug here?
         Vector3 position = borderingHexComponent.gameObject.transform.position/* - borderingHexComponent.hoverOffset*/;
 
         Biome biome = borderingHexComponent.biome;

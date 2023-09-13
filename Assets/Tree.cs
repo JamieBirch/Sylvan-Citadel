@@ -10,10 +10,10 @@ public class Tree : MonoBehaviour
 
     public int Fertility;
 
-    public const int sizeOvergrown = 60;
-    public const int sizeSmall = 12;
-    public const int sizeMiddle = 30;
-    public const int sizeOld = 50;
+    public const int sizeOvergrown = 20;
+    public const int sizeSmall = 4;
+    public const int sizeMiddle = 10;
+    public const int sizeOld = 15;
     private void Start()
     {
         // size = gameObject.transform.localScale.magnitude * 10;

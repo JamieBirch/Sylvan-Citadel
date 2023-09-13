@@ -142,7 +142,7 @@ public class TerrainManager : MonoBehaviour
     {
         Vector3 position = ConstructionManager.instance.PositionOnHex(_woodland.transform.position)/* + new Vector3(0, 1f, 0)*/;
         
-        float randomScale = Utils.GenerateRandom(0.5f, 1.5f);
+        float randomScale = Utils.GenerateRandom(0.3f, 0.65f);
         CreateTree(hex, _woodland, position, randomScale, trees);
     }
     
@@ -151,7 +151,7 @@ public class TerrainManager : MonoBehaviour
         List<Tree> trees = _woodland.GetComponent<Woodland>().trees;
         if (trees.Count <= 100)
         {
-            float randomScale = Utils.GenerateRandom(0.3f, 0.8f);
+            float randomScale = Utils.GenerateRandom(0.2f, 0.3f);
             CreateTree(hex, _woodland, position, randomScale, trees);
         }
     }
@@ -161,11 +161,13 @@ public class TerrainManager : MonoBehaviour
         float treeRotation = Utils.GenerateRandom(0, 360f);
         GameObject newTree = Instantiate(fruitTree, position, Quaternion.AngleAxis(treeRotation, Vector3.up),
             _woodland.transform);
-        newTree.transform.localScale = new Vector3(scale, scale, scale);
 
         Tree treeComponent = newTree.GetComponent<Tree>();
         trees.Add(treeComponent);
         treeComponent.hex = hex;
+
+        TreeSize treeSize = treeComponent.treeSize;
+        treeSize.transform.localScale = new Vector3(scale, scale, scale);
     }
 
     public void ChopTree(GameObject activeHex)

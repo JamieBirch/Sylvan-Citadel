@@ -3264,9 +3264,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 675f670d64e39ec418a145788794a183, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartTrees: 25
+  StartTrees: 10
   borderingHex: {fileID: 5828220953014600915, guid: 72a4f5cafaf2dab43a5e901325b331c4, type: 3}
-  farHex: {fileID: 3180673953241494959, guid: bfa893911798cef478682e7dc867ee72, type: 3}
   ownedHex: {fileID: 3193132197810865085, guid: 04f7847a0e009b3489b5fbb5dc98f219, type: 3}
   woodland: {fileID: 8905510410652168901, guid: d1287a04d19b95e46a60152eb71c2575, type: 3}
   waterway: {fileID: 3394585399397844934, guid: ea274c76920fd234c94f9a4140d12bd9, type: 3}
@@ -3275,6 +3274,7 @@ MonoBehaviour:
   lake: {fileID: 3889763215182566413, guid: 9ae68023581e33743a9a67b1cb33ac65, type: 3}
   overlapRadius: 1
   firstTileCenter: {x: 0, y: 0, z: 0}
+  beltWideness: 3
 --- !u!1 &1797072520
 GameObject:
   m_ObjectHideFlags: 0

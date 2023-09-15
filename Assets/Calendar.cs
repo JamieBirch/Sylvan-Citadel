@@ -8,6 +8,7 @@ public class Calendar : MonoBehaviour
     
     // public GameObject sun;
     public Light sun;
+    public float sunIntensityMultiplier;
     
     // TimeSpan dayStartTime = new TimeSpan(6, 0, 0);
     private int dayStartTime = 6;
@@ -50,10 +51,10 @@ public class Calendar : MonoBehaviour
         float hours = (1 - countdown/dayLength) * 24;
         TimeSpan time = new TimeSpan((int)hours, 0, 0);
         // float sunIntensity = -(Mathf.Cos((float)hours / 4)) + 1;
-        float newSunIntensity = (-(Mathf.Cos(hours / 4)) + 1)/2;
+        float sunIntensity = (-(Mathf.Cos(hours / 4)) + 1)/2;
         // sunIntensity = Mathf.SmoothDamp(sunIntensity, newSunIntensity, , Time.deltaTime);
         
-        sun.intensity = newSunIntensity;
+        sun.intensity = sunIntensity * sunIntensityMultiplier;
 
         if (countdown <= 0)
         {

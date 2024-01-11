@@ -1,2 +1,2 @@
 # Sylvan-Citadel
- simulation game
+Early prototype of a colony management survival simulation video game.

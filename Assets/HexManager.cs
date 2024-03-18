@@ -12,8 +12,10 @@ public class HexManager : MonoBehaviour
     private PopulationManager _populationManager;
     
     public GameObject hexStats;
+    public Text hexPopularityText;
     public Text hexPopulationText;
-    public Text hexFruitsText;
+    public Text hexSettlersText;
+    // public Text hexFruitsText;
     public Text hexBedsText;
     
     // private Random rnd = new Random();
@@ -73,7 +75,9 @@ public class HexManager : MonoBehaviour
     private void SetHexStats()
     {
         OwnedHex activeHexComponent = activeHex.GetComponent<OwnedHex>();
+        hexPopularityText.text = activeHexComponent.HexPopulation.ToString();
         hexPopulationText.text = activeHexComponent.HexPopulation.ToString();
+        hexSettlersText.text = activeHexComponent.GetSettlersAvailable().ToString();
         // hexFruitsText.text = activeHexComponent.FruitsAvailable.ToString();
         hexBedsText.text = activeHexComponent.GetBedsAvailable().ToString();
     }

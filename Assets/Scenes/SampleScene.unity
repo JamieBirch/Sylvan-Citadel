@@ -672,7 +672,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fa36a92843e4ab45b37911fb61456bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  house: {fileID: 8329519506523334572, guid: 11798027765cb10428bc5fac104a1f46, type: 3}
+  house: {fileID: 8641935630557121694, guid: e08cabe3182b47143aadcb24c5b07ca6, type: 3}
   houseOffset: {x: 0, y: 2.5, z: 0}
 --- !u!114 &107134974
 MonoBehaviour:

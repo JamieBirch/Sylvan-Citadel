@@ -34,8 +34,14 @@ public class HexManager : MonoBehaviour
     {
         if (activeHex != null)
         {
-            SetHexStats();
+            UseHexStats();
+            
         }
+    }
+
+    private void UseHexStats()
+    {
+        SetHexStats();
     }
 
     public void BuildHouse()
@@ -61,7 +67,7 @@ public class HexManager : MonoBehaviour
         }
         buttons.SetActive(true);
         hexStats.SetActive(true);
-        SetHexStats();
+        UseHexStats();
     }
 
     private void SetHexStats()

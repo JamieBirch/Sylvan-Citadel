@@ -1,10 +1,13 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Human : MonoBehaviour
 {
     private PopulationManager _populationManager;
-    
+
+    // public Sprite footprint;
+    public Canvas footprint;
     public string Name;
     
     public bool isThirsty = false;
@@ -76,6 +79,8 @@ public class Human : MonoBehaviour
 
     public void RunToTarget()
     {
+        DoFootprint();
+        
         Transform humanTransform = transform;
         Transform currentTargetTransform = currentTarget.transform;
 
@@ -94,6 +99,16 @@ public class Human : MonoBehaviour
         {
             state.UseCurrentTarget(this);
         }
+    }
+
+    private void DoFootprint()
+    {
+        // RaycastHit hit;
+
+        // if (Physics.Raycast(transform.position, transform.forward, out hit))
+        // {
+            Instantiate(footprint, new Vector3(transform.position.x, 1, transform.position.z), Quaternion.identity);
+        // }
     }
 
     public bool Satisfied()

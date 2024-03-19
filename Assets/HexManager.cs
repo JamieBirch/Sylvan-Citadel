@@ -12,6 +12,7 @@ public class HexManager : MonoBehaviour
     private PopulationManager _populationManager;
     
     public GameObject hexStats;
+    //TODO create formula
     public Text hexPopularityText;
     public Text hexPopulationText;
     public Text hexSettlersText;

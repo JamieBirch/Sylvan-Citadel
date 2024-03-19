@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6a253acd536e6349bc96338cffe4ccd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  footprint: {fileID: 7883029496536759818, guid: ec9b6b338d1cbc74f991872cda23fefc, type: 3}
   Name: 
   isThirsty: 0
   isHungry: 0

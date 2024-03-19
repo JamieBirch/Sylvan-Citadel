@@ -27,7 +27,7 @@ public class BorderingHex : Hex
     // public Text holdTimerText;
     public Image holdTimerCircle;
     
-    private int defaultPrice = 6;
+    public int defaultPrice;
     public int humanPrice;
     
     // public static float overlapRadius = HexUtils.HexSize;
@@ -194,6 +194,10 @@ public class BorderingHex : Hex
         List<OwnedHex> ownedHexesAround = GetOwnedHexesAround();
         price -= ownedHexesAround.Count;
 
+        if (price < 0)
+        {
+            return 0;
+        }
         return price;
     }
 

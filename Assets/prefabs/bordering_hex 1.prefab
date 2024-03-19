@@ -734,6 +734,7 @@ MonoBehaviour:
   descriptionText: {fileID: 2082792455105867326}
   priceText: {fileID: 6901396806160983421}
   holdTimerCircle: {fileID: 1586202263494279017}
+  defaultPrice: 4
   humanPrice: 0
   holdTimerDefault: 4
   humansPricePreText: 'settlers required: '

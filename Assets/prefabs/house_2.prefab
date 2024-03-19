@@ -47,7 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hex: {fileID: 0}
   woodPrice: 40
-  capacity: 5
+  capacity: 2
 --- !u!1001 &1880695879125018313
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -50,7 +50,8 @@ public class OwnedHex : Hex
 
     public void Update()
     {
-        settlersAvailable = CalculateSettlersAvailable();
+        // settlersAvailable = CalculateSettlersAvailable();
+        settlersAvailable = HexPopulation;
         
         if (houses.Count > 0)
         {

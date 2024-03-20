@@ -49,12 +49,12 @@ private void Start()
 
     private void BearFruit()
     {
-        Woodland _woodland = gameObject.GetComponentInParent<Woodland>();
-        GameObject _fruit = Instantiate(fruitPrefab, transform.position + FruitPositionOffset(), Quaternion.identity,
-            _woodland.transform);
+        // Woodland _woodland = gameObject.GetComponentInParent<Woodland>();
+        // GameObject _fruit = Instantiate(fruitPrefab, transform.position + FruitPositionOffset(), Quaternion.identity, _woodland.transform);
+        GameObject _fruit = Instantiate(fruitPrefab, transform.position + FruitPositionOffset(), Quaternion.identity);
 
         Fruit fruitComponent = _fruit.GetComponent<Fruit>();
-        fruitComponent.woodland = _woodland;
+        // fruitComponent.woodland = _woodland;
         fruitComponent.hex = hex;
     }
 

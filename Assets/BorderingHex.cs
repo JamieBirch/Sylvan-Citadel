@@ -18,8 +18,13 @@ public class BorderingHex : Hex
     // public Biome biome;
     public string description;
     
-    public bool hasWater;
-    public bool hasWood;
+    public bool hasUniqueResource;
+    public bool hasPrimaryResource;
+    public bool hasSecondaryResource;
+    public bool hasRestriction;
+    
+    // public bool hasWater;
+    // public bool hasWood;
 
     public Canvas hexInfoCanvas;
     public Text descriptionText;
@@ -128,7 +133,7 @@ public class BorderingHex : Hex
     {
         //TODO make Biome-specific
         string _features;
-        if (!hasWater && !hasWood)
+        /*if (!hasWater && !hasWood)
         {
             _features = "Serene";
         } else if (hasWater && hasWood)
@@ -140,7 +145,7 @@ public class BorderingHex : Hex
         } else 
         {
             _features = "Fruitful";
-        }
+        }*/
 
         string _biome;
 
@@ -184,7 +189,7 @@ public class BorderingHex : Hex
             }
         }
         //TODO
-        return _features + " " + _biome;
+        return /*_features + " " + */_biome;
     }
 
     private int definePrice()

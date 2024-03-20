@@ -3,8 +3,10 @@ using UnityEngine;
 public class Fruit : MonoBehaviour
 {
     public OwnedHex hex;
-    public Woodland woodland;
+    // public Woodland woodland;
     public bool isClaimed = false;
+    //TODO code duplication
+    public GameObject treePrefab;
     
     private TerrainManager _terrainManager;
     private int _chanceToGrowTree = 80;
@@ -20,7 +22,8 @@ public class Fruit : MonoBehaviour
         double chance = Utils.GenerateRandomChance();
         if (chance < _chanceToGrowTree)
         {
-            _terrainManager.SpawnTreeAt(hex, woodland.transform, transform.position);
+            _terrainManager.SpawnTreeAt(hex, treePrefab, transform.position);
+            // _terrainManager.SpawnTreeAt(hex, woodland.transform, transform.position);
         }
         Destroy(gameObject);
         

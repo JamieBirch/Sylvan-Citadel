@@ -1,13 +1,13 @@
 ﻿public enum Biome
 {
-    arctic,
-    mountain,
-    grove,
+    // arctic,
+    // mountain,
     forest,
-    river,
-    grassland,
-    tropic,
-    swamp,
-    desert,
-    volcanic
+    grove,
+    // river,
+    grassland
+    // tropic,
+    // swamp,
+    // desert,
+    // volcanic
 }

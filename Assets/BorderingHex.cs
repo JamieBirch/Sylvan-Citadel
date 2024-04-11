@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class BorderingHex : Hex
@@ -19,8 +20,8 @@ public class BorderingHex : Hex
     public string description;
     
     public bool hasUniqueResource;
-    public bool hasPrimaryResource;
-    public bool hasSecondaryResource;
+    [FormerlySerializedAs("hasPrimaryResource")] public bool hasSecondaryResource;
+    [FormerlySerializedAs("hasSecondaryResource")] public bool hasTertiaryResource;
     public bool hasRestriction;
     
     // public bool hasWater;
@@ -80,11 +81,11 @@ public class BorderingHex : Hex
         humanPrice = definePrice();
         priceText.text = humansPricePreText + humanPrice;
         hexInfoCanvas.enabled = true;
-        List<OwnedHex> ownedHexesAround = GetOwnedHexesAround();
+        /*List<OwnedHex> ownedHexesAround = GetOwnedHexesAround();
         foreach (OwnedHex ownedHex in ownedHexesAround)
         {
             ownedHex.ShowSettlersAvailable();
-        }
+        }*/
     }
     
     public void OnMouseDrag()
@@ -122,11 +123,11 @@ public class BorderingHex : Hex
         // gameObject.transform.position -= hoverOffset;
         hexInfoCanvas.enabled = false;
         
-        List<OwnedHex> ownedHexesAround = GetOwnedHexesAround();
+        /*List<OwnedHex> ownedHexesAround = GetOwnedHexesAround();
         foreach (OwnedHex ownedHex in ownedHexesAround)
         {
             ownedHex.StopShowSettlersAvailable();
-        }
+        }*/
     }
 
     public string createDescription()
@@ -166,7 +167,7 @@ public class BorderingHex : Hex
                 _biome = "Grassland";
                 break;
             }
-            case Biome.river:
+            /*case Biome.river:
             {
                 _biome = "River";
                 break;
@@ -180,7 +181,7 @@ public class BorderingHex : Hex
             {
                 _biome = "Mountains";
                 break;
-            }
+            }*/
             default:
             {
                 Debug.Log("no tile for this biome");

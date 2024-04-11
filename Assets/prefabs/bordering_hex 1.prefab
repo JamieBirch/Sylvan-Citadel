@@ -728,8 +728,10 @@ MonoBehaviour:
   rend: {fileID: 5404319486185118211}
   isObtainable: 0
   description: 
-  hasWater: 0
-  hasWood: 0
+  hasUniqueResource: 0
+  hasPrimaryResource: 0
+  hasSecondaryResource: 0
+  hasRestriction: 0
   hexInfoCanvas: {fileID: 4410798472700602043}
   descriptionText: {fileID: 2082792455105867326}
   priceText: {fileID: 6901396806160983421}

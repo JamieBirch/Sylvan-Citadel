@@ -1,12 +1,14 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class TerrainManager : MonoBehaviour
 {
     public static TerrainManager instance;
     
-    public int StartTrees;
+    // public int StartTrees;
     
     public GameObject borderingHex;
     public GameObject ownedHex;
@@ -26,6 +28,7 @@ public class TerrainManager : MonoBehaviour
     //TODO finish list
     public BiomeFeatures BiomeFeaturesGrove;
     public BiomeFeatures BiomeFeaturesForest;
+    public BiomeFeatures BiomeFeaturesGrassland;
     public BiomeFeatures BiomeFeaturesEmpty;
     public Dictionary<Biome, BiomeFeatures> BiomeFeaturesDictionary;
 
@@ -37,7 +40,8 @@ public class TerrainManager : MonoBehaviour
         BiomeFeaturesDictionary = new Dictionary<Biome, BiomeFeatures>()
         {
             {Biome.grove, BiomeFeaturesGrove},
-            {Biome.forest, BiomeFeaturesForest}
+            {Biome.forest, BiomeFeaturesForest},
+            {Biome.grassland, BiomeFeaturesGrassland}
             //TODO finish list
         };
     }
@@ -46,15 +50,18 @@ public class TerrainManager : MonoBehaviour
     public class BiomeFeatures
     {
         // public Biome biome;
-        public GameObject uniqueResource;
+        /*public GameObject uniqueResource;
         public int uniqueResourceMaxCount;
         public GameObject Resource2;
         public int Resource2MaxCount;
         public GameObject Resource3;
         public int Resource3MaxCount;
         public GameObject Restriction;
-        public int RestrictionMaxCount;
+        public int RestrictionMaxCount;*/
         // public GameObject biomeTile;
+        public LandscapeFeatureType uniqueResource;
+        public LandscapeFeatureType secondaryResource;
+        public LandscapeFeatureType tertiaryResource;
     }
     
     private BiomeFeatures GetBiomeFeatures(Biome biome)
@@ -71,8 +78,9 @@ public class TerrainManager : MonoBehaviour
         GameObject startHex = CreateOwnedHex(startBiome, firstTileCenter);
         
         BiomeFeatures biomeFeatures = GetBiomeFeatures(startBiome);
-        CreateFeature(startHex, biomeFeatures.uniqueResource, StartTrees);
-        CreateFeature(startHex, biomeFeatures.Resource2, Utils.GenerateRandomIntMax(5));
+        //TODO modify for another start biomes
+        CreateFeature(startHex, biomeFeatures.uniqueResource);
+        CreateFeature(startHex, biomeFeatures.secondaryResource);
         
         // SpawnTrees(startHex, StartTrees);
         // SpawnLakes(startHex, Utils.GenerateRandomIntMax(5));
@@ -107,7 +115,7 @@ public class TerrainManager : MonoBehaviour
                 hexComponent.rend = hexComponent.grasslandTile.GetComponent<Renderer>();
                 break;
             }
-            case Biome.river:
+            /*case Biome.river:
             {
                 hexComponent.riverTile.SetActive(true);
                 hexComponent.rend = hexComponent.riverTile.GetComponent<Renderer>();
@@ -124,7 +132,7 @@ public class TerrainManager : MonoBehaviour
                 hexComponent.mountainTile.SetActive(true);
                 hexComponent.rend = hexComponent.mountainTile.GetComponent<Renderer>();
                 break;
-            }
+            }*/
             default:
             {
                 Debug.Log("no tile for this biome");
@@ -139,15 +147,21 @@ public class TerrainManager : MonoBehaviour
         return newOwnedHex;
     }
     
-    private void CreateFeature(GameObject hex, GameObject resourcePrefab, int count)
+    // private void CreateFeature(GameObject hex, GameObject resourcePrefab, int count)
+    private void CreateFeature(GameObject hex, LandscapeFeatureType landscapeFeatureType)
     {
         // GameObject _waterway = Instantiate(waterway, hex.transform.position, Quaternion.identity, hex.transform);
         // _waterway.name = "waterway";
         // hex.GetComponent<OwnedHex>().waterway = _waterway;
-        
-        for (int i = 0; i < count; i++)
+        if (landscapeFeatureType == LandscapeFeatureType.none)
         {
-            SpawnResource(resourcePrefab, hex);
+            return;
+        }
+        
+        LandscapeFeature landscapeFeature = LandscapeFeaturesDictionary.GetLandscapeFeature(landscapeFeatureType);
+        for (int i = 0; i < landscapeFeature.resourceMaxCount; i++)
+        {
+            SpawnResource(landscapeFeature.resourceGO, hex);
         }
     }
 
@@ -288,8 +302,8 @@ public class TerrainManager : MonoBehaviour
     private static void RandomizeFeatures(BorderingHex borderingHexComponent)
     {
         borderingHexComponent.hasUniqueResource = Utils.TossCoin();
-        borderingHexComponent.hasPrimaryResource = Utils.TossCoin();
         borderingHexComponent.hasSecondaryResource = Utils.TossCoin();
+        borderingHexComponent.hasTertiaryResource = Utils.TossCoin();
         borderingHexComponent.hasRestriction = Utils.TossCoin();
     }
 
@@ -353,21 +367,35 @@ public class TerrainManager : MonoBehaviour
         {
             case 0:
             {
-                return Utils.TossCoin() ? Biome.grove : Biome.river;
+                // return Utils.TossCoin() ? Biome.grove : Biome.river;
+                return Biome.grove;
             }
             case 1:
             {                
-                return Utils.TossCoin() ? Biome.forest : Biome.mountain;
+                // return Utils.TossCoin() ? Biome.forest : Biome.mountain;
+                return Biome.forest;
             }
             case -1:
             {
-                return Utils.TossCoin() ? Biome.grassland : Biome.swamp;
+                // return Utils.TossCoin() ? Biome.grassland : Biome.swamp;
+                return Biome.grassland;
             }
             //TODO add others
             default:
             {
-                Debug.Log("DEFAULT BIOME");
-                return Biome.grove;
+                Biome[] biomes = Enum.GetValues(typeof(Biome)) as Biome[];
+                if (beltIndex > 0)
+                {
+                    return biomes[0];
+                } else if (beltIndex < 0)
+                {
+                    return biomes[biomes.Length-1];
+                }
+                else
+                {
+                    Debug.Log("DEFAULT BIOME");
+                    return Biome.grove;
+                }
             }
         }
     }
@@ -380,8 +408,8 @@ public class TerrainManager : MonoBehaviour
         // bool hasWood = borderingHexComponent.hasWood;
         
         bool hasUniqueResource = borderingHexComponent.hasUniqueResource;
-        bool hasPrimaryResource = borderingHexComponent.hasPrimaryResource;
         bool hasSecondaryResource = borderingHexComponent.hasSecondaryResource;
+        bool hasTertiaryResource = borderingHexComponent.hasTertiaryResource;
         bool hasRestriction = borderingHexComponent.hasRestriction;
         
         //change tilePrefab based on biome
@@ -394,20 +422,24 @@ public class TerrainManager : MonoBehaviour
         BiomeFeatures biomeFeatures = GetBiomeFeatures(biome);
         if (hasUniqueResource)
         {
-            CreateFeature(hex, biomeFeatures.uniqueResource, biomeFeatures.uniqueResourceMaxCount);
-        }
-        if (hasPrimaryResource)
-        {
-            CreateFeature(hex, biomeFeatures.Resource2, biomeFeatures.Resource2MaxCount);
+            // CreateFeature(hex, LandscapeFeaturesDictionary.GetLandscapeFeature(biomeFeatures.uniqueResource).resourceGO, LandscapeFeaturesDictionary.GetLandscapeFeature(biomeFeatures.uniqueResource).resourceMaxCount);
+            CreateFeature(hex, biomeFeatures.uniqueResource);
         }
         if (hasSecondaryResource)
         {
-            CreateFeature(hex, biomeFeatures.Resource3, biomeFeatures.Resource3MaxCount);
+            // CreateFeature(hex, LandscapeFeaturesDictionary.GetLandscapeFeature(biomeFeatures.secondaryResource).resourceGO, LandscapeFeaturesDictionary.GetLandscapeFeature(biomeFeatures.secondaryResource).resourceMaxCount);
+            CreateFeature(hex, biomeFeatures.secondaryResource);
         }
-        if (hasRestriction)
+        if (hasTertiaryResource)
+        {
+            // CreateFeature(hex, LandscapeFeaturesDictionary.GetLandscapeFeature(biomeFeatures.tertiaryResource).resourceGO, LandscapeFeaturesDictionary.GetLandscapeFeature(biomeFeatures.tertiaryResource).resourceMaxCount);
+            CreateFeature(hex, biomeFeatures.tertiaryResource);
+        }
+        //TODO
+        /*if (hasRestriction)
         {
             CreateFeature(hex, biomeFeatures.Restriction, biomeFeatures.RestrictionMaxCount);
-        }
+        }*/
         
         
 

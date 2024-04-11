@@ -33,7 +33,7 @@ public class OwnedHex : Hex
     // public int FruitsAvailable;
     public int HexPopulation;
 
-    public GameObject settlersAvailableCanvas;
+    // public GameObject settlersAvailableCanvas;
     public Text settlersAvailableText;
     private int settlersAvailable;
     
@@ -140,7 +140,7 @@ public class OwnedHex : Hex
         highlight();
     }
 
-    public void ShowSettlersAvailable()
+    /*public void ShowSettlersAvailable()
     {
         settlersAvailableCanvas.SetActive(true);
         settlersAvailableText.text = settlersAvailable.ToString();
@@ -149,7 +149,7 @@ public class OwnedHex : Hex
     public void StopShowSettlersAvailable()
     {
         settlersAvailableCanvas.SetActive(false);
-    }
+    }*/
     
     private void OnMouseExit()
     {

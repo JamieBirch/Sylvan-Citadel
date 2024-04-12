@@ -9,7 +9,7 @@ public class Fruit : MonoBehaviour
     public GameObject treePrefab;
     
     private TerrainManager _terrainManager;
-    private int _chanceToGrowTree = 80;
+    private int _chanceToGrowTree = 5;
 
     private void Start()
     {

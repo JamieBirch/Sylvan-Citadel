@@ -688,6 +688,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   village: {fileID: 6120161639811956932, guid: c3f706a698612fa47bc8c049a844dea6, type: 3}
   human: {fileID: 4055188296665297496, guid: 93382fba0bea8ba40861ad1f46cfaf83, type: 3}
+  maxPopulation: 50
 --- !u!114 &107134975
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2011,7 +2012,7 @@ Light:
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 20
   m_Shadows:
-    m_Type: 2
+    m_Type: 0
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 0.5
@@ -3471,7 +3472,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!108 &1664172308
 Light:
   m_ObjectHideFlags: 0

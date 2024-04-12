@@ -111,6 +111,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6a253acd536e6349bc96338cffe4ccd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  footprint: {fileID: 0}
   Name: 
   isThirsty: 0
   isHungry: 0
@@ -120,6 +121,6 @@ MonoBehaviour:
   homeHex: {fileID: 0}
   hasWork: 0
   speed: 1
-  fertility: 20
+  fertility: 100
   _home: {fileID: 0}
   stateName: 

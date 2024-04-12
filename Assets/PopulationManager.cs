@@ -11,7 +11,8 @@ public class PopulationManager : MonoBehaviour
     public GameObject human;
     
     private Random rnd = new Random();
-    
+    public int maxPopulation;
+
     private void Awake()
     {
         instance = this;

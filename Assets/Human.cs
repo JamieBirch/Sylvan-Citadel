@@ -52,14 +52,21 @@ public class Human : MonoBehaviour
             Die();
         }
 
-        if ((HasAvailableBeds() || homeHex.NeighborsHaveAvailableBeds()) && Satisfied())
+        if (GameStats.Population < _populationManager.maxPopulation)
         {
-            double chance = Utils.GenerateRandomChance();
-            if (chance <= fertility)
+            if ((HasAvailableBeds() || homeHex.NeighborsHaveAvailableBeds()) && Satisfied())
             {
-                GiveBirth();
+                double chance = Utils.GenerateRandomChance();
+                if (chance <= fertility)
+                {
+                    GiveBirth();
+                }
             }
-        } 
+        }
+        else
+        {
+            Debug.Log("Reached max population");
+        }
         
         // Debug.Log("I'm starting my day!");
         isHungry = true;
@@ -79,7 +86,7 @@ public class Human : MonoBehaviour
 
     public void RunToTarget()
     {
-        DoFootprint();
+        // DoFootprint();
         
         Transform humanTransform = transform;
         Transform currentTargetTransform = currentTarget.transform;

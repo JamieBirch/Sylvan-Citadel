@@ -4010,11 +4010,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   borderingHex: {fileID: 5828220953014600915, guid: 72a4f5cafaf2dab43a5e901325b331c4, type: 3}
   ownedHex: {fileID: 3193132197810865085, guid: 04f7847a0e009b3489b5fbb5dc98f219, type: 3}
-  woodland: {fileID: 8905510410652168901, guid: d1287a04d19b95e46a60152eb71c2575, type: 3}
-  waterway: {fileID: 3394585399397844934, guid: ea274c76920fd234c94f9a4140d12bd9, type: 3}
   overlapRadius: 1
   firstTileCenter: {x: 0, y: 0, z: 0}
-  beltWideness: 2
+  beltWideness: 1
   BiomeFeaturesGrove:
     uniqueResource: 1
     secondaryResource: 2
@@ -4049,7 +4047,7 @@ MonoBehaviour:
     resourceMaxCount: 20
   landscapeFeatureBlueprintField:
     landscapeFeatureType: 3
-    resourceGO: {fileID: 3889763215182566413, guid: 9ae68023581e33743a9a67b1cb33ac65, type: 3}
+    resourceGO: {fileID: 3889763215182566413, guid: 644b70d388e828d4a895c4f837d3672d, type: 3}
     resourceMaxCount: 2
   landscapeFeatureBlueprintGrove:
     landscapeFeatureType: 1

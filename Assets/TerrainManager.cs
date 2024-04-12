@@ -50,10 +50,10 @@ public class TerrainManager : MonoBehaviour
     
     private BiomeFeatures GetBiomeFeatures(Biome biome)
     {
-        if (biome != Biome.grove && biome != Biome.forest)
+        /*if (biome != Biome.grove && biome != Biome.forest)
         {
             return BiomeFeaturesEmpty;
-        }
+        }*/
         return BiomeFeaturesDictionary[biome];
     }
 

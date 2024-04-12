@@ -127,7 +127,7 @@ public class Human : MonoBehaviour
         _populationManager.SpawnHuman(gameObject.GetComponentInParent<Village>().gameObject);
     }
 
-    private void Die()
+    public void Die()
     {
         Debug.Log("I'm dying! :(");
         //die

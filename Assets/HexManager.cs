@@ -1,6 +1,8 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = System.Random;
 
 public class HexManager : MonoBehaviour
 {
@@ -94,9 +96,6 @@ public class HexManager : MonoBehaviour
     {
         BorderingHex borderingHexComponent = _borderingHex.GetComponent<BorderingHex>();
         
-        /*List<OwnedHex> ownedHexesAround = borderingHexComponent.GetOwnedHexesAround();
-        int hexPrice = borderingHexComponent.humanPrice;
-        var allAvailableHumans = _populationManager.AllAvailableHumans(ownedHexesAround);*/
         if (!IsHexObtainable(borderingHexComponent))
         {
             //TODO can't call buyHex on !isHexObtainable, optimize
@@ -106,15 +105,21 @@ public class HexManager : MonoBehaviour
         {
             GameObject hex = _terrainManager.ConvertToOwnedHex(borderingHexComponent);
             _populationManager.CreateVillage(hex);
+            
+            // List<OwnedHex> ownedHexesAround = borderingHexComponent.GetOwnedHexesAround();
+            // int hexPrice = borderingHexComponent.humanPrice;
+            // var allAvailableHumans = _populationManager.AllAvailableHumans(ownedHexesAround);
 
-            // var allAvailableHumans = _populationManager.AllAvailableHumans(borderingHexComponent.GetOwnedHexesAround());
-            // IEnumerable<Human> pickedHumans = allAvailableHumans.OrderBy(x => rnd.Next()).Take(borderingHexComponent.humanPrice);
+            var allAvailableHumans = _populationManager.AllAvailableHumans(borderingHexComponent.GetOwnedHexesAround());
+            // Random rnd = new Random();
+            IEnumerable<Human> pickedHumans = allAvailableHumans.OrderBy(x => new Random().Next()).Take(borderingHexComponent.humanPrice);
 
-            //move in to new hex
-            /*foreach (Human pickedHuman in pickedHumans)
+            //move in to new hex / kill
+            foreach (Human pickedHuman in pickedHumans)
             {
-                _populationManager.SettleHumanInHex(hex.GetComponent<OwnedHex>(), pickedHuman);
-            }*/
+                // _populationManager.SettleHumanInHex(hex.GetComponent<OwnedHex>(), pickedHuman);
+                pickedHuman.Die();
+            }
 
             _terrainManager.CreateConcealedHexesAround(hex);
         
@@ -133,7 +138,7 @@ public class HexManager : MonoBehaviour
         List<OwnedHex> ownedHexesAround = hex.GetOwnedHexesAround();
         int hexPrice = hex.humanPrice;
         var allAvailableHumans = _populationManager.AllAvailableHumans(ownedHexesAround);
-        if (allAvailableHumans.Count < hexPrice)
+        if (allAvailableHumans.Count <= hexPrice)
         {
             return false;
         }

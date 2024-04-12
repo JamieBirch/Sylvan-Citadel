@@ -177,7 +177,7 @@ public class TerrainManager : MonoBehaviour
         for (int i = 0; i < featureBlueprint.resourceMaxCount; i++)
         {
             SpawnResource(feature, featureBlueprint.resourceGO, hex);
-        }
+        } 
     }
 
     private void SpawnResource(LandscapeFeature landscapeFeature, GameObject resourcePrefab, GameObject parent)
@@ -186,7 +186,7 @@ public class TerrainManager : MonoBehaviour
         float rotation = Utils.GenerateRandom(0, 360f);
         GameObject resource = Instantiate(resourcePrefab, position, Quaternion.AngleAxis(rotation, Vector3.up), parent.transform);
         //TODO test scale for different resources
-        float randomScale = Utils.GenerateRandom(0.3f, 1.5f);
+        float randomScale = Utils.GenerateRandom(0.9f, 1.1f);
         resource.transform.localScale = new Vector3(randomScale, 1, randomScale);
         
         landscapeFeature.AddResource(resource);
@@ -204,7 +204,6 @@ public class TerrainManager : MonoBehaviour
     {
         OwnedHex activeHexComponent = activeHex.GetComponent<OwnedHex>();
         
-
         LandscapeFeatureWoodland landscapeFeatureWoodland = activeHexComponent.GetWoodland();
         
         GameObject biggestTree = landscapeFeatureWoodland.ChooseBiggestTree();

@@ -4012,7 +4012,7 @@ MonoBehaviour:
   ownedHex: {fileID: 3193132197810865085, guid: 04f7847a0e009b3489b5fbb5dc98f219, type: 3}
   overlapRadius: 1
   firstTileCenter: {x: 0, y: 0, z: 0}
-  beltWideness: 1
+  beltWideness: 2
   BiomeFeaturesGrove:
     uniqueResource: 1
     secondaryResource: 2

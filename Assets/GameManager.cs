@@ -49,6 +49,12 @@ public class GameManager : MonoBehaviour
         food.text = GameStats.Food.ToString();
         wood.text = GameStats.Wood.ToString();
         tiles.text = GameStats.OwnedHexes.ToString();
+        
+        if (GameStats.Population <= 0)
+        {
+            PlayerMessageService.instance.ShowMessage("No population left!");
+            Debug.Log("No population left!");
+        }
     }
 
 }

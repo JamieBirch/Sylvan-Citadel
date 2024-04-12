@@ -28,16 +28,16 @@ public class FindFoodState : IHumanState
     
     private void FindFood(Human human)
     {
-        GameObject homeHexWoodland = human.homeHex.woodland;
+        // GameObject homeHexWoodland = human.homeHex.woodland;
 
         IEnumerable fruits;
-        if (homeHexWoodland != null)
+        /*if (homeHexWoodland != null)
         {
             Woodland _woodland = homeHexWoodland.GetComponent<Woodland>();
             Transform[] objectsInWoodland = _woodland.transform.GetComponentsInChildren<Transform>();
             fruits = objectsInWoodland.Where(child => child.CompareTag(fruitTag));
         }
-        else
+        else*/
         {
             fruits = GameObject.FindGameObjectsWithTag(fruitTag).Select(fruit => fruit.transform);
         }

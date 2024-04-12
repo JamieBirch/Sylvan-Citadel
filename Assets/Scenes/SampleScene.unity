@@ -4043,19 +4043,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a358ec295c6e4675a6b349bbf7f8063f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LandscapeFeatureForest:
+  landscapeFeatureBlueprintForest:
     landscapeFeatureType: 0
     resourceGO: {fileID: 6040239926759661250, guid: 6e6fce4b8d1ccf741a381fd2a994da2c, type: 3}
     resourceMaxCount: 20
-  LandscapeFeatureGrassland:
+  landscapeFeatureBlueprintField:
     landscapeFeatureType: 3
     resourceGO: {fileID: 3889763215182566413, guid: 9ae68023581e33743a9a67b1cb33ac65, type: 3}
     resourceMaxCount: 2
-  LandscapeFeatureGrove:
+  landscapeFeatureBlueprintGrove:
     landscapeFeatureType: 1
     resourceGO: {fileID: 5287768650643275152, guid: 8a64369d31df14d4081c4b899890d244, type: 3}
-    resourceMaxCount: 10
-  LandscapeFeatureLakes:
+    resourceMaxCount: 15
+  landscapeFeatureBlueprintLakes:
     landscapeFeatureType: 2
     resourceGO: {fileID: 3889763215182566413, guid: 9ae68023581e33743a9a67b1cb33ac65, type: 3}
     resourceMaxCount: 5

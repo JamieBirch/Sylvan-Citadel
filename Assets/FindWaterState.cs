@@ -38,15 +38,15 @@ public class FindWaterState : IHumanState
 
     private GameObject FindWater(Human human)
     {
-        GameObject homeHexWaterway = human.homeHex.waterway;
-
         IEnumerable lakes;
+        /*GameObject homeHexWaterway = human.homeHex.waterway;
+
         if (homeHexWaterway != null)
         {
             Waterway waterway = homeHexWaterway.GetComponent<Waterway>();
             lakes = waterway.lakes;
         }
-        else
+        else*/
         {
             lakes = GameObject.FindGameObjectsWithTag(waterTag);
         }

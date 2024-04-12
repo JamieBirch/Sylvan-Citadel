@@ -22,8 +22,10 @@ public class OwnedHex : Hex
 
     public Renderer rend;
 
-    public GameObject waterway;
-    public GameObject woodland;
+    public Dictionary<LandscapeFeatureType, LandscapeFeature> LandscapeFeaturesDictionary = new Dictionary<LandscapeFeatureType, LandscapeFeature>();
+    
+    // public GameObject waterway;
+    // public GameObject woodland;
     public GameObject village;
     public List<House> houses;
     private bool selected;
@@ -185,5 +187,23 @@ public class OwnedHex : Hex
             } 
         }
         return false;
+    }
+
+    public LandscapeFeatureWoodland GetWoodland()
+    {
+        
+        if (LandscapeFeaturesDictionary.ContainsKey(LandscapeFeatureType.fruitTrees))
+        {
+            return (LandscapeFeatureWoodland)LandscapeFeaturesDictionary[LandscapeFeatureType.fruitTrees];
+        }
+        else if (LandscapeFeaturesDictionary.ContainsKey(LandscapeFeatureType.pineTrees))
+        {
+            return (LandscapeFeatureWoodland)LandscapeFeaturesDictionary[LandscapeFeatureType.pineTrees];
+        }
+        else
+        {
+            Debug.Log("No woodland in tile " + name);
+            return null;
+        }
     }
 }

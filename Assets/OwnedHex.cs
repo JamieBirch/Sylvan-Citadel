@@ -14,7 +14,6 @@ public class OwnedHex : Hex
     public GameObject mountainTile;
     public GameObject swampTile;
     
-    
     private Color defaultColor = new Color(1f, 1f, 1f, 0f);
     private Color selectColor = new Color(1f, 1f, 1f, 0.7f);
     
@@ -22,7 +21,12 @@ public class OwnedHex : Hex
 
     public Renderer rend;
 
+    // public TileStatsUIContainer tileStatsUIcontainer;
+    public GameObject tileStatsUIprefab;
+    public TileStatsUI tileStatsUI;
+
     public Dictionary<LandscapeFeatureType, LandscapeFeature> LandscapeFeaturesDictionary = new Dictionary<LandscapeFeatureType, LandscapeFeature>();
+    public Dictionary<string, int> tileStatistics = new Dictionary<string, int>();
     
     // public GameObject waterway;
     // public GameObject woodland;
@@ -38,6 +42,11 @@ public class OwnedHex : Hex
     // public GameObject settlersAvailableCanvas;
     public Text settlersAvailableText;
     private int settlersAvailable;
+
+    public void UpdateTileStatistics(string field, int count)
+    {
+        tileStatistics[field] = count;
+    }
     
     private void Start()
     {
@@ -48,6 +57,29 @@ public class OwnedHex : Hex
 
         BedsAvailable = 0;
         // FruitsAvailable = 0;
+        
+        string[] defaultTileStatFields =  {
+            "population",
+            "beds"
+        };
+        
+        // GameObject myTileStatsUI = Instantiate(tileStatsUIprefab, tileStatsUIcontainer.transform);
+        // TileStatsUI statsUI = myTileStatsUI.GetComponent<TileStatsUI>();
+        tileStatsUI.Name.text = Name;
+
+        foreach (string field in defaultTileStatFields)
+        {
+            tileStatistics.Add(field, 0);
+            tileStatsUI.AddField(field, 0);
+        }
+        //TOFIX
+        foreach (LandscapeFeature feature in LandscapeFeaturesDictionary.Values)
+        {
+            LandscapeFeatureType landscapeFeatureType = feature.getFeatureType();
+            int count = feature.getCount();
+            tileStatistics.Add(landscapeFeatureType.ToString(), count);
+            tileStatsUI.AddField(landscapeFeatureType.ToString(), count);
+        }
     }
 
     public void Update()

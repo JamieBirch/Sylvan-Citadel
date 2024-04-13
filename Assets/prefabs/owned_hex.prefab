@@ -583,12 +583,12 @@ MonoBehaviour:
   mountainTile: {fileID: 2546353174933584142}
   swampTile: {fileID: 1360907796317392347}
   rend: {fileID: 199010083080033213}
-  waterway: {fileID: 0}
-  woodland: {fileID: 0}
+  tileStatsUIcontainer: {fileID: 0}
+  tileStatsUIprefab: {fileID: 211319817602167943, guid: dcaa502df116b4541973e383997d9ff8, type: 3}
+  tileStatsUI: {fileID: 0}
   village: {fileID: 0}
   houses: []
   HexPopulation: 0
-  settlersAvailableCanvas: {fileID: 1920418806}
   settlersAvailableText: {fileID: 797909391}
 --- !u!65 &8349748933488940630
 BoxCollider:

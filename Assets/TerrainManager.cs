@@ -28,6 +28,8 @@ public class TerrainManager : MonoBehaviour
 
     private Biome startBiome = Biome.grove;
     
+    public TileStatsUIContainer tileStatsUIcontainer;
+    
     private void Awake()
     {
         instance = this;
@@ -77,7 +79,21 @@ public class TerrainManager : MonoBehaviour
         OwnedHex hexComponent = newOwnedHex.GetComponent<OwnedHex>();
         hexComponent.Name = districtName;
 
-        switch (biome)
+        TileStatsUI tileStatsUI = Instantiate(hexComponent.tileStatsUIprefab, tileStatsUIcontainer.transform).GetComponent<TileStatsUI>();
+        hexComponent.tileStatsUI = tileStatsUI;
+        tileStatsUI.gameObject.SetActive(false);
+
+        /*string[] defaultTileStatFields =  {
+        "population",
+        "beds"
+        };
+        foreach (string field in defaultTileStatFields)
+        {
+            hexComponent.tileStatistics.Add(field, 0);
+        }*/
+    // hexComponent.tileStatistics.Add();
+
+    switch (biome)
         {
             case Biome.grove:
             {
@@ -180,11 +196,11 @@ public class TerrainManager : MonoBehaviour
         } 
     }
 
-    private void SpawnResource(LandscapeFeature landscapeFeature, GameObject resourcePrefab, GameObject parent)
+    private void SpawnResource(LandscapeFeature landscapeFeature, GameObject resourcePrefab, GameObject tile)
     {
-        Vector3 position = ConstructionManager.instance.PositionOnHex(parent.transform.position);
+        Vector3 position = ConstructionManager.instance.PositionOnHex(tile.transform.position);
         float rotation = Utils.GenerateRandom(0, 360f);
-        GameObject resource = Instantiate(resourcePrefab, position, Quaternion.AngleAxis(rotation, Vector3.up), parent.transform);
+        GameObject resource = Instantiate(resourcePrefab, position, Quaternion.AngleAxis(rotation, Vector3.up), tile.transform);
         //TODO test scale for different resources
         float randomScale = Utils.GenerateRandom(0.9f, 1.1f);
         resource.transform.localScale = new Vector3(randomScale, 1, randomScale);

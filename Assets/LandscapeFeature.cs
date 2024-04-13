@@ -11,18 +11,32 @@ public abstract class LandscapeFeature
     {
         tile = hex.GetComponent<OwnedHex>();
         tile.LandscapeFeaturesDictionary.Add(getFeatureType(), this);
+        // tile.tileStatistics.Add(getFeatureType().ToString(), 0);
     }
 
     public abstract LandscapeFeatureType getFeatureType();
+
+    public abstract int getCount();
+
 }
 
 public abstract class LandscapeFeatureWoodland : LandscapeFeature
 {
     public List<Tree> trees = new List<Tree>();
+
+    public override int getCount()
+    {
+        return trees.Count;
+    }
     
     public GameObject ChooseBiggestTree()
     {
         Tree biggestTree = null;
+
+        if (trees.Count == 0)
+        {
+            Debug.Log("Tree list empty");
+        }
 
         foreach (Tree _tree in trees)
         {
@@ -82,6 +96,11 @@ public class LandscapeFeatureLakes : LandscapeFeature
 {
     public List<Lake> lakes = new List<Lake>();
     
+    public override int getCount()
+    {
+        return lakes.Count;
+    }
+    
     public override void AddResource(GameObject go)
     {
         //TODO new Lake
@@ -99,6 +118,11 @@ public class LandscapeFeatureLakes : LandscapeFeature
 public class LandscapeFeatureFields : LandscapeFeature
 {
     public List<Field> fields = new List<Field>();
+    
+    public override int getCount()
+    {
+        return fields.Count;
+    }
     
     public override void AddResource(GameObject go)
     {

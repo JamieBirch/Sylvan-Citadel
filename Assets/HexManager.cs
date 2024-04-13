@@ -13,7 +13,9 @@ public class HexManager : MonoBehaviour
     private TerrainManager _terrainManager;
     private PopulationManager _populationManager;
     
-    public GameObject hexStats;
+    // public GameObject hexStats;
+    // public GameObject tileStatPrefab;
+    // public Text hexNameText;
     //TODO create formula
     public Text hexPopularityText;
     public Text hexPopulationText;
@@ -71,25 +73,46 @@ public class HexManager : MonoBehaviour
             activeHex = hex;
         }
         buttons.SetActive(true);
-        hexStats.SetActive(true);
+        activeHex.GetComponent<OwnedHex>().tileStatsUI.gameObject.SetActive(true);
+        // hexStats.SetActive(true);
         UseHexStats();
     }
 
     private void SetHexStats()
     {
         OwnedHex activeHexComponent = activeHex.GetComponent<OwnedHex>();
+        // Dictionary<string,TileStat> tileStatistics = activeHexComponent.tileStatsUI.tileStatistics;
+        activeHexComponent.tileStatsUI.gameObject.SetActive(true);
+        
+
+
+        //remove?
+        // hexNameText.text = activeHexComponent.Name;
         hexPopularityText.text = activeHexComponent.HexPopulation.ToString();
         hexPopulationText.text = activeHexComponent.HexPopulation.ToString();
         hexSettlersText.text = activeHexComponent.GetSettlersAvailable().ToString();
         // hexFruitsText.text = activeHexComponent.FruitsAvailable.ToString();
         hexBedsText.text = activeHexComponent.GetBedsAvailable().ToString();
+        
+        
+        //TOFIX: now Instantiates prefabs every frame
+        /*foreach (LandscapeFeature feature in activeHexComponent.LandscapeFeaturesDictionary.Values)
+        {
+            LandscapeFeatureType landscapeFeatureType = feature.getFeatureType();
+            int count = feature.getCount();
+            /*GameObject tileStatGO = Instantiate(tileStatPrefab, hexStats.transform);
+            TileStat tileStat = tileStatGO.GetComponent<TileStat>();
+            tileStat.SetName(landscapeFeatureType.ToString());
+            tileStat.SetCount(count);#1#
+        }*/
     }
 
     public void SetHexAsInActive()
     {
+        activeHex.GetComponent<OwnedHex>().tileStatsUI.gameObject.SetActive(false);
         activeHex = null;
         buttons.SetActive(false);
-        hexStats.SetActive(false);
+        // hexStats.SetActive(false);
     }
 
     public void BuyHex(GameObject _borderingHex)

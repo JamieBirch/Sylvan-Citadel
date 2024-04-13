@@ -14,6 +14,7 @@ public class Fruit : MonoBehaviour
     private void Start()
     {
         Calendar.NewDay += StartDay;
+        GameStats.Food++;
         _terrainManager = TerrainManager.instance;
     }
     
@@ -28,6 +29,7 @@ public class Fruit : MonoBehaviour
         Destroy(gameObject);
         
         // hex.FruitsAvailable--;
+        GameStats.Food--;
     }
     
     public void OnDestroy()

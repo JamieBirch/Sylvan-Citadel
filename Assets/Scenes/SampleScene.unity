@@ -799,11 +799,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activeHex: {fileID: 0}
   buttons: {fileID: 604358677}
-  hexStats: {fileID: 1586215897}
-  hexPopularityText: {fileID: 386228840}
-  hexPopulationText: {fileID: 303454996}
-  hexSettlersText: {fileID: 1627479168}
-  hexBedsText: {fileID: 450058954}
 --- !u!114 &107134976
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1001,7 +996,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: tiles
+  m_Text: food
 --- !u!222 &222787719
 CanvasRenderer:
   m_ObjectHideFlags: 0

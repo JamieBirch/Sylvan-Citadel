@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class OwnedHex : Hex
 {
+    public const string PopulationStatString = "population";
+    public const string BedsAvailableStatString = "beds";
     private HexManager _hexManager;
     
     public GameObject groveTile;
@@ -21,22 +23,18 @@ public class OwnedHex : Hex
 
     public Renderer rend;
 
-    // public TileStatsUIContainer tileStatsUIcontainer;
     public GameObject tileStatsUIprefab;
     public TileStatsUI tileStatsUI;
 
     public Dictionary<LandscapeFeatureType, LandscapeFeature> LandscapeFeaturesDictionary = new Dictionary<LandscapeFeatureType, LandscapeFeature>();
-    public Dictionary<string, int> tileStatistics = new Dictionary<string, int>();
+    private Dictionary<string, int> tileStatistics = new Dictionary<string, int>();
     
-    // public GameObject waterway;
-    // public GameObject woodland;
     public GameObject village;
     public List<House> houses;
     private bool selected;
     
     //Stats
     private int BedsAvailable;
-    // public int FruitsAvailable;
     public int HexPopulation;
 
     // public GameObject settlersAvailableCanvas;
@@ -46,6 +44,11 @@ public class OwnedHex : Hex
     public void UpdateTileStatistics(string field, int count)
     {
         tileStatistics[field] = count;
+    }
+    
+    public void UpdateTileStatisticsUI(string field)
+    {
+        tileStatsUI.UpdateFieldUi(field, tileStatistics[field]);
     }
     
     private void Start()
@@ -59,12 +62,10 @@ public class OwnedHex : Hex
         // FruitsAvailable = 0;
         
         string[] defaultTileStatFields =  {
-            "population",
-            "beds"
+            PopulationStatString,
+            BedsAvailableStatString
         };
         
-        // GameObject myTileStatsUI = Instantiate(tileStatsUIprefab, tileStatsUIcontainer.transform);
-        // TileStatsUI statsUI = myTileStatsUI.GetComponent<TileStatsUI>();
         tileStatsUI.Name.text = Name;
 
         foreach (string field in defaultTileStatFields)
@@ -72,7 +73,6 @@ public class OwnedHex : Hex
             tileStatistics.Add(field, 0);
             tileStatsUI.AddField(field, 0);
         }
-        //TOFIX
         foreach (LandscapeFeature feature in LandscapeFeaturesDictionary.Values)
         {
             LandscapeFeatureType landscapeFeatureType = feature.getFeatureType();
@@ -91,7 +91,17 @@ public class OwnedHex : Hex
         {
             BedsAvailable = CalcBedsAvailableSum();
             // Debug.Log("total beds: " + BedsAvailable);
-        } 
+        }
+
+        UpdateTileStatistics(PopulationStatString, HexPopulation);
+        UpdateTileStatistics(BedsAvailableStatString, BedsAvailable);
+        
+        foreach (LandscapeFeature feature in LandscapeFeaturesDictionary.Values)
+        {
+            LandscapeFeatureType landscapeFeatureType = feature.getFeatureType();
+            int count = feature.getCount();
+            UpdateTileStatistics(landscapeFeatureType.ToString(), count);
+        }
     }
 
     public int GetBedsAvailable()

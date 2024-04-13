@@ -14,6 +14,12 @@ public class TileStatsUI : MonoBehaviour
         TileStat tileStat = tileStatGO.GetComponent<TileStat>();
         tileStat.SetName(field);
         tileStat.SetCount(count);
+        tileStatistics.Add(field, tileStat);
+    }
+
+    public void UpdateFieldUi(string field, int count)
+    {
+        tileStatistics[field].SetCount(count);
     }
 
 }

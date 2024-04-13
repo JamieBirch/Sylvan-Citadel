@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.UI;
 using Random = System.Random;
 
 public class HexManager : MonoBehaviour
@@ -12,18 +11,6 @@ public class HexManager : MonoBehaviour
     private ConstructionManager _constructionManager;
     private TerrainManager _terrainManager;
     private PopulationManager _populationManager;
-    
-    // public GameObject hexStats;
-    // public GameObject tileStatPrefab;
-    // public Text hexNameText;
-    //TODO create formula
-    public Text hexPopularityText;
-    public Text hexPopulationText;
-    public Text hexSettlersText;
-    // public Text hexFruitsText;
-    public Text hexBedsText;
-    
-    // private Random rnd = new Random();
     
     private void Awake()
     {
@@ -42,13 +29,16 @@ public class HexManager : MonoBehaviour
         if (activeHex != null)
         {
             UseHexStats();
-            
         }
     }
 
     private void UseHexStats()
     {
-        SetHexStats();
+        //show tile stats
+        OwnedHex activeHexComponent = activeHex.GetComponent<OwnedHex>();
+        activeHexComponent.tileStatsUI.gameObject.SetActive(true);
+        
+        SetHexStats(activeHexComponent);
     }
 
     public void BuildHouse()
@@ -78,33 +68,13 @@ public class HexManager : MonoBehaviour
         UseHexStats();
     }
 
-    private void SetHexStats()
+    private void SetHexStats(OwnedHex activeHexComponent)
     {
-        OwnedHex activeHexComponent = activeHex.GetComponent<OwnedHex>();
-        // Dictionary<string,TileStat> tileStatistics = activeHexComponent.tileStatsUI.tileStatistics;
-        activeHexComponent.tileStatsUI.gameObject.SetActive(true);
-        
-
-
-        //remove?
-        // hexNameText.text = activeHexComponent.Name;
-        hexPopularityText.text = activeHexComponent.HexPopulation.ToString();
-        hexPopulationText.text = activeHexComponent.HexPopulation.ToString();
-        hexSettlersText.text = activeHexComponent.GetSettlersAvailable().ToString();
-        // hexFruitsText.text = activeHexComponent.FruitsAvailable.ToString();
-        hexBedsText.text = activeHexComponent.GetBedsAvailable().ToString();
-        
-        
-        //TOFIX: now Instantiates prefabs every frame
-        /*foreach (LandscapeFeature feature in activeHexComponent.LandscapeFeaturesDictionary.Values)
+        Dictionary<string,TileStat> tileStatsUI = activeHexComponent.tileStatsUI.tileStatistics;
+        foreach (KeyValuePair<string, TileStat> uielement in tileStatsUI)
         {
-            LandscapeFeatureType landscapeFeatureType = feature.getFeatureType();
-            int count = feature.getCount();
-            /*GameObject tileStatGO = Instantiate(tileStatPrefab, hexStats.transform);
-            TileStat tileStat = tileStatGO.GetComponent<TileStat>();
-            tileStat.SetName(landscapeFeatureType.ToString());
-            tileStat.SetCount(count);#1#
-        }*/
+            activeHexComponent.UpdateTileStatisticsUI(uielement.Key);
+        }
     }
 
     public void SetHexAsInActive()

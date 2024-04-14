@@ -28,19 +28,8 @@ public class FindFoodState : IHumanState
     
     private void FindFood(Human human)
     {
-        // GameObject homeHexWoodland = human.homeHex.woodland;
-
         IEnumerable fruits;
-        /*if (homeHexWoodland != null)
-        {
-            Woodland _woodland = homeHexWoodland.GetComponent<Woodland>();
-            Transform[] objectsInWoodland = _woodland.transform.GetComponentsInChildren<Transform>();
-            fruits = objectsInWoodland.Where(child => child.CompareTag(fruitTag));
-        }
-        else*/
-        {
-            fruits = GameObject.FindGameObjectsWithTag(fruitTag).Select(fruit => fruit.transform);
-        }
+        fruits = GameObject.FindGameObjectsWithTag(fruitTag).Select(fruit => fruit.transform);
         
         float shortestDistance = Mathf.Infinity;
         GameObject nearestFood = null;

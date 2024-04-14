@@ -49,6 +49,8 @@ MonoBehaviour:
   leaves: {fileID: 3370344991782628282}
   treeSize: {fileID: 6040239924751309810}
   growthSpeed: 1.02
+  Fertility: 20
+  pinePrefab: {fileID: 4328736735578813185, guid: 7f83b3afe64fc434cb937939b5db0af9, type: 3}
 --- !u!1001 &6040239924751309815
 PrefabInstance:
   m_ObjectHideFlags: 0

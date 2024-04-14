@@ -1,18 +1,16 @@
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Fruit : MonoBehaviour
+public class Pine : MonoBehaviour
 {
     public OwnedHex hex;
-    public bool isClaimed = false;
     public GameObject treePrefab;
     public int _chanceToGrowTree;
 
     private TerrainManager _terrainManager;
-
+    
     private void Start()
     {
         Calendar.NewDay += StartDay;
-        GameStats.Food++;
         _terrainManager = TerrainManager.instance;
     }
     
@@ -25,7 +23,6 @@ public class Fruit : MonoBehaviour
         }
         Destroy(gameObject);
         
-        GameStats.Food--;
     }
     
     public void OnDestroy()

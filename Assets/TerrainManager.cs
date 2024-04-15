@@ -189,7 +189,7 @@ public class TerrainManager : MonoBehaviour
         //assign feature to Hex
         feature.AssignToTile(hex);
 
-        int randomCount = Utils.GenerateRandomIntNumberWhereMaxIs(featureBlueprint.resourceMaxCount);
+        int randomCount = Utils.GenerateRandomIntBetween(featureBlueprint.resourceMinCount, featureBlueprint.resourceMaxCount);
 
         //spawn feature resources
         for (int i = 0; i < randomCount; i++)

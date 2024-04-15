@@ -5320,18 +5320,22 @@ MonoBehaviour:
   landscapeFeatureBlueprintForest:
     landscapeFeatureType: 0
     resourceGO: {fileID: 6040239926759661250, guid: 6e6fce4b8d1ccf741a381fd2a994da2c, type: 3}
+    resourceMinCount: 10
     resourceMaxCount: 20
   landscapeFeatureBlueprintField:
     landscapeFeatureType: 3
     resourceGO: {fileID: 3889763215182566413, guid: 644b70d388e828d4a895c4f837d3672d, type: 3}
+    resourceMinCount: 1
     resourceMaxCount: 2
   landscapeFeatureBlueprintGrove:
     landscapeFeatureType: 1
     resourceGO: {fileID: 5287768650643275152, guid: 8a64369d31df14d4081c4b899890d244, type: 3}
+    resourceMinCount: 5
     resourceMaxCount: 15
   landscapeFeatureBlueprintLakes:
     landscapeFeatureType: 2
     resourceGO: {fileID: 3889763215182566413, guid: 9ae68023581e33743a9a67b1cb33ac65, type: 3}
+    resourceMinCount: 1
     resourceMaxCount: 3
 --- !u!1 &1797072520
 GameObject:

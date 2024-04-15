@@ -6,6 +6,7 @@ public class LandscapeFeatureBlueprint
 {
     public LandscapeFeatureType landscapeFeatureType;
     public GameObject resourceGO;
+    public int resourceMinCount;
     public int resourceMaxCount;
 
     /*public LandscapeFeature(LandscapeFeatureType landscapeFeatureType, GameObject resourceGO, int resourceMaxCount)

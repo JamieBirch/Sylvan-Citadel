@@ -12,6 +12,7 @@ public class Calendar : MonoBehaviour
     
     // TimeSpan dayStartTime = new TimeSpan(6, 0, 0);
     private int dayStartTime = 6;
+    private int eveningTime = 20;
     
     public static int day;
     public float countdown;
@@ -23,6 +24,8 @@ public class Calendar : MonoBehaviour
 
     private bool newDay;
     private Quaternion sunDefaultRotation;
+
+    public Material windowMaterial;
 
     // private float sunIntensity;
     
@@ -69,6 +72,12 @@ public class Calendar : MonoBehaviour
         {
             NewDay?.Invoke();
             newDay = false;
+            windowMaterial.DisableKeyword("_EMISSION");
+        }
+
+        if ((int)hours == eveningTime && !newDay)
+        {
+            windowMaterial.EnableKeyword("_EMISSION");
         }
 
         countdownText.text = $"{countdown:00.00}";

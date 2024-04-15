@@ -819,6 +819,7 @@ MonoBehaviour:
   daysText: {fileID: 51112724}
   countdownText: {fileID: 1090628650}
   timeText: {fileID: 97144614}
+  windowMaterial: {fileID: 2100000, guid: f25ed9a33e8936443bf56b94ed327668, type: 2}
 --- !u!114 &107134977
 MonoBehaviour:
   m_ObjectHideFlags: 0

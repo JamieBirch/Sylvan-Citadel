@@ -188,9 +188,11 @@ public class TerrainManager : MonoBehaviour
         
         //assign feature to Hex
         feature.AssignToTile(hex);
-        
+
+        int randomCount = Utils.GenerateRandomIntNumberWhereMaxIs(featureBlueprint.resourceMaxCount);
+
         //spawn feature resources
-        for (int i = 0; i < featureBlueprint.resourceMaxCount; i++)
+        for (int i = 0; i < randomCount; i++)
         {
             SpawnResource(feature, featureBlueprint.resourceGO, hex);
         } 
@@ -287,7 +289,7 @@ public class TerrainManager : MonoBehaviour
     {
         // Vector3[] positionsOfHexesAround = HexUtils.PositionsOfHexesAround(hexPosition);
         List<OwnedHex> hexesAround = newHexComponent.GetOwnedHexesAround();
-        int randomHexIndex = Utils.GenerateRandomIntMax(6);
+        int randomHexIndex = Utils.GenerateRandomIntNumberWhereMaxIs(6);
 
         Hex randomHex = hexesAround.ElementAtOrDefault(randomHexIndex - 1);
 

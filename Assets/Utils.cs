@@ -14,7 +14,7 @@ public static class Utils
         return (float)random.NextDouble() * 100;
     }
     
-    public static int GenerateRandomIntMax(int max)
+    public static int GenerateRandomIntNumberWhereMaxIs(int max)
     {
         Random random = new Random();
         return (int)(random.NextDouble() * (max) + 1);

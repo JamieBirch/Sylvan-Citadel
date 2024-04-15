@@ -5331,7 +5331,7 @@ MonoBehaviour:
   landscapeFeatureBlueprintLakes:
     landscapeFeatureType: 2
     resourceGO: {fileID: 3889763215182566413, guid: 9ae68023581e33743a9a67b1cb33ac65, type: 3}
-    resourceMaxCount: 5
+    resourceMaxCount: 3
 --- !u!1 &1797072520
 GameObject:
   m_ObjectHideFlags: 0

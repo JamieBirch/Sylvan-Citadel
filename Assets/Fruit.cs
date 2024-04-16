@@ -22,10 +22,11 @@ public class Fruit : MonoBehaviour
         if (chance < _chanceToGrowTree)
         {
             _terrainManager.SpawnTreeAt(hex, treePrefab, transform.position);
+            GameStats.Food--;
         }
+        
         Destroy(gameObject);
         
-        GameStats.Food--;
     }
     
     public void OnDestroy()

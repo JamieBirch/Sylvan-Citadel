@@ -9,6 +9,7 @@ TagManager:
   - water
   - tree
   - human
+  - foodSource
   layers:
   - Default
   - TransparentFX

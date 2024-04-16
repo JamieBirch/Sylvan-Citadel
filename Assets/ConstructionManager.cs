@@ -5,6 +5,7 @@ public class ConstructionManager : MonoBehaviour
     public static ConstructionManager instance;
     public GameObject house;
     public GameObject well;
+    public GameObject foodStorage;
     public Vector3 houseOffset;
     
     private float _hexRadius;
@@ -53,6 +54,27 @@ public class ConstructionManager : MonoBehaviour
             /*GameObject newWell = */Instantiate(well, position, Quaternion.AngleAxis(houseRotation, Vector3.up) , hex.transform);
 
             GameStats.Wood -= wellComponent.woodPrice;
+
+            // OwnedHex hexComponent = hex.GetComponent<OwnedHex>();
+        }
+    }
+    
+    public void BuildFoodStorage(GameObject hex)
+    {
+        FoodStorage foodStorageComponent = foodStorage.GetComponent<FoodStorage>();
+        
+        if (GameStats.Wood < foodStorageComponent.woodPrice)
+        {
+            PlayerMessageService.instance.ShowMessage("Not enough wood to build!");
+            Debug.Log("Not enough wood to build!");
+        }
+        else
+        {
+            var position = PositionOnHex(hex.transform.position);
+            float buildingRotation = Utils.GenerateRandom(0, 360f);
+            /*GameObject newWell = */Instantiate(foodStorage, position, Quaternion.AngleAxis(buildingRotation, Vector3.up) , hex.transform);
+
+            GameStats.Wood -= foodStorageComponent.woodPrice;
 
             // OwnedHex hexComponent = hex.GetComponent<OwnedHex>();
         }

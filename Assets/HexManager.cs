@@ -51,6 +51,11 @@ public class HexManager : MonoBehaviour
         _constructionManager.BuildWell(activeHex);
     }
     
+    public void BuildFoodStorage()
+    {
+        _constructionManager.BuildFoodStorage(activeHex);
+    }
+    
     public void ChopTree()
     {
         _terrainManager.ChopTree(activeHex);

@@ -5,7 +5,7 @@ public class FruitTree : Tree
     public int Fertility;
     public GameObject fruitPrefab;
 
-private void Start()
+    private void Start()
     {
         Calendar.NewDay += StartDay;
     }
@@ -63,9 +63,9 @@ private void Start()
         return new Vector3(Utils.GenerateRandom(-0.5f, 0.5f), 0f, Utils.GenerateRandom(-0.5f, 0.5f));
     }
     
-    /*public void OnDestroy()
+    public void OnDestroy()
     {
         Calendar.NewDay -= StartDay;
-    }*/
+    }
     
 }

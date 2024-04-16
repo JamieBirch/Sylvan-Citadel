@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class ConstructionManager : MonoBehaviour
@@ -6,7 +7,7 @@ public class ConstructionManager : MonoBehaviour
     public static ConstructionManager instance;
 
     public Button BuildButton;
-    public GameObject BuildingsPanel;
+    public GameObject BuildingsButtons;
     
     public GameObject house;
     public GameObject well;
@@ -23,13 +24,13 @@ public class ConstructionManager : MonoBehaviour
 
     public void ShowHideBuildPanel()
     {
-        if (BuildingsPanel.activeSelf)
+        if (BuildingsButtons.activeSelf)
         {
-            BuildingsPanel.SetActive(false);
+            BuildingsButtons.SetActive(false);
         }
         else
         {
-            BuildingsPanel.SetActive(true);
+            BuildingsButtons.SetActive(true);
         }
     }
 

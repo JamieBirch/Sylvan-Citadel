@@ -8,8 +8,9 @@ public class HexManager : MonoBehaviour
     public static HexManager instance;
     public GameObject activeHex;
     public GameObject buttons;
-    private ConstructionManager _constructionManager;
     private TerrainManager _terrainManager;
+    private ConstructionManager _constructionManager;
+    private TerraformingManager _terraformingManager;
     private PopulationManager _populationManager;
     
     private void Awake()
@@ -19,8 +20,9 @@ public class HexManager : MonoBehaviour
 
     private void Start()
     {
-        _constructionManager = ConstructionManager.instance;
         _terrainManager = TerrainManager.instance;
+        _constructionManager = ConstructionManager.instance;
+        _terraformingManager = TerraformingManager.instance;
         _populationManager = PopulationManager.instance;
     }
 
@@ -56,9 +58,11 @@ public class HexManager : MonoBehaviour
         _constructionManager.BuildFoodStorage(activeHex);
     }
     
+    //TODO move to terraforming manager
     public void ChopTree()
     {
-        _terrainManager.ChopTree(activeHex);
+        _terraformingManager.ChopTree(activeHex);
+        // _terrainManager.ChopTree(activeHex);
     }
 
     public void SetHexAsActive(GameObject hex)

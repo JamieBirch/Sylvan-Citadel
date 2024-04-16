@@ -218,7 +218,7 @@ public class TerrainManager : MonoBehaviour
         SpawnResource(hex.GetWoodland(), treePrefab, hex.gameObject);
     }
 
-    public void ChopTree(GameObject activeHex)
+    /*public void ChopTree(GameObject activeHex)
     {
         OwnedHex activeHexComponent = activeHex.GetComponent<OwnedHex>();
         
@@ -234,8 +234,8 @@ public class TerrainManager : MonoBehaviour
         {
             PlayerMessageService.instance.ShowMessage("No trees to chop! :(");
             Debug.Log("No trees to chop! :(");
-        }*/
-    }
+        }#1#
+    }*/
 
     public void CreateConcealedHexesAround(GameObject hex)
     {

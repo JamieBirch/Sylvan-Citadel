@@ -59,8 +59,8 @@ public class PineTree : Tree
         return new Vector3(Utils.GenerateRandom(-0.5f, 0.5f), 0f, Utils.GenerateRandom(-0.5f, 0.5f));
     }
     
-    public void OnDestroy()
+    /*public void OnDestroy()
     {
         Calendar.NewDay -= StartDay;
-    }
+    }*/
 }

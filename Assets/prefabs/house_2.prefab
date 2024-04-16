@@ -45,8 +45,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b301b1a23119c742a4b2663c78d210f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hex: {fileID: 0}
+  name: House
+  prefab: {fileID: 0}
   woodPrice: 40
+  hex: {fileID: 0}
   capacity: 4
 --- !u!1001 &1880695879125018313
 PrefabInstance:

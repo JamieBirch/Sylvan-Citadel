@@ -8,6 +8,11 @@ public class TerraformingManager : MonoBehaviour
     public Button TerraformButton;
     public GameObject TerraformingButtons;
     
+    private void Awake()
+    {
+        instance = this;
+    }
+    
     public void ShowHidePanel()
     {
         if (TerraformingButtons.activeSelf)
@@ -22,11 +27,11 @@ public class TerraformingManager : MonoBehaviour
     
     public void Update()
     {
-        if (HexManager.instance.activeHex == null && TerraformButton.IsInteractable())
+        if (TileManager.instance.activeTile == null && TerraformButton.IsInteractable())
         {
             TerraformButton.interactable = false;
         }
-        else if (HexManager.instance.activeHex != null && !TerraformButton.IsInteractable())
+        else if (TileManager.instance.activeTile != null && !TerraformButton.IsInteractable())
         {
             TerraformButton.interactable = true;
         }

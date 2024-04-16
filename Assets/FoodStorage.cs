@@ -1,6 +1,4 @@
-using UnityEngine;
 
-public class FoodStorage : MonoBehaviour
+public class FoodStorage : Building
 {
-    public int woodPrice;
 }

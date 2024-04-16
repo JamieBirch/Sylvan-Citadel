@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public static class HexUtils
+public static class TileUtils
 {
     public static int HexSize = 9;
     
@@ -11,6 +11,9 @@ public static class HexUtils
     public static Vector3 zHexOffset = new Vector3(0f, 0f, 7.625f);
     
     public static Vector3 selectOffset = new Vector3(0f, 1f, 0f);
+    
+    // public static float HexRadius = 3f;
+    public static float TileRadius = 3f;
 
 
     public static Vector3[] PositionsOfHexesAround(Vector3 hexPosition)
@@ -27,5 +30,16 @@ public static class HexUtils
             rightHexPosition, leftHexPosition, topRightHexPosition, topLeftHexPosition, bottomRightHexPosition,
             bottomLeftHexPosition
         };
+    }
+    
+    public static Vector3 PositionOnTile(Vector3 hexCenter)
+    {
+        float minX = hexCenter.x - TileRadius;
+        float maxX = hexCenter.x + TileRadius;
+        
+        float minZ = hexCenter.z - TileRadius;
+        float maxZ = hexCenter.z + TileRadius;
+
+        return new Vector3(Utils.GenerateRandom(minX, maxX), 0f, Utils.GenerateRandom(minZ, maxZ));
     }
 }

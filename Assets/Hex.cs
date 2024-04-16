@@ -16,7 +16,7 @@ public class Hex : MonoBehaviour
         List<Hex> listOfAdjacentHexes = new List<Hex>();
         Vector3 hexPosition = transform.position;
 
-        var overlapColliders = Physics.OverlapSphere(hexPosition, HexUtils.HexSize);
+        var overlapColliders = Physics.OverlapSphere(hexPosition, TileUtils.HexSize);
         foreach (Collider _collider in overlapColliders)
         {
             if (_collider.TryGetComponent(out Hex hexComponent))
@@ -33,7 +33,7 @@ public class Hex : MonoBehaviour
         List<OwnedHex> listOfAdjacentOwnedHexes = new List<OwnedHex>();
         Vector3 hexPosition = transform.position;
 
-        var overlapColliders = Physics.OverlapSphere(hexPosition, HexUtils.HexSize);
+        var overlapColliders = Physics.OverlapSphere(hexPosition, TileUtils.HexSize);
         foreach (Collider _collider in overlapColliders)
         {
             if (_collider.TryGetComponent(out OwnedHex hexComponent))

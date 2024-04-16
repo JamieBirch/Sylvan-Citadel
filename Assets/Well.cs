@@ -1,7 +1,5 @@
-using UnityEngine;
 
-public class Well : MonoBehaviour
+public class Well : Building
 {
-    public int woodPrice;
 
 }

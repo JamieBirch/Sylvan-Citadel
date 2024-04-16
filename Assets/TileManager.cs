@@ -3,10 +3,10 @@ using System.Linq;
 using UnityEngine;
 using Random = System.Random;
 
-public class HexManager : MonoBehaviour
+public class TileManager : MonoBehaviour
 {
-    public static HexManager instance;
-    public GameObject activeHex;
+    public static TileManager instance;
+    public GameObject activeTile;
     public GameObject buttons;
     private TerrainManager _terrainManager;
     private ConstructionManager _constructionManager;
@@ -28,7 +28,7 @@ public class HexManager : MonoBehaviour
 
     private void Update()
     {
-        if (activeHex != null)
+        if (activeTile != null)
         {
             UseHexStats();
         }
@@ -37,47 +37,46 @@ public class HexManager : MonoBehaviour
     private void UseHexStats()
     {
         //show tile stats
-        OwnedHex activeHexComponent = activeHex.GetComponent<OwnedHex>();
+        OwnedHex activeHexComponent = activeTile.GetComponent<OwnedHex>();
         activeHexComponent.tileStatsUI.gameObject.SetActive(true);
         
         SetHexStats(activeHexComponent);
     }
 
-    public void BuildHouse()
+    public void Build(GameObject buildingPrefab)
     {
-        _constructionManager.BuildHouse(activeHex);
+        _constructionManager.Build(buildingPrefab, activeTile);
     }
     
-    public void BuildWell()
+    /*public void BuildWell()
     {
-        _constructionManager.BuildWell(activeHex);
+        _constructionManager.BuildWell(activeTile);
     }
     
     public void BuildFoodStorage()
     {
-        _constructionManager.BuildFoodStorage(activeHex);
-    }
+        _constructionManager.BuildFoodStorage(activeTile);
+    }*/
     
-    //TODO move to terraforming manager
     public void ChopTree()
     {
-        _terraformingManager.ChopTree(activeHex);
+        _terraformingManager.ChopTree(activeTile);
         // _terrainManager.ChopTree(activeHex);
     }
 
     public void SetHexAsActive(GameObject hex)
     {
-        if (activeHex == null)
+        if (activeTile == null)
         {
-            activeHex = hex;
+            activeTile = hex;
         }
         else
         {
-            activeHex.GetComponent<OwnedHex>().Unselect();
-            activeHex = hex;
+            activeTile.GetComponent<OwnedHex>().Unselect();
+            activeTile = hex;
         }
         buttons.SetActive(true);
-        activeHex.GetComponent<OwnedHex>().tileStatsUI.gameObject.SetActive(true);
+        activeTile.GetComponent<OwnedHex>().tileStatsUI.gameObject.SetActive(true);
         // hexStats.SetActive(true);
         UseHexStats();
     }
@@ -93,8 +92,8 @@ public class HexManager : MonoBehaviour
 
     public void SetHexAsInActive()
     {
-        activeHex.GetComponent<OwnedHex>().tileStatsUI.gameObject.SetActive(false);
-        activeHex = null;
+        activeTile.GetComponent<OwnedHex>().tileStatsUI.gameObject.SetActive(false);
+        activeTile = null;
         buttons.SetActive(false);
         // hexStats.SetActive(false);
     }

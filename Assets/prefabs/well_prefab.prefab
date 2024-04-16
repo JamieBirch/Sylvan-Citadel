@@ -45,6 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 800b3ef4cf092d74ca245aa2b542cc3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  name: Well
+  prefab: {fileID: 0}
   woodPrice: 50
 --- !u!1001 &328056224030048239
 PrefabInstance:

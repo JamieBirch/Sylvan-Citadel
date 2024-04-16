@@ -782,7 +782,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59830095abf5152459964edc3c8092fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activeHex: {fileID: 0}
+  activeTile: {fileID: 0}
   buttons: {fileID: 604358677}
 --- !u!114 &107134976
 MonoBehaviour:
@@ -1048,7 +1048,6 @@ MonoBehaviour:
   house: {fileID: 8641935630557121694, guid: e08cabe3182b47143aadcb24c5b07ca6, type: 3}
   well: {fileID: 1541975218879869188, guid: 419eb92ab2438bd44b33f1acb6513b9a, type: 3}
   foodStorage: {fileID: 3330790554826253085, guid: 806e0b48d9d578b459dda2ee1f8835fd, type: 3}
-  buildingOffset: {x: 0, y: 2.5, z: 0}
 --- !u!114 &245635083
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3736,12 +3735,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 107134975}
-        m_TargetAssemblyTypeName: HexManager, Assembly-CSharp
-        m_MethodName: BuildHouse
-        m_Mode: 1
+        m_TargetAssemblyTypeName: TileManager, Assembly-CSharp
+        m_MethodName: Build
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 8641935630557121694, guid: e08cabe3182b47143aadcb24c5b07ca6, type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -4176,12 +4175,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 107134975}
-        m_TargetAssemblyTypeName: HexManager, Assembly-CSharp
-        m_MethodName: BuildFoodStorage
-        m_Mode: 1
+        m_TargetAssemblyTypeName: TileManager, Assembly-CSharp
+        m_MethodName: Build
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 3330790554826253085, guid: 806e0b48d9d578b459dda2ee1f8835fd, type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -4406,12 +4405,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 107134975}
-        m_TargetAssemblyTypeName: HexManager, Assembly-CSharp
-        m_MethodName: BuildWell
-        m_Mode: 1
+        m_TargetAssemblyTypeName: TileManager, Assembly-CSharp
+        m_MethodName: Build
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 1541975218879869188, guid: 419eb92ab2438bd44b33f1acb6513b9a, type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 

@@ -16,7 +16,7 @@ public class TerrainManager : MonoBehaviour
     public float overlapRadius = 1;
     
     public Vector3 firstTileCenter = Vector3.zero;
-    public static float HexRadius = 3f;
+    // public static float HexRadius = 3f;
     public int beltWideness;
 
     //TODO finish list
@@ -200,7 +200,7 @@ public class TerrainManager : MonoBehaviour
 
     private void SpawnResource(LandscapeFeature landscapeFeature, GameObject resourcePrefab, GameObject tile)
     {
-        Vector3 position = ConstructionManager.instance.PositionOnHex(tile.transform.position);
+        Vector3 position = TileUtils.PositionOnTile(tile.transform.position);
         float rotation = Utils.GenerateRandom(0, 360f);
         GameObject resource = Instantiate(resourcePrefab, position, Quaternion.AngleAxis(rotation, Vector3.up), tile.transform);
         //TODO test scale for different resources
@@ -241,7 +241,7 @@ public class TerrainManager : MonoBehaviour
     {
         Vector3 hexPosition = hex.transform.position;
 
-        Vector3[] positionsOfHexesAround = HexUtils.PositionsOfHexesAround(hexPosition);
+        Vector3[] positionsOfHexesAround = TileUtils.PositionsOfHexesAround(hexPosition);
 
         foreach (var borderingPosition in positionsOfHexesAround)
         {
@@ -309,7 +309,7 @@ public class TerrainManager : MonoBehaviour
     private Biome GetHexBiomeByPosition(Vector3 hexPosition)
     {
         // float aaaaa = hexPosition.z / HexUtils.zHexOffset.z;
-        int beltIndex = (int)(hexPosition.z / HexUtils.zHexOffset.z / beltWideness);
+        int beltIndex = (int)(hexPosition.z / TileUtils.zHexOffset.z / beltWideness);
         // Debug.Log(beltIndex);
 
         Biome biome = RandomBiomeByBelt(beltIndex);

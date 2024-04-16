@@ -1,10 +1,8 @@
 using System.Collections.Generic;
-using UnityEngine;
 
-public class House : MonoBehaviour
+public class House : Building
 {
     public OwnedHex hex;
-    public int woodPrice;
     public int capacity;
     private int bedsAvailable;
     

@@ -1,12 +1,17 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ConstructionManager : MonoBehaviour
 {
     public static ConstructionManager instance;
+
+    public Button BuildButton;
+    public GameObject BuildingsPanel;
+    
     public GameObject house;
     public GameObject well;
     public GameObject foodStorage;
-    public Vector3 houseOffset;
+    public Vector3 buildingOffset;
     
     private float _hexRadius;
 
@@ -14,6 +19,30 @@ public class ConstructionManager : MonoBehaviour
     {
         instance = this;
         _hexRadius = TerrainManager.HexRadius;
+    }
+
+    public void ShowHideBuildPanel()
+    {
+        if (BuildingsPanel.activeSelf)
+        {
+            BuildingsPanel.SetActive(false);
+        }
+        else
+        {
+            BuildingsPanel.SetActive(true);
+        }
+    }
+
+    public void Update()
+    {
+        if (HexManager.instance.activeHex == null && BuildButton.IsInteractable())
+        {
+            BuildButton.interactable = false;
+        }
+        else if (HexManager.instance.activeHex != null && !BuildButton.IsInteractable())
+        {
+            BuildButton.interactable = true;
+        }
     }
 
     public void BuildHouse(GameObject hex)

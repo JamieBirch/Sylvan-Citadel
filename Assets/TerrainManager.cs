@@ -215,7 +215,7 @@ public class TerrainManager : MonoBehaviour
     {
         //TODO spawn tree of random size
         float randomScale = Utils.GenerateRandom(0.2f, 0.3f);
-        SpawnResource(hex.GetWoodland(), treePrefab, gameObject);
+        SpawnResource(hex.GetWoodland(), treePrefab, hex.gameObject);
     }
 
     public void ChopTree(GameObject activeHex)
@@ -230,11 +230,11 @@ public class TerrainManager : MonoBehaviour
         {
             landscapeFeatureWoodland.ChopTree(biggestTree);
         }
-        else
+        /*else
         {
             PlayerMessageService.instance.ShowMessage("No trees to chop! :(");
             Debug.Log("No trees to chop! :(");
-        }
+        }*/
     }
 
     public void CreateConcealedHexesAround(GameObject hex)

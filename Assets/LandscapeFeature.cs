@@ -36,6 +36,8 @@ public abstract class LandscapeFeatureWoodland : LandscapeFeature
         if (trees.Count == 0)
         {
             Debug.Log("Tree list empty");
+            PlayerMessageService.instance.ShowMessage("No trees to chop!");
+            return null;
         }
 
         foreach (Tree _tree in trees)

@@ -8,7 +8,7 @@ public class FindFoodState : IHumanState
     public string foodSourceTag = "foodSource";
     public IHumanState DoState(Human human)
     {
-        if (!human.isHungry)
+        if (!human.wantsFood)
         {
             if (!human.hasHome)
             {
@@ -91,6 +91,6 @@ public class FindFoodState : IHumanState
         GameStats.Food--;
         // human.homeHex.FruitsAvailable--;
 
-        human.isHungry = false;
+        human.wantsFood = false;
     }
 }

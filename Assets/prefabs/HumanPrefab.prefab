@@ -47,8 +47,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   footprint: {fileID: 7883029496536759818, guid: ec9b6b338d1cbc74f991872cda23fefc, type: 3}
   Name: 
-  isThirsty: 0
-  isHungry: 0
+  unsatisfiedColor: {r: 1, g: 0, b: 0, a: 0}
+  satisfiedColor: {r: 0, g: 0.92142105, b: 1, a: 0}
+  rend: {fileID: 1224938094105969109}
+  wantsWater: 0
+  wantsFood: 0
   hasHome: 0
   isRelocating: 0
   currentTarget: {fileID: 0}
@@ -123,6 +126,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 29074b5d32fa9374dabd446018d22a54, type: 3}
+--- !u!23 &1224938094105969109 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2024832944165075999, guid: 29074b5d32fa9374dabd446018d22a54, type: 3}
+  m_PrefabInstance: {fileID: 929567130451475914}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2386589636887291885 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3312576471553006119, guid: 29074b5d32fa9374dabd446018d22a54, type: 3}

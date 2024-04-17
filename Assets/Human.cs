@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Human : MonoBehaviour
 {
@@ -10,8 +9,12 @@ public class Human : MonoBehaviour
     public Canvas footprint;
     public string Name;
     
-    public bool isThirsty = false;
-    public bool isHungry = false;
+    public Color unsatisfiedColor;
+    public Color satisfiedColor;
+    public Renderer rend;
+    
+    public bool wantsWater = false;
+    public bool wantsFood = false;
     public bool hasHome = false;
     public bool isRelocating = false;
     public GameObject currentTarget;
@@ -43,11 +46,20 @@ public class Human : MonoBehaviour
     {
         state = state.DoState(this);
         stateName = state.ToString();
+        
+        if (Satisfied())
+        {
+            rend.material.color = satisfiedColor;
+        }
+        else
+        {
+            rend.material.color = unsatisfiedColor;
+        }
     }
 
     void StartDay()
     {
-        if (isHungry || isThirsty)
+        if (wantsFood || wantsWater)
         {
             Die();
         }
@@ -69,8 +81,8 @@ public class Human : MonoBehaviour
         }
         
         // Debug.Log("I'm starting my day!");
-        isHungry = true;
-        isThirsty = true;
+        wantsFood = true;
+        wantsWater = true;
     }
 
     private bool HasAvailableBeds()
@@ -120,7 +132,7 @@ public class Human : MonoBehaviour
 
     public bool Satisfied()
     {
-        return !isThirsty && !isHungry && hasHome;
+        return !wantsWater && !wantsFood && hasHome;
     }
 
     public void DestroyCurrentTarget()

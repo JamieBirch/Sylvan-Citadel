@@ -8,9 +8,9 @@ public class FindWaterState : IHumanState
     
     public IHumanState DoState(Human human)
     {
-        if (!human.isThirsty)
+        if (!human.wantsWater)
         {
-            if (human.isHungry)
+            if (human.wantsFood)
             {
                 return human.findFood;
             } else if (!human.hasHome)
@@ -77,7 +77,7 @@ public class FindWaterState : IHumanState
     private void Drink(Human human)
     {
         //TODO effect
-        human.isThirsty = false;
+        human.wantsWater = false;
         human.currentTarget = null;
     }
 }

@@ -14,10 +14,10 @@ public class DoWanderState : IHumanState
         }
         else if(!human.Satisfied())
         {
-            if (human.isThirsty)
+            if (human.wantsWater)
             {
                 return human.findWater;
-            } else if (human.isHungry)
+            } else if (human.wantsFood)
             {
                 return human.findFood;
             } else if (!human.hasHome)

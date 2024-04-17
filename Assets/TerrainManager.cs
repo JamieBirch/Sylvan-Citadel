@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class TerrainManager : MonoBehaviour
 {
@@ -61,7 +60,7 @@ public class TerrainManager : MonoBehaviour
 
     public GameObject CreateStartHex()
     {
-        GameObject startHex = CreateOwnedHex(startBiome, firstTileCenter);
+        GameObject startHex = CreateOwnedTile(startBiome, firstTileCenter);
         
         BiomeFeatures biomeFeatures = GetBiomeFeatures(startBiome);
         //TODO modify for another start biomes
@@ -71,16 +70,16 @@ public class TerrainManager : MonoBehaviour
         return startHex;
     }
 
-    private GameObject CreateOwnedHex(Biome biome, Vector3 hexCenter)
+    private GameObject CreateOwnedTile(Biome biome, Vector3 tileCenter)
     {
-        GameObject newOwnedHex = Instantiate(ownedHex, hexCenter, Quaternion.identity, gameObject.transform);
+        GameObject newOwnedTile = Instantiate(ownedHex, tileCenter, Quaternion.identity, gameObject.transform);
         string districtName = NameGenerator.CreateDistrictName();
-        newOwnedHex.name = districtName;
-        OwnedHex hexComponent = newOwnedHex.GetComponent<OwnedHex>();
-        hexComponent.Name = districtName;
+        newOwnedTile.name = districtName;
+        OwnedHex tileComponent = newOwnedTile.GetComponent<OwnedHex>();
+        tileComponent.Name = districtName;
 
-        TileStatsUI tileStatsUI = Instantiate(hexComponent.tileStatsUIprefab, tileStatsUIcontainer.transform).GetComponent<TileStatsUI>();
-        hexComponent.tileStatsUI = tileStatsUI;
+        TileStatsUI tileStatsUI = Instantiate(tileComponent.tileStatsUIprefab, tileStatsUIcontainer.transform).GetComponent<TileStatsUI>();
+        tileComponent.tileStatsUI = tileStatsUI;
         tileStatsUI.gameObject.SetActive(false);
 
         /*string[] defaultTileStatFields =  {
@@ -97,20 +96,20 @@ public class TerrainManager : MonoBehaviour
         {
             case Biome.grove:
             {
-                hexComponent.groveTile.SetActive(true);
-                hexComponent.rend = hexComponent.groveTile.GetComponent<Renderer>();
+                tileComponent.groveTile.SetActive(true);
+                tileComponent.rend = tileComponent.groveTile.GetComponent<Renderer>();
                 break;
             }
             case Biome.forest:
             {
-                hexComponent.forestTile.SetActive(true);
-                hexComponent.rend = hexComponent.forestTile.GetComponent<Renderer>();
+                tileComponent.forestTile.SetActive(true);
+                tileComponent.rend = tileComponent.forestTile.GetComponent<Renderer>();
                 break;
             }
             case Biome.grassland:
             {
-                hexComponent.grasslandTile.SetActive(true);
-                hexComponent.rend = hexComponent.grasslandTile.GetComponent<Renderer>();
+                tileComponent.grasslandTile.SetActive(true);
+                tileComponent.rend = tileComponent.grasslandTile.GetComponent<Renderer>();
                 break;
             }
             /*case Biome.river:
@@ -137,12 +136,11 @@ public class TerrainManager : MonoBehaviour
                 break;
             }
         }
-        hexComponent.biome = biome;
+        tileComponent.biome = biome;
         
-        //TODO create features
+        GameStats.AddTile(tileComponent);
         
-        
-        return newOwnedHex;
+        return newOwnedTile;
     }
     
     private void CreateFeature(GameObject hex, LandscapeFeatureType landscapeFeatureType)
@@ -371,7 +369,7 @@ public class TerrainManager : MonoBehaviour
         //change tilePrefab based on biome
         Vector3 position = borderingHexComponent.gameObject.transform.position;
         Destroy(borderingHexComponent.gameObject);
-        GameObject hex = CreateOwnedHex(biome, position);
+        GameObject hex = CreateOwnedTile(biome, position);
         
         //create features based on biome
 

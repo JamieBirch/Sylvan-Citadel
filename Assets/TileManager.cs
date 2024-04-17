@@ -128,8 +128,6 @@ public class TileManager : MonoBehaviour
             }
 
             _terrainManager.CreateConcealedHexesAround(hex);
-        
-            GameStats.OwnedHexes++;
         }
     }
 

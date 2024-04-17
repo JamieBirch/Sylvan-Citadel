@@ -29,7 +29,6 @@ public class GameManager : MonoBehaviour
 
         //create terrain by creating hexes 
         startHex = _terrainManager.CreateStartHex();
-        GameStats.OwnedHexes++;
         //create other hexes
         _terrainManager.CreateConcealedHexesAround(startHex);
 
@@ -48,7 +47,7 @@ public class GameManager : MonoBehaviour
         humans.text = GameStats.Population.ToString();
         food.text = GameStats.Food.ToString();
         wood.text = GameStats.Wood.ToString();
-        tiles.text = GameStats.OwnedHexes.ToString();
+        tiles.text = GameStats.OwnedTiles.Count.ToString();
         
         if (GameStats.Population <= 0)
         {

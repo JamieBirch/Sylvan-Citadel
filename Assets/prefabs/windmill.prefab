@@ -130,7 +130,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92c23cbaba57b9141837ffba7872d4c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: 
+  name: Windmill
   woodPrice: 70
   propeller: {fileID: 6340324197600106045}
   produceEvery_seconds: 7

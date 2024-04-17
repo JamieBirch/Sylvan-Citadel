@@ -42,4 +42,9 @@ public class House : Building
         bedsAvailable++;
         // hex.BedsAvailable++;
     }
+
+    public override bool IsBuildable()
+    {
+        return GameStats.Wood >= woodPrice;
+    }
 }

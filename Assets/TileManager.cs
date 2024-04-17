@@ -48,16 +48,6 @@ public class TileManager : MonoBehaviour
         _constructionManager.Build(buildingPrefab, activeTile);
     }
     
-    /*public void BuildWell()
-    {
-        _constructionManager.BuildWell(activeTile);
-    }
-    
-    public void BuildFoodStorage()
-    {
-        _constructionManager.BuildFoodStorage(activeTile);
-    }*/
-    
     public void ChopTree()
     {
         _terraformingManager.ChopTree(activeTile);
@@ -147,5 +137,10 @@ public class TileManager : MonoBehaviour
             return false;
         }
         return true;
+    }
+
+    public Biome GetActiveTileBiome()
+    {
+        return activeTile.GetComponent<OwnedHex>().biome;
     }
 }

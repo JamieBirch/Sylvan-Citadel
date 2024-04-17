@@ -639,6 +639,7 @@ GameObject:
   - component: {fileID: 145369117}
   - component: {fileID: 145369116}
   - component: {fileID: 145369115}
+  - component: {fileID: 145369118}
   m_Layer: 5
   m_Name: BuildWindmillButton
   m_TagString: Untagged
@@ -761,6 +762,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 145369113}
   m_CullTransparentMesh: 1
+--- !u!114 &145369118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 145369113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c577aee34f171454fb7423c70df2ccbd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 145369115}
+  building: {fileID: 4421653983999014292, guid: 0e78bf33367e81348812ff7ca8f13927, type: 3}
 --- !u!1 &147618903
 GameObject:
   m_ObjectHideFlags: 0
@@ -978,7 +993,7 @@ MonoBehaviour:
   missionText: {fileID: 213134329}
   checkmark: {fileID: 213134328}
   building: {fileID: 8293445449922038972, guid: e08cabe3182b47143aadcb24c5b07ca6, type: 3}
-  goalNumber: 1
+  goalNumber: 5
 --- !u!1 &222787715
 GameObject:
   m_ObjectHideFlags: 0
@@ -3716,6 +3731,7 @@ GameObject:
   - component: {fileID: 929057173}
   - component: {fileID: 929057172}
   - component: {fileID: 929057171}
+  - component: {fileID: 929057174}
   m_Layer: 5
   m_Name: BuildHouseButton
   m_TagString: Untagged
@@ -3838,6 +3854,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 929057169}
   m_CullTransparentMesh: 1
+--- !u!114 &929057174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 929057169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c577aee34f171454fb7423c70df2ccbd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 929057171}
+  building: {fileID: 8293445449922038972, guid: e08cabe3182b47143aadcb24c5b07ca6, type: 3}
 --- !u!1 &944786710
 GameObject:
   m_ObjectHideFlags: 0
@@ -4118,6 +4148,7 @@ GameObject:
   - component: {fileID: 1082310994}
   - component: {fileID: 1082310993}
   - component: {fileID: 1082310992}
+  - component: {fileID: 1082310995}
   m_Layer: 5
   m_Name: BuildStorageButton
   m_TagString: Untagged
@@ -4240,6 +4271,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1082310990}
   m_CullTransparentMesh: 1
+--- !u!114 &1082310995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1082310990}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c577aee34f171454fb7423c70df2ccbd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 1082310992}
+  building: {fileID: 8745016560592745415, guid: 806e0b48d9d578b459dda2ee1f8835fd, type: 3}
 --- !u!1 &1090628648
 GameObject:
   m_ObjectHideFlags: 0
@@ -4348,6 +4393,7 @@ GameObject:
   - component: {fileID: 1099630337}
   - component: {fileID: 1099630336}
   - component: {fileID: 1099630335}
+  - component: {fileID: 1099630338}
   m_Layer: 5
   m_Name: BuildWellButton
   m_TagString: Untagged
@@ -4470,6 +4516,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1099630333}
   m_CullTransparentMesh: 1
+--- !u!114 &1099630338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1099630333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c577aee34f171454fb7423c70df2ccbd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 1099630335}
+  building: {fileID: 6978331284145593434, guid: 419eb92ab2438bd44b33f1acb6513b9a, type: 3}
 --- !u!1 &1135474881
 GameObject:
   m_ObjectHideFlags: 0

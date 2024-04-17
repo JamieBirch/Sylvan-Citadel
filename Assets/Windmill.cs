@@ -32,4 +32,10 @@ public class Windmill : Building
             Debug.Log("Windmill produced some wheat");
         }
     }
+
+    public override bool IsBuildable()
+    {
+        return GameStats.Wood >= woodPrice &&
+               TileManager.instance.GetActiveTileBiome() == Biome.grassland;
+    }
 }

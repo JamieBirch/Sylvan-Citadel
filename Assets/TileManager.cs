@@ -7,7 +7,6 @@ public class TileManager : MonoBehaviour
 {
     public static TileManager instance;
     public GameObject activeTile;
-    public GameObject buttons;
     private TerrainManager _terrainManager;
     private ConstructionManager _constructionManager;
     private TerraformingManager _terraformingManager;
@@ -65,9 +64,7 @@ public class TileManager : MonoBehaviour
             activeTile.GetComponent<OwnedHex>().Unselect();
             activeTile = hex;
         }
-        buttons.SetActive(true);
         activeTile.GetComponent<OwnedHex>().tileStatsUI.gameObject.SetActive(true);
-        // hexStats.SetActive(true);
         UseHexStats();
     }
 
@@ -84,8 +81,6 @@ public class TileManager : MonoBehaviour
     {
         activeTile.GetComponent<OwnedHex>().tileStatsUI.gameObject.SetActive(false);
         activeTile = null;
-        buttons.SetActive(false);
-        // hexStats.SetActive(false);
     }
 
     public void BuyHex(GameObject _borderingHex)

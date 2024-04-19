@@ -33,8 +33,8 @@ public class GameManager : MonoBehaviour
         _terrainManager.CreateConcealedHexesAround(startHex);
 
         // put storage resources to storage
-        GameStats.Food = StartStorageFood;
-        GameStats.Wood = StartStorageWood;
+        GameStats.instance.AddFood(StartStorageFood);
+        GameStats.instance.AddWood(StartStorageWood);
 
         // spawn humans
         _populationManager.SpawnHumans(StartHumans, startHex);
@@ -45,8 +45,8 @@ public class GameManager : MonoBehaviour
     {
         // fruits.text = GameStats.FruitsAvailable.ToString();
         humans.text = GameStats.GetPopulation().ToString();
-        food.text = GameStats.Food.ToString();
-        wood.text = GameStats.Wood.ToString();
+        food.text = GameStats.GetFood().ToString();
+        wood.text = GameStats.GetWood().ToString();
         tiles.text = GameStats.OwnedTiles.Count.ToString();
         
         if (GameStats.GetPopulation() <= 0)

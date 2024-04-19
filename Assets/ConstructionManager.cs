@@ -47,7 +47,7 @@ public class ConstructionManager : MonoBehaviour
     {
         int woodPrice = buildingPrefab.GetComponent<Building>().woodPrice;
 
-        if (GameStats.Wood < woodPrice)
+        if (GameStats.GetWood() < woodPrice)
         {
             PlayerMessageService.instance.ShowMessage("Not enough wood to build!");
             Debug.Log("Not enough wood to build!");
@@ -64,7 +64,7 @@ public class ConstructionManager : MonoBehaviour
             tileComponent.AddBuildingToTile(newBuilding.GetComponent<Building>());
             
             //deduct wood
-            GameStats.Wood -= woodPrice;
+            GameStats.instance.RemoveWood(woodPrice);
         }
     }
     

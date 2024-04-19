@@ -28,14 +28,14 @@ public class Windmill : Building
         if (countdown <= 0)
         {
             countdown = produceEvery_seconds;
-            GameStats.Food++;
+            GameStats.instance.AddFood();
             Debug.Log("Windmill produced some wheat");
         }
     }
 
     public override bool IsBuildable()
     {
-        return GameStats.Wood >= woodPrice &&
+        return GameStats.GetWood() >= woodPrice &&
                TileManager.instance.GetActiveTileBiome() == Biome.grassland;
     }
 }

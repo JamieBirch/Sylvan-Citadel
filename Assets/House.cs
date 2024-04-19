@@ -45,6 +45,6 @@ public class House : Building
 
     public override bool IsBuildable()
     {
-        return GameStats.Wood >= woodPrice;
+        return GameStats.GetWood() >= woodPrice;
     }
 }

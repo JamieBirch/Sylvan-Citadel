@@ -88,7 +88,7 @@ public class FindFoodState : IHumanState
             //TODO effect
         }
         human.currentTarget = null;
-        GameStats.Food--;
+        GameStats.instance.RemoveFood();
         // human.homeHex.FruitsAvailable--;
 
         human.wantsFood = false;

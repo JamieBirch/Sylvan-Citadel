@@ -6,8 +6,8 @@ public class GameStats : MonoBehaviour
 {
     public static GameStats instance;
     
-    public static int Wood = 0;
-    public static int Food = 0;
+    private static int Wood = 0;
+    private static int Food = 0;
     private static int Population = 0;
 
     public GameObject populationUi;
@@ -30,21 +30,56 @@ public class GameStats : MonoBehaviour
     public void AddHuman()
     {
         Population++;
-        //TODO play animation;
         populationUi.GetComponent<Animator>().Play("increase");
     }
     
     public void RemoveHuman()
     {
         Population--;
-
-        //TODO play animation;
         populationUi.GetComponent<Animator>().Play("decrease");
+    }
+    
+    public static int GetWood()
+    {
+        return Wood;
+    }
+    
+    public void AddWood(int count)
+    {
+        Wood+=count;
+        woodUi.GetComponent<Animator>().Play("increase");
+    }
+    
+    public void RemoveWood(int count)
+    {
+        Wood-=count;
+        woodUi.GetComponent<Animator>().Play("decrease");
+    }
+    
+    public static int GetFood()
+    {
+        return Food;
+    }
+    
+    public void AddFood()
+    {
+        Food++;
+        foodUi.GetComponent<Animator>().Play("increase");
+    }
+    
+    public void RemoveFood()
+    {
+        Food--;
+        foodUi.GetComponent<Animator>().Play("decrease");
     }
     
     public static void AddTile(OwnedHex newTile)
     {
         OwnedTiles.Add(newTile);
     }
-    
+
+    public void AddFood(int startStorageFood)
+    {
+        Food+= startStorageFood;
+    }
 }

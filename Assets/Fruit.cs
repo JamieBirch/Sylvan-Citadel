@@ -12,7 +12,7 @@ public class Fruit : MonoBehaviour
     private void Start()
     {
         Calendar.NewDay += StartDay;
-        GameStats.Food++;
+        GameStats.instance.AddFood();
         _terrainManager = TerrainManager.instance;
     }
     
@@ -22,7 +22,7 @@ public class Fruit : MonoBehaviour
         if (chance < _chanceToGrowTree)
         {
             _terrainManager.SpawnTreeAt(hex, treePrefab, transform.position);
-            GameStats.Food--;
+            GameStats.instance.RemoveFood();
         }
         
         Destroy(gameObject);

@@ -43,7 +43,7 @@ public class PopulationManager : MonoBehaviour
         //create
         var position = TileUtils.PositionOnTile(village.transform.position) /*+ new Vector3(0, 1.25f, 0)*/;
         GameObject humanGameObject = Instantiate(human, position, Quaternion.identity, village.transform);
-        GameStats.Population++;
+        GameStats.instance.AddHuman();
 
         //name
         string name = NameGenerator.CreateHumanName();

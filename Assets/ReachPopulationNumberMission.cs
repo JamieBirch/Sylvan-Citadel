@@ -4,7 +4,7 @@
     
     public override bool CheckFinished()
     {
-        return GameStats.Population >= goalNumber;
+        return GameStats.GetPopulation() >= goalNumber;
     }
 
     public override void GiveWording()

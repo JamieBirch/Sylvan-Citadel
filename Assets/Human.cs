@@ -64,7 +64,7 @@ public class Human : MonoBehaviour
             Die();
         }
 
-        if (GameStats.Population < _populationManager.maxPopulation)
+        if (GameStats.GetPopulation() < _populationManager.maxPopulation)
         {
             if ((HasAvailableBeds() || homeHex.NeighborsHaveAvailableBeds()) && Satisfied())
             {
@@ -157,7 +157,7 @@ public class Human : MonoBehaviour
         homeHex.village.GetComponent<Village>().humans.Remove(this);
         Destroy(gameObject);
         homeHex.HexPopulation--;
-        GameStats.Population--;
+        GameStats.instance.RemoveHuman();
     }
 
     public void MoveOut()

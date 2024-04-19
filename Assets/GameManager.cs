@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
         _populationManager = PopulationManager.instance;
         _terrainManager = TerrainManager.instance;
         
-        GameStats.Population = 0;
+        // GameStats.Population = 0;
 
         //create terrain by creating hexes 
         startHex = _terrainManager.CreateStartHex();
@@ -44,12 +44,12 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         // fruits.text = GameStats.FruitsAvailable.ToString();
-        humans.text = GameStats.Population.ToString();
+        humans.text = GameStats.GetPopulation().ToString();
         food.text = GameStats.Food.ToString();
         wood.text = GameStats.Wood.ToString();
         tiles.text = GameStats.OwnedTiles.Count.ToString();
         
-        if (GameStats.Population <= 0)
+        if (GameStats.GetPopulation() <= 0)
         {
             PlayerMessageService.instance.ShowMessage("No population left!");
             Debug.Log("No population left!");

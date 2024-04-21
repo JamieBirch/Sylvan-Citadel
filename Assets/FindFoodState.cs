@@ -81,16 +81,19 @@ public class FindFoodState : IHumanState
     
     private void Consume(Human human)
     {
-        //TODO only if fruit
-        if (human.currentTarget.TryGetComponent<Fruit>(out _))
+        if (GameStats.GetFood() > 0)
         {
-            human.DestroyCurrentTarget();
-            //TODO effect
-        }
-        human.currentTarget = null;
-        GameStats.instance.RemoveFood();
-        // human.homeHex.FruitsAvailable--;
+            if (human.currentTarget.TryGetComponent<Fruit>(out _))
+            {
+                human.DestroyCurrentTarget();
+                //TODO effect
+            }
+            human.currentTarget = null;
+            GameStats.instance.RemoveFood();
+            // human.homeHex.FruitsAvailable--;
 
-        human.wantsFood = false;
+            human.wantsFood = false;
+        }
+        
     }
 }

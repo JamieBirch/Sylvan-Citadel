@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,7 +11,9 @@ public class SoundManager : MonoBehaviour
         new_tile, 
         mission_complete, 
         build,
-        chop
+        chop,
+        button_click,
+        tile_select
     }
 
     public static Dictionary<Sound, AudioClip> soundsDictionary = new Dictionary<Sound, AudioClip>();
@@ -46,6 +47,17 @@ public class SoundManager : MonoBehaviour
             GameObject soundGameObject = new GameObject("Sound");
             AudioSource audioSource = soundGameObject.AddComponent<AudioSource>();
             audioSource.PlayOneShot(soundsDictionary[sound]);
+        }
+    }
+    
+    public static void PlayButtonSound()
+    {
+        // if (CanPlaySound(sound))
+        {
+            //TODO fixhere?
+            GameObject soundGameObject = new GameObject("Sound");
+            AudioSource audioSource = soundGameObject.AddComponent<AudioSource>();
+            audioSource.PlayOneShot(soundsDictionary[Sound.button_click]);
         }
     }
 

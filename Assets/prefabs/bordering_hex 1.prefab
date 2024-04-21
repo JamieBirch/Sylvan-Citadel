@@ -493,8 +493,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 9813a345a4ee0ca4bb30d53e6d464e3c, type: 3}
-    m_FontSize: 150
+    m_Font: {fileID: 12800000, guid: fdf0aa78b36054a4fb83d921ef8d6356, type: 3}
+    m_FontSize: 93
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
@@ -505,7 +505,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 99
+  m_Text: 'settlers required: 99'
 --- !u!1 &3485305646560744807
 GameObject:
   m_ObjectHideFlags: 0
@@ -729,8 +729,8 @@ MonoBehaviour:
   isObtainable: 0
   description: 
   hasUniqueResource: 0
-  hasPrimaryResource: 0
   hasSecondaryResource: 0
+  hasTertiaryResource: 0
   hasRestriction: 0
   hexInfoCanvas: {fileID: 4410798472700602043}
   descriptionText: {fileID: 2082792455105867326}
@@ -1123,7 +1123,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 9813a345a4ee0ca4bb30d53e6d464e3c, type: 3}
+    m_Font: {fileID: 12800000, guid: fdf0aa78b36054a4fb83d921ef8d6356, type: 3}
     m_FontSize: 170
     m_FontStyle: 1
     m_BestFit: 0

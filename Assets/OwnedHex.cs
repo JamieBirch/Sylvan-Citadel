@@ -186,6 +186,7 @@ public class OwnedHex : Hex
         selected = true;
         _tileManager.SetHexAsActive(gameObject);
         highlight();
+        SoundManager.PlaySound(SoundManager.Sound.tile_select);
     }
 
     /*public void ShowSettlersAvailable()

@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -5,6 +7,10 @@ public class GameManager : MonoBehaviour
 {
     private PopulationManager _populationManager;
     private TerrainManager _terrainManager;
+
+    public GameObject GameOverCanvas;
+    public GameObject InfoCanvas;
+    public List<Mission> missions;
     
     public int StartHumans;
     
@@ -53,6 +59,31 @@ public class GameManager : MonoBehaviour
         {
             PlayerMessageService.instance.ShowMessage("No population left!");
             Debug.Log("No population left!");
+        }
+
+        if (CheckAllMissionsComplete())
+        {
+            Debug.Log("All Missions complete, game over");
+            GameOver();
+        }
+    }
+
+    private void GameOver()
+    {
+        InfoCanvas.SetActive(false);
+        GameOverCanvas.SetActive(true);
+    }
+
+
+    private bool CheckAllMissionsComplete()
+    {
+        if (missions.Count > 0)
+        {
+            return missions.All(mission => mission.finished);
+        }
+        else
+        {
+            return false;
         }
     }
 

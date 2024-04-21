@@ -8,10 +8,6 @@ public class ConstructionManager : MonoBehaviour
     public Button BuildButton;
     public GameObject BuildingsButtons;
     
-    public GameObject house;
-    public GameObject well;
-    public GameObject foodStorage;
-    
     private float _hexRadius;
 
     private void Awake()

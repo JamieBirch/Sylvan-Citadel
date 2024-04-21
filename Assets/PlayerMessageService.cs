@@ -32,6 +32,8 @@ public class PlayerMessageService : MonoBehaviour
     
     public void ShowMessage(string messageText)
     {
+        //FIXME
+        
         messagePrefab.SetActive(true);
         messagePrefabText.text = messageText;
     }

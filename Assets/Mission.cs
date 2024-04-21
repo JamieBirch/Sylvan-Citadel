@@ -17,10 +17,11 @@ public abstract class Mission : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (CheckFinished())
+        if (!finished && CheckFinished())
         {
             finished = true;
             checkmark.SetActive(true);
+            SoundManager.PlaySound(SoundManager.Sound.mission_complete);
             //TODO add visual effect
             //TODO add sound
         }

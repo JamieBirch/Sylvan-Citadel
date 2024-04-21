@@ -370,6 +370,7 @@ public class TerrainManager : MonoBehaviour
         Vector3 position = borderingHexComponent.gameObject.transform.position;
         Destroy(borderingHexComponent.gameObject);
         GameObject hex = CreateOwnedTile(biome, position);
+        SoundManager.PlaySound(SoundManager.Sound.new_tile);
         
         //create features based on biome
 

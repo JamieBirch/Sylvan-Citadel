@@ -45,6 +45,7 @@ public class TileManager : MonoBehaviour
     public void Build(GameObject buildingPrefab)
     {
         _constructionManager.Build(buildingPrefab, activeTile);
+        SoundManager.PlaySound(SoundManager.Sound.build);
     }
     
     public void ChopTree()

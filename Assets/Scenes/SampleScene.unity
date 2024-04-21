@@ -523,6 +523,7 @@ GameObject:
   - component: {fileID: 107134977}
   - component: {fileID: 107134978}
   - component: {fileID: 107134979}
+  - component: {fileID: 107134980}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -662,6 +663,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TerraformButton: {fileID: 393392725}
   TerraformingButtons: {fileID: 1911781776}
+--- !u!114 &107134980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 107134970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 438194e27aaaa6246b64c3f1de0d8a94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  instance: {fileID: 0}
+  soundAudioClips:
+  - sound: 0
+    audioClip: {fileID: 8300000, guid: 881ee9671cd71194b9cd85c4ce1bd4eb, type: 3}
+  - sound: 1
+    audioClip: {fileID: 8300000, guid: ebc3cc439dd599a42b6a5301c016447b, type: 3}
+  - sound: 2
+    audioClip: {fileID: 8300000, guid: dfed6a619edb48049a950ffce0881cd3, type: 3}
+  - sound: 3
+    audioClip: {fileID: 8300000, guid: e73688947c9994747838333bb784241a, type: 3}
+  - sound: 4
+    audioClip: {fileID: 8300000, guid: 272909673c9e6f942b4930cdc751b387, type: 3}
 --- !u!1 &145369113
 GameObject:
   m_ObjectHideFlags: 0

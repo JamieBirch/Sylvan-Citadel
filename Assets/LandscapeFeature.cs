@@ -66,6 +66,7 @@ public abstract class LandscapeFeatureWoodland : LandscapeFeature
         treeComponent.Chop();
         Debug.Log("chop tree, " + woodAmount);
         GameStats.instance.AddWood(woodAmount);
+        SoundManager.PlaySound(SoundManager.Sound.chop);
     }
 
     public override void AddResource(GameObject go)

@@ -44,6 +44,8 @@ public class GameManager : MonoBehaviour
 
         // spawn humans
         _populationManager.SpawnHumans(StartHumans, startHex);
+        
+        SoundManager.PlaySoundTrack();
     }
 
     // Update is called once per frame

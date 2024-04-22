@@ -5,4 +5,9 @@ public class Well : Building
     {
         return GameStats.GetWood() >= woodPrice;
     }
+
+    public override bool IsShowable()
+    {
+        return true;
+    }
 }

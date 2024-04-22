@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TerrainButton : MonoBehaviour
+public class ChopWoodButton : MonoBehaviour
 {
     public Button button;
     
@@ -10,15 +10,13 @@ public class TerrainButton : MonoBehaviour
     {
         if (CheckIfTreesAvailable())
         {
+            button.animator.Play("Normal");
             button.interactable = true;
         }
         else
         {
             button.interactable = false;
         }
-        
-        
-        
     }
 
     private bool CheckIfTreesAvailable()

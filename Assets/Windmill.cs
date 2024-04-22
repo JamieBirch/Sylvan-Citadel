@@ -38,4 +38,9 @@ public class Windmill : Building
         return GameStats.GetWood() >= woodPrice &&
                TileManager.instance.GetActiveTileBiome() == Biome.grassland;
     }
+
+    public override bool IsShowable()
+    {
+        return TileManager.instance.GetActiveTileBiome() == Biome.grassland;
+    }
 }

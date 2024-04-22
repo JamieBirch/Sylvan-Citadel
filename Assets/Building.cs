@@ -6,4 +6,6 @@ public abstract class Building : MonoBehaviour
     public int woodPrice;
 
     public abstract bool IsBuildable();
+
+    public abstract bool IsShowable();
 }

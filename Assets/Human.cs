@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Human : MonoBehaviour
 {
@@ -10,8 +9,12 @@ public class Human : MonoBehaviour
     public Canvas footprint;
     public string Name;
     
-    public bool isThirsty = false;
-    public bool isHungry = false;
+    public Color unsatisfiedColor;
+    public Color satisfiedColor;
+    public Renderer rend;
+    
+    public bool wantsWater = false;
+    public bool wantsFood = false;
     public bool hasHome = false;
     public bool isRelocating = false;
     public GameObject currentTarget;
@@ -43,27 +46,43 @@ public class Human : MonoBehaviour
     {
         state = state.DoState(this);
         stateName = state.ToString();
+        
+        if (Satisfied())
+        {
+            rend.material.color = satisfiedColor;
+        }
+        else
+        {
+            rend.material.color = unsatisfiedColor;
+        }
     }
 
     void StartDay()
     {
-        if (isHungry || isThirsty)
+        if (wantsFood || wantsWater)
         {
             Die();
         }
 
-        if ((HasAvailableBeds() || homeHex.NeighborsHaveAvailableBeds()) && Satisfied())
+        if (GameStats.GetPopulation() < _populationManager.maxPopulation)
         {
-            double chance = Utils.GenerateRandomChance();
-            if (chance <= fertility)
+            if ((HasAvailableBeds() || homeHex.NeighborsHaveAvailableBeds()) && Satisfied())
             {
-                GiveBirth();
+                double chance = Utils.GenerateRandomChance();
+                if (chance <= fertility)
+                {
+                    GiveBirth();
+                }
             }
-        } 
+        }
+        else
+        {
+            Debug.Log("Reached max population");
+        }
         
         // Debug.Log("I'm starting my day!");
-        isHungry = true;
-        isThirsty = true;
+        wantsFood = true;
+        wantsWater = true;
     }
 
     private bool HasAvailableBeds()
@@ -79,7 +98,7 @@ public class Human : MonoBehaviour
 
     public void RunToTarget()
     {
-        DoFootprint();
+        // DoFootprint();
         
         Transform humanTransform = transform;
         Transform currentTargetTransform = currentTarget.transform;
@@ -113,7 +132,7 @@ public class Human : MonoBehaviour
 
     public bool Satisfied()
     {
-        return !isThirsty && !isHungry && hasHome;
+        return !wantsWater && !wantsFood && hasHome;
     }
 
     public void DestroyCurrentTarget()
@@ -127,7 +146,7 @@ public class Human : MonoBehaviour
         _populationManager.SpawnHuman(gameObject.GetComponentInParent<Village>().gameObject);
     }
 
-    private void Die()
+    public void Die()
     {
         Debug.Log("I'm dying! :(");
         //die
@@ -138,7 +157,7 @@ public class Human : MonoBehaviour
         homeHex.village.GetComponent<Village>().humans.Remove(this);
         Destroy(gameObject);
         homeHex.HexPopulation--;
-        GameStats.Population--;
+        GameStats.instance.RemoveHuman();
     }
 
     public void MoveOut()

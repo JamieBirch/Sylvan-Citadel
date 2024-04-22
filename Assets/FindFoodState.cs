@@ -5,9 +5,10 @@ using System.Linq;
 public class FindFoodState : IHumanState
 {
     public string fruitTag = "fruit";
+    public string foodSourceTag = "foodSource";
     public IHumanState DoState(Human human)
     {
-        if (!human.isHungry)
+        if (!human.wantsFood)
         {
             if (!human.hasHome)
             {
@@ -28,40 +29,44 @@ public class FindFoodState : IHumanState
     
     private void FindFood(Human human)
     {
-        GameObject homeHexWoodland = human.homeHex.woodland;
-
-        IEnumerable fruits;
-        if (homeHexWoodland != null)
-        {
-            Woodland _woodland = homeHexWoodland.GetComponent<Woodland>();
-            Transform[] objectsInWoodland = _woodland.transform.GetComponentsInChildren<Transform>();
-            fruits = objectsInWoodland.Where(child => child.CompareTag(fruitTag));
-        }
-        else
-        {
-            fruits = GameObject.FindGameObjectsWithTag(fruitTag).Select(fruit => fruit.transform);
-        }
+        IEnumerable foodSources = GameObject.FindGameObjectsWithTag(foodSourceTag).Select(fruit => fruit.transform);
         
         float shortestDistance = Mathf.Infinity;
-        GameObject nearestFood = null;
+        GameObject nearestFoodSource = null;
         
-        foreach (Transform fruit in fruits)
+        foreach (Transform foodSource in foodSources)
         {
-            if (!fruit.GetComponent<Fruit>().isClaimed)
+            if (foodSource.TryGetComponent<Fruit>(out Fruit fruitComponent))
             {
-                float distanceToFood = Vector3.Distance(human.transform.position, fruit.transform.position);
+                if (!fruitComponent.isClaimed)
+                {
+                    float distanceToFood = Vector3.Distance(human.transform.position, foodSource.position);
+                    if (distanceToFood < shortestDistance)
+                    {
+                        shortestDistance = distanceToFood;
+                        nearestFoodSource = fruitComponent.gameObject;
+                    }
+                }
+            }
+            else
+            {
+                float distanceToFood = Vector3.Distance(human.transform.position, foodSource.position);
                 if (distanceToFood < shortestDistance)
                 {
                     shortestDistance = distanceToFood;
-                    nearestFood = fruit.gameObject;
+                    nearestFoodSource = foodSource.gameObject;
                 }
             }
         }
 
-        if (nearestFood != null)
+        if (nearestFoodSource != null)
         {
-            human.currentTarget = nearestFood;
-            nearestFood.GetComponent<Fruit>().isClaimed = true;
+            human.currentTarget = nearestFoodSource;
+            Fruit fruitComponent;
+            if (nearestFoodSource.TryGetComponent<Fruit>(out fruitComponent))
+            {
+                fruitComponent.isClaimed = true;
+            }
             // Debug.Log(name + " claimed food");
         } else
         {
@@ -76,11 +81,19 @@ public class FindFoodState : IHumanState
     
     private void Consume(Human human)
     {
-        human.DestroyCurrentTarget();
-        human.currentTarget = null;
-        //TODO effect
-        // human.homeHex.FruitsAvailable--;
+        if (GameStats.GetFood() > 0)
+        {
+            if (human.currentTarget.TryGetComponent<Fruit>(out _))
+            {
+                human.DestroyCurrentTarget();
+                //TODO effect
+            }
+            human.currentTarget = null;
+            GameStats.instance.RemoveFood();
+            // human.homeHex.FruitsAvailable--;
 
-        human.isHungry = false;
+            human.wantsFood = false;
+        }
+        
     }
 }

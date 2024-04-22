@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class TerrainManager : MonoBehaviour
 {
@@ -13,16 +12,10 @@ public class TerrainManager : MonoBehaviour
     public GameObject borderingHex;
     public GameObject ownedHex;
 
-    public GameObject woodland;
-    public GameObject waterway;
-    // public GameObject fruitTree;
-    // public GameObject pineTree;
-    // public GameObject lake;
-
     public float overlapRadius = 1;
     
     public Vector3 firstTileCenter = Vector3.zero;
-    public static float HexRadius = 3f;
+    // public static float HexRadius = 3f;
     public int beltWideness;
 
     //TODO finish list
@@ -33,6 +26,8 @@ public class TerrainManager : MonoBehaviour
     public Dictionary<Biome, BiomeFeatures> BiomeFeaturesDictionary;
 
     private Biome startBiome = Biome.grove;
+    
+    public TileStatsUIContainer tileStatsUIcontainer;
     
     private void Awake()
     {
@@ -49,16 +44,6 @@ public class TerrainManager : MonoBehaviour
     [System.Serializable]
     public class BiomeFeatures
     {
-        // public Biome biome;
-        /*public GameObject uniqueResource;
-        public int uniqueResourceMaxCount;
-        public GameObject Resource2;
-        public int Resource2MaxCount;
-        public GameObject Resource3;
-        public int Resource3MaxCount;
-        public GameObject Restriction;
-        public int RestrictionMaxCount;*/
-        // public GameObject biomeTile;
         public LandscapeFeatureType uniqueResource;
         public LandscapeFeatureType secondaryResource;
         public LandscapeFeatureType tertiaryResource;
@@ -66,53 +51,65 @@ public class TerrainManager : MonoBehaviour
     
     private BiomeFeatures GetBiomeFeatures(Biome biome)
     {
-        if (biome != Biome.grove && biome != Biome.forest)
+        /*if (biome != Biome.grove && biome != Biome.forest)
         {
             return BiomeFeaturesEmpty;
-        }
+        }*/
         return BiomeFeaturesDictionary[biome];
     }
 
     public GameObject CreateStartHex()
     {
-        GameObject startHex = CreateOwnedHex(startBiome, firstTileCenter);
+        GameObject startHex = CreateOwnedTile(startBiome, firstTileCenter);
         
         BiomeFeatures biomeFeatures = GetBiomeFeatures(startBiome);
         //TODO modify for another start biomes
         CreateFeature(startHex, biomeFeatures.uniqueResource);
         CreateFeature(startHex, biomeFeatures.secondaryResource);
         
-        // SpawnTrees(startHex, StartTrees);
-        // SpawnLakes(startHex, Utils.GenerateRandomIntMax(5));
         return startHex;
     }
 
-    private GameObject CreateOwnedHex(Biome biome, Vector3 hexCenter)
+    private GameObject CreateOwnedTile(Biome biome, Vector3 tileCenter)
     {
-        GameObject newOwnedHex = Instantiate(ownedHex, hexCenter, Quaternion.identity, gameObject.transform);
+        GameObject newOwnedTile = Instantiate(ownedHex, tileCenter, Quaternion.identity, gameObject.transform);
         string districtName = NameGenerator.CreateDistrictName();
-        newOwnedHex.name = districtName;
-        OwnedHex hexComponent = newOwnedHex.GetComponent<OwnedHex>();
-        hexComponent.Name = districtName;
+        newOwnedTile.name = districtName;
+        OwnedHex tileComponent = newOwnedTile.GetComponent<OwnedHex>();
+        tileComponent.Name = districtName;
 
-        switch (biome)
+        TileStatsUI tileStatsUI = Instantiate(tileComponent.tileStatsUIprefab, tileStatsUIcontainer.transform).GetComponent<TileStatsUI>();
+        tileComponent.tileStatsUI = tileStatsUI;
+        tileStatsUI.gameObject.SetActive(false);
+
+        /*string[] defaultTileStatFields =  {
+        "population",
+        "beds"
+        };
+        foreach (string field in defaultTileStatFields)
+        {
+            hexComponent.tileStatistics.Add(field, 0);
+        }*/
+    // hexComponent.tileStatistics.Add();
+
+    switch (biome)
         {
             case Biome.grove:
             {
-                hexComponent.groveTile.SetActive(true);
-                hexComponent.rend = hexComponent.groveTile.GetComponent<Renderer>();
+                tileComponent.groveTile.SetActive(true);
+                tileComponent.rend = tileComponent.groveTile.GetComponent<Renderer>();
                 break;
             }
             case Biome.forest:
             {
-                hexComponent.forestTile.SetActive(true);
-                hexComponent.rend = hexComponent.forestTile.GetComponent<Renderer>();
+                tileComponent.forestTile.SetActive(true);
+                tileComponent.rend = tileComponent.forestTile.GetComponent<Renderer>();
                 break;
             }
             case Biome.grassland:
             {
-                hexComponent.grasslandTile.SetActive(true);
-                hexComponent.rend = hexComponent.grasslandTile.GetComponent<Renderer>();
+                tileComponent.grasslandTile.SetActive(true);
+                tileComponent.rend = tileComponent.grasslandTile.GetComponent<Renderer>();
                 break;
             }
             /*case Biome.river:
@@ -139,153 +136,110 @@ public class TerrainManager : MonoBehaviour
                 break;
             }
         }
-        hexComponent.biome = biome;
+        tileComponent.biome = biome;
         
-        //TODO create features
+        GameStats.AddTile(tileComponent);
         
-        
-        return newOwnedHex;
+        return newOwnedTile;
     }
     
-    // private void CreateFeature(GameObject hex, GameObject resourcePrefab, int count)
     private void CreateFeature(GameObject hex, LandscapeFeatureType landscapeFeatureType)
     {
-        // GameObject _waterway = Instantiate(waterway, hex.transform.position, Quaternion.identity, hex.transform);
-        // _waterway.name = "waterway";
-        // hex.GetComponent<OwnedHex>().waterway = _waterway;
         if (landscapeFeatureType == LandscapeFeatureType.none)
         {
             return;
         }
         
-        LandscapeFeature landscapeFeature = LandscapeFeaturesDictionary.GetLandscapeFeature(landscapeFeatureType);
-        for (int i = 0; i < landscapeFeature.resourceMaxCount; i++)
+        //get blueprint for feature
+        LandscapeFeatureBlueprint featureBlueprint = LandscapeFeaturesDictionary.GetLandscapeFeatureBlueprint(landscapeFeatureType);
+
+        //create instance of feature
+        LandscapeFeature feature = null;
+        switch (featureBlueprint.landscapeFeatureType)
         {
-            SpawnResource(landscapeFeature.resourceGO, hex);
+            case LandscapeFeatureType.fruitTrees:
+            {
+                feature = new LandscapeFeatureGrove();
+                break;
+            }
+            case LandscapeFeatureType.lakes:
+            {
+                feature = new LandscapeFeatureLakes();
+                break;
+            }
+            case LandscapeFeatureType.pineTrees:
+            {
+                feature = new LandscapeFeatureForest();
+                break;
+            }
+            case LandscapeFeatureType.field:
+            {
+                feature = new LandscapeFeatureFields();
+                break;
+            }
+            default:
+            {
+                Debug.Log("Unknown landscape feature");
+                break;
+            }
         }
+        
+        //assign feature to Hex
+        feature.AssignToTile(hex);
+
+        int randomCount = Utils.GenerateRandomIntBetween(featureBlueprint.resourceMinCount, featureBlueprint.resourceMaxCount);
+
+        //spawn feature resources
+        for (int i = 0; i < randomCount; i++)
+        {
+            SpawnResource(feature, featureBlueprint.resourceGO, hex);
+        } 
     }
 
-    private void SpawnResource(GameObject resourcePrefab, GameObject parent)
+    private void SpawnResource(LandscapeFeature landscapeFeature, GameObject resourcePrefab, GameObject tile)
     {
-        Vector3 position = ConstructionManager.instance.PositionOnHex(parent.transform.position);
+        Vector3 position = TileUtils.PositionOnTile(tile.transform.position);
         float rotation = Utils.GenerateRandom(0, 360f);
-        GameObject resource = Instantiate(resourcePrefab, position, Quaternion.AngleAxis(rotation, Vector3.up), parent.transform);
+        GameObject resource = Instantiate(resourcePrefab, position, Quaternion.AngleAxis(rotation, Vector3.up), tile.transform);
         //TODO test scale for different resources
-        float randomScale = Utils.GenerateRandom(0.3f, 1.5f);
+        float randomScale = Utils.GenerateRandom(0.9f, 1.1f);
         resource.transform.localScale = new Vector3(randomScale, 1, randomScale);
         
-        // _waterway.GetComponent<Waterway>().lakes.Add(newLake);
+        landscapeFeature.AddResource(resource);
     }
     
 
-    /*private void SpawnLakes(GameObject hex, int lakesNumber)
+    public void SpawnTreeAt(OwnedHex hex, GameObject treePrefab, Vector3 position)
     {
-        GameObject _waterway = Instantiate(waterway, hex.transform.position, Quaternion.identity, hex.transform);
-        _waterway.name = "waterway";
-        hex.GetComponent<OwnedHex>().waterway = _waterway;
-        
-        for (int i = 0; i < lakesNumber; i++)
-        {
-            SpawnLake(_waterway);
-        }
+        //TODO spawn tree of random size
+        float randomScale = Utils.GenerateRandom(0.2f, 0.3f);
+        SpawnResource(hex.GetWoodland(), treePrefab, hex.gameObject);
     }
 
-    private void SpawnLake(GameObject _waterway)
-    {
-        Vector3 position = ConstructionManager.instance.PositionOnHex(_waterway.transform.position)/* + new Vector3(0, 0.875f, 0)#1#;
-        float lakeRotation = Utils.GenerateRandom(0, 360f);
-        GameObject newLake = Instantiate(lake, position, Quaternion.AngleAxis(lakeRotation, Vector3.up), _waterway.transform);
-        float randomScale = Utils.GenerateRandom(0.3f, 1.5f);
-        newLake.transform.localScale = new Vector3(randomScale, 1, randomScale);
-        
-        _waterway.GetComponent<Waterway>().lakes.Add(newLake);
-    }*/
-
-    /*public void SpawnTrees(GameObject hex, int treesNumber)
-    {
-        // GameObject _woodland = hex.GetComponent<OwnedHex>().woodland;
-        // if (woodland == null)
-        // {
-            GameObject _woodland = Instantiate(woodland, hex.transform.position, Quaternion.identity, hex.transform);
-            _woodland.name = "woodland";
-
-            OwnedHex hexComponent = hex.GetComponent<OwnedHex>();
-            hexComponent.woodland = _woodland;
-        // }
-        List<Tree> trees = _woodland.GetComponent<Woodland>().trees;
-
-        for (int i = 0; i < treesNumber; i++)
-        {
-            SpawnTree(hexComponent, _woodland.transform, trees);
-        }
-    }
-
-    public void SpawnTree(OwnedHex hex, Transform _woodland, List<Tree> trees)
-    {
-        Vector3 position = ConstructionManager.instance.PositionOnHex(_woodland.transform.position)/* + new Vector3(0, 1f, 0)#1#;
-        
-        float randomScale = Utils.GenerateRandom(0.3f, 0.65f);
-        CreateTree(hex, _woodland, position, randomScale, trees);
-    }
-
-    private void CreateTree(OwnedHex hex, Transform _woodland, Vector3 position, float scale, List<Tree> trees)
-    {
-        float treeRotation = Utils.GenerateRandom(0, 360f);
-        GameObject newTree = Instantiate(fruitTree, position, Quaternion.AngleAxis(treeRotation, Vector3.up),
-            _woodland.transform);
-
-        Tree treeComponent = newTree.GetComponent<Tree>();
-        trees.Add(treeComponent);
-        treeComponent.hex = hex;
-
-        TreeSize treeSize = treeComponent.treeSize;
-        treeSize.transform.localScale = new Vector3(scale, scale, scale);
-    }*/
-
-    public void SpawnTreeAt(OwnedHex hex, /*Transform _woodland,*/GameObject treePrefab, Vector3 position)
-    {
-        // List<Tree> trees = _woodland.GetComponent<Woodland>().trees;
-        // if (trees.Count <= 100)
-        // {
-            float randomScale = Utils.GenerateRandom(0.2f, 0.3f);
-            // CreateTree(hex, _woodland, position, randomScale, trees);
-            SpawnResource(treePrefab, gameObject);
-        // }
-    }
-
-    public void ChopTree(GameObject activeHex)
+    /*public void ChopTree(GameObject activeHex)
     {
         OwnedHex activeHexComponent = activeHex.GetComponent<OwnedHex>();
-        if (activeHexComponent.woodland != null)
+        
+        LandscapeFeatureWoodland landscapeFeatureWoodland = activeHexComponent.GetWoodland();
+        
+        GameObject biggestTree = landscapeFeatureWoodland.ChooseBiggestTree();
+            
+        if (biggestTree != null)
         {
-            Woodland _woodland = activeHexComponent.woodland.GetComponent<Woodland>();
-
-            //choose biggest tree
-            GameObject biggestTree = _woodland.ChooseBiggestTree();
-
-            if (biggestTree != null)
-            {
-                _woodland.ChopTree(biggestTree);
-            }
-            else
-            {
-                PlayerMessageService.instance.ShowMessage("No trees to chop! :(");
-                Debug.Log("No trees to chop! :(");
-            }
+            landscapeFeatureWoodland.ChopTree(biggestTree);
         }
-        else
+        /*else
         {
-            PlayerMessageService.instance.ShowMessage("No trees to chop");
-            Debug.Log("No trees to chop");
-            return;
-        }
-    }
+            PlayerMessageService.instance.ShowMessage("No trees to chop! :(");
+            Debug.Log("No trees to chop! :(");
+        }#1#
+    }*/
 
     public void CreateConcealedHexesAround(GameObject hex)
     {
         Vector3 hexPosition = hex.transform.position;
 
-        Vector3[] positionsOfHexesAround = HexUtils.PositionsOfHexesAround(hexPosition);
+        Vector3[] positionsOfHexesAround = TileUtils.PositionsOfHexesAround(hexPosition);
 
         foreach (var borderingPosition in positionsOfHexesAround)
         {
@@ -333,7 +287,7 @@ public class TerrainManager : MonoBehaviour
     {
         // Vector3[] positionsOfHexesAround = HexUtils.PositionsOfHexesAround(hexPosition);
         List<OwnedHex> hexesAround = newHexComponent.GetOwnedHexesAround();
-        int randomHexIndex = Utils.GenerateRandomIntMax(6);
+        int randomHexIndex = Utils.GenerateRandomIntNumberWhereMaxIs(6);
 
         Hex randomHex = hexesAround.ElementAtOrDefault(randomHexIndex - 1);
 
@@ -353,7 +307,7 @@ public class TerrainManager : MonoBehaviour
     private Biome GetHexBiomeByPosition(Vector3 hexPosition)
     {
         // float aaaaa = hexPosition.z / HexUtils.zHexOffset.z;
-        int beltIndex = (int)(hexPosition.z / HexUtils.zHexOffset.z / beltWideness);
+        int beltIndex = (int)(hexPosition.z / TileUtils.zHexOffset.z / beltWideness);
         // Debug.Log(beltIndex);
 
         Biome biome = RandomBiomeByBelt(beltIndex);
@@ -415,7 +369,8 @@ public class TerrainManager : MonoBehaviour
         //change tilePrefab based on biome
         Vector3 position = borderingHexComponent.gameObject.transform.position;
         Destroy(borderingHexComponent.gameObject);
-        GameObject hex = CreateOwnedHex(biome, position);
+        GameObject hex = CreateOwnedTile(biome, position);
+        SoundManager.PlaySound(SoundManager.Sound.new_tile);
         
         //create features based on biome
 
@@ -441,23 +396,6 @@ public class TerrainManager : MonoBehaviour
             CreateFeature(hex, biomeFeatures.Restriction, biomeFeatures.RestrictionMaxCount);
         }*/
         
-        
-
-        // Vector3 position = borderingHexComponent.gameObject.transform.position/* - borderingHexComponent.hoverOffset*/;
-
-        // Biome biome = borderingHexComponent.biome;
-        // Destroy(borderingHexComponent.gameObject);
-        
-        // GameObject hex = CreateOwnedHex(biome, position);
-        
-        /*if (hasWater)
-        {
-            SpawnLakes(hex, Utils.GenerateRandomIntMax(5));
-        }
-        if (hasWood)
-        {
-            SpawnTrees(hex, Utils.GenerateRandomIntBetween(5, 20));
-        }*/
         return hex;
     }
 }

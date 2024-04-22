@@ -3,26 +3,26 @@ using UnityEngine;
 
 public class LandscapeFeaturesDictionary : MonoBehaviour
 {
-    public static Dictionary<LandscapeFeatureType, LandscapeFeature> LandscapeFeatureDictionary;
+    public static Dictionary<LandscapeFeatureType, LandscapeFeatureBlueprint> LandscapeFeatureDictionary;
 
-    public LandscapeFeature LandscapeFeatureForest;
-    public LandscapeFeature LandscapeFeatureGrassland;
-    public LandscapeFeature LandscapeFeatureGrove;
-    public LandscapeFeature LandscapeFeatureLakes;
+    public LandscapeFeatureBlueprint landscapeFeatureBlueprintForest;
+    public LandscapeFeatureBlueprint landscapeFeatureBlueprintField;
+    public LandscapeFeatureBlueprint landscapeFeatureBlueprintGrove;
+    public LandscapeFeatureBlueprint landscapeFeatureBlueprintLakes;
     
     private void Awake()
     {
-        LandscapeFeatureDictionary = new Dictionary<LandscapeFeatureType, LandscapeFeature>()
+        LandscapeFeatureDictionary = new Dictionary<LandscapeFeatureType, LandscapeFeatureBlueprint>()
         {
-            {LandscapeFeatureType.field, LandscapeFeatureGrassland},
-            {LandscapeFeatureType.lakes, LandscapeFeatureLakes},
-            {LandscapeFeatureType.fruitTrees, LandscapeFeatureGrove},
-            {LandscapeFeatureType.pineTrees, LandscapeFeatureForest}
+            {LandscapeFeatureType.field, landscapeFeatureBlueprintField},
+            {LandscapeFeatureType.lakes, landscapeFeatureBlueprintLakes},
+            {LandscapeFeatureType.fruitTrees, landscapeFeatureBlueprintGrove},
+            {LandscapeFeatureType.pineTrees, landscapeFeatureBlueprintForest}
             //TODO finish list
         };
     }
 
-    public static LandscapeFeature GetLandscapeFeature(LandscapeFeatureType type)
+    public static LandscapeFeatureBlueprint GetLandscapeFeatureBlueprint(LandscapeFeatureType type)
     {
         return LandscapeFeatureDictionary[type];
     }

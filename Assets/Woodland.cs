@@ -42,6 +42,6 @@ public class Woodland : MonoBehaviour
         Destroy(_tree);
         int woodAmount = (int)treeComponent.treeSize.GetSize();
         Debug.Log("chop tree, " + woodAmount);
-        GameStats.Wood += woodAmount;
+        GameStats.instance.AddWood(woodAmount);
     }
 }

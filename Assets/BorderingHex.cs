@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class BorderingHex : Hex
 {
-    public static HexManager _hexManager;
+    public static TileManager TileManager;
     
     public Color availableColor;
     public Color nonAvailableColor;
@@ -45,7 +45,7 @@ public class BorderingHex : Hex
 
     private void Start()
     {
-        _hexManager = HexManager.instance;
+        TileManager = TileManager.instance;
         
         humanPrice = definePrice();
         description = createDescription();
@@ -62,7 +62,7 @@ public class BorderingHex : Hex
     private void Update()
     {
         humanPrice = definePrice();
-        if (_hexManager.IsHexObtainable(this))
+        if (TileManager.IsHexObtainable(this))
         {
             isObtainable = true;
             rend.material.color = availableColor;
@@ -107,7 +107,7 @@ public class BorderingHex : Hex
         holdTimerCircle.fillAmount = holdTimer / holdTimerDefault;
         if (holdTimer <= 0)
         {
-            _hexManager.BuyHex(gameObject);
+            TileManager.BuyHex(gameObject);
         }
     }
 

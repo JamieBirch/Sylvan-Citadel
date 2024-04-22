@@ -1,11 +1,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class OwnedHex : Hex
 {
-    private HexManager _hexManager;
+    public const string PopulationStatString = "population";
+    public const string BedsAvailableStatString = "beds";
+    private TileManager _tileManager;
     
     public GameObject groveTile;
     public GameObject forestTile;
@@ -14,7 +17,6 @@ public class OwnedHex : Hex
     public GameObject mountainTile;
     public GameObject swampTile;
     
-    
     private Color defaultColor = new Color(1f, 1f, 1f, 0f);
     private Color selectColor = new Color(1f, 1f, 1f, 0.7f);
     
@@ -22,30 +24,63 @@ public class OwnedHex : Hex
 
     public Renderer rend;
 
-    public GameObject waterway;
-    public GameObject woodland;
+    public GameObject tileStatsUIprefab;
+    public TileStatsUI tileStatsUI;
+
+    public Dictionary<LandscapeFeatureType, LandscapeFeature> LandscapeFeaturesDictionary = new Dictionary<LandscapeFeatureType, LandscapeFeature>();
+    private Dictionary<string, int> tileStatistics = new Dictionary<string, int>();
+    
     public GameObject village;
-    public List<House> houses;
+    public List<Building> buildings;
     private bool selected;
     
     //Stats
     private int BedsAvailable;
-    // public int FruitsAvailable;
     public int HexPopulation;
 
     // public GameObject settlersAvailableCanvas;
     public Text settlersAvailableText;
     private int settlersAvailable;
+
+    public void UpdateTileStatistics(string field, int count)
+    {
+        tileStatistics[field] = count;
+    }
+    
+    public void UpdateTileStatisticsUI(string field)
+    {
+        tileStatsUI.UpdateFieldUi(field, tileStatistics[field]);
+    }
     
     private void Start()
     {
-        _hexManager = HexManager.instance;
+        _tileManager = TileManager.instance;
         
-        houses = new List<House>();
+        buildings = new List<Building>();
         selected = false;
 
         BedsAvailable = 0;
         // FruitsAvailable = 0;
+        
+        string[] defaultTileStatFields =  {
+            PopulationStatString,
+            BedsAvailableStatString
+        };
+        
+        tileStatsUI.Name.text = Name;
+
+        foreach (string field in defaultTileStatFields)
+        {
+            tileStatistics.Add(field, 0);
+            tileStatsUI.AddField(field, 0);
+        }
+        foreach (LandscapeFeature feature in LandscapeFeaturesDictionary.Values)
+        {
+            LandscapeFeatureType landscapeFeatureType = feature.getFeatureType();
+            int count = feature.getCount();
+            tileStatistics.Add(landscapeFeatureType.ToString(), count);
+            tileStatsUI.AddField(landscapeFeatureType.ToString(), count);
+        }
     }
 
     public void Update()
@@ -53,11 +88,21 @@ public class OwnedHex : Hex
         // settlersAvailable = CalculateSettlersAvailable();
         settlersAvailable = HexPopulation;
         
-        if (houses.Count > 0)
+        if (buildings.Count > 0)
         {
             BedsAvailable = CalcBedsAvailableSum();
             // Debug.Log("total beds: " + BedsAvailable);
-        } 
+        }
+
+        UpdateTileStatistics(PopulationStatString, HexPopulation);
+        UpdateTileStatistics(BedsAvailableStatString, BedsAvailable);
+        
+        foreach (LandscapeFeature feature in LandscapeFeaturesDictionary.Values)
+        {
+            LandscapeFeatureType landscapeFeatureType = feature.getFeatureType();
+            int count = feature.getCount();
+            UpdateTileStatistics(landscapeFeatureType.ToString(), count);
+        }
     }
 
     public int GetBedsAvailable()
@@ -65,21 +110,24 @@ public class OwnedHex : Hex
         return BedsAvailable;
     }
 
-    public void AddHouseToHex(House houseComponent)
+    public void AddBuildingToTile(Building buildingComponent)
     {
-        houses.Add(houseComponent);
+        buildings.Add(buildingComponent);
     }
 
     private int CalcBedsAvailableSum()
     {
-        int BedsAvailableSum = 0;
-
-        foreach (House house in houses)
+        int bedsAvailableSum = 0;
+        foreach (Building building in buildings)
         {
-            BedsAvailableSum += house.GetBedsAvailable();
+            // House component;
+            if (building.gameObject.TryGetComponent<House>(out House houseComponent))
+            {
+                bedsAvailableSum += houseComponent.GetBedsAvailable();
+            }
             // Debug.Log("adding beds: " + house.GetBedsAvailable() + "current sum: " + BedsAvailable);
         }
-        return BedsAvailableSum;
+        return bedsAvailableSum;
     }
 
     private int CalculateSettlersAvailable()
@@ -98,7 +146,7 @@ public class OwnedHex : Hex
         if (human.homeHex != this)
         {
             // Debug.Log("new Hex!");
-            _hexManager.RelocateHumanTo(this, village.GetComponent<Village>(), human);
+            _tileManager.RelocateHumanTo(this, village.GetComponent<Village>(), human);
         }
     }
 
@@ -136,8 +184,9 @@ public class OwnedHex : Hex
     private void Select()
     {
         selected = true;
-        _hexManager.SetHexAsActive(gameObject);
+        _tileManager.SetHexAsActive(gameObject);
         highlight();
+        SoundManager.PlaySound(SoundManager.Sound.tile_select);
     }
 
     /*public void ShowSettlersAvailable()
@@ -163,7 +212,7 @@ public class OwnedHex : Hex
     {
         // gameObject.transform.position -= HexUtils.selectOffset;
         selected = false;
-        _hexManager.SetHexAsInActive();
+        _tileManager.SetHexAsInActive();
         ColorToDefault();
     }
 
@@ -185,5 +234,23 @@ public class OwnedHex : Hex
             } 
         }
         return false;
+    }
+
+    public LandscapeFeatureWoodland GetWoodland()
+    {
+        
+        if (LandscapeFeaturesDictionary.ContainsKey(LandscapeFeatureType.fruitTrees))
+        {
+            return (LandscapeFeatureWoodland)LandscapeFeaturesDictionary[LandscapeFeatureType.fruitTrees];
+        }
+        else if (LandscapeFeaturesDictionary.ContainsKey(LandscapeFeatureType.pineTrees))
+        {
+            return (LandscapeFeatureWoodland)LandscapeFeaturesDictionary[LandscapeFeatureType.pineTrees];
+        }
+        else
+        {
+            Debug.Log("No woodland in tile " + name);
+            return null;
+        }
     }
 }

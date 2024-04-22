@@ -1,10 +1,8 @@
 using System.Collections.Generic;
-using UnityEngine;
 
-public class House : MonoBehaviour
+public class House : Building
 {
     public OwnedHex hex;
-    public int woodPrice;
     public int capacity;
     private int bedsAvailable;
     
@@ -43,5 +41,15 @@ public class House : MonoBehaviour
         _tenants.Remove(human);
         bedsAvailable++;
         // hex.BedsAvailable++;
+    }
+
+    public override bool IsBuildable()
+    {
+        return GameStats.GetWood() >= woodPrice;
+    }
+
+    public override bool IsShowable()
+    {
+        return true;
     }
 }

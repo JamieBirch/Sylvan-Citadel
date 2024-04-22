@@ -5,7 +5,7 @@ public class FruitTree : Tree
     public int Fertility;
     public GameObject fruitPrefab;
 
-private void Start()
+    private void Start()
     {
         Calendar.NewDay += StartDay;
     }

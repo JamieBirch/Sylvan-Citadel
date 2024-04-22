@@ -11,7 +11,8 @@ public class PopulationManager : MonoBehaviour
     public GameObject human;
     
     private Random rnd = new Random();
-    
+    public int maxPopulation;
+
     private void Awake()
     {
         instance = this;
@@ -40,9 +41,9 @@ public class PopulationManager : MonoBehaviour
     public GameObject SpawnHuman(GameObject village)
     {
         //create
-        var position = ConstructionManager.instance.PositionOnHex(village.transform.position) /*+ new Vector3(0, 1.25f, 0)*/;
+        var position = TileUtils.PositionOnTile(village.transform.position) /*+ new Vector3(0, 1.25f, 0)*/;
         GameObject humanGameObject = Instantiate(human, position, Quaternion.identity, village.transform);
-        GameStats.Population++;
+        GameStats.instance.AddHuman();
 
         //name
         string name = NameGenerator.CreateHumanName();

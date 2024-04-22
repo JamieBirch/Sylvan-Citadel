@@ -33,4 +33,9 @@ public class Tree : MonoBehaviour
     {
         Calendar.NewDay -= StartDay;
     }
+
+    public void Chop()
+    {
+        Destroy(gameObject);
+    }
 }

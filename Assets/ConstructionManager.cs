@@ -1,50 +1,67 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ConstructionManager : MonoBehaviour
 {
     public static ConstructionManager instance;
-    public GameObject house;
-    public Vector3 houseOffset;
+
+    public Button BuildButton;
+    public GameObject BuildingsButtons;
     
     private float _hexRadius;
 
     private void Awake()
     {
         instance = this;
-        _hexRadius = TerrainManager.HexRadius;
     }
 
-    public void BuildHouse(GameObject hex)
+    public void ShowHideBuildPanel()
     {
-        House houseComponent = house.GetComponent<House>();
-        
-        if (GameStats.Wood < houseComponent.woodPrice)
+        if (BuildingsButtons.activeSelf)
+        {
+            BuildingsButtons.SetActive(false);
+        }
+        else
+        {
+            BuildingsButtons.SetActive(true);
+        }
+    }
+
+    public void Update()
+    {
+        if (TileManager.instance.activeTile == null && BuildButton.IsInteractable())
+        {
+            BuildButton.interactable = false;
+        }
+        else if (TileManager.instance.activeTile != null && !BuildButton.IsInteractable())
+        {
+            BuildButton.interactable = true;
+        }
+    }
+
+    public void Build(GameObject buildingPrefab, GameObject tile)
+    {
+        int woodPrice = buildingPrefab.GetComponent<Building>().woodPrice;
+
+        if (GameStats.GetWood() < woodPrice)
         {
             PlayerMessageService.instance.ShowMessage("Not enough wood to build!");
             Debug.Log("Not enough wood to build!");
         }
         else
         {
-            var position = PositionOnHex(hex.transform.position)/* + houseOffset*/ /*+ HexUtils.selectOffset*/;
-            float houseRotation = Utils.GenerateRandom(0, 360f);
-            GameObject newHouse = Instantiate(house, position, Quaternion.AngleAxis(houseRotation, Vector3.up) , hex.transform);
-
-            GameStats.Wood -= houseComponent.woodPrice;
-
-            OwnedHex hexComponent = hex.GetComponent<OwnedHex>();
-            hexComponent.AddHouseToHex(newHouse.GetComponent<House>());
+            //instantiate building
+            var position = TileUtils.PositionOnTile(tile.transform.position);
+            float buildingRotation = Utils.GenerateRandom(0, 360f);
+            GameObject newBuilding = Instantiate(buildingPrefab, position, Quaternion.AngleAxis(buildingRotation, Vector3.up) , tile.transform);
+            
+            //assign to tile
+            OwnedHex tileComponent = tile.GetComponent<OwnedHex>();
+            tileComponent.AddBuildingToTile(newBuilding.GetComponent<Building>());
+            
+            //deduct wood
+            GameStats.instance.RemoveWood(woodPrice);
         }
-    }
-    
-    public Vector3 PositionOnHex(Vector3 hexCenter)
-    {
-        float minX = hexCenter.x - _hexRadius;
-        float maxX = hexCenter.x + _hexRadius;
-        
-        float minZ = hexCenter.z - _hexRadius;
-        float maxZ = hexCenter.z + _hexRadius;
-
-        return new Vector3(Utils.GenerateRandom(minX, maxX), 0f, Utils.GenerateRandom(minZ, maxZ));
     }
     
 }

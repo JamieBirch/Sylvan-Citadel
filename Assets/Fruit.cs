@@ -3,17 +3,16 @@ using UnityEngine;
 public class Fruit : MonoBehaviour
 {
     public OwnedHex hex;
-    // public Woodland woodland;
     public bool isClaimed = false;
-    //TODO code duplication
     public GameObject treePrefab;
-    
+    public int _chanceToGrowTree;
+
     private TerrainManager _terrainManager;
-    private int _chanceToGrowTree = 80;
 
     private void Start()
     {
         Calendar.NewDay += StartDay;
+        GameStats.instance.AddFood();
         _terrainManager = TerrainManager.instance;
     }
     
@@ -23,11 +22,17 @@ public class Fruit : MonoBehaviour
         if (chance < _chanceToGrowTree)
         {
             _terrainManager.SpawnTreeAt(hex, treePrefab, transform.position);
-            // _terrainManager.SpawnTreeAt(hex, woodland.transform, transform.position);
+            GameStats.instance.RemoveFood();
         }
+        else
+        {
+            if (Utils.TossCoin())
+            {
+                GameStats.instance.RemoveFood();
+            }
+        }
+
         Destroy(gameObject);
-        
-        // hex.FruitsAvailable--;
     }
     
     public void OnDestroy()

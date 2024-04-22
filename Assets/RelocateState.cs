@@ -5,15 +5,15 @@
         if (human.currentTarget == null)
         {
             //Set satisfied,
-            human.isThirsty = false;
-            human.isHungry = false;
+            human.wantsWater = false;
+            human.wantsFood = false;
             //Set target as newHex
             human.currentTarget = human.homeHex.gameObject;
         }
         else
         {
-            human.isThirsty = false;
-            human.isHungry = false;
+            human.wantsWater = false;
+            human.wantsFood = false;
             human.RunToTarget();
             return human.doWander;
         }

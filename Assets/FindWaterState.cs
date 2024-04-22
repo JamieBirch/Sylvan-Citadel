@@ -8,9 +8,9 @@ public class FindWaterState : IHumanState
     
     public IHumanState DoState(Human human)
     {
-        if (!human.isThirsty)
+        if (!human.wantsWater)
         {
-            if (human.isHungry)
+            if (human.wantsFood)
             {
                 return human.findFood;
             } else if (!human.hasHome)
@@ -38,15 +38,15 @@ public class FindWaterState : IHumanState
 
     private GameObject FindWater(Human human)
     {
-        GameObject homeHexWaterway = human.homeHex.waterway;
-
         IEnumerable lakes;
+        /*GameObject homeHexWaterway = human.homeHex.waterway;
+
         if (homeHexWaterway != null)
         {
             Waterway waterway = homeHexWaterway.GetComponent<Waterway>();
             lakes = waterway.lakes;
         }
-        else
+        else*/
         {
             lakes = GameObject.FindGameObjectsWithTag(waterTag);
         }
@@ -77,7 +77,7 @@ public class FindWaterState : IHumanState
     private void Drink(Human human)
     {
         //TODO effect
-        human.isThirsty = false;
+        human.wantsWater = false;
         human.currentTarget = null;
     }
 }

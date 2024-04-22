@@ -278,7 +278,7 @@ MonoBehaviour:
         m_PostInfinity: 2
         m_RotationOrder: 4
   lumVsSat:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value:
       <length>k__BackingField: 0
       m_Loop: 0
@@ -304,17 +304,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   active: 1
   color:
-    m_OverrideState: 0
-    m_Value: {r: 0, g: 0, b: 0, a: 1}
+    m_OverrideState: 1
+    m_Value: {r: 0.3, g: 0.28235295, b: 0.2282353, a: 1}
   center:
     m_OverrideState: 0
     m_Value: {x: 0.5, y: 0.5}
   intensity:
     m_OverrideState: 1
-    m_Value: 0.357
+    m_Value: 0.385
   smoothness:
-    m_OverrideState: 0
-    m_Value: 0.2
+    m_OverrideState: 1
+    m_Value: 0.364
   rounded:
     m_OverrideState: 0
     m_Value: 0

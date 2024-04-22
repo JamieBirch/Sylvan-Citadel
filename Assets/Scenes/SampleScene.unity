@@ -1016,7 +1016,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1400298329937334190, guid: 003fb6955f6dc844b80de78389603b19, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 130
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 1400298329937334190, guid: 003fb6955f6dc844b80de78389603b19, type: 3}
       propertyPath: m_SizeDelta.y
@@ -1052,7 +1052,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1400298329937334190, guid: 003fb6955f6dc844b80de78389603b19, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 65
+      value: 75
       objectReference: {fileID: 0}
     - target: {fileID: 1400298329937334190, guid: 003fb6955f6dc844b80de78389603b19, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1735,8 +1735,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 65, y: -45}
-  m_SizeDelta: {x: 130, y: 80}
+  m_AnchoredPosition: {x: 72.5, y: -45}
+  m_SizeDelta: {x: 145, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &299848783
 MonoBehaviour:
@@ -2867,7 +2867,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1400298329937334190, guid: 003fb6955f6dc844b80de78389603b19, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 130
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 1400298329937334190, guid: 003fb6955f6dc844b80de78389603b19, type: 3}
       propertyPath: m_SizeDelta.y
@@ -2903,7 +2903,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1400298329937334190, guid: 003fb6955f6dc844b80de78389603b19, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 65
+      value: 75
       objectReference: {fileID: 0}
     - target: {fileID: 1400298329937334190, guid: 003fb6955f6dc844b80de78389603b19, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -6428,7 +6428,7 @@ MonoBehaviour:
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
   m_RenderPostProcessing: 1
-  m_Antialiasing: 0
+  m_Antialiasing: 2
   m_AntialiasingQuality: 2
   m_StopNaN: 0
   m_Dithering: 0
@@ -8643,6 +8643,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 299848782}
     m_Modifications:
+    - target: {fileID: 1400298329143972900, guid: 003fb6955f6dc844b80de78389603b19, type: 3}
+      propertyPath: m_Text
+      value: Own 3 types of biomes
+      objectReference: {fileID: 0}
     - target: {fileID: 1400298329937334097, guid: 003fb6955f6dc844b80de78389603b19, type: 3}
       propertyPath: m_Name
       value: mission_ui_prefab
@@ -8677,7 +8681,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1400298329937334190, guid: 003fb6955f6dc844b80de78389603b19, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 130
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 1400298329937334190, guid: 003fb6955f6dc844b80de78389603b19, type: 3}
       propertyPath: m_SizeDelta.y
@@ -8713,7 +8717,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1400298329937334190, guid: 003fb6955f6dc844b80de78389603b19, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 65
+      value: 75
       objectReference: {fileID: 0}
     - target: {fileID: 1400298329937334190, guid: 003fb6955f6dc844b80de78389603b19, type: 3}
       propertyPath: m_AnchoredPosition.y

@@ -4,8 +4,8 @@ using System.Linq;
 
 public class FindFoodState : IHumanState
 {
-    public string fruitTag = "fruit";
     public string foodSourceTag = "foodSource";
+    
     public IHumanState DoState(Human human)
     {
         if (!human.wantsFood)
@@ -86,11 +86,10 @@ public class FindFoodState : IHumanState
             if (human.currentTarget.TryGetComponent<Fruit>(out _))
             {
                 human.DestroyCurrentTarget();
-                //TODO effect
+                //TODO visual effect
             }
             human.currentTarget = null;
             GameStats.instance.RemoveFood();
-            // human.homeHex.FruitsAvailable--;
 
             human.wantsFood = false;
         }

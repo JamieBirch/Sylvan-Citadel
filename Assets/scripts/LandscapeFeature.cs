@@ -11,7 +11,6 @@ public abstract class LandscapeFeature
     {
         tile = hex.GetComponent<OwnedHex>();
         tile.LandscapeFeaturesDictionary.Add(getFeatureType(), this);
-        // tile.tileStatistics.Add(getFeatureType().ToString(), 0);
     }
 
     public abstract LandscapeFeatureType getFeatureType();
@@ -71,8 +70,6 @@ public abstract class LandscapeFeatureWoodland : LandscapeFeature
 
     public override void AddResource(GameObject go)
     {
-        //TODO new tree
-        
         Tree treeComponent = go.GetComponent<Tree>();
         treeComponent.hex = tile;
         trees.Add(treeComponent);
@@ -129,8 +126,6 @@ public class LandscapeFeatureFields : LandscapeFeature
     
     public override void AddResource(GameObject go)
     {
-        //TODO new Lake
-        
         Field fieldComponent = go.GetComponent<Field>();
         fields.Add(fieldComponent);
     }

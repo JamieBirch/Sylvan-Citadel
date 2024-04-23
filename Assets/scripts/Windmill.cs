@@ -4,13 +4,7 @@ public class Windmill : Building
 {
     public GameObject propeller;
     public int produceEvery_seconds;
-    // public int windmillDayLength;
 
-    //per day
-    // public int foodProduction;
-    
-    // private float blah = Calendar.dayLength / foodProduction;
-    
     private float countdown;
 
     private void Start()
@@ -20,9 +14,8 @@ public class Windmill : Building
 
     private void Update()
     {
-        //turn propeller
+        //rotate propeller
         propeller.transform.Rotate(0,0, Time.deltaTime * 15);
-        // float blah = Calendar.dayLength / foodProduction;
         
         countdown -= Time.deltaTime;
         if (countdown <= 0)

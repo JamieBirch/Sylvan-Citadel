@@ -58,7 +58,7 @@ MonoBehaviour:
   homeHex: {fileID: 0}
   hasWork: 0
   speed: 2
-  fertility: 20
+  fertility: 50
   _home: {fileID: 0}
   stateName: 
 --- !u!1001 &929567130451475914

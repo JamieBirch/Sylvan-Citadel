@@ -23,7 +23,6 @@ public abstract class Mission : MonoBehaviour
             checkmark.SetActive(true);
             SoundManager.PlaySound(SoundManager.Sound.mission_complete);
             //TODO add visual effect
-            //TODO add sound
         }
     }
 

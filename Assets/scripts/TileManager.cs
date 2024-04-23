@@ -51,7 +51,6 @@ public class TileManager : MonoBehaviour
     public void ChopTree()
     {
         _terraformingManager.ChopTree(activeTile);
-        // _terrainManager.ChopTree(activeHex);
     }
 
     public void SetHexAsActive(GameObject hex)
@@ -98,18 +97,12 @@ public class TileManager : MonoBehaviour
             GameObject hex = _terrainManager.ConvertToOwnedHex(borderingHexComponent);
             _populationManager.CreateVillage(hex);
             
-            // List<OwnedHex> ownedHexesAround = borderingHexComponent.GetOwnedHexesAround();
-            // int hexPrice = borderingHexComponent.humanPrice;
-            // var allAvailableHumans = _populationManager.AllAvailableHumans(ownedHexesAround);
-
             var allAvailableHumans = _populationManager.AllAvailableHumans(borderingHexComponent.GetOwnedHexesAround());
-            // Random rnd = new Random();
             IEnumerable<Human> pickedHumans = allAvailableHumans.OrderBy(x => new Random().Next()).Take(borderingHexComponent.humanPrice);
 
             //move in to new hex / kill
             foreach (Human pickedHuman in pickedHumans)
             {
-                // _populationManager.SettleHumanInHex(hex.GetComponent<OwnedHex>(), pickedHuman);
                 pickedHuman.Die();
             }
 
@@ -119,7 +112,6 @@ public class TileManager : MonoBehaviour
 
     public void RelocateHumanTo(OwnedHex hex, Village village, Human human)
     {
-        // _populationManager.RelocateHuman(hex, human);
         _populationManager.SettleHumanInHex(hex, village, human);
     }
 

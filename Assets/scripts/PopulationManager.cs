@@ -41,7 +41,7 @@ public class PopulationManager : MonoBehaviour
     public GameObject SpawnHuman(GameObject village)
     {
         //create
-        var position = TileUtils.PositionOnTile(village.transform.position) /*+ new Vector3(0, 1.25f, 0)*/;
+        var position = TileUtils.PositionOnTile(village.transform.position);
         GameObject humanGameObject = Instantiate(human, position, Quaternion.identity, village.transform);
         GameStats.instance.AddHuman();
 
@@ -92,26 +92,6 @@ public class PopulationManager : MonoBehaviour
         newHomeHex.HexPopulation++;
     }
 
-    /*public void RelocateHuman(OwnedHex newHomeHex, Human humanComponent)
-    {
-        Village homeVillage = humanComponent.homeHex.gameObject.GetComponentInChildren<Village>();
-        homeVillage.humans.Remove(humanComponent);
-        humanComponent.homeHex.HexPopulation--;
-
-        GameObject newHomeVillage = newHomeHex.gameObject.GetComponentInChildren<Village>().gameObject;
-        humanComponent.gameObject.transform.SetParent(newHomeVillage.transform);
-
-        /*if (humanComponent._home != null)
-        {
-            humanComponent._home.GetComponent<House>().MoveOut(humanComponent);
-        }#1#
-        humanComponent.isRelocating = true;
-        
-        newHomeHex.village.GetComponent<Village>().humans.Add(humanComponent);
-        humanComponent.homeHex = newHomeHex;
-        newHomeHex.HexPopulation++;
-    }*/
-    
     public List<Human> AllAvailableHumans(List<OwnedHex> ownedHexesAround)
     {
         List<Human> allAvailableHumans = new List<Human>();

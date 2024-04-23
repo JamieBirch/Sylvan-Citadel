@@ -7,22 +7,18 @@ public class TerrainManager : MonoBehaviour
 {
     public static TerrainManager instance;
     
-    // public int StartTrees;
-    
     public GameObject borderingHex;
     public GameObject ownedHex;
 
     public float overlapRadius = 1;
     
     public Vector3 firstTileCenter = Vector3.zero;
-    // public static float HexRadius = 3f;
     public int beltWideness;
 
     //TODO finish list
     public BiomeFeatures BiomeFeaturesGrove;
     public BiomeFeatures BiomeFeaturesForest;
     public BiomeFeatures BiomeFeaturesGrassland;
-    public BiomeFeatures BiomeFeaturesEmpty;
     public Dictionary<Biome, BiomeFeatures> BiomeFeaturesDictionary;
 
     private Biome startBiome = Biome.grove;
@@ -49,20 +45,11 @@ public class TerrainManager : MonoBehaviour
         public LandscapeFeatureType tertiaryResource;
     }
     
-    private BiomeFeatures GetBiomeFeatures(Biome biome)
-    {
-        /*if (biome != Biome.grove && biome != Biome.forest)
-        {
-            return BiomeFeaturesEmpty;
-        }*/
-        return BiomeFeaturesDictionary[biome];
-    }
-
-    public GameObject CreateStartHex()
+    public GameObject CreateStartTile()
     {
         GameObject startHex = CreateOwnedTile(startBiome, firstTileCenter);
         
-        BiomeFeatures biomeFeatures = GetBiomeFeatures(startBiome);
+        BiomeFeatures biomeFeatures = BiomeFeaturesDictionary[startBiome];
         //TODO modify for another start biomes
         CreateFeature(startHex, biomeFeatures.uniqueResource);
         CreateFeature(startHex, biomeFeatures.secondaryResource);
@@ -81,16 +68,6 @@ public class TerrainManager : MonoBehaviour
         TileStatsUI tileStatsUI = Instantiate(tileComponent.tileStatsUIprefab, tileStatsUIcontainer.transform).GetComponent<TileStatsUI>();
         tileComponent.tileStatsUI = tileStatsUI;
         tileStatsUI.gameObject.SetActive(false);
-
-        /*string[] defaultTileStatFields =  {
-        "population",
-        "beds"
-        };
-        foreach (string field in defaultTileStatFields)
-        {
-            hexComponent.tileStatistics.Add(field, 0);
-        }*/
-    // hexComponent.tileStatistics.Add();
 
     switch (biome)
         {
@@ -216,25 +193,6 @@ public class TerrainManager : MonoBehaviour
         SpawnResource(hex.GetWoodland(), treePrefab, hex.gameObject);
     }
 
-    /*public void ChopTree(GameObject activeHex)
-    {
-        OwnedHex activeHexComponent = activeHex.GetComponent<OwnedHex>();
-        
-        LandscapeFeatureWoodland landscapeFeatureWoodland = activeHexComponent.GetWoodland();
-        
-        GameObject biggestTree = landscapeFeatureWoodland.ChooseBiggestTree();
-            
-        if (biggestTree != null)
-        {
-            landscapeFeatureWoodland.ChopTree(biggestTree);
-        }
-        /*else
-        {
-            PlayerMessageService.instance.ShowMessage("No trees to chop! :(");
-            Debug.Log("No trees to chop! :(");
-        }#1#
-    }*/
-
     public void CreateConcealedHexesAround(GameObject hex)
     {
         Vector3 hexPosition = hex.transform.position;
@@ -246,12 +204,6 @@ public class TerrainManager : MonoBehaviour
             CreateBorderingHexAt(borderingPosition);
         }
     }
-
-    /*private static void RandomizeResources(BorderingHex borderingHexComponent)
-    {
-        borderingHexComponent.hasWater = Utils.TossCoin();
-        borderingHexComponent.hasWood = Utils.TossCoin();
-    }*/
 
     private static void RandomizeFeatures(BorderingHex borderingHexComponent)
     {
@@ -306,7 +258,6 @@ public class TerrainManager : MonoBehaviour
 
     private Biome GetHexBiomeByPosition(Vector3 hexPosition)
     {
-        // float aaaaa = hexPosition.z / HexUtils.zHexOffset.z;
         int beltIndex = (int)(hexPosition.z / TileUtils.zHexOffset.z / beltWideness);
         // Debug.Log(beltIndex);
 
@@ -358,9 +309,6 @@ public class TerrainManager : MonoBehaviour
     {
         Biome biome = borderingHexComponent.biome;
         
-        // bool hasWater = borderingHexComponent.hasWater;
-        // bool hasWood = borderingHexComponent.hasWood;
-        
         bool hasUniqueResource = borderingHexComponent.hasUniqueResource;
         bool hasSecondaryResource = borderingHexComponent.hasSecondaryResource;
         bool hasTertiaryResource = borderingHexComponent.hasTertiaryResource;
@@ -373,21 +321,17 @@ public class TerrainManager : MonoBehaviour
         SoundManager.PlaySound(SoundManager.Sound.new_tile);
         
         //create features based on biome
-
-        BiomeFeatures biomeFeatures = GetBiomeFeatures(biome);
+        BiomeFeatures biomeFeatures = BiomeFeaturesDictionary[biome];
         if (hasUniqueResource)
         {
-            // CreateFeature(hex, LandscapeFeaturesDictionary.GetLandscapeFeature(biomeFeatures.uniqueResource).resourceGO, LandscapeFeaturesDictionary.GetLandscapeFeature(biomeFeatures.uniqueResource).resourceMaxCount);
             CreateFeature(hex, biomeFeatures.uniqueResource);
         }
         if (hasSecondaryResource)
         {
-            // CreateFeature(hex, LandscapeFeaturesDictionary.GetLandscapeFeature(biomeFeatures.secondaryResource).resourceGO, LandscapeFeaturesDictionary.GetLandscapeFeature(biomeFeatures.secondaryResource).resourceMaxCount);
             CreateFeature(hex, biomeFeatures.secondaryResource);
         }
         if (hasTertiaryResource)
         {
-            // CreateFeature(hex, LandscapeFeaturesDictionary.GetLandscapeFeature(biomeFeatures.tertiaryResource).resourceGO, LandscapeFeaturesDictionary.GetLandscapeFeature(biomeFeatures.tertiaryResource).resourceMaxCount);
             CreateFeature(hex, biomeFeatures.tertiaryResource);
         }
         //TODO

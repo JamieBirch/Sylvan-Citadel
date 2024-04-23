@@ -14,19 +14,13 @@ public class BorderingHex : Hex
 
     public bool isObtainable = false;
     
-    // public Vector3 hoverOffset;
-
-    // public Biome biome;
     public string description;
     
     public bool hasUniqueResource;
-    [FormerlySerializedAs("hasPrimaryResource")] public bool hasSecondaryResource;
-    [FormerlySerializedAs("hasSecondaryResource")] public bool hasTertiaryResource;
+    public bool hasSecondaryResource;
+    public bool hasTertiaryResource;
     public bool hasRestriction;
     
-    // public bool hasWater;
-    // public bool hasWood;
-
     public Canvas hexInfoCanvas;
     public Text descriptionText;
     public Text priceText;
@@ -36,7 +30,6 @@ public class BorderingHex : Hex
     public int defaultPrice;
     public int humanPrice;
     
-    // public static float overlapRadius = HexUtils.HexSize;
     private float holdTimer;
     public float holdTimerDefault;
 
@@ -77,15 +70,9 @@ public class BorderingHex : Hex
     public override void OnMouseEnter()
     {
         base.OnMouseEnter();
-        // gameObject.transform.position += hoverOffset;
         humanPrice = definePrice();
         priceText.text = humansPricePreText + humanPrice;
         hexInfoCanvas.enabled = true;
-        /*List<OwnedHex> ownedHexesAround = GetOwnedHexesAround();
-        foreach (OwnedHex ownedHex in ownedHexesAround)
-        {
-            ownedHex.ShowSettlersAvailable();
-        }*/
     }
     
     public void OnMouseDrag()
@@ -120,34 +107,11 @@ public class BorderingHex : Hex
 
     private void OnMouseExit()
     {
-        // gameObject.transform.position -= hoverOffset;
         hexInfoCanvas.enabled = false;
-        
-        /*List<OwnedHex> ownedHexesAround = GetOwnedHexesAround();
-        foreach (OwnedHex ownedHex in ownedHexesAround)
-        {
-            ownedHex.StopShowSettlersAvailable();
-        }*/
     }
 
     public string createDescription()
     {
-        //TODO make Biome-specific
-        string _features;
-        /*if (!hasWater && !hasWood)
-        {
-            _features = "Serene";
-        } else if (hasWater && hasWood)
-        {
-            _features = "Bountiful";
-        } else if (hasWater)
-        {
-            _features = "Lakeside";
-        } else 
-        {
-            _features = "Fruitful";
-        }*/
-
         string _biome;
 
         switch (biome)
@@ -213,22 +177,4 @@ public class BorderingHex : Hex
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, overlapRadius);
     }*/
-
-    /*public List<OwnedHex> GetOwnedHexesAround()
-    {
-        List<OwnedHex> listOfAdjacentOwnedHexes = new List<OwnedHex>();
-        Vector3 hexPosition = transform.position;
-
-        var overlapColliders = Physics.OverlapSphere(hexPosition, overlapRadius);
-        foreach (Collider _collider in overlapColliders)
-        {
-            if (_collider.TryGetComponent(out OwnedHex hexComponent))
-            {
-                listOfAdjacentOwnedHexes.Add(hexComponent);
-                // Debug.Log("Got one!");
-            }
-        }
-
-        return listOfAdjacentOwnedHexes;
-    } */
 }

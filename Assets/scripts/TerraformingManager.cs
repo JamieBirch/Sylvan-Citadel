@@ -49,11 +49,7 @@ public class TerraformingManager : MonoBehaviour
         {
             landscapeFeatureWoodland.ChopTree(biggestTree);
         }
-        /*else
-        {
-            PlayerMessageService.instance.ShowMessage("No trees to chop! :(");
-            Debug.Log("No trees to chop! :(");
-        }*/
+
     }
 
 }

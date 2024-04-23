@@ -8,8 +8,6 @@ public class ConstructionManager : MonoBehaviour
     public Button BuildButton;
     public GameObject BuildingsButtons;
     
-    private float _hexRadius;
-
     private void Awake()
     {
         instance = this;

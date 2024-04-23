@@ -7409,10 +7409,6 @@ MonoBehaviour:
     uniqueResource: 3
     secondaryResource: 4
     tertiaryResource: 4
-  BiomeFeaturesEmpty:
-    uniqueResource: 4
-    secondaryResource: 4
-    tertiaryResource: 4
   tileStatsUIcontainer: {fileID: 7648413202088973360}
 --- !u!114 &1789882337
 MonoBehaviour:

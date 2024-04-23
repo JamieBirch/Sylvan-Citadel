@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class FindWaterState : IHumanState
@@ -39,14 +38,6 @@ public class FindWaterState : IHumanState
     private GameObject FindWater(Human human)
     {
         IEnumerable lakes;
-        /*GameObject homeHexWaterway = human.homeHex.waterway;
-
-        if (homeHexWaterway != null)
-        {
-            Waterway waterway = homeHexWaterway.GetComponent<Waterway>();
-            lakes = waterway.lakes;
-        }
-        else*/
         {
             lakes = GameObject.FindGameObjectsWithTag(waterTag);
         }
@@ -65,18 +56,16 @@ public class FindWaterState : IHumanState
 
         if (nearestWater != null)
         {
-            // human.currentTarget = nearestWater;
             return nearestWater;
         } else
         {
-            // human.currentTarget = null;
             return null;
         }
     }
     
     private void Drink(Human human)
     {
-        //TODO effect
+        //TODO visual effect
         human.wantsWater = false;
         human.currentTarget = null;
     }

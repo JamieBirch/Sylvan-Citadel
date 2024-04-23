@@ -1,5 +1,4 @@
-﻿using UnityEngine;
-
+﻿
 public class GoHomeState : IHumanState
 {
     public IHumanState DoState(Human human)

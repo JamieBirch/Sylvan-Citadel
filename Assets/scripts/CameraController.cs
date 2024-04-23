@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
+    //TODO: move smoother
+    //TODO: screen margin camera movement
+    //TODO: camera rotation
     public float panSpeed;
     public Vector2 panLimit;
 

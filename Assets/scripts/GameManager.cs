@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     
     public int StartHumans;
     
-    //initial resources
+    //start resources
     public int StartStorageWood;
     public int StartStorageFood;
 
@@ -31,11 +31,9 @@ public class GameManager : MonoBehaviour
         _populationManager = PopulationManager.instance;
         _terrainManager = TerrainManager.instance;
         
-        // GameStats.Population = 0;
-
-        //create terrain by creating hexes 
-        startHex = _terrainManager.CreateStartHex();
-        //create other hexes
+        //create terrain by creating tiles 
+        startHex = _terrainManager.CreateStartTile();
+        //create other tiles
         _terrainManager.CreateConcealedHexesAround(startHex);
 
         // put storage resources to storage
@@ -51,7 +49,6 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // fruits.text = GameStats.FruitsAvailable.ToString();
         humans.text = GameStats.GetPopulation().ToString();
         food.text = GameStats.GetFood().ToString();
         wood.text = GameStats.GetWood().ToString();

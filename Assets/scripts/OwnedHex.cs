@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class OwnedHex : Hex
@@ -60,7 +59,6 @@ public class OwnedHex : Hex
         selected = false;
 
         BedsAvailable = 0;
-        // FruitsAvailable = 0;
         
         string[] defaultTileStatFields =  {
             PopulationStatString,
@@ -85,7 +83,6 @@ public class OwnedHex : Hex
 
     public void Update()
     {
-        // settlersAvailable = CalculateSettlersAvailable();
         settlersAvailable = HexPopulation;
         
         if (buildings.Count > 0)
@@ -189,17 +186,6 @@ public class OwnedHex : Hex
         SoundManager.PlaySound(SoundManager.Sound.tile_select);
     }
 
-    /*public void ShowSettlersAvailable()
-    {
-        settlersAvailableCanvas.SetActive(true);
-        settlersAvailableText.text = settlersAvailable.ToString();
-    }
-    
-    public void StopShowSettlersAvailable()
-    {
-        settlersAvailableCanvas.SetActive(false);
-    }*/
-    
     private void OnMouseExit()
     {
         if (!selected)
@@ -210,7 +196,6 @@ public class OwnedHex : Hex
 
     public void Unselect()
     {
-        // gameObject.transform.position -= HexUtils.selectOffset;
         selected = false;
         _tileManager.SetHexAsInActive();
         ColorToDefault();

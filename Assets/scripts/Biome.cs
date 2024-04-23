@@ -1,11 +1,12 @@
 ﻿public enum Biome
 {
-    // arctic,
-    // mountain,
+    //TODO: implement more biomes
     forest,
     grove,
+    grassland,
+    // arctic,
+    // mountain,
     // river,
-    grassland
     // tropic,
     // swamp,
     // desert,

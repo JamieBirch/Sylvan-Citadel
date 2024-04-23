@@ -21,8 +21,6 @@ public class House : Building
         {
             _tenants.Add(human);
             bedsAvailable--;
-            // hex.BedsAvailable--;
-            // human.homeHex = hex;
             return true;
         }
         else
@@ -40,7 +38,6 @@ public class House : Building
     {
         _tenants.Remove(human);
         bedsAvailable++;
-        // hex.BedsAvailable++;
     }
 
     public override bool IsBuildable()

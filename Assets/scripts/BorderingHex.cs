@@ -77,17 +77,12 @@ public class BorderingHex : Hex
     
     public void OnMouseDrag()
     {
-        if (EventSystem.current.IsPointerOverGameObject())
-        {
-            return;
-        }
         if (!isObtainable)
         {
             PlayerMessageService.instance.ShowMessage("Not enough population in nearby tiles");
             Debug.Log("Not enough population in nearby tiles");
             return;
         }
-        // holdTimerText.enabled = true;
         holdTimerCircle.enabled = true;
         holdTimer -= Time.deltaTime;
         // holdTimerText.text = holdTimerPreText + (int)holdTimer;

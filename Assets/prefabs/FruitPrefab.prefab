@@ -48,7 +48,7 @@ MonoBehaviour:
   hex: {fileID: 0}
   isClaimed: 0
   treePrefab: {fileID: 5287768650643275152, guid: 8a64369d31df14d4081c4b899890d244, type: 3}
-  _chanceToGrowTree: 5
+  _chanceToGrowTree: 10
 --- !u!1001 &133708104544724660
 PrefabInstance:
   m_ObjectHideFlags: 0

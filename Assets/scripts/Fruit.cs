@@ -22,15 +22,9 @@ public class Fruit : MonoBehaviour
         if (chance < _chanceToGrowTree)
         {
             _terrainManager.SpawnTreeAt(hex, treePrefab, transform.position);
-            GameStats.instance.RemoveFood();
         }
-        else
-        {
-            if (Utils.TossCoin())
-            {
-                GameStats.instance.RemoveFood();
-            }
-        }
+
+        GameStats.instance.RemoveFood();
 
         Destroy(gameObject);
     }

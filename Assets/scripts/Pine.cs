@@ -16,13 +16,15 @@ public class Pine : MonoBehaviour
     
     void StartDay()
     {
-        double chance = Utils.GenerateRandomChance();
-        if (chance < _chanceToGrowTree)
+        if (hex.GetWoodland().getCount() >= 100)
         {
-            _terrainManager.SpawnTreeAt(hex, treePrefab, transform.position);
+            double chance = Utils.GenerateRandomChance();
+            if (chance < _chanceToGrowTree)
+            {
+                _terrainManager.SpawnTreeAt(hex, treePrefab, transform.position);
+            }
         }
         Destroy(gameObject);
-        
     }
     
     public void OnDestroy()

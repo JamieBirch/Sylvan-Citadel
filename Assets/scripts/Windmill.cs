@@ -28,12 +28,25 @@ public class Windmill : Building
 
     public override bool IsBuildable()
     {
-        return GameStats.GetWood() >= woodPrice &&
-               TileManager.instance.GetActiveTileBiome() == Biome.grassland;
+        if (TileManager.instance.activeTile != null)
+        {
+            return GameStats.GetWood() >= woodPrice &&
+                   TileManager.instance.GetActiveTileBiome() == Biome.grassland;
+        } else
+        {
+            return false;
+        }
     }
 
     public override bool IsShowable()
     {
-        return TileManager.instance.GetActiveTileBiome() == Biome.grassland;
+        if (TileManager.instance.activeTile != null)
+        {
+            return TileManager.instance.GetActiveTileBiome() == Biome.grassland;
+        }
+        else
+        {
+            return false;
+        }
     }
 }

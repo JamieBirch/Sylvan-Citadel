@@ -7,6 +7,7 @@ public class TerrainManager : MonoBehaviour
 {
     public static TerrainManager instance;
     
+    public GameObject fogTile;
     public GameObject borderingHex;
     public GameObject ownedHex;
 
@@ -120,7 +121,7 @@ public class TerrainManager : MonoBehaviour
         return newOwnedTile;
     }
     
-    private void CreateFeature(GameObject hex, LandscapeFeatureType landscapeFeatureType)
+    private void CreateFeature(GameObject tile, LandscapeFeatureType landscapeFeatureType)
     {
         if (landscapeFeatureType == LandscapeFeatureType.none)
         {
@@ -162,20 +163,21 @@ public class TerrainManager : MonoBehaviour
         }
         
         //assign feature to Hex
-        feature.AssignToTile(hex);
+        feature.AssignToTile(tile);
 
         int randomCount = Utils.GenerateRandomIntBetween(featureBlueprint.resourceMinCount, featureBlueprint.resourceMaxCount);
 
         //spawn feature resources
         for (int i = 0; i < randomCount; i++)
         {
-            SpawnResource(feature, featureBlueprint.resourceGO, hex);
+            Vector3 position = TileUtils.PositionOnTile(tile.transform.position);
+            SpawnResource(feature, featureBlueprint.resourceGO, tile, position);
         } 
     }
 
-    private void SpawnResource(LandscapeFeature landscapeFeature, GameObject resourcePrefab, GameObject tile)
+    private void SpawnResource(LandscapeFeature landscapeFeature, GameObject resourcePrefab, GameObject tile, Vector3 position)
     {
-        Vector3 position = TileUtils.PositionOnTile(tile.transform.position);
+        // Vector3 position = TileUtils.PositionOnTile(tile.transform.position);
         float rotation = Utils.GenerateRandom(0, 360f);
         GameObject resource = Instantiate(resourcePrefab, position, Quaternion.AngleAxis(rotation, Vector3.up), tile.transform);
         //TODO test scale for different resources
@@ -190,7 +192,7 @@ public class TerrainManager : MonoBehaviour
     {
         //TODO spawn tree of random size
         float randomScale = Utils.GenerateRandom(0.2f, 0.3f);
-        SpawnResource(hex.GetWoodland(), treePrefab, hex.gameObject);
+        SpawnResource(hex.GetWoodland(), treePrefab, hex.gameObject, position);
     }
 
     public void CreateConcealedHexesAround(GameObject hex)
@@ -199,9 +201,23 @@ public class TerrainManager : MonoBehaviour
 
         Vector3[] positionsOfHexesAround = TileUtils.PositionsOfHexesAround(hexPosition);
 
+        List<GameObject> borderingTiles = new List<GameObject>();
         foreach (var borderingPosition in positionsOfHexesAround)
         {
-            CreateBorderingHexAt(borderingPosition);
+            GameObject borderingTile = CreateBorderingHexAt(borderingPosition);
+            if (borderingTile != null)
+            {
+                borderingTiles.Add(borderingTile);
+            }
+        }
+        
+        foreach (var borderingTile in borderingTiles)
+        {
+            Vector3[] positionsOfTilesAround = TileUtils.PositionsOfHexesAround(borderingTile.transform.position);
+            foreach (var tilePosition in positionsOfTilesAround)
+            {
+                CreateConcealedTileAt(tilePosition);
+            }
         }
     }
 
@@ -215,15 +231,66 @@ public class TerrainManager : MonoBehaviour
 
     private GameObject CreateBorderingHexAt(Vector3 hexPosition)
     {
-        if (!Physics.CheckSphere(hexPosition, overlapRadius))
+        Collider[] colliders = Physics.OverlapSphere(hexPosition, overlapRadius);
+        if (colliders.Length == 0)
+        {
+            return CreateNewBorderingTile(hexPosition);
+        }
+        else if (collidesWithFogTile(colliders))
+        {
+            foreach(var collider in colliders)
+            {
+                var go = collider.gameObject; //This is the game object you collided with
+                if (go.TryGetComponent<ConcealedHex>(out _))
+                {
+                    Destroy(go);
+                }
+            }
+
+            return CreateNewBorderingTile(hexPosition);
+        } 
+        else
+        {
+            // Debug.Log("can't spawn hex at" + hexPosition+ ". There's something here");
+            return null;
+        }
+    }
+
+    private GameObject CreateNewBorderingTile(Vector3 position)
+    {
+        GameObject newHex = Instantiate(borderingHex, position, Quaternion.identity, gameObject.transform);
+        BorderingHex newHexComponent = newHex.GetComponent<BorderingHex>();
+
+        DefineBiome(position, newHexComponent);
+        RandomizeFeatures(newHexComponent);
+        return newHexComponent.gameObject;
+    }
+
+    private bool collidesWithFogTile(Collider[] colliders)
+    {
+        foreach(var collider in colliders)
+        {
+            var go = collider.gameObject; //This is the game object you collided with
+            if (go.TryGetComponent<ConcealedHex>(out _))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private GameObject CreateConcealedTileAt(Vector3 tilePosition)
+    {
+        if (!Physics.CheckSphere(tilePosition, overlapRadius))
         {
             // Debug.Log("no obstruction here");
-            GameObject newHex = Instantiate(borderingHex, hexPosition, Quaternion.identity, gameObject.transform);
-            BorderingHex newHexComponent = newHex.GetComponent<BorderingHex>();
+            GameObject newHex = Instantiate(fogTile, tilePosition, Quaternion.identity, gameObject.transform);
+            // BorderingHex newHexComponent = newHex.GetComponent<BorderingHex>();
 
-            DefineBiome(hexPosition, newHexComponent);
+            // DefineBiome(tilePosition, newHexComponent);
             // RandomizeResources(newHexComponent);
-            RandomizeFeatures(newHexComponent);
+            // RandomizeFeatures(newHexComponent);
 
             return newHex;
         }

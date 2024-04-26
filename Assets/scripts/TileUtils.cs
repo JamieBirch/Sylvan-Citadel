@@ -7,7 +7,7 @@ public static class TileUtils
     public static Vector3 xHexOffset = new Vector3(8.75f, 0f, 0f);
     public static Vector3 zHexOffset = new Vector3(0f, 0f, 7.625f);
     
-    public static Vector3 selectOffset = new Vector3(0f, 1f, 0f);
+    // public static Vector3 selectOffset = new Vector3(0f, 1f, 0f);
     
     public static float TileRadius = 3f;
 

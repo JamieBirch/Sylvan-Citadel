@@ -6,7 +6,7 @@ public class Calendar : MonoBehaviour
 {
     public static event Action NewDay;
     
-    // public GameObject sun;
+    public GameObject sunRotationObject;
     public Light sun;
     public float sunIntensityMultiplier;
     
@@ -45,26 +45,23 @@ public class Calendar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // var sunTransform = sun.transform;
-
         countdown -= Time.deltaTime;
         countdown = Mathf.Clamp(countdown, 0f, Mathf.Infinity);
-        // sunTransform.Rotate(Time.deltaTime * (270/dayLength),0, 0);
+        sunRotationObject.transform.Rotate(0,0, Time.deltaTime * (360/dayLength));
         
         float hours = (1 - countdown/dayLength) * 24;
         TimeSpan time = new TimeSpan((int)hours, 0, 0);
         // float sunIntensity = -(Mathf.Cos((float)hours / 4)) + 1;
-        float sunIntensity = (-(Mathf.Cos(hours / 4)) + 1)/2;
+        // float sunIntensity = (-(Mathf.Cos(hours / 4)) + 1)/2;
         // sunIntensity = Mathf.SmoothDamp(sunIntensity, newSunIntensity, , Time.deltaTime);
         
-        sun.intensity = sunIntensity * sunIntensityMultiplier;
+        // sun.intensity = sunIntensity * sunIntensityMultiplier;
 
         if (countdown <= 0)
         {
             //start new day
             day++;
             countdown = dayLength;
-            // sunTransform.rotation = sunDefaultRotation;
             newDay = true;
         }
 

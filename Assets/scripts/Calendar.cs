@@ -7,7 +7,8 @@ public class Calendar : MonoBehaviour
     public static event Action NewDay;
     
     public GameObject sunRotationObject;
-    public Light sun;
+    // public Light sun;
+    public Light moon;
     public float sunIntensityMultiplier;
     
     // TimeSpan dayStartTime = new TimeSpan(6, 0, 0);
@@ -27,7 +28,7 @@ public class Calendar : MonoBehaviour
 
     public Material windowMaterial;
 
-    // private float sunIntensity;
+    // private float moonIntensity;
     
     // Start is called before the first frame update
     void Start()
@@ -39,7 +40,7 @@ public class Calendar : MonoBehaviour
         day = 1;
         
         newDay = true;
-        // sunIntensity = 0;
+        // moonIntensity = 1;
     }
 
     // Update is called once per frame
@@ -51,11 +52,14 @@ public class Calendar : MonoBehaviour
         
         float hours = (1 - countdown/dayLength) * 24;
         TimeSpan time = new TimeSpan((int)hours, 0, 0);
+        
         // float sunIntensity = -(Mathf.Cos((float)hours / 4)) + 1;
         // float sunIntensity = (-(Mathf.Cos(hours / 4)) + 1)/2;
+        // float moonIntensity = (Mathf.Cos(hours/4));
         // sunIntensity = Mathf.SmoothDamp(sunIntensity, newSunIntensity, , Time.deltaTime);
         
-        // sun.intensity = sunIntensity * sunIntensityMultiplier;
+        // moon.intensity = sunIntensity * sunIntensityMultiplier;
+        moon.intensity = Mathf.Cos(hours/4);
 
         if (countdown <= 0)
         {

@@ -2,9 +2,6 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    //TODO: move smoother
-    //TODO: screen margin camera movement
-    //TODO: camera rotation
     public float panSpeed;
     public float panBorderThickness;
     public Vector2 panLimit;
@@ -31,7 +28,6 @@ public class CameraController : MonoBehaviour
         {
             pos.x += panSpeed * Time.deltaTime;
         }
-
         if (Input.GetKey("a") || Input.mousePosition.x <= panBorderThickness)
         {
             pos.x -= panSpeed * Time.deltaTime;
@@ -47,6 +43,6 @@ public class CameraController : MonoBehaviour
         // pos.y -= scroll * scrollSpeed * 100f * Time.deltaTime;
         pos.y = (Mathf.Clamp(pos.y, miny, maxy));
 
-        transform.position = Vector3.Lerp(pos, new Vector3(pos.x, pos.y, pos.z),  Mathf.SmoothStep(0, 1,Time.deltaTime / 100f));
+        transform.position = pos;
     }
 }

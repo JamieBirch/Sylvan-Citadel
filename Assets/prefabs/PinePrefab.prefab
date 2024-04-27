@@ -47,7 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hex: {fileID: 0}
   treePrefab: {fileID: 6040239926759661250, guid: 6e6fce4b8d1ccf741a381fd2a994da2c, type: 3}
-  _chanceToGrowTree: 15
+  _chanceToGrowTree: 50
 --- !u!1001 &133708104544724660
 PrefabInstance:
   m_ObjectHideFlags: 0

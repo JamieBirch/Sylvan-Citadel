@@ -24,6 +24,7 @@ public class Calendar : MonoBehaviour
     public Text timeText;
 
     private bool newDay;
+    public static bool night = true;
     private Quaternion sunDefaultRotation;
 
     public Material windowMaterial;
@@ -73,12 +74,21 @@ public class Calendar : MonoBehaviour
         {
             NewDay?.Invoke();
             newDay = false;
-            windowMaterial.DisableKeyword("_EMISSION");
+            night = false;
         }
-
         if ((int)hours == eveningTime && !newDay)
         {
+            night = true;
+        }
+
+        //TODO move to House????
+        if (night)
+        {
             windowMaterial.EnableKeyword("_EMISSION");
+        }
+        else
+        {
+            windowMaterial.DisableKeyword("_EMISSION");
         }
 
         countdownText.text = $"{countdown:00.00}";

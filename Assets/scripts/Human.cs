@@ -49,10 +49,12 @@ public class Human : MonoBehaviour
         
         if (Satisfied())
         {
+            speed = 1;
             rend.material.color = satisfiedColor;
         }
         else
         {
+            speed = 2;
             rend.material.color = unsatisfiedColor;
         }
     }

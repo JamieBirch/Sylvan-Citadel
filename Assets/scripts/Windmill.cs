@@ -1,9 +1,11 @@
+using System.Linq;
 using UnityEngine;
 
 public class Windmill : Building
 {
     public GameObject propeller;
     public int produceEvery_seconds;
+    public int maxWindmillsPerTile = 2;
 
     private float countdown;
 
@@ -31,7 +33,9 @@ public class Windmill : Building
         if (TileManager.instance.activeTile != null)
         {
             return GameStats.GetWood() >= woodPrice &&
-                   TileManager.instance.GetActiveTileBiome() == Biome.grassland;
+                   TileManager.instance.GetActiveTileBiome() == Biome.grassland &&
+                   TileManager.instance.activeTile.GetComponent<OwnedHex>().buildings
+                       .Select(building => building.TryGetComponent<Windmill>(out _)).Count() <= maxWindmillsPerTile;
         } else
         {
             return false;

@@ -16,7 +16,7 @@ public class Pine : MonoBehaviour
     
     void StartDay()
     {
-        if (hex.GetWoodland().getCount() >= 100)
+        if (hex.GetWoodland().getCount() < 100)
         {
             double chance = Utils.GenerateRandomChance();
             if (chance < _chanceToGrowTree)

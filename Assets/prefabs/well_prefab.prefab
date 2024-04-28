@@ -47,6 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Well
   woodPrice: 50
+  description: Provides place to take water
 --- !u!1001 &6789993833632958051
 PrefabInstance:
   m_ObjectHideFlags: 0

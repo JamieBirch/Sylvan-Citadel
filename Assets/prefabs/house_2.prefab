@@ -46,8 +46,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: House
-  prefab: {fileID: 0}
   woodPrice: 40
+  description: Provides shelter for 4 villagers
   hex: {fileID: 0}
   capacity: 4
 --- !u!1001 &1880695879125018313

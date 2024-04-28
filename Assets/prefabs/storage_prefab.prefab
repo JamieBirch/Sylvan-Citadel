@@ -47,6 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Storage
   woodPrice: 70
+  description: Provides place to take food
 --- !u!1001 &457385868971235714
 PrefabInstance:
   m_ObjectHideFlags: 0

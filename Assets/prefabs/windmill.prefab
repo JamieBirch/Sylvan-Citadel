@@ -132,8 +132,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Windmill
   woodPrice: 70
+  description: Produces food and provides place to take it
   propeller: {fileID: 6340324197600106045}
   produceEvery_seconds: 7
+  maxWindmillsPerTile: 2
 --- !u!1 &6340324197600106045
 GameObject:
   m_ObjectHideFlags: 0

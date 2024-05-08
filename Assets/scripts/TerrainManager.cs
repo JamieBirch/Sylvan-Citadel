@@ -10,6 +10,10 @@ public class TerrainManager : MonoBehaviour
     public GameObject fogTile;
     public GameObject borderingHex;
     public GameObject ownedHex;
+    
+    //decorations
+    public GameObject rockPrefab;
+    public GameObject stonePrefab;
 
     public float overlapRadius = 1;
     
@@ -195,15 +199,20 @@ public class TerrainManager : MonoBehaviour
     private void SpawnResource(LandscapeFeature landscapeFeature, GameObject resourcePrefab, GameObject tile, Vector3 position)
     {
         // Vector3 position = TileUtils.PositionOnTile(tile.transform.position);
+        var resource = CreateInTile(resourcePrefab, tile, position);
+        landscapeFeature.AddResource(resource);
+    }
+
+    private static GameObject CreateInTile(GameObject resourcePrefab, GameObject tile, Vector3 position)
+    {
         float rotation = Utils.GenerateRandom(0, 360f);
         GameObject resource = Instantiate(resourcePrefab, position, Quaternion.AngleAxis(rotation, Vector3.up), tile.transform);
         //TODO test scale for different resources
-        float randomScale = Utils.GenerateRandom(0.9f, 1.1f);
+        float randomScale = Utils.GenerateRandom(0.6f, 1.2f);
         resource.transform.localScale = new Vector3(randomScale, 1, randomScale);
-        
-        landscapeFeature.AddResource(resource);
+        return resource;
     }
-    
+
 
     public void SpawnTreeAt(OwnedHex hex, GameObject treePrefab, Vector3 position)
     {
@@ -401,22 +410,22 @@ public class TerrainManager : MonoBehaviour
         //change tilePrefab based on biome
         Vector3 position = borderingHexComponent.gameObject.transform.position;
         Destroy(borderingHexComponent.gameObject);
-        GameObject hex = CreateOwnedTile(biome, position);
+        GameObject tile = CreateOwnedTile(biome, position);
         SoundManager.PlaySound(SoundManager.Sound.new_tile);
         
         //create features based on biome
         BiomeFeatures biomeFeatures = BiomeFeaturesDictionary[biome];
         if (hasUniqueResource)
         {
-            CreateFeature(hex, biomeFeatures.uniqueResource);
+            CreateFeature(tile, biomeFeatures.uniqueResource);
         }
         if (hasSecondaryResource)
         {
-            CreateFeature(hex, biomeFeatures.secondaryResource);
+            CreateFeature(tile, biomeFeatures.secondaryResource);
         }
         if (hasTertiaryResource)
         {
-            CreateFeature(hex, biomeFeatures.tertiaryResource);
+            CreateFeature(tile, biomeFeatures.tertiaryResource);
         }
         //TODO
         /*if (hasRestriction)
@@ -424,6 +433,25 @@ public class TerrainManager : MonoBehaviour
             CreateFeature(hex, biomeFeatures.Restriction, biomeFeatures.RestrictionMaxCount);
         }*/
         
-        return hex;
+        SpawnDecor(tile);
+
+        return tile;
+    }
+
+    private void SpawnDecor(GameObject tile)
+    {
+        int randomCount1 = Utils.GenerateRandomIntBetween(0, 2);
+        for (int i = 0; i < randomCount1; i++)
+        {
+            Vector3 position1 = TileUtils.PositionOnTile(tile.transform.position);
+            CreateInTile(rockPrefab, tile, position1);
+        }
+
+        int randomCount2 = Utils.GenerateRandomIntBetween(0, 6);
+        for (int i = 0; i < randomCount2; i++)
+        {
+            Vector3 position2 = TileUtils.PositionOnTile(tile.transform.position);
+            CreateInTile(stonePrefab, tile, position2);
+        }
     }
 }

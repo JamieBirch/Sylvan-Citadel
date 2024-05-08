@@ -6485,6 +6485,8 @@ MonoBehaviour:
   fogTile: {fileID: 3180673953241494959, guid: bfa893911798cef478682e7dc867ee72, type: 3}
   borderingHex: {fileID: 5828220953014600915, guid: 72a4f5cafaf2dab43a5e901325b331c4, type: 3}
   ownedHex: {fileID: 3193132197810865085, guid: 04f7847a0e009b3489b5fbb5dc98f219, type: 3}
+  rockPrefab: {fileID: 8824293447432050947, guid: 632a98b519745b246b2976c252d51380, type: 3}
+  stonePrefab: {fileID: 3276919348322983240, guid: ed90159adec90dc45a2e76b78dc641d8, type: 3}
   overlapRadius: 1
   firstTileCenter: {x: 0, y: 0, z: 0}
   beltWideness: 2

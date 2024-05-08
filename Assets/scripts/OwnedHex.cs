@@ -9,9 +9,15 @@ public class OwnedHex : Hex
     public const string BedsAvailableStatString = "beds";
     private TileManager _tileManager;
     
-    public GameObject groveTile;
-    public GameObject forestTile;
-    public GameObject grasslandTile;
+    public GameObject tileBase;
+
+    public GameObject groveLayers;
+    public GameObject forestLayers;
+    public GameObject grasslandLayers;
+    
+    // public GameObject groveTile;
+    // public GameObject forestTile;
+    // public GameObject grasslandTile;
     public GameObject riverTile;
     public GameObject mountainTile;
     public GameObject swampTile;
@@ -149,7 +155,6 @@ public class OwnedHex : Hex
 
     public override void OnMouseEnter()
     {
-        base.OnMouseEnter();
         highlight();
     }
 

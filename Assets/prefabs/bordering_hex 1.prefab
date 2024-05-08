@@ -724,7 +724,7 @@ MonoBehaviour:
   Name: 
   biome: 0
   availableColor: {r: 0.5019608, g: 0.24705882, b: 0.24705882, a: 0}
-  nonAvailableColor: {r: 0.32941177, g: 0.27058825, b: 0.27058825, a: 0}
+  nonAvailableColor: {r: 0.8, g: 0.6571429, b: 0.6571429, a: 1}
   rend: {fileID: 5404319486185118211}
   isObtainable: 0
   description: 

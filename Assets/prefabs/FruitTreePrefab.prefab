@@ -111,6 +111,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7009425994374707002, guid: 74c15aebf39c08644b581691ed192c82, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7641952577707814272, guid: 74c15aebf39c08644b581691ed192c82, type: 3}
       propertyPath: m_Name
       value: fruit_tree_5

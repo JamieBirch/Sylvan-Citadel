@@ -70,24 +70,29 @@ public class TerrainManager : MonoBehaviour
         tileComponent.tileStatsUI = tileStatsUI;
         tileStatsUI.gameObject.SetActive(false);
 
-    switch (biome)
+
+        GameObject tileGroundLayers = null;
+        switch (biome)
         {
             case Biome.grove:
             {
-                tileComponent.groveTile.SetActive(true);
-                tileComponent.rend = tileComponent.groveTile.GetComponent<Renderer>();
+                tileGroundLayers = tileComponent.groveLayers;
+                // tileComponent.groveLayers.SetActive(true);
+                // tileComponent.rend = tileComponent.groveTile.GetComponent<Renderer>();
                 break;
             }
             case Biome.forest:
             {
-                tileComponent.forestTile.SetActive(true);
-                tileComponent.rend = tileComponent.forestTile.GetComponent<Renderer>();
+                tileGroundLayers = tileComponent.forestLayers;
+                // tileComponent.forestTile.SetActive(true);
+                // tileComponent.rend = tileComponent.forestTile.GetComponent<Renderer>();
                 break;
             }
             case Biome.grassland:
             {
-                tileComponent.grasslandTile.SetActive(true);
-                tileComponent.rend = tileComponent.grasslandTile.GetComponent<Renderer>();
+                tileGroundLayers = tileComponent.grasslandLayers;
+                // tileComponent.grasslandTile.SetActive(true);
+                // tileComponent.rend = tileComponent.grasslandTile.GetComponent<Renderer>();
                 break;
             }
             /*case Biome.river:
@@ -114,13 +119,25 @@ public class TerrainManager : MonoBehaviour
                 break;
             }
         }
+        tileGroundLayers.SetActive(true);
+        RandomizeTileGroundLandscape(tileGroundLayers.GetComponent<GroundLayers>());
+        
         tileComponent.biome = biome;
         
         GameStats.AddTile(tileComponent);
         
         return newOwnedTile;
     }
-    
+
+    private void RandomizeTileGroundLandscape(GroundLayers tileGroundLayers)
+    {
+        foreach (GameObject layer in tileGroundLayers.layers)
+        {
+            float yAngle = 60* Utils.GenerateRandomIntNumberWhereMaxIs(6);
+            layer.transform.Rotate(0, 0, yAngle);
+        }
+    }
+
     private void CreateFeature(GameObject tile, LandscapeFeatureType landscapeFeatureType)
     {
         if (landscapeFeatureType == LandscapeFeatureType.none)

@@ -11,7 +11,7 @@ public class Fruit : MonoBehaviour
     private void Start()
     {
         Calendar.NewDay += StartDay;
-        GameStats.instance.AddFood();
+        // GameStats.instance.AddFood();
         _terrainManager = TerrainManager.instance;
     }
     
@@ -27,7 +27,7 @@ public class Fruit : MonoBehaviour
             }
         }
 
-        GameStats.instance.RemoveFood();
+        // GameStats.instance.RemoveFood();
 
         Destroy(gameObject);
     }

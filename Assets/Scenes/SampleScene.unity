@@ -1194,7 +1194,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: food
+  m_Text: stored food
 --- !u!222 &222787719
 CanvasRenderer:
   m_ObjectHideFlags: 0

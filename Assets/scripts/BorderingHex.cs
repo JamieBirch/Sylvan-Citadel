@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class BorderingHex : Hex
@@ -77,6 +76,10 @@ public class BorderingHex : Hex
     
     public void OnMouseDrag()
     {
+        if (EventSystem.current.currentSelectedGameObject)
+        {
+            return;
+        }
         if (!isObtainable)
         {
             PlayerMessageService.instance.ShowMessage("Not enough population in nearby tiles");

@@ -19,6 +19,19 @@ public class GameStats : MonoBehaviour
     {
         instance = this;
     }
+
+    private void Update()
+    {
+        if (Wood < 0)
+        {
+            Wood = 0;
+        }
+
+        if (Food < 0)
+        {
+            Food = 0;
+        }
+    }
     
     public static int GetPopulation()
     {

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class TreeSize : MonoBehaviour
 {
-    private float size;
+    public float size;
 
     public float GetSize()
     {

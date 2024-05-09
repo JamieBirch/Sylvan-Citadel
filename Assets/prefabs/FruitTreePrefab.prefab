@@ -46,12 +46,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c39b588b1cd94bffbd44bee842acbc58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hex: {fileID: 0}
+  tile: {fileID: 0}
   leaves: {fileID: 6550092746152342733}
   treeSize: {fileID: 3430489637295218359}
   growthSpeed: 1.02
-  Fertility: 70
-  fruitPrefab: {fileID: 4328736735578813185, guid: 982b625b4d9fa8246b89402921114733, type: 3}
+  fertility: 70
+  seedPrefab: {fileID: 4328736735578813185, guid: 982b625b4d9fa8246b89402921114733, type: 3}
 --- !u!1001 &346811191883833726
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -152,6 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2ae590dfaf64ce488caebabda0b0ac1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  size: 0
 --- !u!1001 &7956474165562977213
 PrefabInstance:
   m_ObjectHideFlags: 0

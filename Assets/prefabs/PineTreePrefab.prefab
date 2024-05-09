@@ -46,12 +46,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dffcd2cf7ad4aadb7c5aa3710629239, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hex: {fileID: 0}
+  tile: {fileID: 0}
   leaves: {fileID: 146949629793314472}
   treeSize: {fileID: 7327350240597833231}
   growthSpeed: 1.02
-  Fertility: 20
-  pinePrefab: {fileID: 4328736735578813185, guid: 7f83b3afe64fc434cb937939b5db0af9, type: 3}
+  fertility: 20
+  seedPrefab: {fileID: 4328736735578813185, guid: 7f83b3afe64fc434cb937939b5db0af9, type: 3}
 --- !u!1001 &3085702036776862816
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -155,6 +155,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2ae590dfaf64ce488caebabda0b0ac1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  size: 0
 --- !u!4 &3267402049024009099 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: df500cd0cd14f1d47a722a2ceee3618d, type: 3}
@@ -243,3 +244,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2ae590dfaf64ce488caebabda0b0ac1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  size: 0

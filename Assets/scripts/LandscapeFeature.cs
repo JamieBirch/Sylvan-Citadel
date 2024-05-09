@@ -71,7 +71,7 @@ public abstract class LandscapeFeatureWoodland : LandscapeFeature
     public override void AddResource(GameObject go)
     {
         Tree treeComponent = go.GetComponent<Tree>();
-        treeComponent.hex = tile;
+        treeComponent.tile = tile;
         trees.Add(treeComponent);
     }
 }

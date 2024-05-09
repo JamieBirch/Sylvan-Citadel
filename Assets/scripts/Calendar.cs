@@ -97,6 +97,11 @@ public class Calendar : MonoBehaviour
         timeText.text = $"{time:t}";
     }
 
+    public void Pause()
+    {
+        Time.timeScale = 0f;
+    }
+    
     public void TimeScale1()
     {
         Time.timeScale = 1f;

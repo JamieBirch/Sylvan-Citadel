@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject GameOverCanvas;
     public GameObject InfoCanvas;
+    public GameObject PauseMenuCanvas;
     public List<Mission> missions;
     
     public int StartHumans;
@@ -49,6 +50,12 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKey("escape"))
+        {
+            PauseMenuCanvas.SetActive(true);
+            Time.timeScale = 0f;
+        }
+        
         humans.text = GameStats.GetPopulation().ToString();
         food.text = GameStats.GetFood().ToString();
         wood.text = GameStats.GetWood().ToString();

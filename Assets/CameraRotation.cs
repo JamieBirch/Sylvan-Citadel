@@ -7,11 +7,11 @@ public class CameraRotation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey("q"))
+        if (Input.GetKey("e"))
         {
             transform.Rotate(Vector3.down, panSpeed * Time.deltaTime);
         }
-        if (Input.GetKey("e"))
+        if (Input.GetKey("q"))
         {
             transform.Rotate(Vector3.up, panSpeed * Time.deltaTime);
         }

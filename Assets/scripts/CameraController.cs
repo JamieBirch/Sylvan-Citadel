@@ -33,14 +33,24 @@ public class CameraController : MonoBehaviour
             pos.x -= panSpeed * Time.deltaTime;
         }
 
-        pos.x = (Mathf.Clamp(pos.x, -panLimit.x, panLimit.x));
-        pos.z = (Mathf.Clamp(pos.z, -panLimit.y, panLimit.y));
+        
 
         //zoom
         float scroll = Input.GetAxis("Mouse ScrollWheel");
-        pos.y = Mathf.SmoothDamp(pos.y, pos.y - scroll * scrollSpeed * 100f * Time.deltaTime, ref velocity, Time.deltaTime);
-        // Vector3 targetPosition = target.position + offset;
-        // pos.y -= scroll * scrollSpeed * 100f * Time.deltaTime;
+        if ((scroll > 0f && pos.y > miny) || (scroll < 0f && pos.y < maxy) )
+        {
+            Vector3 transformForward = gameObject.transform.forward;
+            Vector3 targetPosition = transform.position + transformForward * scroll * scrollSpeed * 100f * Time.deltaTime;
+
+            // transform.Translate(targetPosition, Space.World);
+            // pos.y = Mathf.SmoothDamp(pos.y, pos.y - scroll * scrollSpeed * 100f * Time.deltaTime, ref velocity, Time.deltaTime);
+            // pos.y = Mathf.SmoothDamp(pos.y, pos.y - targetPosition.y, ref velocity, Time.deltaTime);
+            // pos.y -= scroll * scrollSpeed * 100f * Time.deltaTime;
+            pos = targetPosition;
+        }
+        
+        pos.x = (Mathf.Clamp(pos.x, -panLimit.x, panLimit.x));
+        pos.z = (Mathf.Clamp(pos.z, -panLimit.y, panLimit.y));
         pos.y = (Mathf.Clamp(pos.y, miny, maxy));
 
         transform.position = pos;

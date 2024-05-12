@@ -4,11 +4,11 @@ public class Fruit : MonoBehaviour
 {
     public OwnedHex tile;
     public bool isClaimed = false;
-    public GameObject treePrefab;
+    // public GameObject treePrefab;
 
     private TerrainManager _terrainManager;
 
-    private void Start()
+    /*private void Start()
     {
         Calendar.NewDay += StartDay;
         // GameStats.instance.AddFood();
@@ -17,7 +17,7 @@ public class Fruit : MonoBehaviour
     
     void StartDay()
     {
-        int treesOnTile = tile.GetWoodland().getCount();
+        /*int treesOnTile = tile.GetWoodland().getCount();
         if (treesOnTile < 100)
         {
             double chance = Utils.GenerateRandomChance();
@@ -25,7 +25,7 @@ public class Fruit : MonoBehaviour
             {
                 _terrainManager.SpawnTreeAt(tile, treePrefab, transform.position);
             }
-        }
+        }#1#
 
         // GameStats.instance.RemoveFood();
 
@@ -35,5 +35,5 @@ public class Fruit : MonoBehaviour
     public void OnDestroy()
     {
         Calendar.NewDay -= StartDay;
-    }
+    }*/
 }

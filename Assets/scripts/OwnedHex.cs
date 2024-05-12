@@ -8,6 +8,7 @@ public class OwnedHex : Hex
     public const string PopulationStatString = "population";
     public const string BedsAvailableStatString = "beds";
     private TileManager _tileManager;
+    private TerrainManager _terrainManager;
     
     public GameObject tileBase;
 
@@ -60,6 +61,9 @@ public class OwnedHex : Hex
     private void Start()
     {
         _tileManager = TileManager.instance;
+        _terrainManager = TerrainManager.instance;
+        
+        Calendar.NewDay += StartDay;
         
         buildings = new List<Building>();
         selected = false;
@@ -84,6 +88,15 @@ public class OwnedHex : Hex
             int count = feature.getCount();
             tileStatistics.Add(landscapeFeatureType.ToString(), count);
             tileStatsUI.AddField(landscapeFeatureType.ToString(), count);
+        }
+    }
+    
+    void StartDay()
+    {
+        LandscapeFeatureWoodland woodland = GetWoodland();
+        if (woodland != null)
+        {
+            woodland.GrowNewTree(_terrainManager);
         }
     }
 
@@ -242,5 +255,10 @@ public class OwnedHex : Hex
             Debug.Log("No woodland in tile " + name);
             return null;
         }
+    }
+    
+    public void OnDestroy()
+    {
+        Calendar.NewDay -= StartDay;
     }
 }

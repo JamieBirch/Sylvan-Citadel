@@ -28,6 +28,19 @@ public abstract class LandscapeFeatureWoodland : LandscapeFeature
         return trees.Count;
     }
     
+    public void GrowNewTree(TerrainManager terrainManager)
+    {
+        int treesOnTile = getCount();
+        if (treesOnTile < 100)
+        {
+            double chance = Utils.GenerateRandomChance();
+            if (chance < 100 - treesOnTile)
+            {
+                terrainManager.SpawnTree(this, tile.gameObject);
+            }
+        }
+    }
+    
     public GameObject ChooseBiggestTree()
     {
         Tree biggestTree = null;
@@ -73,6 +86,11 @@ public abstract class LandscapeFeatureWoodland : LandscapeFeature
         Tree treeComponent = go.GetComponent<Tree>();
         treeComponent.tile = tile;
         trees.Add(treeComponent);
+    }
+
+    public GameObject GetTreePrefab()
+    {
+        return LandscapeFeaturesDictionary.GetLandscapeFeatureBlueprint(getFeatureType()).resourceGO;
     }
 }
 

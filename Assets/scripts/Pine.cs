@@ -3,11 +3,11 @@
 public class Pine : MonoBehaviour
 {
     public OwnedHex tile;
-    public GameObject treePrefab;
+    // public GameObject treePrefab;
 
     private TerrainManager _terrainManager;
     
-    private void Start()
+    /*private void Start()
     {
         Calendar.NewDay += StartDay;
         _terrainManager = TerrainManager.instance;
@@ -30,5 +30,5 @@ public class Pine : MonoBehaviour
     public void OnDestroy()
     {
         Calendar.NewDay -= StartDay;
-    }
+    }*/
 }

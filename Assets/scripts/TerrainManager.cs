@@ -196,6 +196,12 @@ public class TerrainManager : MonoBehaviour
         } 
     }
 
+    public void SpawnTree(LandscapeFeatureWoodland woodland, GameObject tile)
+    {
+        Vector3 position = TileUtils.PositionOnTile(tile.transform.position);
+        SpawnResource(woodland, woodland.GetTreePrefab(), tile, position);
+    }
+
     private void SpawnResource(LandscapeFeature landscapeFeature, GameObject resourcePrefab, GameObject tile, Vector3 position)
     {
         // Vector3 position = TileUtils.PositionOnTile(tile.transform.position);

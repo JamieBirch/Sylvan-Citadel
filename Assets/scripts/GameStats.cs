@@ -13,7 +13,7 @@ public class GameStats : MonoBehaviour
     public GameObject woodUi;
     public GameObject foodUi;
     
-    public static List<OwnedHex> OwnedTiles = new List<OwnedHex>();
+    public static List<OwnedTile> OwnedTiles = new List<OwnedTile>();
 
     private void Awake()
     {
@@ -84,7 +84,7 @@ public class GameStats : MonoBehaviour
         foodUi.GetComponent<Animator>().Play("decrease");
     }
     
-    public static void AddTile(OwnedHex newTile)
+    public static void AddTile(OwnedTile newTile)
     {
         OwnedTiles.Add(newTile);
     }

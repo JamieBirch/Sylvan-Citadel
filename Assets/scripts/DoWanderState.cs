@@ -55,21 +55,21 @@ public class DoWanderState : IHumanState
             {
                 case SparetimeActivity.admireBuilding:
                 {
-                    List<Building> buildings = human.homeHex.buildings;
+                    List<Building> buildings = human.homeTile.buildings;
                     human.currentTarget = buildings[new Random().Next(buildings.Count - 1)].gameObject;
                     break;
                 }
                 case SparetimeActivity.followPerson:
                 {
-                    List<Human> humans = human.homeHex.village.GetComponent<Village>().humans;
+                    List<Human> humans = human.homeTile.village.GetComponent<Village>().humans;
                     human.currentTarget = humans[new Random().Next(humans.Count - 1)].gameObject;
                     break;
                 }
                 case SparetimeActivity.hugTree:
                 {
-                    if (human.homeHex.GetWoodland() != null)
+                    if (human.homeTile.GetWoodland() != null)
                     {
-                        List<Tree> trees = human.homeHex.GetWoodland().trees;
+                        List<Tree> trees = human.homeTile.GetWoodland().trees;
                         human.currentTarget = trees[new Random().Next(trees.Count - 1)].gameObject;
                     }
                     break;

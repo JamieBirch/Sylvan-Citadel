@@ -34,7 +34,7 @@ public class PopulationManager : MonoBehaviour
         
         GameObject _village = Instantiate(village, hex.transform.position, Quaternion.identity, hex.transform);
         _village.name = "village";
-        hex.GetComponent<OwnedHex>().village = _village;
+        hex.GetComponent<OwnedTile>().village = _village;
         return _village;
     }
 
@@ -52,21 +52,21 @@ public class PopulationManager : MonoBehaviour
         humanComponent.Name = name;
         
         //settle
-        OwnedHex homeHex = village.GetComponentInParent<OwnedHex>();
+        OwnedTile homeTile = village.GetComponentInParent<OwnedTile>();
         Village villageComponent = village.GetComponent<Village>();
-        SettleHumanInHex(homeHex, villageComponent, humanComponent);
+        SettleHumanInHex(homeTile, villageComponent, humanComponent);
 
         return humanGameObject;
     }
     
-    public void SettleHumanInHex(OwnedHex newHomeHex, Village newVillage, Human humanComponent)
+    public void SettleHumanInHex(OwnedTile newHomeTile, Village newVillage, Human humanComponent)
     {
-        if (humanComponent.homeHex != null)
+        if (humanComponent.homeTile != null)
         {
             // move out of hex  
-            Village homeVillage = humanComponent.homeHex.gameObject.GetComponentInChildren<Village>();
+            Village homeVillage = humanComponent.homeTile.gameObject.GetComponentInChildren<Village>();
             homeVillage.humans.Remove(humanComponent);
-            humanComponent.homeHex.HexPopulation--;
+            humanComponent.homeTile.HexPopulation--;
             
             //TODO !!!
             //move out of house
@@ -87,15 +87,15 @@ public class PopulationManager : MonoBehaviour
         newVillage.humans.Add(humanComponent);
         
         //move in to new hex
-        humanComponent.homeHex = newHomeHex;
+        humanComponent.homeTile = newHomeTile;
         // Debug.Log(humanComponent.name + " is settling in " + newHomeHex.Name);
-        newHomeHex.HexPopulation++;
+        newHomeTile.HexPopulation++;
     }
 
-    public List<Human> AllAvailableHumans(List<OwnedHex> ownedHexesAround)
+    public List<Human> AllAvailableHumans(List<OwnedTile> ownedHexesAround)
     {
         List<Human> allAvailableHumans = new List<Human>();
-        foreach (OwnedHex ownedHex in ownedHexesAround)
+        foreach (OwnedTile ownedHex in ownedHexesAround)
         {
             //should leave at least 1 human in each Hex
             int ownedHexAvailablePopulation = ownedHex.GetSettlersAvailable();

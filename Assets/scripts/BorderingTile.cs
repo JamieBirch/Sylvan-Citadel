@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class BorderingHex : Hex
+public class BorderingTile : Tile
 {
     public static TileManager TileManager;
     
@@ -159,7 +159,7 @@ public class BorderingHex : Hex
     {
         int price = defaultPrice;
         
-        List<OwnedHex> ownedHexesAround = GetOwnedHexesAround();
+        List<OwnedTile> ownedHexesAround = GetOwnedHexesAround();
         price -= ownedHexesAround.Count;
 
         if (price < 0)

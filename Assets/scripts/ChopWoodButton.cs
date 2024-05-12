@@ -24,10 +24,10 @@ public class ChopWoodButton : MonoBehaviour
         if (TileManager.instance.activeTile == null)
         {
             return false;
-        } else if (TileManager.instance.activeTile.GetComponent<OwnedHex>().GetWoodland() == null)
+        } else if (TileManager.instance.activeTile.GetComponent<OwnedTile>().GetWoodland() == null)
         {
             return false;
-        } else if (TileManager.instance.activeTile.GetComponent<OwnedHex>().GetWoodland().getCount() > 0 )
+        } else if (TileManager.instance.activeTile.GetComponent<OwnedTile>().GetWoodland().getCount() > 0 )
         {
             return true;
         }

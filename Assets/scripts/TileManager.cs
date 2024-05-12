@@ -36,10 +36,10 @@ public class TileManager : MonoBehaviour
     private void UseHexStats()
     {
         //show tile stats
-        OwnedHex activeHexComponent = activeTile.GetComponent<OwnedHex>();
-        activeHexComponent.tileStatsUI.gameObject.SetActive(true);
+        OwnedTile activeTileComponent = activeTile.GetComponent<OwnedTile>();
+        activeTileComponent.tileStatsUI.gameObject.SetActive(true);
         
-        SetHexStats(activeHexComponent);
+        SetHexStats(activeTileComponent);
     }
 
     public void Build(GameObject buildingPrefab)
@@ -61,44 +61,44 @@ public class TileManager : MonoBehaviour
         }
         else
         {
-            activeTile.GetComponent<OwnedHex>().Unselect();
+            activeTile.GetComponent<OwnedTile>().Unselect();
             activeTile = hex;
         }
-        activeTile.GetComponent<OwnedHex>().tileStatsUI.gameObject.SetActive(true);
+        activeTile.GetComponent<OwnedTile>().tileStatsUI.gameObject.SetActive(true);
         UseHexStats();
     }
 
-    private void SetHexStats(OwnedHex activeHexComponent)
+    private void SetHexStats(OwnedTile activeTileComponent)
     {
-        Dictionary<string,TileStat> tileStatsUI = activeHexComponent.tileStatsUI.tileStatistics;
+        Dictionary<string,TileStat> tileStatsUI = activeTileComponent.tileStatsUI.tileStatistics;
         foreach (KeyValuePair<string, TileStat> uielement in tileStatsUI)
         {
-            activeHexComponent.UpdateTileStatisticsUI(uielement.Key);
+            activeTileComponent.UpdateTileStatisticsUI(uielement.Key);
         }
     }
 
     public void SetHexAsInActive()
     {
-        activeTile.GetComponent<OwnedHex>().tileStatsUI.gameObject.SetActive(false);
+        activeTile.GetComponent<OwnedTile>().tileStatsUI.gameObject.SetActive(false);
         activeTile = null;
     }
 
     public void BuyHex(GameObject _borderingHex)
     {
-        BorderingHex borderingHexComponent = _borderingHex.GetComponent<BorderingHex>();
+        BorderingTile borderingTileComponent = _borderingHex.GetComponent<BorderingTile>();
         
-        if (!IsHexObtainable(borderingHexComponent))
+        if (!IsHexObtainable(borderingTileComponent))
         {
             //TODO can't call buyHex on !isHexObtainable, optimize
             Debug.Log("Not enough humans!");
         }
         else
         {
-            GameObject hex = _terrainManager.ConvertToOwnedHex(borderingHexComponent);
+            GameObject hex = _terrainManager.ConvertToOwnedHex(borderingTileComponent);
             _populationManager.CreateVillage(hex);
             
-            var allAvailableHumans = _populationManager.AllAvailableHumans(borderingHexComponent.GetOwnedHexesAround());
-            IEnumerable<Human> pickedHumans = allAvailableHumans.OrderBy(x => new Random().Next()).Take(borderingHexComponent.humanPrice);
+            var allAvailableHumans = _populationManager.AllAvailableHumans(borderingTileComponent.GetOwnedHexesAround());
+            IEnumerable<Human> pickedHumans = allAvailableHumans.OrderBy(x => new Random().Next()).Take(borderingTileComponent.humanPrice);
 
             //move in to new hex / kill
             foreach (Human pickedHuman in pickedHumans)
@@ -110,15 +110,15 @@ public class TileManager : MonoBehaviour
         }
     }
 
-    public void RelocateHumanTo(OwnedHex hex, Village village, Human human)
+    public void RelocateHumanTo(OwnedTile tile, Village village, Human human)
     {
-        _populationManager.SettleHumanInHex(hex, village, human);
+        _populationManager.SettleHumanInHex(tile, village, human);
     }
 
-    public bool IsHexObtainable(BorderingHex hex)
+    public bool IsHexObtainable(BorderingTile tile)
     {
-        List<OwnedHex> ownedHexesAround = hex.GetOwnedHexesAround();
-        int hexPrice = hex.humanPrice;
+        List<OwnedTile> ownedHexesAround = tile.GetOwnedHexesAround();
+        int hexPrice = tile.humanPrice;
         var allAvailableHumans = _populationManager.AllAvailableHumans(ownedHexesAround);
         if (allAvailableHumans.Count <= hexPrice)
         {
@@ -129,6 +129,6 @@ public class TileManager : MonoBehaviour
 
     public Biome GetActiveTileBiome()
     {
-        return activeTile.GetComponent<OwnedHex>().biome;
+        return activeTile.GetComponent<OwnedTile>().biome;
     }
 }

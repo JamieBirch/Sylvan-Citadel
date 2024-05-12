@@ -67,7 +67,7 @@ public class TerrainManager : MonoBehaviour
         GameObject newOwnedTile = Instantiate(ownedHex, tileCenter, Quaternion.identity, gameObject.transform);
         string districtName = NameGenerator.CreateDistrictName();
         newOwnedTile.name = districtName;
-        OwnedHex tileComponent = newOwnedTile.GetComponent<OwnedHex>();
+        OwnedTile tileComponent = newOwnedTile.GetComponent<OwnedTile>();
         tileComponent.Name = districtName;
 
         TileStatsUI tileStatsUI = Instantiate(tileComponent.tileStatsUIprefab, tileStatsUIcontainer.transform).GetComponent<TileStatsUI>();
@@ -220,11 +220,11 @@ public class TerrainManager : MonoBehaviour
     }
 
 
-    public void SpawnTreeAt(OwnedHex hex, GameObject treePrefab, Vector3 position)
+    public void SpawnTreeAt(OwnedTile tile, GameObject treePrefab, Vector3 position)
     {
         //TODO spawn tree of random size
         float randomScale = Utils.GenerateRandom(0.2f, 0.3f);
-        SpawnResource(hex.GetWoodland(), treePrefab, hex.gameObject, position);
+        SpawnResource(tile.GetWoodland(), treePrefab, tile.gameObject, position);
     }
 
     public void CreateConcealedHexesAround(GameObject hex)
@@ -253,12 +253,12 @@ public class TerrainManager : MonoBehaviour
         }
     }
 
-    private static void RandomizeFeatures(BorderingHex borderingHexComponent)
+    private static void RandomizeFeatures(BorderingTile borderingTileComponent)
     {
-        borderingHexComponent.hasUniqueResource = Utils.TossCoin();
-        borderingHexComponent.hasSecondaryResource = Utils.TossCoin();
-        borderingHexComponent.hasTertiaryResource = Utils.TossCoin();
-        borderingHexComponent.hasRestriction = Utils.TossCoin();
+        borderingTileComponent.hasUniqueResource = Utils.TossCoin();
+        borderingTileComponent.hasSecondaryResource = Utils.TossCoin();
+        borderingTileComponent.hasTertiaryResource = Utils.TossCoin();
+        borderingTileComponent.hasRestriction = Utils.TossCoin();
     }
 
     private GameObject CreateBorderingHexAt(Vector3 hexPosition)
@@ -273,7 +273,7 @@ public class TerrainManager : MonoBehaviour
             foreach(var collider in colliders)
             {
                 var go = collider.gameObject; //This is the game object you collided with
-                if (go.TryGetComponent<ConcealedHex>(out _))
+                if (go.TryGetComponent<ConcealedTile>(out _))
                 {
                     Destroy(go);
                 }
@@ -291,11 +291,11 @@ public class TerrainManager : MonoBehaviour
     private GameObject CreateNewBorderingTile(Vector3 position)
     {
         GameObject newHex = Instantiate(borderingHex, position, Quaternion.identity, gameObject.transform);
-        BorderingHex newHexComponent = newHex.GetComponent<BorderingHex>();
+        BorderingTile newTileComponent = newHex.GetComponent<BorderingTile>();
 
-        DefineBiome(position, newHexComponent);
-        RandomizeFeatures(newHexComponent);
-        return newHexComponent.gameObject;
+        DefineBiome(position, newTileComponent);
+        RandomizeFeatures(newTileComponent);
+        return newTileComponent.gameObject;
     }
 
     private bool collidesWithFogTile(Collider[] colliders)
@@ -303,7 +303,7 @@ public class TerrainManager : MonoBehaviour
         foreach(var collider in colliders)
         {
             var go = collider.gameObject; //This is the game object you collided with
-            if (go.TryGetComponent<ConcealedHex>(out _))
+            if (go.TryGetComponent<ConcealedTile>(out _))
             {
                 return true;
             }
@@ -334,25 +334,25 @@ public class TerrainManager : MonoBehaviour
         
     }
 
-    private void DefineBiome(Vector3 hexPosition, BorderingHex newHexComponent)
+    private void DefineBiome(Vector3 hexPosition, BorderingTile newTileComponent)
     {
         // Vector3[] positionsOfHexesAround = HexUtils.PositionsOfHexesAround(hexPosition);
-        List<OwnedHex> hexesAround = newHexComponent.GetOwnedHexesAround();
+        List<OwnedTile> hexesAround = newTileComponent.GetOwnedHexesAround();
         int randomHexIndex = Utils.GenerateRandomIntNumberWhereMaxIs(6);
 
-        Hex randomHex = hexesAround.ElementAtOrDefault(randomHexIndex - 1);
+        Tile randomTile = hexesAround.ElementAtOrDefault(randomHexIndex - 1);
 
         Biome biome;
-        if (randomHex != null)
+        if (randomTile != null)
         {
-            biome = randomHex.biome;
+            biome = randomTile.biome;
         }
         else
         {
             biome = GetHexBiomeByPosition(hexPosition);
         }
 
-        newHexComponent.biome = biome;
+        newTileComponent.biome = biome;
     }
 
     private Biome GetHexBiomeByPosition(Vector3 hexPosition)
@@ -404,18 +404,18 @@ public class TerrainManager : MonoBehaviour
         }
     }
 
-    public GameObject ConvertToOwnedHex(BorderingHex borderingHexComponent)
+    public GameObject ConvertToOwnedHex(BorderingTile borderingTileComponent)
     {
-        Biome biome = borderingHexComponent.biome;
+        Biome biome = borderingTileComponent.biome;
         
-        bool hasUniqueResource = borderingHexComponent.hasUniqueResource;
-        bool hasSecondaryResource = borderingHexComponent.hasSecondaryResource;
-        bool hasTertiaryResource = borderingHexComponent.hasTertiaryResource;
-        bool hasRestriction = borderingHexComponent.hasRestriction;
+        bool hasUniqueResource = borderingTileComponent.hasUniqueResource;
+        bool hasSecondaryResource = borderingTileComponent.hasSecondaryResource;
+        bool hasTertiaryResource = borderingTileComponent.hasTertiaryResource;
+        bool hasRestriction = borderingTileComponent.hasRestriction;
         
         //change tilePrefab based on biome
-        Vector3 position = borderingHexComponent.gameObject.transform.position;
-        Destroy(borderingHexComponent.gameObject);
+        Vector3 position = borderingTileComponent.gameObject.transform.position;
+        Destroy(borderingTileComponent.gameObject);
         GameObject tile = CreateOwnedTile(biome, position);
         SoundManager.PlaySound(SoundManager.Sound.new_tile);
         

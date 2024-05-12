@@ -1,8 +1,9 @@
 using System.Collections.Generic;
+using UnityEngine.Serialization;
 
 public class House : Building
 {
-    public OwnedHex hex;
+    [FormerlySerializedAs("hex")] public OwnedTile tile;
     public int capacity;
     private int bedsAvailable;
     
@@ -12,7 +13,7 @@ public class House : Building
     {
         _tenants = new List<Human>();
         bedsAvailable = capacity;
-        hex = GetComponentInParent<OwnedHex>();
+        tile = GetComponentInParent<OwnedTile>();
     }
 
     public bool MoveIn(Human human)

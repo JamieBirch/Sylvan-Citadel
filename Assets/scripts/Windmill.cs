@@ -34,7 +34,7 @@ public class Windmill : Building
         {
             return GameStats.GetWood() >= woodPrice &&
                    TileManager.instance.GetActiveTileBiome() == Biome.grassland &&
-                   TileManager.instance.activeTile.GetComponent<OwnedHex>().buildings
+                   TileManager.instance.activeTile.GetComponent<OwnedTile>().buildings
                        .Select(building => building.TryGetComponent<Windmill>(out _)).Count() <= maxWindmillsPerTile;
         } else
         {

@@ -2,20 +2,20 @@
 
 public class Pine : MonoBehaviour
 {
-    public OwnedHex tile;
+    public OwnedTile tile;
     // public GameObject treePrefab;
 
     private TerrainManager _terrainManager;
     
-    /*private void Start()
+    private void Start()
     {
         Calendar.NewDay += StartDay;
-        _terrainManager = TerrainManager.instance;
+        // _terrainManager = TerrainManager.instance;
     }
     
     void StartDay()
     {
-        int treesOnTile = tile.GetWoodland().getCount();
+        /*int treesOnTile = tile.GetWoodland().getCount();
         if (treesOnTile < 100)
         {
             double chance = Utils.GenerateRandomChance();
@@ -23,12 +23,12 @@ public class Pine : MonoBehaviour
             {
                 _terrainManager.SpawnTreeAt(tile, treePrefab, transform.position);
             }
-        }
+        }*/
         Destroy(gameObject);
     }
     
     public void OnDestroy()
     {
         Calendar.NewDay -= StartDay;
-    }*/
+    }
 }

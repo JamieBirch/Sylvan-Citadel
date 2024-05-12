@@ -3,13 +3,13 @@ using UnityEngine;
 
 public abstract class LandscapeFeature
 {
-    public OwnedHex tile;
+    public OwnedTile tile;
     
     public abstract void AddResource(GameObject go);
 
     public void AssignToTile(GameObject hex)
     {
-        tile = hex.GetComponent<OwnedHex>();
+        tile = hex.GetComponent<OwnedTile>();
         tile.LandscapeFeaturesDictionary.Add(getFeatureType(), this);
     }
 

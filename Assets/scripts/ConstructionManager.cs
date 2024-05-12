@@ -54,7 +54,7 @@ public class ConstructionManager : MonoBehaviour
             GameObject newBuilding = Instantiate(buildingPrefab, position, Quaternion.AngleAxis(buildingRotation, Vector3.up) , tile.transform);
             
             //assign to tile
-            OwnedHex tileComponent = tile.GetComponent<OwnedHex>();
+            OwnedTile tileComponent = tile.GetComponent<OwnedTile>();
             tileComponent.AddBuildingToTile(newBuilding.GetComponent<Building>());
             
             //deduct wood

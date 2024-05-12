@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class OwnedHex : Hex
+public class OwnedTile : Tile
 {
     public const string PopulationStatString = "population";
     public const string BedsAvailableStatString = "beds";
@@ -159,7 +159,7 @@ public class OwnedHex : Hex
     public void SettleInHex(Human human)
     {
         // Debug.Log("settling " + human.Name + " in " + Name);
-        if (human.homeHex != this)
+        if (human.homeTile != this)
         {
             // Debug.Log("new Hex!");
             _tileManager.RelocateHumanTo(this, village.GetComponent<Village>(), human);
@@ -227,7 +227,7 @@ public class OwnedHex : Hex
     public bool NeighborsHaveAvailableBeds()
     {
         // Debug.Log("checking for available beds in nearby hexes");
-        List<OwnedHex> ownedHexesAround = GetOwnedHexesAround();
+        List<OwnedTile> ownedHexesAround = GetOwnedHexesAround();
         foreach (var ownedHex in ownedHexesAround)
         {
             if (ownedHex.BedsAvailable > 0)

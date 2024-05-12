@@ -39,9 +39,9 @@ public class TerraformingManager : MonoBehaviour
     
     public void ChopTree(GameObject activeHex)
     {
-        OwnedHex activeHexComponent = activeHex.GetComponent<OwnedHex>();
+        OwnedTile activeTileComponent = activeHex.GetComponent<OwnedTile>();
         
-        LandscapeFeatureWoodland landscapeFeatureWoodland = activeHexComponent.GetWoodland();
+        LandscapeFeatureWoodland landscapeFeatureWoodland = activeTileComponent.GetWoodland();
         
         GameObject biggestTree = landscapeFeatureWoodland.ChooseBiggestTree();
             

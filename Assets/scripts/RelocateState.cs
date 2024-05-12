@@ -8,7 +8,7 @@
             human.wantsWater = false;
             human.wantsFood = false;
             //Set target as newHex
-            human.currentTarget = human.homeHex.gameObject;
+            human.currentTarget = human.homeTile.gameObject;
         }
         else
         {

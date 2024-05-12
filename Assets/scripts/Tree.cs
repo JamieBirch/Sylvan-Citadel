@@ -2,7 +2,7 @@ using UnityEngine;
 
 public abstract class Tree : MonoBehaviour
 {
-    public OwnedHex tile;
+    public OwnedTile tile;
     public GameObject leaves;
     public TreeSize treeSize;
     public float growthSpeed;

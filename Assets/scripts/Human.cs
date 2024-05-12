@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Human : MonoBehaviour
 {
@@ -18,7 +19,7 @@ public class Human : MonoBehaviour
     public bool hasHome = false;
     public bool isRelocating = false;
     public GameObject currentTarget;
-    public OwnedHex homeHex;
+    [FormerlySerializedAs("homeHex")] public OwnedTile homeTile;
 
     public bool hasWork = false;
     public int speed;
@@ -68,7 +69,7 @@ public class Human : MonoBehaviour
 
         if (GameStats.GetPopulation() < _populationManager.maxPopulation)
         {
-            if ((HasAvailableBeds() || homeHex.NeighborsHaveAvailableBeds()) && Satisfied())
+            if ((HasAvailableBeds() || homeTile.NeighborsHaveAvailableBeds()) && Satisfied())
             {
                 double chance = Utils.GenerateRandomChance();
                 if (chance <= fertility)
@@ -89,7 +90,7 @@ public class Human : MonoBehaviour
 
     private bool HasAvailableBeds()
     {
-        return homeHex.GetBedsAvailable() > 0;
+        return homeTile.GetBedsAvailable() > 0;
     }
 
     public void Hire()
@@ -156,9 +157,9 @@ public class Human : MonoBehaviour
         {
             MoveOut();
         }
-        homeHex.village.GetComponent<Village>().humans.Remove(this);
+        homeTile.village.GetComponent<Village>().humans.Remove(this);
         Destroy(gameObject);
-        homeHex.HexPopulation--;
+        homeTile.HexPopulation--;
         GameStats.instance.RemoveHuman();
     }
 
@@ -173,7 +174,7 @@ public class Human : MonoBehaviour
     {
         _home = house.gameObject;
         hasHome = true;
-       _home.GetComponent<House>().hex.SettleInHex(this);
+       _home.GetComponent<House>().tile.SettleInHex(this);
     }
 
     public void OnDestroy()

@@ -2,17 +2,17 @@ using UnityEngine;
 
 public class Fruit : MonoBehaviour
 {
-    public OwnedHex tile;
+    public OwnedTile tile;
     public bool isClaimed = false;
     // public GameObject treePrefab;
 
     private TerrainManager _terrainManager;
 
-    /*private void Start()
+    private void Start()
     {
         Calendar.NewDay += StartDay;
         // GameStats.instance.AddFood();
-        _terrainManager = TerrainManager.instance;
+        // _terrainManager = TerrainManager.instance;
     }
     
     void StartDay()
@@ -25,7 +25,7 @@ public class Fruit : MonoBehaviour
             {
                 _terrainManager.SpawnTreeAt(tile, treePrefab, transform.position);
             }
-        }#1#
+        }*/
 
         // GameStats.instance.RemoveFood();
 
@@ -35,5 +35,5 @@ public class Fruit : MonoBehaviour
     public void OnDestroy()
     {
         Calendar.NewDay -= StartDay;
-    }*/
+    }
 }

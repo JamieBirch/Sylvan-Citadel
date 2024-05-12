@@ -18,34 +18,30 @@ public class CameraController : MonoBehaviour
         //move
         if (Input.GetKey("w") || Input.mousePosition.y >= Screen.height - panBorderThickness)
         {
-            pos.z += panSpeed * Time.deltaTime;
+            Vector3 target = transform.position + gameObject.transform.forward * (panSpeed * Time.deltaTime);
+            pos.z = target.z;
+            pos.x = target.x;
         }
         if (Input.GetKey("s") || Input.mousePosition.y <= panBorderThickness)
         {
-            pos.z -= panSpeed * Time.deltaTime;
+            Vector3 target = transform.position - gameObject.transform.forward * (panSpeed * Time.deltaTime);
+            pos.z = target.z;
+            pos.x = target.x;
         }
         if (Input.GetKey("d") || Input.mousePosition.x >= Screen.width - panBorderThickness)
         {
-            pos.x += panSpeed * Time.deltaTime;
+            pos = transform.position + gameObject.transform.right * (panSpeed * Time.deltaTime);
         }
         if (Input.GetKey("a") || Input.mousePosition.x <= panBorderThickness)
         {
-            pos.x -= panSpeed * Time.deltaTime;
+            pos = transform.position - gameObject.transform.right * (panSpeed * Time.deltaTime);
         }
-
-        
 
         //zoom
         float scroll = Input.GetAxis("Mouse ScrollWheel");
         if ((scroll > 0f && pos.y > miny) || (scroll < 0f && pos.y < maxy) )
         {
-            Vector3 transformForward = gameObject.transform.forward;
-            Vector3 targetPosition = transform.position + transformForward * scroll * scrollSpeed * 100f * Time.deltaTime;
-
-            // transform.Translate(targetPosition, Space.World);
-            // pos.y = Mathf.SmoothDamp(pos.y, pos.y - scroll * scrollSpeed * 100f * Time.deltaTime, ref velocity, Time.deltaTime);
-            // pos.y = Mathf.SmoothDamp(pos.y, pos.y - targetPosition.y, ref velocity, Time.deltaTime);
-            // pos.y -= scroll * scrollSpeed * 100f * Time.deltaTime;
+            Vector3 targetPosition = transform.position + gameObject.transform.forward * (scroll * scrollSpeed * 100f * Time.deltaTime);
             pos = targetPosition;
         }
         

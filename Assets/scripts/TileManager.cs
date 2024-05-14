@@ -42,9 +42,10 @@ public class TileManager : MonoBehaviour
         SetHexStats(activeTileComponent);
     }
 
-    public void Build(GameObject buildingPrefab)
+    //TODO update
+    public void Build(BuildingBlueprint buildingBlueprint)
     {
-        _constructionManager.Build(buildingPrefab, activeTile);
+        _constructionManager.Build(buildingBlueprint, activeTile);
         SoundManager.PlaySound(SoundManager.Sound.build);
     }
     

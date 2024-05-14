@@ -129,6 +129,7 @@ public class OwnedTile : Tile
     public void AddBuildingToTile(Building buildingComponent)
     {
         buildings.Add(buildingComponent);
+        buildingComponent.tile = this;
     }
 
     private int CalcBedsAvailableSum()

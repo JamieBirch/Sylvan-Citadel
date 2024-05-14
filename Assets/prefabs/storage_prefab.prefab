@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8530626447809960566}
-  - component: {fileID: 8745016560592745415}
+  - component: {fileID: -9083125293251946865}
   m_Layer: 0
   m_Name: storage_prefab
   m_TagString: foodSource
@@ -33,7 +33,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8745016560592745415
+--- !u!114 &-9083125293251946865
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42,12 +42,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 3330790554826253085}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8233b489f1b2034cbffb926b479681c, type: 3}
+  m_Script: {fileID: 11500000, guid: 368debc00eb341d69ed02be7e7191f54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: Storage
-  woodPrice: 70
-  description: Provides place to take food
+  tile: {fileID: 0}
 --- !u!1001 &457385868971235714
 PrefabInstance:
   m_ObjectHideFlags: 0

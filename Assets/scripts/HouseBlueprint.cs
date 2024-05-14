@@ -1,12 +1,13 @@
-﻿using System.Collections.Generic;
 
-public class House : Building
+public class HouseBlueprint : BuildingBlueprint
 {
-    public int capacity;
+    // public OwnedTile tile;
+    /*public int capacity;
     private int bedsAvailable;
-    private List<Human> _tenants;
     
-    private void Start()
+    private List<Human> _tenants;*/
+
+    /*private void Start()
     {
         _tenants = new List<Human>();
         bedsAvailable = capacity;
@@ -36,15 +37,12 @@ public class House : Building
     {
         _tenants.Remove(human);
         bedsAvailable++;
-    }
-    
-    public void Demolish()
+    }*/
+
+    public override bool IsShowable()
     {
-        foreach (Human tenant in _tenants)
-        {
-            tenant.MoveOut();
-        }
-        
-        base.Demolish();
+        return true;
     }
+
+
 }

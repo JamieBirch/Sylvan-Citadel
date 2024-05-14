@@ -10,8 +10,8 @@ public class BuildButtonsPanel : MonoBehaviour
     {
         foreach (BuildingButton buildingButton in buildingButtons)
         {
-            Building building = buildingButton.building;
-            if (building.IsShowable())
+            BuildingBlueprint buildingBlueprint = buildingButton.buildingBlueprint;
+            if (buildingBlueprint.IsShowable())
             {
                 buildingButton.gameObject.SetActive(true);
             }

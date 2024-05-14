@@ -37,9 +37,9 @@ public class ConstructionManager : MonoBehaviour
         }
     }
 
-    public void Build(GameObject buildingPrefab, GameObject tile)
+    public void Build(BuildingBlueprint buildingBlueprint, GameObject tile)
     {
-        int woodPrice = buildingPrefab.GetComponent<Building>().woodPrice;
+        int woodPrice = buildingBlueprint.GetComponent<BuildingBlueprint>().woodPrice;
 
         if (GameStats.GetWood() < woodPrice)
         {
@@ -51,7 +51,7 @@ public class ConstructionManager : MonoBehaviour
             //instantiate building
             var position = TileUtils.PositionOnTile(tile.transform.position);
             float buildingRotation = Utils.GenerateRandom(0, 360f);
-            GameObject newBuilding = Instantiate(buildingPrefab, position, Quaternion.AngleAxis(buildingRotation, Vector3.up) , tile.transform);
+            GameObject newBuilding = Instantiate(buildingBlueprint.buildingPrefab, position, Quaternion.AngleAxis(buildingRotation, Vector3.up) , tile.transform);
             
             //assign to tile
             OwnedTile tileComponent = tile.GetComponent<OwnedTile>();

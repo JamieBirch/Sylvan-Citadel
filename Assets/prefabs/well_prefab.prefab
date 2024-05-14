@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6540093680836451837}
-  - component: {fileID: 6978331284145593434}
+  - component: {fileID: 470433929591936780}
   m_Layer: 0
   m_Name: well_prefab
   m_TagString: water
@@ -33,7 +33,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6978331284145593434
+--- !u!114 &470433929591936780
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42,12 +42,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1541975218879869188}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 800b3ef4cf092d74ca245aa2b542cc3d, type: 3}
+  m_Script: {fileID: 11500000, guid: 5fda54354ce441a9babe408b47e83457, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: Well
-  woodPrice: 50
-  description: Provides place to take water
+  tile: {fileID: 0}
 --- !u!1001 &6789993833632958051
 PrefabInstance:
   m_ObjectHideFlags: 0

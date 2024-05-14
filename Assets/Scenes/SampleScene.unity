@@ -315,6 +315,27 @@ MonoBehaviour:
   m_EffectColor: {r: 1, g: 1, b: 1, a: 1}
   m_EffectDistance: {x: 1, y: -1}
   m_UseGraphicAlpha: 0
+--- !u!1 &82755079 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2955438174395994308, guid: 4d412f56e3f9b3047890321505807bee, type: 3}
+  m_PrefabInstance: {fileID: 281062982}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &82755086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 82755079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8233b489f1b2034cbffb926b479681c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: Storage
+  woodPrice: 70
+  description: 
+  buildingPrefab: {fileID: 3330790554826253085, guid: 806e0b48d9d578b459dda2ee1f8835fd, type: 3}
 --- !u!1 &97144611
 GameObject:
   m_ObjectHideFlags: 0
@@ -1351,7 +1372,7 @@ MonoBehaviour:
   finished: 0
   missionText: {fileID: 213134329}
   checkmark: {fileID: 213134328}
-  building: {fileID: 8293445449922038972, guid: e08cabe3182b47143aadcb24c5b07ca6, type: 3}
+  buildingBlueprint: {fileID: 583543122}
   goalNumber: 5
 --- !u!1 &222787715
 GameObject:
@@ -1732,7 +1753,11 @@ PrefabInstance:
     - target: {fileID: 2955438172743500798, guid: 4d412f56e3f9b3047890321505807bee, type: 3}
       propertyPath: building
       value: 
-      objectReference: {fileID: 8745016560592745415, guid: 806e0b48d9d578b459dda2ee1f8835fd, type: 3}
+      objectReference: {fileID: 0}
+    - target: {fileID: 2955438172743500798, guid: 4d412f56e3f9b3047890321505807bee, type: 3}
+      propertyPath: buildingBlueprint
+      value: 
+      objectReference: {fileID: 82755086}
     - target: {fileID: 2955438172743500799, guid: 4d412f56e3f9b3047890321505807bee, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1828,7 +1853,11 @@ PrefabInstance:
     - target: {fileID: 2955438174395994310, guid: 4d412f56e3f9b3047890321505807bee, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
       value: 
-      objectReference: {fileID: 3330790554826253085, guid: 806e0b48d9d578b459dda2ee1f8835fd, type: 3}
+      objectReference: {fileID: 82755086}
+    - target: {fileID: 2955438174395994310, guid: 4d412f56e3f9b3047890321505807bee, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: BuildingBlueprint, Assembly-CSharp
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4d412f56e3f9b3047890321505807bee, type: 3}
 --- !u!224 &281062983 stripped
@@ -2030,6 +2059,28 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!1 &299030806 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2955438174395994308, guid: 4d412f56e3f9b3047890321505807bee, type: 3}
+  m_PrefabInstance: {fileID: 851802347}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &299030813
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 299030806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92c23cbaba57b9141837ffba7872d4c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: windmill
+  woodPrice: 70
+  description: 
+  buildingPrefab: {fileID: 4421653983999014295, guid: 0e78bf33367e81348812ff7ca8f13927, type: 3}
+  maxWindmillsPerTile: 2
 --- !u!1 &299848781
 GameObject:
   m_ObjectHideFlags: 0
@@ -2389,7 +2440,11 @@ PrefabInstance:
     - target: {fileID: 2955438172743500798, guid: 4d412f56e3f9b3047890321505807bee, type: 3}
       propertyPath: building
       value: 
-      objectReference: {fileID: 6978331284145593434, guid: 419eb92ab2438bd44b33f1acb6513b9a, type: 3}
+      objectReference: {fileID: 0}
+    - target: {fileID: 2955438172743500798, guid: 4d412f56e3f9b3047890321505807bee, type: 3}
+      propertyPath: buildingBlueprint
+      value: 
+      objectReference: {fileID: 1657117916}
     - target: {fileID: 2955438172743500799, guid: 4d412f56e3f9b3047890321505807bee, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2485,7 +2540,11 @@ PrefabInstance:
     - target: {fileID: 2955438174395994310, guid: 4d412f56e3f9b3047890321505807bee, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
       value: 
-      objectReference: {fileID: 1541975218879869188, guid: 419eb92ab2438bd44b33f1acb6513b9a, type: 3}
+      objectReference: {fileID: 1657117916}
+    - target: {fileID: 2955438174395994310, guid: 4d412f56e3f9b3047890321505807bee, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: BuildingBlueprint, Assembly-CSharp
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4d412f56e3f9b3047890321505807bee, type: 3}
 --- !u!224 &403191810 stripped
@@ -3226,6 +3285,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ebac43d93a09d64585dae4a48d35d50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &583543115 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2955438174395994308, guid: 4d412f56e3f9b3047890321505807bee, type: 3}
+  m_PrefabInstance: {fileID: 2955438174117091669}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &583543122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 583543115}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b301b1a23119c742a4b2663c78d210f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: house
+  woodPrice: 40
+  description: 
+  buildingPrefab: {fileID: 8641935630557121694, guid: e08cabe3182b47143aadcb24c5b07ca6, type: 3}
 --- !u!1 &588057117
 GameObject:
   m_ObjectHideFlags: 0
@@ -4514,7 +4594,11 @@ PrefabInstance:
     - target: {fileID: 2955438172743500798, guid: 4d412f56e3f9b3047890321505807bee, type: 3}
       propertyPath: building
       value: 
-      objectReference: {fileID: 4421653983999014292, guid: 0e78bf33367e81348812ff7ca8f13927, type: 3}
+      objectReference: {fileID: 0}
+    - target: {fileID: 2955438172743500798, guid: 4d412f56e3f9b3047890321505807bee, type: 3}
+      propertyPath: buildingBlueprint
+      value: 
+      objectReference: {fileID: 299030813}
     - target: {fileID: 2955438172743500799, guid: 4d412f56e3f9b3047890321505807bee, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -4614,7 +4698,11 @@ PrefabInstance:
     - target: {fileID: 2955438174395994310, guid: 4d412f56e3f9b3047890321505807bee, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
       value: 
-      objectReference: {fileID: 4421653983999014295, guid: 0e78bf33367e81348812ff7ca8f13927, type: 3}
+      objectReference: {fileID: 299030813}
+    - target: {fileID: 2955438174395994310, guid: 4d412f56e3f9b3047890321505807bee, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: BuildingBlueprint, Assembly-CSharp
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4d412f56e3f9b3047890321505807bee, type: 3}
 --- !u!224 &851802348 stripped
@@ -7068,6 +7156,27 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1657117909 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2955438174395994308, guid: 4d412f56e3f9b3047890321505807bee, type: 3}
+  m_PrefabInstance: {fileID: 403191809}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1657117916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1657117909}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 800b3ef4cf092d74ca245aa2b542cc3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: well
+  woodPrice: 50
+  description: 
+  buildingPrefab: {fileID: 1541975218879869188, guid: 419eb92ab2438bd44b33f1acb6513b9a, type: 3}
 --- !u!1 &1726948599
 GameObject:
   m_ObjectHideFlags: 0
@@ -9516,7 +9625,11 @@ PrefabInstance:
     - target: {fileID: 2955438172743500798, guid: 4d412f56e3f9b3047890321505807bee, type: 3}
       propertyPath: building
       value: 
-      objectReference: {fileID: 8293445449922038972, guid: e08cabe3182b47143aadcb24c5b07ca6, type: 3}
+      objectReference: {fileID: 0}
+    - target: {fileID: 2955438172743500798, guid: 4d412f56e3f9b3047890321505807bee, type: 3}
+      propertyPath: buildingBlueprint
+      value: 
+      objectReference: {fileID: 583543122}
     - target: {fileID: 2955438172743500799, guid: 4d412f56e3f9b3047890321505807bee, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -9605,6 +9718,14 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 107134975}
+    - target: {fileID: 2955438174395994310, guid: 4d412f56e3f9b3047890321505807bee, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 583543122}
+    - target: {fileID: 2955438174395994310, guid: 4d412f56e3f9b3047890321505807bee, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: BuildingBlueprint, Assembly-CSharp
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4d412f56e3f9b3047890321505807bee, type: 3}
 --- !u!1 &7648413202088973359

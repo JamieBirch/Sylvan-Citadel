@@ -7,6 +7,7 @@ public class Calendar : MonoBehaviour
     public static event Action NewDay;
     
     public GameObject sunRotationObject;
+    public GameObject timeDiscObject;
     // public Light sun;
     public Light moon;
     public float sunIntensityMultiplier;
@@ -50,6 +51,7 @@ public class Calendar : MonoBehaviour
         countdown -= Time.deltaTime;
         countdown = Mathf.Clamp(countdown, 0f, Mathf.Infinity);
         sunRotationObject.transform.Rotate(0,0, Time.deltaTime * (360/dayLength));
+        timeDiscObject.transform.Rotate(0,0, Time.deltaTime * (360/dayLength));
         
         float hours = (1 - countdown/dayLength) * 24;
         TimeSpan time = new TimeSpan((int)hours, 0, 0);

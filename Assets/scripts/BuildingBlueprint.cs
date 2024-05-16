@@ -13,7 +13,8 @@ public abstract class BuildingBlueprint : MonoBehaviour
 
     public bool IsBuildable()
     {
-        return GameStats.GetWood() >= woodPrice;
+        return TileManager.instance.activeTile != null && 
+               GameStats.GetWood() >= woodPrice;
     }
 
     public abstract bool IsShowable();

@@ -4113,7 +4113,7 @@ MonoBehaviour:
   woodPrice: 70
   description: Produces food and provides place to pick it up.
   buildingPrefab: {fileID: 4421653983999014295, guid: 0e78bf33367e81348812ff7ca8f13927, type: 3}
-  maxWindmillsPerTile: 2
+  maxWindmillsPerTile: 3
 --- !u!1 &698565070
 GameObject:
   m_ObjectHideFlags: 0

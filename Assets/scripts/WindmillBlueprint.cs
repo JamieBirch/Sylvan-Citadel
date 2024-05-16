@@ -2,8 +2,7 @@ using System.Linq;
 
 public class WindmillBlueprint : BuildingBlueprint
 {
-    //TODO: TEST
-    public int maxWindmillsPerTile = 2;
+    public int maxWindmillsPerTile;
 
     public override bool IsBuildable()
     {
@@ -12,7 +11,7 @@ public class WindmillBlueprint : BuildingBlueprint
             return GameStats.GetWood() >= woodPrice &&
                    TileManager.instance.GetActiveTileBiome() == Biome.grassland &&
                    TileManager.instance.activeTile.GetComponent<OwnedTile>().buildings
-                       .Select(building => building.TryGetComponent<WindmillBlueprint>(out _)).Count() <= maxWindmillsPerTile;
+                       .FindAll(building => building.TryGetComponent<Windmill>(out _)).Count() < maxWindmillsPerTile;
         } else
         {
             return false;

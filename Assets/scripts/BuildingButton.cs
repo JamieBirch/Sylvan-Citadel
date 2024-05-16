@@ -8,11 +8,13 @@ public class BuildingButton : MonoBehaviour
     //sb BuildingBlueprint
     [FormerlySerializedAs("building")] public BuildingBlueprint buildingBlueprint;
     public GameObject tooltip;
+    public Text buildingName;
     public Text buildingPrice;
     public Text buildingDescription;
 
     private void Start()
     {
+        buildingName.text = buildingBlueprint.name;
         buildingPrice.text = "wood: " + buildingBlueprint.woodPrice;
         buildingDescription.text = buildingBlueprint.description;
     }

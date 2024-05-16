@@ -75,19 +75,19 @@ public class OwnedTile : Tile
             BedsAvailableStatString
         };
         
-        tileStatsUI.Name.text = Name;
+        tileStatsUI.TileName.text = Name;
 
         foreach (string field in defaultTileStatFields)
         {
             tileStatistics.Add(field, 0);
-            tileStatsUI.AddField(field, 0);
+            tileStatsUI.AddStatField(field, 0);
         }
         foreach (LandscapeFeature feature in LandscapeFeaturesDictionary.Values)
         {
             LandscapeFeatureType landscapeFeatureType = feature.getFeatureType();
             int count = feature.getCount();
             tileStatistics.Add(landscapeFeatureType.ToString(), count);
-            tileStatsUI.AddField(landscapeFeatureType.ToString(), count);
+            tileStatsUI.AddStatField(landscapeFeatureType.ToString(), count);
         }
     }
     
@@ -130,6 +130,7 @@ public class OwnedTile : Tile
     {
         buildings.Add(buildingComponent);
         buildingComponent.tile = this;
+        tileStatsUI.AddBuildingField(buildingComponent.name, 1);
     }
 
     private int CalcBedsAvailableSum()

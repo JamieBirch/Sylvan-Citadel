@@ -4,6 +4,7 @@ using UnityEngine.EventSystems;
 public abstract class Building : MonoBehaviour
 {
     public OwnedTile tile;
+    public string name;
     private bool selected;
 
     public void Demolish()

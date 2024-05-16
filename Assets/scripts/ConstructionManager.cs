@@ -52,10 +52,12 @@ public class ConstructionManager : MonoBehaviour
             var position = TileUtils.PositionOnTile(tile.transform.position);
             float buildingRotation = Utils.GenerateRandom(0, 360f);
             GameObject newBuilding = Instantiate(buildingBlueprint.buildingPrefab, position, Quaternion.AngleAxis(buildingRotation, Vector3.up) , tile.transform);
-            
+            Building buildingComponent = newBuilding.GetComponent<Building>();
+            buildingComponent.name = buildingBlueprint.name;
+
             //assign to tile
             OwnedTile tileComponent = tile.GetComponent<OwnedTile>();
-            tileComponent.AddBuildingToTile(newBuilding.GetComponent<Building>());
+            tileComponent.AddBuildingToTile(buildingComponent);
             
             //deduct wood
             GameStats.instance.RemoveWood(woodPrice);

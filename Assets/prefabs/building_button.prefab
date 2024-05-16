@@ -112,7 +112,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 50, y: -26.5}
+  m_AnchoredPosition: {x: 58.29725, y: -26.5}
   m_SizeDelta: {x: 100, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4874338681441763316
@@ -188,7 +188,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 50, y: -8}
+  m_AnchoredPosition: {x: 58.29725, y: -8}
   m_SizeDelta: {x: 100, y: 15}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2955438172743500796
@@ -228,8 +228,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 50, y: -27.5}
-  m_SizeDelta: {x: 150, y: 55}
+  m_AnchoredPosition: {x: 9.041412, y: -27.5}
+  m_SizeDelta: {x: 231.9171, y: 55}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2955438172743500798
 MonoBehaviour:
@@ -246,6 +246,7 @@ MonoBehaviour:
   button: {fileID: 2955438174395994310}
   buildingBlueprint: {fileID: 0}
   tooltip: {fileID: 8369026055479615684}
+  buildingName: {fileID: 839897565772352649}
   buildingPrice: {fileID: 2955438173654848016}
   buildingDescription: {fileID: 8684044660860892987}
 --- !u!114 &541369556323182449
@@ -522,7 +523,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 50, y: -43.5}
+  m_AnchoredPosition: {x: 58.29725, y: -43.5}
   m_SizeDelta: {x: 100, y: 12}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2955438173823360934
@@ -884,8 +885,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 50, y: -0.0000003874302}
-  m_SizeDelta: {x: 100, y: 50}
+  m_AnchoredPosition: {x: 41.702682, y: -0.0000003874302}
+  m_SizeDelta: {x: 116.5945, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &947883985385940956
 MonoBehaviour:

@@ -8,19 +8,7 @@ public abstract class BuildingBlueprint : MonoBehaviour
     public string description;
     public GameObject buildingPrefab;
     
-    /*public OwnedTile tile;
-    
-    private bool selected;*/
+    public abstract bool IsBuildable();
 
-    public bool IsBuildable()
-    {
-        return TileManager.instance.activeTile != null && 
-               GameStats.GetWood() >= woodPrice;
-    }
-
-    public bool IsShowable()
-    {
-        return !locked;
-    }
-
+    public abstract bool IsShowable();
 }

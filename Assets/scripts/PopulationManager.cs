@@ -54,12 +54,12 @@ public class PopulationManager : MonoBehaviour
         //settle
         OwnedTile homeTile = village.GetComponentInParent<OwnedTile>();
         Village villageComponent = village.GetComponent<Village>();
-        SettleHumanInHex(homeTile, villageComponent, humanComponent);
+        SettleHumanInTile(homeTile, villageComponent, humanComponent);
 
         return humanGameObject;
     }
     
-    public void SettleHumanInHex(OwnedTile newHomeTile, Village newVillage, Human humanComponent)
+    public void SettleHumanInTile(OwnedTile newHomeTile, Village newVillage, Human humanComponent)
     {
         if (humanComponent.homeTile != null)
         {

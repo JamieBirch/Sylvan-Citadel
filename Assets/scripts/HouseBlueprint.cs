@@ -39,10 +39,5 @@ public class HouseBlueprint : BuildingBlueprint
         bedsAvailable++;
     }*/
 
-    public override bool IsShowable()
-    {
-        return true;
-    }
-
 
 }

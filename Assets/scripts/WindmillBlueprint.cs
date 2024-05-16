@@ -41,8 +41,13 @@ public class WindmillBlueprint : BuildingBlueprint
         }
     }
 
-    public override bool IsShowable()
+    public bool IsShowable()
     {
+        if (!base.IsShowable())
+        {
+            return false;
+        }
+        
         if (TileManager.instance.activeTile != null)
         {
             return TileManager.instance.GetActiveTileBiome() == Biome.grassland;

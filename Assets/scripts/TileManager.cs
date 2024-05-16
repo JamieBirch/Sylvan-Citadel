@@ -84,19 +84,19 @@ public class TileManager : MonoBehaviour
         activeTile = null;
     }
 
-    public void BuyHex(GameObject _borderingHex)
+    public void BuyHex(GameObject _borderingTile)
     {
-        BorderingTile borderingTileComponent = _borderingHex.GetComponent<BorderingTile>();
+        BorderingTile borderingTileComponent = _borderingTile.GetComponent<BorderingTile>();
         
-        if (!IsHexObtainable(borderingTileComponent))
+        if (!IsTileObtainable(borderingTileComponent))
         {
             //TODO can't call buyHex on !isHexObtainable, optimize
             Debug.Log("Not enough humans!");
         }
         else
         {
-            GameObject hex = _terrainManager.ConvertToOwnedHex(borderingTileComponent);
-            _populationManager.CreateVillage(hex);
+            GameObject tile = _terrainManager.ConvertToOwnedHex(borderingTileComponent);
+            _populationManager.CreateVillage(tile);
             
             var allAvailableHumans = _populationManager.AllAvailableHumans(borderingTileComponent.GetOwnedHexesAround());
             IEnumerable<Human> pickedHumans = allAvailableHumans.OrderBy(x => new Random().Next()).Take(borderingTileComponent.humanPrice);
@@ -107,16 +107,16 @@ public class TileManager : MonoBehaviour
                 pickedHuman.Die();
             }
 
-            _terrainManager.CreateConcealedHexesAround(hex);
+            _terrainManager.CreateConcealedTilesAround(tile);
         }
     }
 
     public void RelocateHumanTo(OwnedTile tile, Village village, Human human)
     {
-        _populationManager.SettleHumanInHex(tile, village, human);
+        _populationManager.SettleHumanInTile(tile, village, human);
     }
 
-    public bool IsHexObtainable(BorderingTile tile)
+    public bool IsTileObtainable(BorderingTile tile)
     {
         List<OwnedTile> ownedHexesAround = tile.GetOwnedHexesAround();
         int hexPrice = tile.humanPrice;

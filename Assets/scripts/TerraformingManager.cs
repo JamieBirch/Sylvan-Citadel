@@ -25,7 +25,7 @@ public class TerraformingManager : MonoBehaviour
         }
     }
     
-    public void Update()
+    /*public void Update()
     {
         if (TileManager.instance.activeTile == null && TerraformButton.IsInteractable())
         {
@@ -35,7 +35,7 @@ public class TerraformingManager : MonoBehaviour
         {
             TerraformButton.interactable = true;
         }
-    }
+    }*/
     
     public void ChopTree(GameObject activeHex)
     {

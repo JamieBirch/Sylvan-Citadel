@@ -12,7 +12,7 @@ public static class TileUtils
     public static float TileRadius = 3f;
 
 
-    public static Vector3[] PositionsOfHexesAround(Vector3 hexPosition)
+    public static Vector3[] PositionsOfTilesAround(Vector3 hexPosition)
     {
         Vector3 rightHexPosition = hexPosition + xHexOffset;
         Vector3 leftHexPosition = hexPosition + -xHexOffset;

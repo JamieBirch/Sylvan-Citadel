@@ -29,7 +29,9 @@ public class TerrainManager : MonoBehaviour
     private Biome startBiome = Biome.grove;
     
     public TileStatsUIContainer tileStatsUIcontainer;
-    
+
+    public Dictionary<Biome, int> borderingTilesCounter = new Dictionary<Biome, int>();
+
     private void Awake()
     {
         instance = this;
@@ -227,16 +229,16 @@ public class TerrainManager : MonoBehaviour
         SpawnResource(tile.GetWoodland(), treePrefab, tile.gameObject, position);
     }
 
-    public void CreateConcealedHexesAround(GameObject hex)
+    public void CreateConcealedTilesAround(GameObject hex)
     {
         Vector3 hexPosition = hex.transform.position;
 
-        Vector3[] positionsOfHexesAround = TileUtils.PositionsOfHexesAround(hexPosition);
+        Vector3[] positionsOfHexesAround = TileUtils.PositionsOfTilesAround(hexPosition);
 
         List<GameObject> borderingTiles = new List<GameObject>();
         foreach (var borderingPosition in positionsOfHexesAround)
         {
-            GameObject borderingTile = CreateBorderingHexAt(borderingPosition);
+            GameObject borderingTile = CreateBorderingTileAt(borderingPosition);
             if (borderingTile != null)
             {
                 borderingTiles.Add(borderingTile);
@@ -245,7 +247,7 @@ public class TerrainManager : MonoBehaviour
         
         foreach (var borderingTile in borderingTiles)
         {
-            Vector3[] positionsOfTilesAround = TileUtils.PositionsOfHexesAround(borderingTile.transform.position);
+            Vector3[] positionsOfTilesAround = TileUtils.PositionsOfTilesAround(borderingTile.transform.position);
             foreach (var tilePosition in positionsOfTilesAround)
             {
                 CreateConcealedTileAt(tilePosition);
@@ -261,7 +263,7 @@ public class TerrainManager : MonoBehaviour
         borderingTileComponent.hasRestriction = Utils.TossCoin();
     }
 
-    private GameObject CreateBorderingHexAt(Vector3 hexPosition)
+    private GameObject CreateBorderingTileAt(Vector3 hexPosition)
     {
         Collider[] colliders = Physics.OverlapSphere(hexPosition, overlapRadius);
         if (colliders.Length == 0)
@@ -295,7 +297,36 @@ public class TerrainManager : MonoBehaviour
 
         DefineBiome(position, newTileComponent);
         RandomizeFeatures(newTileComponent);
+        DefineIfIsPOI(newTileComponent);
         return newTileComponent.gameObject;
+    }
+
+    private void DefineIfIsPOI(BorderingTile newTileComponent)
+    {
+        Biome biome = newTileComponent.biome;
+        if (IsSecondOfBiome(biome))
+        {
+            newTileComponent.MakePOI();
+        }
+    }
+
+    private bool IsSecondOfBiome(Biome biome)
+    {
+        if (borderingTilesCounter.TryGetValue(biome, out int value))
+        {
+            if (value == 2)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        else
+        {
+            return false;
+        }
     }
 
     private bool collidesWithFogTile(Collider[] colliders)
@@ -353,6 +384,15 @@ public class TerrainManager : MonoBehaviour
         }
 
         newTileComponent.biome = biome;
+        
+        if (borderingTilesCounter.TryGetValue(biome, out int value))
+        {
+            borderingTilesCounter[biome] += 1;
+        }
+        else
+        {
+            borderingTilesCounter.Add(biome, 1);
+        }
     }
 
     private Biome GetHexBiomeByPosition(Vector3 hexPosition)
@@ -412,6 +452,15 @@ public class TerrainManager : MonoBehaviour
         bool hasSecondaryResource = borderingTileComponent.hasSecondaryResource;
         bool hasTertiaryResource = borderingTileComponent.hasTertiaryResource;
         bool hasRestriction = borderingTileComponent.hasRestriction;
+
+        if (borderingTileComponent.isPOI)
+        {
+            BuildingBlueprint buildingBlueprint = BuildingQuestsManager.BiomeRewardsDictionary[biome];
+            buildingBlueprint.locked = false;
+            //TODO define behavior when new Building is unlocked
+            // PlayerMessageService.instance.ShowMessage(buildingBlueprint.name + " is unlocked!");
+            BuildingQuestsManager.instance.ShowNewBuildingPanel(buildingBlueprint);
+        }
         
         //change tilePrefab based on biome
         Vector3 position = borderingTileComponent.gameObject.transform.position;

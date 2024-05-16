@@ -5,6 +5,10 @@ using UnityEngine.UI;
 
 public class BorderingTile : Tile
 {
+    public GameObject poiEffect;
+    public bool isPOI;
+    // public BuildingBlueprint reward;
+    
     public static TileManager TileManager;
     
     public Color availableColor;
@@ -54,7 +58,7 @@ public class BorderingTile : Tile
     private void Update()
     {
         humanPrice = definePrice();
-        if (TileManager.IsHexObtainable(this))
+        if (TileManager.IsTileObtainable(this))
         {
             isObtainable = true;
             rend.material.color = availableColor;
@@ -64,6 +68,12 @@ public class BorderingTile : Tile
             isObtainable = false;
             rend.material.color = nonAvailableColor;
         }
+    }
+
+    public void MakePOI()
+    {
+        isPOI = true;
+        poiEffect.SetActive(true);
     }
 
     public override void OnMouseEnter()

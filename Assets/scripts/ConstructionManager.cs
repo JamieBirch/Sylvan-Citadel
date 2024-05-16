@@ -25,7 +25,7 @@ public class ConstructionManager : MonoBehaviour
         }
     }
 
-    public void Update()
+    /*public void Update()
     {
         if (TileManager.instance.activeTile == null && BuildButton.IsInteractable())
         {
@@ -35,7 +35,7 @@ public class ConstructionManager : MonoBehaviour
         {
             BuildButton.interactable = true;
         }
-    }
+    }*/
 
     public void Build(BuildingBlueprint buildingBlueprint, GameObject tile)
     {

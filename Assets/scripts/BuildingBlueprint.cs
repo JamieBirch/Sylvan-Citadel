@@ -2,6 +2,7 @@ using UnityEngine;
 
 public abstract class BuildingBlueprint : MonoBehaviour
 {
+    public bool locked;
     public string name;
     public int woodPrice;
     public string description;
@@ -17,7 +18,9 @@ public abstract class BuildingBlueprint : MonoBehaviour
                GameStats.GetWood() >= woodPrice;
     }
 
-    public abstract bool IsShowable();
+    public bool IsShowable()
+    {
+        return !locked;
+    }
 
-    
 }

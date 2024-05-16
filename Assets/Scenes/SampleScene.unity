@@ -972,7 +972,7 @@ MonoBehaviour:
   - biome: 0
     reward: {fileID: 1297510336}
   - biome: 2
-    reward: {fileID: 1738526695}
+    reward: {fileID: 698274466}
   newBuildingCanvas: {fileID: 1214096452}
   headerText: {fileID: 1680591848}
   descriptionText: {fileID: 1784262431}
@@ -4044,7 +4044,7 @@ PrefabInstance:
     - target: {fileID: 2955438174395994310, guid: 4d412f56e3f9b3047890321505807bee, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 698274466}
     - target: {fileID: 2955438174395994310, guid: 4d412f56e3f9b3047890321505807bee, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: BuildingBlueprint, Assembly-CSharp

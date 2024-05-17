@@ -27,6 +27,8 @@ public class GameManager : MonoBehaviour
     public Text wood;
     public Text tiles;
 
+    public bool gameover = false;
+
     void Start()
     {
         _populationManager = PopulationManager.instance;
@@ -67,9 +69,10 @@ public class GameManager : MonoBehaviour
             Debug.Log("No population left!");
         }
 
-        if (CheckAllMissionsComplete())
+        if (CheckAllMissionsComplete() && !gameover)
         {
             Debug.Log("All Missions complete, game over");
+            gameover = true;
             GameOver();
         }
     }
@@ -78,6 +81,7 @@ public class GameManager : MonoBehaviour
     {
         InfoCanvas.SetActive(false);
         GameOverCanvas.SetActive(true);
+        
         Time.timeScale = 0f;
     }
 

@@ -74,6 +74,7 @@ public class TerrainManager : MonoBehaviour
 
         TileStatsUI tileStatsUI = Instantiate(tileComponent.tileStatsUIprefab, tileStatsUIcontainer.transform).GetComponent<TileStatsUI>();
         tileComponent.tileStatsUI = tileStatsUI;
+        tileComponent.tileBuildingsUI = tileStatsUI.tileBuildings;
         tileStatsUI.gameObject.SetActive(false);
 
 

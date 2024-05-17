@@ -773,7 +773,7 @@ MonoBehaviour:
   holdTimerCircle: {fileID: 1586202263494279017}
   defaultPrice: 4
   humanPrice: 0
-  holdTimerDefault: 4
+  holdTimerDefault: 2
   humansPricePreText: 'settlers required: '
 --- !u!65 &5765409841354726004
 BoxCollider:

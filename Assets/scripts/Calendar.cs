@@ -30,6 +30,8 @@ public class Calendar : MonoBehaviour
 
     public Material windowMaterial;
 
+    public float currentTimeScale = 1;
+
     // private float moonIntensity;
     
     // Start is called before the first frame update
@@ -102,20 +104,29 @@ public class Calendar : MonoBehaviour
     public void Pause()
     {
         Time.timeScale = 0f;
+        currentTimeScale = 0;
     }
     
     public void TimeScale1()
     {
         Time.timeScale = 1f;
+        currentTimeScale = 1;
     }
     
     public void TimeScale2()
     {
         Time.timeScale = 2f;
+        currentTimeScale = 2;
     }
     
     public void TimeScale4()
     {
         Time.timeScale = 4f;
+        currentTimeScale = 4;
+    }
+
+    public void Resume()
+    {
+        Time.timeScale = currentTimeScale;
     }
 }

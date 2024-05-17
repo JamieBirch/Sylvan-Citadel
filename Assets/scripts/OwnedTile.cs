@@ -32,6 +32,7 @@ public class OwnedTile : Tile
 
     public GameObject tileStatsUIprefab;
     public TileStatsUI tileStatsUI;
+    public GameObject tileBuildingsUI;
 
     public Dictionary<LandscapeFeatureType, LandscapeFeature> LandscapeFeaturesDictionary = new Dictionary<LandscapeFeatureType, LandscapeFeature>();
     private Dictionary<string, int> tileStatistics = new Dictionary<string, int>();
@@ -108,6 +109,8 @@ public class OwnedTile : Tile
         {
             BedsAvailable = CalcBedsAvailableSum();
             // Debug.Log("total beds: " + BedsAvailable);
+            
+            tileBuildingsUI.SetActive(true);
         }
 
         UpdateTileStatistics(PopulationStatString, HexPopulation);

@@ -78,6 +78,7 @@ public class GameManager : MonoBehaviour
     {
         InfoCanvas.SetActive(false);
         GameOverCanvas.SetActive(true);
+        Time.timeScale = 0f;
     }
 
 

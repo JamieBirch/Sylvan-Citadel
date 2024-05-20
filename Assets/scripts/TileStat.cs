@@ -5,6 +5,7 @@ public class TileStat : MonoBehaviour
 {
     public Text tileStatNameText;
     public Text tileStatCountText;
+    public int tileStatCount = 0;
     
     public void SetName(string name)
     {
@@ -13,6 +14,13 @@ public class TileStat : MonoBehaviour
     
     public void SetCount(int count)
     {
+        tileStatCount = count;
         tileStatCountText.text = count.ToString();
+    }
+    
+    public void Increase()
+    {
+        tileStatCount++;
+        tileStatCountText.text = tileStatCount.ToString();
     }
 }

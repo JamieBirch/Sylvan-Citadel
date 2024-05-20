@@ -133,7 +133,7 @@ public class OwnedTile : Tile
     {
         buildings.Add(buildingComponent);
         buildingComponent.tile = this;
-        tileStatsUI.AddBuildingField(buildingComponent.name, 1);
+        tileStatsUI.AddBuildingField(buildingComponent.name);
     }
 
     private int CalcBedsAvailableSum()

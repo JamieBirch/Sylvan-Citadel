@@ -22,21 +22,18 @@ public class TileStatsUI : MonoBehaviour
         tileStatistics.Add(field, tileStat);
     }
     
-    public void AddBuildingField(string field, int count)
+    public void AddBuildingField(string field)
     {
         if (tileBuildingsDic.TryGetValue(field, out TileStat tileStat))
         {
-            string text = tileStat.tileStatCountText.text;
-            int currentCount = Int32.Parse(text);
-            int newCount = currentCount + 1;
-            tileStat.SetCount(newCount);
+            tileStat.Increase();
         }
         else
         {
             GameObject tileStatGO = Instantiate(tileStatPrefab, tileBuildings.transform);
             TileStat newtileStat = tileStatGO.GetComponent<TileStat>();
             newtileStat.SetName(field);
-            newtileStat.SetCount(count);
+            newtileStat.Increase();
             tileBuildingsDic.Add(field, newtileStat);
         }
     }

@@ -22,6 +22,7 @@ public abstract class LandscapeFeature
 public abstract class LandscapeFeatureWoodland : LandscapeFeature
 {
     public List<Tree> trees = new List<Tree>();
+    public int maxTrees = 20;
 
     public override int getCount()
     {
@@ -31,10 +32,10 @@ public abstract class LandscapeFeatureWoodland : LandscapeFeature
     public void GrowNewTree(TerrainManager terrainManager)
     {
         int treesOnTile = getCount();
-        if (treesOnTile < 100)
+        if (treesOnTile < maxTrees)
         {
             double chance = Utils.GenerateRandomChance();
-            if (chance < 100 - treesOnTile)
+            if (chance < ((float)treesOnTile/(float)maxTrees) * 100)
             {
                 terrainManager.SpawnTree(this, tile.gameObject);
             }

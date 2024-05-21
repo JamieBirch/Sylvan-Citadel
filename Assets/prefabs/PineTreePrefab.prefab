@@ -49,7 +49,7 @@ MonoBehaviour:
   tile: {fileID: 0}
   leaves: {fileID: 146949629793314472}
   treeSize: {fileID: 7327350240597833231}
-  growthSpeed: 1.02
+  growthSpeed: 1.01
   fertility: 20
   seedPrefab: {fileID: 4328736735578813185, guid: 7f83b3afe64fc434cb937939b5db0af9, type: 3}
 --- !u!1001 &3085702036776862816

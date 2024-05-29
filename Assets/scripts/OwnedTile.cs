@@ -40,7 +40,9 @@ public class OwnedTile : Tile
     public GameObject village;
     public List<Building> buildings;
     private bool selected;
-    
+
+    public Wall tileWall;
+
     //Stats
     private int BedsAvailable;
     public int HexPopulation;

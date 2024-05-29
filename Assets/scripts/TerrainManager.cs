@@ -133,6 +133,9 @@ public class TerrainManager : MonoBehaviour
         
         GameStats.AddTile(tileComponent);
         
+        //TODO WTF??
+        tileComponent.tileWall.SurroundNewTile(tileComponent);
+        
         return newOwnedTile;
     }
 

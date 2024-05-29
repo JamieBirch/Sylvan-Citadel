@@ -70,7 +70,14 @@ public class DoWanderState : IHumanState
                     if (human.homeTile.GetWoodland() != null)
                     {
                         List<Tree> trees = human.homeTile.GetWoodland().trees;
-                        human.currentTarget = trees[new Random().Next(trees.Count - 1)].gameObject;
+                        if (trees.Count > 0)
+                        {
+                            human.currentTarget = trees[new Random().Next(trees.Count)].gameObject;
+                        }
+                        else
+                        {
+                            human.currentTarget = null;
+                        }
                     }
                     break;
                 }

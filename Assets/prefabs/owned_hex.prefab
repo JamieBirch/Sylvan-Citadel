@@ -568,6 +568,7 @@ Transform:
   - {fileID: 7687730347753398094}
   - {fileID: 153055767714037324}
   - {fileID: 6903495578852402092}
+  - {fileID: 2164666388912797541}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -595,8 +596,10 @@ MonoBehaviour:
   rend: {fileID: 4966444852901199381}
   tileStatsUIprefab: {fileID: 211319817602167943, guid: dcaa502df116b4541973e383997d9ff8, type: 3}
   tileStatsUI: {fileID: 0}
+  tileBuildingsUI: {fileID: 0}
   village: {fileID: 0}
   buildings: []
+  tileWall: {fileID: 5035445010077279743}
   HexPopulation: 0
   settlersAvailableText: {fileID: 797909391}
 --- !u!65 &8349748933488940630
@@ -612,6 +615,51 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 8.660254, y: 0.2, z: 10}
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!1 &4159865051044300684
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2164666388912797541}
+  - component: {fileID: 5035445010077279743}
+  m_Layer: 0
+  m_Name: wall
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2164666388912797541
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4159865051044300684}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.625, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3193132197810865087}
+  m_RootOrder: 16
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5035445010077279743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4159865051044300684}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ca77a5b7751457a97001d423c599cd7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wallPrefab: {fileID: 2698487808173007256, guid: d00b990ec462f394bab4878dcd42c1db, type: 3}
 --- !u!1 &7396452692956061105
 GameObject:
   m_ObjectHideFlags: 0

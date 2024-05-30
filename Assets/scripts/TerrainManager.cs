@@ -457,7 +457,8 @@ public class TerrainManager : MonoBehaviour
         bool hasTertiaryResource = borderingTileComponent.hasTertiaryResource;
         bool hasRestriction = borderingTileComponent.hasRestriction;
 
-        if (borderingTileComponent.isPOI)
+        bool isPoi = borderingTileComponent.isPOI;
+        if (isPoi)
         {
             BuildingBlueprint buildingBlueprint = BuildingQuestsManager.BiomeRewardsDictionary[biome];
             buildingBlueprint.locked = false;
@@ -491,6 +492,12 @@ public class TerrainManager : MonoBehaviour
         {
             CreateFeature(hex, biomeFeatures.Restriction, biomeFeatures.RestrictionMaxCount);
         }*/
+        
+        if (isPoi)
+        {
+            BuildingBlueprint buildingBlueprint = BuildingQuestsManager.BiomeRewardsDictionary[biome];
+            ConstructionManager.InstantiateBuilding(buildingBlueprint, tile);
+        }
         
         SpawnDecor(tile);
 

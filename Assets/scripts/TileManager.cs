@@ -27,19 +27,18 @@ public class TileManager : MonoBehaviour
 
     private void Update()
     {
-        if (activeTile != null)
+        /*if (activeTile != null)
         {
-            UseHexStats();
-        }
+            UseTileStats(activeTile.GetComponent<OwnedTile>());
+        }*/
     }
 
-    private void UseHexStats()
+    private void UseTileStats(OwnedTile ownedTile)
     {
         //show tile stats
-        OwnedTile activeTileComponent = activeTile.GetComponent<OwnedTile>();
-        activeTileComponent.tileStatsUI.gameObject.SetActive(true);
+        ownedTile.tileStatsUI.gameObject.SetActive(true);
         
-        SetHexStats(activeTileComponent);
+        SetHexStats(ownedTile);
     }
 
     //TODO update
@@ -54,7 +53,7 @@ public class TileManager : MonoBehaviour
         _terraformingManager.ChopTree(activeTile);
     }
 
-    public void SetHexAsActive(GameObject hex)
+    public void SetTileAsActive(GameObject hex)
     {
         if (activeTile == null)
         {
@@ -65,8 +64,26 @@ public class TileManager : MonoBehaviour
             activeTile.GetComponent<OwnedTile>().Unselect();
             activeTile = hex;
         }
-        activeTile.GetComponent<OwnedTile>().tileStatsUI.gameObject.SetActive(true);
-        UseHexStats();
+        ShowTileStats(activeTile.GetComponent<OwnedTile>());
+    }
+
+    public void ShowTileStats(OwnedTile tile)
+    {
+        if (activeTile != null && tile.gameObject != activeTile)
+        {
+            HideTileStats(activeTile.GetComponent<OwnedTile>());
+        }
+        tile.tileStatsUI.gameObject.SetActive(true);
+        UseTileStats(tile);
+    }
+
+    public void HideTileStats(OwnedTile tile)
+    {
+        if (activeTile != null && tile.gameObject != activeTile)
+        {
+            ShowTileStats(activeTile.GetComponent<OwnedTile>());
+        }
+        tile.tileStatsUI.gameObject.SetActive(false);
     }
 
     private void SetHexStats(OwnedTile activeTileComponent)
@@ -80,7 +97,7 @@ public class TileManager : MonoBehaviour
 
     public void SetHexAsInActive()
     {
-        activeTile.GetComponent<OwnedTile>().tileStatsUI.gameObject.SetActive(false);
+        HideTileStats(activeTile.GetComponent<OwnedTile>());
         activeTile = null;
     }
 

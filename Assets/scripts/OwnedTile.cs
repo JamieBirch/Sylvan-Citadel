@@ -176,6 +176,7 @@ public class OwnedTile : Tile
     public override void OnMouseEnter()
     {
         highlight();
+        _tileManager.ShowTileStats(this);
     }
 
     private void highlight()
@@ -206,7 +207,7 @@ public class OwnedTile : Tile
     private void Select()
     {
         selected = true;
-        _tileManager.SetHexAsActive(gameObject);
+        _tileManager.SetTileAsActive(gameObject);
         highlight();
         SoundManager.PlaySound(SoundManager.Sound.tile_select);
     }
@@ -216,6 +217,7 @@ public class OwnedTile : Tile
         if (!selected)
         {
             ColorToDefault();
+            _tileManager.HideTileStats(this);
         }
     }
 

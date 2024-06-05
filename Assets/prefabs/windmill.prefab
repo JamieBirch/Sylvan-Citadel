@@ -133,7 +133,7 @@ MonoBehaviour:
   tile: {fileID: 0}
   name: 
   propeller: {fileID: 6340324197600106045}
-  produceEvery_seconds: 5
+  producePerDay: 3
 --- !u!1 &6340324197600106045
 GameObject:
   m_ObjectHideFlags: 0

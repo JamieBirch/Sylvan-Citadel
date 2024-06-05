@@ -7,6 +7,7 @@ public abstract class BuildingBlueprint : MonoBehaviour
     public int woodPrice;
     public string description;
     public GameObject buildingPrefab;
+    public bool onlyOnePerTile;
     
     public abstract bool IsBuildable();
 

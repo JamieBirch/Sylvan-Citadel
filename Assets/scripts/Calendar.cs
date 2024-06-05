@@ -4,6 +4,8 @@ using UnityEngine.UI;
 
 public class Calendar : MonoBehaviour
 {
+    public static Calendar instance;
+    
     public static event Action NewDay;
     
     public GameObject sunRotationObject;
@@ -37,6 +39,10 @@ public class Calendar : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (instance == null)
+        {
+            instance = this;
+        }
         // sunDefaultRotation = sun.transform.rotation;
         
         // start world time
@@ -128,5 +134,10 @@ public class Calendar : MonoBehaviour
     public void Resume()
     {
         Time.timeScale = currentTimeScale;
+    }
+
+    public float DayLength()
+    {
+        return dayLength;
     }
 }

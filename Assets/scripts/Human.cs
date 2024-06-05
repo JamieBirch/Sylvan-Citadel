@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 public class Human : MonoBehaviour
 {
@@ -35,18 +36,28 @@ public class Human : MonoBehaviour
     public GoHomeState goHome = new GoHomeState();
     public DoWorkState doWork = new DoWorkState();
     public RelocateState relocate = new RelocateState();
+
+    public GameObject VillagerInfoPanel;
+    public Text NameText;
+    public Text ThirstyText;
+    public Text HungryText;
+    public Text HomelessText;
+    public Text ThoughtText;
+    public Text StateText;
     
     private void Start()
     {
         Calendar.NewDay += StartDay;
         _populationManager = PopulationManager.instance;
         state = doWander;
+        NameText.text = Name;
     }
 
     private void Update()
     {
         state = state.DoState(this);
         stateName = state.ToString();
+        StateText.text = stateName;
         
         if (Satisfied())
         {
@@ -58,6 +69,18 @@ public class Human : MonoBehaviour
             speed = 2;
             rend.material.color = unsatisfiedColor;
         }
+    }
+    
+    void OnMouseDown()
+    {
+        /*if (EventSystem.current.IsPointerOverGameObject())
+        {
+            return;
+        }*/
+        // else
+        // {
+        VillagerInfoPanel.SetActive(true);
+        // }
     }
 
     void StartDay()

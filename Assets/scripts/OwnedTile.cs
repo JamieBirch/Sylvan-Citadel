@@ -261,7 +261,7 @@ public class OwnedTile : Tile
         }
         else
         {
-            Debug.Log("No woodland in tile " + name);
+            // Debug.Log("No woodland in tile " + name);
             return null;
         }
     }

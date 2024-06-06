@@ -3791,7 +3791,7 @@ MonoBehaviour:
   woodPrice: 40
   description: Provides shelter for 4 villagers.
   buildingPrefab: {fileID: 8641935630557121694, guid: e08cabe3182b47143aadcb24c5b07ca6, type: 3}
-  onlyOnePerTile: 0
+  onlyBuildingOnTile: 0
 --- !u!1 &698095246
 GameObject:
   m_ObjectHideFlags: 0
@@ -4119,7 +4119,7 @@ MonoBehaviour:
   woodPrice: 90
   description: Produces food and provides place to pick it up.
   buildingPrefab: {fileID: 4421653983999014295, guid: 0e78bf33367e81348812ff7ca8f13927, type: 3}
-  onlyOnePerTile: 0
+  onlyBuildingOnTile: 0
   maxWindmillsPerTile: 3
 --- !u!1 &698565070
 GameObject:
@@ -4900,6 +4900,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 2133194244}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!114 &752410101
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5262,11 +5274,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   locked: 0
-  name: Forester hut
+  name: Forester
   woodPrice: 250
   description: ---
   buildingPrefab: {fileID: 3446166757399284502, guid: b9c40461b0719054998211e4c9a2cf51, type: 3}
-  onlyOnePerTile: 1
+  onlyBuildingOnTile: 1
 --- !u!114 &796141629 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2955438172743500798, guid: 4d412f56e3f9b3047890321505807bee, type: 3}
@@ -7251,6 +7263,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 2133194244}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!114 &1176847819
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7819,7 +7843,7 @@ MonoBehaviour:
   woodPrice: 50
   description: Provides water source.
   buildingPrefab: {fileID: 1541975218879869188, guid: 419eb92ab2438bd44b33f1acb6513b9a, type: 3}
-  onlyOnePerTile: 0
+  onlyBuildingOnTile: 0
 --- !u!1 &1271898979
 GameObject:
   m_ObjectHideFlags: 0
@@ -8233,7 +8257,7 @@ MonoBehaviour:
   description: Provides place to pick up food produced by Windmills and other food
     sources.
   buildingPrefab: {fileID: 3330790554826253085, guid: 806e0b48d9d578b459dda2ee1f8835fd, type: 3}
-  onlyOnePerTile: 0
+  onlyBuildingOnTile: 0
 --- !u!1 &1299611714
 GameObject:
   m_ObjectHideFlags: 0
@@ -11357,7 +11381,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EffectColor: {r: 0.22352941, g: 0.015686275, b: 0.015686275, a: 0.7490196}
+  m_EffectColor: {r: 0.22352941, g: 0.015686275, b: 0.015686275, a: 1}
   m_EffectDistance: {x: 2, y: -2}
   m_UseGraphicAlpha: 1
 --- !u!114 &1910443745
@@ -11893,7 +11917,7 @@ MonoBehaviour:
   woodPrice: 250
   description: ---
   buildingPrefab: {fileID: 2848225816592233711, guid: abf2b87d64015a242a3005670dc490e4, type: 3}
-  onlyOnePerTile: 1
+  onlyBuildingOnTile: 1
 --- !u!1 &1982493957
 GameObject:
   m_ObjectHideFlags: 0

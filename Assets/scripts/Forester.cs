@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Forester : MonoBehaviour
+public class Forester : Building
 {
     public int producePerDay;
     private float produceEvery_seconds;

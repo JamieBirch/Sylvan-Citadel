@@ -6,13 +6,12 @@ public class WindmillBlueprint : BuildingBlueprint
 
     public override bool IsBuildable()
     {
-        if (TileManager.instance.activeTile != null)
+        if (base.IsBuildable())
         {
-            return GameStats.GetWood() >= woodPrice &&
-                   // TileManager.instance.GetActiveTileBiome() == Biome.grassland &&
-                   TileManager.instance.activeTile.GetComponent<OwnedTile>().buildings
-                       .FindAll(building => building.TryGetComponent<Windmill>(out _)).Count() < maxWindmillsPerTile;
-        } else
+            return TileManager.instance.activeTile.GetComponent<OwnedTile>().buildings
+                .FindAll(building => building.TryGetComponent<Windmill>(out _)).Count() < maxWindmillsPerTile;
+        }
+        else
         {
             return false;
         }

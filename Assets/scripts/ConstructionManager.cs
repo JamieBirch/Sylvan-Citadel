@@ -68,5 +68,10 @@ public class ConstructionManager : MonoBehaviour
         //assign to tile
         OwnedTile tileComponent = tile.GetComponent<OwnedTile>();
         tileComponent.AddBuildingToTile(buildingComponent);
+
+        if (buildingBlueprint.onlyBuildingOnTile)
+        {
+            tileComponent.allowBuildingOnTile = false;
+        }
     }
 }

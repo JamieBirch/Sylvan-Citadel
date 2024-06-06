@@ -2,18 +2,17 @@ using UnityEngine;
 
 public class ForestBlueprint : BuildingBlueprint
 {
-    public override bool IsBuildable()
+    /*public override bool IsBuildable()
     {
-        if (TileManager.instance.activeTile != null)
+        if (base.IsBuildable())
         {
-            return GameStats.GetWood() >= woodPrice &&
-                   //only building per tile
-                   TileManager.instance.activeTile.GetComponent<OwnedTile>().buildings.Count == 0;
-        } else
+            return TileManager.instance.activeTile.GetComponent<OwnedTile>().buildings.Count == 0;
+        }
+        else
         {
             return false;
         }
-    }
+    }*/
 
     public override bool IsShowable()
     {

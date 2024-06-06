@@ -38,8 +38,9 @@ public class OwnedTile : Tile
     private Dictionary<string, int> tileStatistics = new Dictionary<string, int>();
     
     public GameObject village;
-    public List<Building> buildings;
-    private bool selected;
+    public List<Building> buildings = new List<Building>();
+    public bool allowBuildingOnTile = true;
+    private bool selected = false;
 
     public Wall tileWall;
 
@@ -67,9 +68,6 @@ public class OwnedTile : Tile
         _terrainManager = TerrainManager.instance;
         
         Calendar.NewDay += StartDay;
-        
-        buildings = new List<Building>();
-        selected = false;
 
         BedsAvailable = 0;
         

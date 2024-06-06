@@ -1,11 +1,10 @@
 
 public class FoodStorageBlueprint : BuildingBlueprint
 {
-    public override bool IsBuildable()
+    /*public override bool IsBuildable()
     {
-        return TileManager.instance.activeTile != null && 
-               GameStats.GetWood() >= woodPrice;
-    }
+        return base.IsBuildable();
+    }*/
     
     public override bool IsShowable()
     {

@@ -38,6 +38,7 @@ public class Human : MonoBehaviour
     public RelocateState relocate = new RelocateState();
 
     public GameObject VillagerInfoPanel;
+    public Transform villagerTransform;
     public Text NameText;
     public Text ThirstyText;
     public Text HungryText;
@@ -58,7 +59,9 @@ public class Human : MonoBehaviour
         state = state.DoState(this);
         stateName = state.ToString();
         StateText.text = stateName;
-        
+
+        UpdateNeedsUI();
+
         if (Satisfied())
         {
             speed = 1;
@@ -70,7 +73,37 @@ public class Human : MonoBehaviour
             rend.material.color = unsatisfiedColor;
         }
     }
-    
+
+    private void UpdateNeedsUI()
+    {
+        if (wantsWater)
+        {
+            ThirstyText.gameObject.SetActive(true);
+        }
+        else
+        {
+            ThirstyText.gameObject.SetActive(false);
+        }
+
+        if (wantsFood)
+        {
+            HungryText.gameObject.SetActive(true);
+        }
+        else
+        {
+            HungryText.gameObject.SetActive(false);
+        }
+
+        if (!hasHome)
+        {
+            HomelessText.gameObject.SetActive(true);
+        }
+        else
+        {
+            HomelessText.gameObject.SetActive(false);
+        }
+    }
+
     void OnMouseDown()
     {
         /*if (EventSystem.current.IsPointerOverGameObject())
@@ -136,7 +169,7 @@ public class Human : MonoBehaviour
         float distanceThisFrame = speed * Time.deltaTime;
 
         humanTransform.Translate(dir.normalized * distanceThisFrame, Space.World);
-        // humanTransform.LookAt(currentTargetTransform);
+        villagerTransform.LookAt(currentTargetTransform);
 
         float distance = Vector3.Distance(humanTransform.position, currentTargetTransform.position);
         

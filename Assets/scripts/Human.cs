@@ -176,7 +176,13 @@ public class Human : MonoBehaviour
         if (distance <= 0.4)
         {
             state.UseCurrentTarget(this);
+            AssignNewThought();
         }
+    }
+
+    private void AssignNewThought()
+    {
+        ThoughtText.text = ThoughtGenerator.RandomThought();
     }
 
     private void DoFootprint()

@@ -1200,8 +1200,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   footprint: {fileID: 7883029496536759818, guid: ec9b6b338d1cbc74f991872cda23fefc, type: 3}
   Name: 
-  unsatisfiedColor: {r: 1, g: 0, b: 0, a: 0}
-  satisfiedColor: {r: 0, g: 0.92142105, b: 1, a: 0}
+  unsatisfiedColor: {r: 0.70980394, g: 0.37173778, b: 0.31764707, a: 0}
+  satisfiedColor: {r: 0.60338634, g: 0.709, b: 0.31692302, a: 0}
   rend: {fileID: 3838229252711456648}
   wantsWater: 0
   wantsFood: 0
@@ -1661,7 +1661,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ac9e4994877c7d143a5f51769707ff26, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.20000002
+      value: 0.26
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ac9e4994877c7d143a5f51769707ff26, type: 3}
       propertyPath: m_LocalScale.y
@@ -1713,7 +1713,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ac9e4994877c7d143a5f51769707ff26, type: 3}
       propertyPath: m_ConstrainProportionsScale
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: ac9e4994877c7d143a5f51769707ff26, type: 3}
       propertyPath: m_Name

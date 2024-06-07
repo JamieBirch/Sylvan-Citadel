@@ -11,7 +11,7 @@ public class DoWanderState : IHumanState
         {
             return human.relocate;
         }*/
-        if (!human.Satisfied())
+        if (human.wantsFood || human.wantsWater)
         {
             return human.decide;
         }

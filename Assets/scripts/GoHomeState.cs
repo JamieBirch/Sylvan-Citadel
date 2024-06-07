@@ -3,6 +3,11 @@ public class GoHomeState : IHumanState
 {
     public IHumanState DoState(Human human)
     {
+        if (!human.Satisfied())
+        {
+            return human.decide;
+        }
+        
         if (human.currentTarget == null)
         {
             SetHomeAsTarget(human);
@@ -12,7 +17,7 @@ public class GoHomeState : IHumanState
             human.RunToTarget();
             return this;
         }
-        return human.decide;
+        return this;
     }
 
     private void SetHomeAsTarget(Human human)

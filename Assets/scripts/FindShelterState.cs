@@ -22,7 +22,7 @@ public class FindShelterState : IHumanState
         else
         {
             human.currentTarget = null;
-            return human.decide;
+            return human.doWander;
         }
     }
     

@@ -9,24 +9,25 @@ public class FindWaterState : IHumanState
     {
         if (!human.wantsWater)
         {
-            if (human.wantsFood)
+            /*if (human.wantsFood)
             {
                 return human.findFood;
             } else if (!human.hasHome)
             {
                 return human.findShelter;
             }
-            Debug.Log(human.Name + " is satisfied and not sure what to do");
+            Debug.Log(human.Name + " is satisfied and not sure what to do");*/
+            return human.decide;
         } else {
             GameObject nearestWater = FindWater(human);
             if (nearestWater != null)
             {
                 human.currentTarget = nearestWater;
                 human.RunToTarget();
-                return human.doWander;
+                return this;
+                // return human.doWander;
             }
         }
-
         return this;
     }
 

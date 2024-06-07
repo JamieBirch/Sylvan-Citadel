@@ -6,17 +6,23 @@ public class FindShelterState : IHumanState
 
     public IHumanState DoState(Human human)
     {
+        if (human.hasHome)
+        {
+            return human.decide;
+        }
+        
         GameObject nearestHouse = FindHome(human);
         if (nearestHouse != null)
         {
             human.currentTarget = nearestHouse;
             human.RunToTarget();
-            return human.doWander;
+            // return human.doWander;
+            return this;
         }
         else
         {
             human.currentTarget = null;
-            return human.doWander;
+            return human.decide;
         }
     }
     

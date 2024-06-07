@@ -10,24 +10,40 @@ public class FindFoodState : IHumanState
     {
         if (!human.wantsFood)
         {
-            if (!human.hasHome)
+            /*if (!human.hasHome)
             {
                 return human.findShelter;
             }
-            Debug.Log(human.Name + " is satisfied and not sure what to do");
-        } else if (human.currentTarget == null)
+            Debug.Log(human.Name + " is satisfied and not sure what to do");*/
+            return human.decide;
+        } /*else if (human.currentTarget == null)
         {
             FindFood(human);
-        }
+        }*/
         else
         {
-            human.RunToTarget();
+            if (human.currentTarget == null)
+            {
+                GameObject nearestFood = FindFood(human);
+                if (nearestFood != null)
+                {
+                    human.currentTarget = nearestFood;
+                }
+            }
+            else
+            {
+                human.RunToTarget();
+            } 
+            /*if (nearestFood != null)
+            {
+                return this;
+            }*/
         }
 
-        return human.doWander;
+        return this;
     }
     
-    private void FindFood(Human human)
+    private GameObject FindFood(Human human)
     {
         IEnumerable foodSources = GameObject.FindGameObjectsWithTag(foodSourceTag).Select(fruit => fruit.transform);
         
@@ -61,16 +77,16 @@ public class FindFoodState : IHumanState
 
         if (nearestFoodSource != null)
         {
-            human.currentTarget = nearestFoodSource;
             Fruit fruitComponent;
             if (nearestFoodSource.TryGetComponent<Fruit>(out fruitComponent))
             {
                 fruitComponent.isClaimed = true;
             }
+            return nearestFoodSource;
             // Debug.Log(name + " claimed food");
         } else
         {
-            human.currentTarget = null;
+            return null;
         }
     }
 

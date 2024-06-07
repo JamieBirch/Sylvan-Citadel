@@ -10,9 +10,9 @@ public class GoHomeState : IHumanState
         else
         {
             human.RunToTarget();
-            return human.doWander;
+            return this;
         }
-        return human.doWander;
+        return human.decide;
     }
 
     private void SetHomeAsTarget(Human human)

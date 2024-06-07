@@ -36,6 +36,7 @@ public class Human : MonoBehaviour
     public GoHomeState goHome = new GoHomeState();
     public DoWorkState doWork = new DoWorkState();
     public RelocateState relocate = new RelocateState();
+    public DoDecideState decide = new DoDecideState();
 
     public GameObject VillagerInfoPanel;
     public Transform villagerTransform;
@@ -50,7 +51,7 @@ public class Human : MonoBehaviour
     {
         Calendar.NewDay += StartDay;
         _populationManager = PopulationManager.instance;
-        state = doWander;
+        state = decide;
         NameText.text = Name;
     }
 

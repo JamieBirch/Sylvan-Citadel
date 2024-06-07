@@ -15,7 +15,7 @@
             human.wantsWater = false;
             human.wantsFood = false;
             human.RunToTarget();
-            return human.doWander;
+            return human.decide;
         }
 
         return human.relocate;

@@ -7,13 +7,27 @@ public class DoWanderState : IHumanState
 {
     public IHumanState DoState(Human human)
     {
+        /*if (human.isRelocating)
+        {
+            return human.relocate;
+        }*/
+        if (!human.Satisfied())
+        {
+            return human.decide;
+        }
+        else
+        {
+            Wander(human);
+        }
+        
+        /*
         if (human.isRelocating)
         {
             return human.relocate;
         }
         if (human.Satisfied() && !human.hasWork)
         {
-            if (Calendar.night)
+            if (Calendar.night && human.hasHome)
             {
                 return human.goHome;
             }
@@ -39,7 +53,7 @@ public class DoWanderState : IHumanState
         {
             Debug.Log(human.name + " is ready to work");
             return human.doWork;
-        }
+        }*/
 
         return this;
     }
@@ -56,6 +70,10 @@ public class DoWanderState : IHumanState
                 case SparetimeActivity.admireBuilding:
                 {
                     List<Building> buildings = human.homeTile.buildings;
+                    if (buildings.Count == 0)
+                    {
+                        break;
+                    }
                     human.currentTarget = buildings[new Random().Next(buildings.Count - 1)].gameObject;
                     break;
                 }

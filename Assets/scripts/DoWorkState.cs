@@ -3,7 +3,7 @@
     public IHumanState DoState(Human human)
     {
         //TODO
-        return human.doWander;
+        return human.decide;
     }
 
     public void UseCurrentTarget(Human human)

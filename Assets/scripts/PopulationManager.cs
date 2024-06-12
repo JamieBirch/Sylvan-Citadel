@@ -50,6 +50,7 @@ public class PopulationManager : MonoBehaviour
         humanGameObject.name = name;
         Human humanComponent = humanGameObject.GetComponent<Human>();
         humanComponent.Name = name;
+        humanComponent.RandomizeAppearance();
         
         //settle
         OwnedTile homeTile = village.GetComponentInParent<OwnedTile>();

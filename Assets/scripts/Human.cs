@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class Human : MonoBehaviour
 {
     private PopulationManager _populationManager;
+    public CritterGenerator critterGenerator;
 
     // public Sprite footprint;
     public Canvas footprint;
@@ -243,5 +244,10 @@ public class Human : MonoBehaviour
     public void OnDestroy()
     {
         Calendar.NewDay -= StartDay;
+    }
+
+    public void RandomizeAppearance()
+    {
+        critterGenerator.RandomizeAppearance();
     }
 }

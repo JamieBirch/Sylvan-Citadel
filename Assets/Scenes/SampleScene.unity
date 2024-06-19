@@ -950,15 +950,21 @@ MonoBehaviour:
   - sound: 1
     audioClip: {fileID: 8300000, guid: ebc3cc439dd599a42b6a5301c016447b, type: 3}
   - sound: 2
-    audioClip: {fileID: 8300000, guid: dfed6a619edb48049a950ffce0881cd3, type: 3}
-  - sound: 3
     audioClip: {fileID: 8300000, guid: e73688947c9994747838333bb784241a, type: 3}
-  - sound: 4
+  - sound: 3
     audioClip: {fileID: 8300000, guid: 272909673c9e6f942b4930cdc751b387, type: 3}
-  - sound: 5
+  - sound: 4
     audioClip: {fileID: 8300000, guid: da08bc531ab274945a55dc7bbcd937e3, type: 3}
-  - sound: 6
+  - sound: 5
     audioClip: {fileID: 8300000, guid: f1d5139869a0c2143848b64525ede265, type: 3}
+  - sound: 6
+    audioClip: {fileID: 8300000, guid: 9a34d725ba2b1314baf775435ab7e737, type: 3}
+  - sound: 7
+    audioClip: {fileID: 8300000, guid: 311c4e240d86a9b4c8e2ff646a32fe18, type: 3}
+  - sound: 8
+    audioClip: {fileID: 8300000, guid: fc3e2cff24591e24497418a01ef528d3, type: 3}
+  - sound: 9
+    audioClip: {fileID: 8300000, guid: a4274cd78af87e34db9cf07af853f925, type: 3}
 --- !u!114 &107134981
 MonoBehaviour:
   m_ObjectHideFlags: 0

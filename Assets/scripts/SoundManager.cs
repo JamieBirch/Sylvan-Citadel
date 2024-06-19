@@ -9,11 +9,16 @@ public class SoundManager : MonoBehaviour
     {
         ambient,
         new_tile, 
-        mission_complete, 
+        // mission_complete, 
         build,
         chop,
         button_click,
-        tile_select
+        tile_select,
+        death,
+        birth,
+        // yohoo,
+        pencil,
+        applause
     }
 
     public static Dictionary<Sound, AudioClip> soundsDictionary = new Dictionary<Sound, AudioClip>();

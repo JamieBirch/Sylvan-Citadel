@@ -210,6 +210,8 @@ public class Human : MonoBehaviour
 
     private void GiveBirth()
     {
+        SoundManager.PlaySound(SoundManager.Sound.birth);
+
         Debug.Log("I'm having a child!");
         _populationManager.SpawnHuman(gameObject.GetComponentInParent<Village>().gameObject);
     }
@@ -223,7 +225,8 @@ public class Human : MonoBehaviour
             MoveOut();
         }
         
-        //TODO sound
+        //sound
+        SoundManager.PlaySound(SoundManager.Sound.death);
         
         //leave shell
         GameObject shell = Instantiate(shellPrefab, villagerTransform.position, Quaternion.identity);

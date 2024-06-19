@@ -21,7 +21,8 @@ public abstract class Mission : MonoBehaviour
         {
             finished = true;
             checkmark.SetActive(true);
-            SoundManager.PlaySound(SoundManager.Sound.mission_complete);
+            SoundManager.PlaySound(SoundManager.Sound.applause);
+            SoundManager.PlaySound(SoundManager.Sound.pencil);
             //TODO add visual effect
         }
     }

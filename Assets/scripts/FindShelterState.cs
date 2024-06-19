@@ -65,4 +65,9 @@ public class FindShelterState : IHumanState
         }
         human.currentTarget = null;
     }
+
+    public string GetStateString()
+    {
+        return "Looking for shelter";
+    }
 }

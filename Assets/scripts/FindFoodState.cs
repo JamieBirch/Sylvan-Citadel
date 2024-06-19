@@ -94,7 +94,12 @@ public class FindFoodState : IHumanState
     {
         Consume(human);
     }
-    
+
+    public string GetStateString()
+    {
+        return "Looking for food";
+    }
+
     private void Consume(Human human)
     {
         // if (GameStats.GetFood() > 0)

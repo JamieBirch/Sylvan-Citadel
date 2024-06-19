@@ -122,4 +122,9 @@ public class DoWanderState : IHumanState
         // Debug.Log("can't utilize target in wander state");
         human.currentTarget = null;
     }
+
+    public string GetStateString()
+    {
+        return "Relaxing";
+    }
 }

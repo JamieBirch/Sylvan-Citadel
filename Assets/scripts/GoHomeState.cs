@@ -29,4 +29,9 @@ public class GoHomeState : IHumanState
     {
         // Debug.Log("I'm home");
     }
+
+    public string GetStateString()
+    {
+        return "Going home";
+    }
 }

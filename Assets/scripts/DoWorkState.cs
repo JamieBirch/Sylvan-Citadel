@@ -10,4 +10,9 @@
     {
         //TODO
     }
+
+    public string GetStateString()
+    {
+        return "Working";
+    }
 }

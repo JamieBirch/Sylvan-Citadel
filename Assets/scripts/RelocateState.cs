@@ -26,4 +26,9 @@
         human.currentTarget = null;
         human.isRelocating = false;
     }
+
+    public string GetStateString()
+    {
+        return "Moving to ";
+    }
 }

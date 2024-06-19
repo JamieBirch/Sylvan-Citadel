@@ -29,7 +29,7 @@ public class Human : MonoBehaviour
 
     public GameObject _home;
     private IHumanState state;
-    public String stateName;
+    // public String stateName;
     public FindWaterState findWater = new FindWaterState();
     public FindFoodState findFood = new FindFoodState();
     public FindShelterState findShelter = new FindShelterState();
@@ -59,8 +59,8 @@ public class Human : MonoBehaviour
     private void Update()
     {
         state = state.DoState(this);
-        stateName = state.ToString();
-        StateText.text = stateName;
+        // stateName = state.ToString();
+        StateText.text = state.GetStateString();
 
         UpdateNeedsUI();
 

@@ -6,6 +6,7 @@ public class DoDecideState : IHumanState
     {
         if (human.isRelocating)
         {
+            Debug.Log("relocating");
             return human.relocate;
         }
         if (human.Satisfied() && !human.hasWork)
@@ -44,5 +45,10 @@ public class DoDecideState : IHumanState
     public void UseCurrentTarget(Human human)
     {
         throw new System.NotImplementedException();
+    }
+
+    public string GetStateString()
+    {
+        return "Thinking what to do next";
     }
 }

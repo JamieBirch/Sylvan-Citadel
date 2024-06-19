@@ -36,6 +36,11 @@ public class FindWaterState : IHumanState
         Drink(human);
     }
 
+    public string GetStateString()
+    {
+        return "Looking for water";
+    }
+
     private GameObject FindWater(Human human)
     {
         IEnumerable lakes;

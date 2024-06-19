@@ -39,6 +39,7 @@ public class Human : MonoBehaviour
     public RelocateState relocate = new RelocateState();
     public DoDecideState decide = new DoDecideState();
 
+    public GameObject shellPrefab;
     public GameObject VillagerInfoPanel;
     public Transform villagerTransform;
     public Text NameText;
@@ -221,6 +222,13 @@ public class Human : MonoBehaviour
         {
             MoveOut();
         }
+        
+        //TODO sound
+        
+        //leave shell
+        GameObject shell = Instantiate(shellPrefab, villagerTransform.position, Quaternion.identity);
+        Destroy(shell, Calendar.instance.dayLength);
+
         homeTile.village.GetComponent<Village>().humans.Remove(this);
         Destroy(gameObject);
         homeTile.HexPopulation--;

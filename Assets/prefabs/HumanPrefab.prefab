@@ -1217,6 +1217,7 @@ MonoBehaviour:
   speed: 2
   fertility: 50
   _home: {fileID: 0}
+  shellPrefab: {fileID: 5047084111848998831, guid: aa5ddc8654842a3478b0adb0bee85fbe, type: 3}
   VillagerInfoPanel: {fileID: 1697980003}
   villagerTransform: {fileID: 254008539232684003}
   NameText: {fileID: 1500931927}

@@ -58,6 +58,20 @@ public class GameManager : MonoBehaviour
             Time.timeScale = 0f;
         }
         
+        if (Input.GetKey("space"))
+        {
+            if (Calendar.instance.paused)
+            {
+                Calendar.instance.Resume();
+            }
+            else
+            {
+                // Calendar.instance.Pause();
+                Calendar.instance.paused = true;
+                Time.timeScale = 0f;
+            }
+        }
+        
         humans.text = GameStats.GetPopulation().ToString();
         food.text = GameStats.GetFood().ToString();
         wood.text = GameStats.GetWood().ToString();

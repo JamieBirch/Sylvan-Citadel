@@ -33,6 +33,7 @@ public class Calendar : MonoBehaviour
     public Material windowMaterial;
 
     public float currentTimeScale = 1;
+    public bool paused = false;
 
     // private float moonIntensity;
     
@@ -109,30 +110,35 @@ public class Calendar : MonoBehaviour
 
     public void Pause()
     {
+        paused = true;
         Time.timeScale = 0f;
         currentTimeScale = 0;
     }
     
     public void TimeScale1()
     {
+        paused = false;
         Time.timeScale = 1f;
         currentTimeScale = 1;
     }
     
     public void TimeScale2()
     {
+        paused = false;
         Time.timeScale = 2f;
         currentTimeScale = 2;
     }
     
     public void TimeScale4()
     {
+        paused = false;
         Time.timeScale = 4f;
         currentTimeScale = 4;
     }
 
     public void Resume()
     {
+        paused = false;
         Time.timeScale = currentTimeScale;
     }
 

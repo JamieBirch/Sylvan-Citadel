@@ -917,7 +917,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BuildingsButtons: {fileID: 0}
-  BuildingPrefab: {fileID: 0}
 --- !u!114 &107134979
 MonoBehaviour:
   m_ObjectHideFlags: 0

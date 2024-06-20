@@ -42,7 +42,7 @@ public class House : Building
     {
         foreach (Human tenant in _tenants)
         {
-            tenant.MoveOut();
+            tenant.MakeHomeless();
         }
         
         base.Demolish();

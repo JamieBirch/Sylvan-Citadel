@@ -5,7 +5,6 @@ public class ConstructionManager : MonoBehaviour
 {
     public static ConstructionManager instance;
 
-    public Button BuildButton;
     public GameObject BuildingsButtons;
     
     private void Awake()
@@ -59,11 +58,13 @@ public class ConstructionManager : MonoBehaviour
     public static void InstantiateBuilding(BuildingBlueprint buildingBlueprint, GameObject tile)
     {
         var position = TileUtils.PositionOnTile(tile.transform.position);
-        float buildingRotation = Utils.GenerateRandom(0, 360f);
-        GameObject newBuilding = Instantiate(buildingBlueprint.buildingPrefab, position,
-            Quaternion.AngleAxis(buildingRotation, Vector3.up), tile.transform);
+        // float buildingRotation = Utils.GenerateRandom(0, 360f);
+        GameObject newBuilding = Instantiate(buildingBlueprint.buildingPrefab, position, 
+            Quaternion.identity /*Quaternion.AngleAxis(buildingRotation, Vector3.up)*/, tile.transform);
         Building buildingComponent = newBuilding.GetComponent<Building>();
         buildingComponent.name = buildingBlueprint.name;
+        buildingComponent.buildingNameUI.text = buildingBlueprint.name;
+        buildingComponent.descriptionUI.text = buildingBlueprint.description;
 
         //assign to tile
         OwnedTile tileComponent = tile.GetComponent<OwnedTile>();

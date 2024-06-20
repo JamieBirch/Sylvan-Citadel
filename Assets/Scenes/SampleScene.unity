@@ -888,6 +888,7 @@ MonoBehaviour:
   timeText: {fileID: 97144614}
   windowMaterial: {fileID: 2100000, guid: f25ed9a33e8936443bf56b94ed327668, type: 2}
   currentTimeScale: 1
+  paused: 0
 --- !u!114 &107134977
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -915,8 +916,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fa36a92843e4ab45b37911fb61456bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BuildButton: {fileID: 0}
   BuildingsButtons: {fileID: 0}
+  BuildingPrefab: {fileID: 0}
 --- !u!114 &107134979
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11497,7 +11498,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 1
     m_MaxSize: 40
-    m_Alignment: 3
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0

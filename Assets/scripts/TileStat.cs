@@ -23,4 +23,10 @@ public class TileStat : MonoBehaviour
         tileStatCount++;
         tileStatCountText.text = tileStatCount.ToString();
     }
+
+    public void Decrease()
+    {
+        tileStatCount--;
+        tileStatCountText.text = tileStatCount.ToString();
+    }
 }

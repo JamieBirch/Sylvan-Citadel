@@ -241,6 +241,11 @@ public class Human : MonoBehaviour
     public void MoveOut()
     {
         _home.GetComponent<House>().MoveOut(this);
+        MakeHomeless();
+    }
+
+    public void MakeHomeless()
+    {
         hasHome = false;
         _home = null;
     }

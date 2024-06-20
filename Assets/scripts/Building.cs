@@ -1,15 +1,22 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
-public abstract class Building : MonoBehaviour
+public class Building : MonoBehaviour
 {
     public OwnedTile tile;
     public string name;
     private bool selected;
 
+    public GameObject BuildingInfo;
+    
+    public Text buildingNameUI;
+    public Text descriptionUI;
+
     public void Demolish()
     {
-        tile.buildings.Remove(this);
+        SoundManager.PlaySound(SoundManager.Sound.chop);
+        tile.RemoveBuildingFromTile(this);
         Destroy(gameObject);
     }
     
@@ -41,8 +48,9 @@ public abstract class Building : MonoBehaviour
     private void Select()
     {
         selected = true;
+        Debug.Log("building selected");
         highlight();
-        SoundManager.PlaySound(SoundManager.Sound.tile_select);
+        BuildingInfo.SetActive(true);
     }
 
     private void OnMouseExit()
@@ -55,19 +63,19 @@ public abstract class Building : MonoBehaviour
 
     public void Unselect()
     {
+        Debug.Log("building unselected");
         selected = false;
         ColorToDefault();
+        BuildingInfo.SetActive(false);
     }
     
     private void highlight()
     {
-        Debug.Log("building selected");
         // rend.materials[1].color = selectColor;
     }
 
     private void ColorToDefault()
     {
-        Debug.Log("building unselected");
         // rend.materials[1].color = defaultColor;
     }
 }

@@ -112,6 +112,10 @@ public class OwnedTile : Tile
             
             tileBuildingsUI.SetActive(true);
         }
+        else
+        {
+            tileBuildingsUI.SetActive(false);
+        }
 
         UpdateTileStatistics(PopulationStatString, HexPopulation);
         UpdateTileStatistics(BedsAvailableStatString, BedsAvailable);
@@ -134,6 +138,12 @@ public class OwnedTile : Tile
         buildings.Add(buildingComponent);
         buildingComponent.tile = this;
         tileStatsUI.AddBuildingField(buildingComponent.name);
+    }
+    
+    public void RemoveBuildingFromTile(Building buildingComponent)
+    {
+        buildings.Remove(buildingComponent);
+        tileStatsUI.RemoveBuildingField(buildingComponent.name);
     }
 
     private int CalcBedsAvailableSum()

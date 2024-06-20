@@ -1,3 +1,13 @@
-﻿fileFormatVersion: 2
+fileFormatVersion: 2
 guid: 4e7576ec3fbf40fea91d8a4de28cd20f
-timeCreated: 1715682313
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - tile: {instanceID: 0}
+  - BuildingInfo: {fileID: 3449437701648784438, guid: e3dfd1e1d986b074cb5eaa1659db2c23, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

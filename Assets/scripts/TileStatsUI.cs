@@ -43,4 +43,16 @@ public class TileStatsUI : MonoBehaviour
         tileStatistics[field].SetCount(count);
     }
 
+    public void RemoveBuildingField(string field)
+    {
+        TileStat tileStat = tileBuildingsDic[field];
+        tileStat.Decrease();
+
+        if (tileStat.tileStatCount == 0)
+        {
+            //remove
+            Destroy(tileStat.gameObject);
+            tileBuildingsDic.Remove(field);
+        }
+    }
 }

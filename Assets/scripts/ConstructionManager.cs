@@ -5,14 +5,15 @@ public class ConstructionManager : MonoBehaviour
 {
     public static ConstructionManager instance;
 
-    public GameObject BuildingsButtons;
+    // public GameObject BuildingsButtons;
+    public GameObject BuildingPanel;
     
     private void Awake()
     {
         instance = this;
     }
 
-    public void ShowHideBuildPanel()
+    /*public void ShowHideBuildPanel()
     {
         if (BuildingsButtons.activeSelf)
         {
@@ -22,6 +23,16 @@ public class ConstructionManager : MonoBehaviour
         {
             BuildingsButtons.SetActive(true);
         }
+    }*/
+    
+    public void ShowBuildPanel()
+    {
+        BuildingPanel.SetActive(true);
+    }
+    
+    public void HideBuildPanel()
+    {
+        BuildingPanel.SetActive(false);
     }
 
     /*public void Update()

@@ -218,6 +218,9 @@ public class OwnedTile : Tile
         _tileManager.SetTileAsActive(gameObject);
         highlight();
         SoundManager.PlaySound(SoundManager.Sound.tile_select);
+        
+        //TODO show Build & Terraform panels
+        _tileManager.ShowBuildAndTerraformPanels();
     }
 
     private void OnMouseExit()
@@ -234,6 +237,9 @@ public class OwnedTile : Tile
         selected = false;
         _tileManager.SetHexAsInActive();
         ColorToDefault();
+        
+        //TODO hide Build & Terraform panels
+        _tileManager.HideBuildAndTerraformPanels();
     }
 
     private void ColorToDefault()

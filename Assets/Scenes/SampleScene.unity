@@ -916,7 +916,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fa36a92843e4ab45b37911fb61456bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BuildingsButtons: {fileID: 0}
+  BuildingPanel: {fileID: 626023709}
 --- !u!114 &107134979
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -931,6 +931,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TerraformButton: {fileID: 0}
   TerraformingButtons: {fileID: 0}
+  TerraformingPanel: {fileID: 1517069681}
 --- !u!114 &107134980
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3097,7 +3098,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &626023710
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9631,7 +9632,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1517069682
 RectTransform:
   m_ObjectHideFlags: 0

@@ -7,13 +7,14 @@ public class TerraformingManager : MonoBehaviour
     
     public Button TerraformButton;
     public GameObject TerraformingButtons;
+    public GameObject TerraformingPanel;
     
     private void Awake()
     {
         instance = this;
     }
     
-    public void ShowHidePanel()
+    /*public void ShowHidePanel()
     {
         if (TerraformingButtons.activeSelf)
         {
@@ -23,6 +24,16 @@ public class TerraformingManager : MonoBehaviour
         {
             TerraformingButtons.SetActive(true);
         }
+    }*/
+    
+    public void ShowPanel()
+    {
+        TerraformingPanel.SetActive(true);
+    }
+    
+    public void HidePanel()
+    {
+        TerraformingPanel.SetActive(false);
     }
     
     /*public void Update()

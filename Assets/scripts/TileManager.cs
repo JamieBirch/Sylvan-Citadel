@@ -149,4 +149,16 @@ public class TileManager : MonoBehaviour
     {
         return activeTile.GetComponent<OwnedTile>().biome;
     }
+
+    public void ShowBuildAndTerraformPanels()
+    {
+        _constructionManager.ShowBuildPanel();
+        _terraformingManager.ShowPanel();
+    }
+
+    public void HideBuildAndTerraformPanels()
+    {
+        _constructionManager.HideBuildPanel();
+        _terraformingManager.HidePanel();
+    }
 }

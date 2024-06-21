@@ -1,12 +1,12 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ChopWoodButton : MonoBehaviour
+public class ChopWoodButton : TerraformingButton
 {
-    public Button button;
+    // public Button button;
     
     // Update is called once per frame
-    void Update()
+    /*void Update()
     {
         if (CheckIfTreesAvailable())
         {
@@ -17,14 +17,24 @@ public class ChopWoodButton : MonoBehaviour
         {
             button.interactable = false;
         }
+    }*/
+
+    public override bool IsDoable()
+    {
+        if (base.IsDoable())
+        {
+            return CheckIfTreesAvailable();
+        }
+        else
+        {
+            return false;
+        }
     }
+
 
     private bool CheckIfTreesAvailable()
     {
-        if (TileManager.instance.activeTile == null)
-        {
-            return false;
-        } else if (TileManager.instance.activeTile.GetComponent<OwnedTile>().GetWoodland() == null)
+        if (TileManager.instance.activeTile.GetComponent<OwnedTile>().GetWoodland() == null)
         {
             return false;
         } else if (TileManager.instance.activeTile.GetComponent<OwnedTile>().GetWoodland().getCount() > 0 )

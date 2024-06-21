@@ -146,13 +146,24 @@ public class OwnedTile : Tile
     {
         buildings.Remove(buildingComponent);
         tileStatsUI.RemoveBuildingField(buildingComponent.name);
+        flagsToDefault();
+    }
+
+    private void flagsToDefault()
+    {
         if (!allowBuildingOnTile)
         {
             allowBuildingOnTile = true;
         }
+
         if (blockTreeGrowth)
         {
             blockTreeGrowth = false;
+        }
+
+        if (!allowTileTerraforming)
+        {
+            allowTileTerraforming = true;
         }
     }
 

@@ -90,5 +90,11 @@ public class ConstructionManager : MonoBehaviour
         {
             tileComponent.blockTreeGrowth = true;
         }
+
+        if (buildingBlueprint.blocksTerraforming)
+        {
+            tileComponent.allowTileTerraforming = false;
+        }
+        
     }
 }

@@ -5374,7 +5374,8 @@ MonoBehaviour:
   locked: 0
   name: Forester
   woodPrice: 250
-  description: 'Consistently provides wood. Takes entire tile. '
+  description: 'Consistently provides wood. Takes care of dead trees. Takes entire
+    tile. '
   buildingPrefab: {fileID: 3446166757399284502, guid: b9c40461b0719054998211e4c9a2cf51, type: 3}
   onlyBuildingOnTile: 1
   blocksTerraforming: 1
@@ -7100,6 +7101,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1130444963}
   - component: {fileID: 1130444964}
+  - component: {fileID: 1130444965}
   m_Layer: 5
   m_Name: buttons
   m_TagString: Untagged
@@ -7155,6 +7157,19 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &1130444965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1130444962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d11946151fd64bd43b16ab9b787d1917, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttons: []
 --- !u!1 &1135474881
 GameObject:
   m_ObjectHideFlags: 0
@@ -12019,7 +12034,8 @@ MonoBehaviour:
   locked: 0
   name: Orchard
   woodPrice: 250
-  description: 'Consistently provides fruits for storage. Takes entire tile. '
+  description: 'Consistently provides fruits for storage. Takes care of dead trees.
+    Takes entire tile. '
   buildingPrefab: {fileID: 2848225816592233711, guid: abf2b87d64015a242a3005670dc490e4, type: 3}
   onlyBuildingOnTile: 1
   blocksTerraforming: 1

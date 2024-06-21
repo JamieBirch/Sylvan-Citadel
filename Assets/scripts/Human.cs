@@ -214,10 +214,13 @@ public class Human : MonoBehaviour
 
         Debug.Log("I'm having a child!");
         _populationManager.SpawnHuman(gameObject.GetComponentInParent<Village>().gameObject);
+        LoggingService.instance.LogMessage(Name + " gave birth");
     }
 
     public void Die()
     {
+        LoggingService.instance.LogMessage(Name + " died");
+        
         Debug.Log("I'm dying! :(");
         //die
         if (_home != null)

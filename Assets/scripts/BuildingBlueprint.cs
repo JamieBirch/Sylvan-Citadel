@@ -9,6 +9,8 @@ public abstract class BuildingBlueprint : MonoBehaviour
     public string description;
     public GameObject buildingPrefab;
     [FormerlySerializedAs("onlyOnePerTile")] public bool onlyBuildingOnTile;
+    public bool blocksTerraforming;
+    public bool blockTreeGrowth;
 
     public virtual bool IsBuildable()
     {

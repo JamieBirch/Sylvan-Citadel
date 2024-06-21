@@ -40,6 +40,8 @@ public class OwnedTile : Tile
     public GameObject village;
     public List<Building> buildings = new List<Building>();
     public bool allowBuildingOnTile = true;
+    public bool allowTileTerraforming = true;
+    public bool blockTreeGrowth = false;
     private bool selected = false;
 
     public Wall tileWall;
@@ -144,6 +146,14 @@ public class OwnedTile : Tile
     {
         buildings.Remove(buildingComponent);
         tileStatsUI.RemoveBuildingField(buildingComponent.name);
+        if (!allowBuildingOnTile)
+        {
+            allowBuildingOnTile = true;
+        }
+        if (blockTreeGrowth)
+        {
+            blockTreeGrowth = false;
+        }
     }
 
     private int CalcBedsAvailableSum()

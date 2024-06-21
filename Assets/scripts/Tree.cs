@@ -24,6 +24,11 @@ public abstract class Tree : MonoBehaviour
     
     void StartDay()
     {
+        if (tile.blockTreeGrowth)
+        {
+            return;
+        }
+        
         switch (treeSize.GetSize())
         {
             //young tree

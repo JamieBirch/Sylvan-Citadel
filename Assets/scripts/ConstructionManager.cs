@@ -85,5 +85,10 @@ public class ConstructionManager : MonoBehaviour
         {
             tileComponent.allowBuildingOnTile = false;
         }
+
+        if (buildingBlueprint.blockTreeGrowth)
+        {
+            tileComponent.blockTreeGrowth = true;
+        }
     }
 }

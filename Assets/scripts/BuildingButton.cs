@@ -20,11 +20,11 @@ public class BuildingButton : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void Update()       
     {
         if (buildingBlueprint.IsBuildable())
         {
-            button.animator.Play("Normal");
+            // button.animator.Play("Normal");
             button.interactable = true;
         }
         else

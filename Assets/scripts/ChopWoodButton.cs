@@ -10,7 +10,7 @@ public class ChopWoodButton : MonoBehaviour
     {
         if (CheckIfTreesAvailable())
         {
-            button.animator.Play("Normal");
+            // button.animator.Play("Normal");
             button.interactable = true;
         }
         else

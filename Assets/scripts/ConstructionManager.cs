@@ -68,7 +68,17 @@ public class ConstructionManager : MonoBehaviour
 
     public static void InstantiateBuilding(BuildingBlueprint buildingBlueprint, GameObject tile)
     {
-        var position = TileUtils.PositionOnTile(tile.transform.position);
+        Vector3 position;
+        Vector3 tileCenter = tile.transform.position;
+        if (buildingBlueprint.onlyBuildingOnTile)
+        {
+            position = new Vector3(tileCenter.x, 0f, tileCenter.z);
+        }
+        else
+        {
+            position = TileUtils.PositionOnTile(tileCenter);
+        }
+        
         // float buildingRotation = Utils.GenerateRandom(0, 360f);
         GameObject newBuilding = Instantiate(buildingBlueprint.buildingPrefab, position, 
             Quaternion.identity /*Quaternion.AngleAxis(buildingRotation, Vector3.up)*/, tile.transform);

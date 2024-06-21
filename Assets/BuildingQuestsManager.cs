@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,13 +7,16 @@ public class BuildingQuestsManager : MonoBehaviour
 {
     public static BuildingQuestsManager instance;
     
-    public static Dictionary<Biome, BuildingBlueprint> BiomeRewardsDictionary = new Dictionary<Biome, BuildingBlueprint>() ;
-    public BiomeReward[] BiomeRewards;
+    public static Dictionary<BuildingUnlockTrigger, BuildingBlueprint> TriggerRewardsDictionary = new Dictionary<BuildingUnlockTrigger, BuildingBlueprint>() ;
+    public TriggerReward[] TriggerRewards;
 
     public GameObject newBuildingCanvas;
     public Text headerText;
     public Text descriptionText;
 
+    public bool DeadFruitTreeBuildingUnlocked = false;
+    public bool DeadPineTreeBuildingUnlocked = false;
+    
     private void Awake()
     {
         if (instance == null)
@@ -20,21 +24,33 @@ public class BuildingQuestsManager : MonoBehaviour
             instance = this;
         }
         
-        foreach (BiomeReward BiomeReward in BiomeRewards)
+        foreach (TriggerReward TriggerReward in TriggerRewards)
         {
-            BiomeRewardsDictionary.Add(BiomeReward.biome, BiomeReward.reward);
+            TriggerRewardsDictionary.Add(TriggerReward.trigger, TriggerReward.reward);
         }
     }
     
     [System.Serializable]
-    public class BiomeReward
+    public class TriggerReward
     {
-        public Biome biome;
+        public BuildingUnlockTrigger trigger;
         public BuildingBlueprint reward;
     }
 
-    public void ShowNewBuildingPanel(BuildingBlueprint buildingBlueprint)
+    public enum BuildingUnlockTrigger
     {
+        well,
+        storage,
+        windmill,
+        orchard,
+        forester
+    }
+    
+    public void UnlockNewBuilding(BuildingUnlockTrigger trigger)
+    {
+        BuildingBlueprint buildingBlueprint = TriggerRewardsDictionary[trigger];
+        buildingBlueprint.locked = false;
+        
         Time.timeScale = 0f;
 
         headerText.text = buildingBlueprint.name + " unlocked!";

@@ -458,13 +458,14 @@ public class TerrainManager : MonoBehaviour
         bool hasRestriction = borderingTileComponent.hasRestriction;
 
         bool isPoi = borderingTileComponent.isPOI;
+        BuildingQuestsManager.BuildingUnlockTrigger buildingUnlockTrigger = BuildingUnlockTrigger(biome);
         if (isPoi)
         {
-            BuildingBlueprint buildingBlueprint = BuildingQuestsManager.BiomeRewardsDictionary[biome];
-            buildingBlueprint.locked = false;
             //TODO define behavior when new Building is unlocked
             // PlayerMessageService.instance.ShowMessage(buildingBlueprint.name + " is unlocked!");
-            BuildingQuestsManager.instance.ShowNewBuildingPanel(buildingBlueprint);
+
+            var unlockTrigger = buildingUnlockTrigger;
+            BuildingQuestsManager.instance.UnlockNewBuilding(unlockTrigger);
         }
         
         //change tilePrefab based on biome
@@ -495,13 +496,44 @@ public class TerrainManager : MonoBehaviour
         
         if (isPoi)
         {
-            BuildingBlueprint buildingBlueprint = BuildingQuestsManager.BiomeRewardsDictionary[biome];
+            BuildingBlueprint buildingBlueprint = BuildingQuestsManager.TriggerRewardsDictionary[buildingUnlockTrigger];
             ConstructionManager.InstantiateBuilding(buildingBlueprint, tile);
         }
         
         SpawnDecor(tile);
 
         return tile;
+    }
+
+    private static BuildingQuestsManager.BuildingUnlockTrigger BuildingUnlockTrigger(Biome biome)
+    {
+        BuildingQuestsManager.BuildingUnlockTrigger unlockTrigger;
+        switch (biome)
+        {
+            case Biome.forest:
+            {
+                unlockTrigger = BuildingQuestsManager.BuildingUnlockTrigger.storage;
+                break;
+            }
+            case Biome.grove:
+            {
+                unlockTrigger = BuildingQuestsManager.BuildingUnlockTrigger.well;
+                break;
+            }
+            case Biome.grassland:
+            {
+                unlockTrigger = BuildingQuestsManager.BuildingUnlockTrigger.windmill;
+                break;
+            }
+            default:
+            {
+                Debug.Log("unknown biome reward, setting to well");
+                unlockTrigger = BuildingQuestsManager.BuildingUnlockTrigger.well;
+                break;
+            }
+        }
+
+        return unlockTrigger;
     }
 
     private void SpawnDecor(GameObject tile)
@@ -520,4 +552,6 @@ public class TerrainManager : MonoBehaviour
             CreateInTile(stonePrefab, tile, position2);
         }
     }
+    
+    
 }

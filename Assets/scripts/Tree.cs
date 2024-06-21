@@ -64,12 +64,22 @@ public abstract class Tree : MonoBehaviour
             }
             case >= sizeDeadThreshhold:
             {
+                if (this is FruitTree && !BuildingQuestsManager.instance.DeadFruitTreeBuildingUnlocked)
+                {
+                    BuildingQuestsManager.instance.DeadFruitTreeBuildingUnlocked = true;
+                    BuildingQuestsManager.instance.UnlockNewBuilding(BuildingQuestsManager.BuildingUnlockTrigger.orchard);
+                } else if (this is PineTree && !BuildingQuestsManager.instance.DeadPineTreeBuildingUnlocked)
+                {
+                    BuildingQuestsManager.instance.DeadPineTreeBuildingUnlocked = true;
+                    BuildingQuestsManager.instance.UnlockNewBuilding(BuildingQuestsManager.BuildingUnlockTrigger.forester);
+                }
+                
                 leaves.SetActive(false);
                 break;
             }
             default:
             {
-                Debug.Log("Unknown Fruit Tree size condition");
+                Debug.Log("Unknown Tree size condition");
                 break;
             }
         }

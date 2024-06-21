@@ -978,16 +978,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 055779014a924b7499384461fdf103d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BiomeRewards:
-  - biome: 1
+  TriggerRewards:
+  - trigger: 0
     reward: {fileID: 1244135126}
-  - biome: 0
+  - trigger: 1
     reward: {fileID: 1297510336}
-  - biome: 2
+  - trigger: 2
     reward: {fileID: 698274466}
+  - trigger: 3
+    reward: {fileID: 1957487137}
+  - trigger: 4
+    reward: {fileID: 796141628}
   newBuildingCanvas: {fileID: 1214096452}
   headerText: {fileID: 1680591848}
   descriptionText: {fileID: 1784262431}
+  DeadFruitTreeBuildingUnlocked: 0
+  DeadPineTreeBuildingUnlocked: 0
 --- !u!1 &134181748
 GameObject:
   m_ObjectHideFlags: 0
@@ -5371,7 +5377,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 131957316bab43049a2f6a6fd7ed43b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  locked: 0
+  locked: 1
   name: Forester
   woodPrice: 250
   description: 'Consistently provides wood. Takes care of dead trees. Takes entire
@@ -12031,7 +12037,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edec7803b558b9844a046d964d2dad9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  locked: 0
+  locked: 1
   name: Orchard
   woodPrice: 250
   description: 'Consistently provides fruits for storage. Takes care of dead trees.

@@ -279,6 +279,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1400298329937334190}
   - component: {fileID: 2098739377}
+  - component: {fileID: 5951382287746093527}
   m_Layer: 5
   m_Name: mission_ui_prefab
   m_TagString: Untagged
@@ -296,7 +297,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1400298328282413639}
   - {fileID: 1400298329143972902}
@@ -324,4 +325,25 @@ MonoBehaviour:
   finished: 0
   missionText: {fileID: 1400298329143972900}
   checkmark: {fileID: 1400298329727255821}
+  animator: {fileID: 5951382287746093527}
   goalNumber: 3
+--- !u!95 &5951382287746093527
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1400298329937334097}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8714996fb6051d34a8b2af6a43c53205, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

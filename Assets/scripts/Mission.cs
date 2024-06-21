@@ -7,6 +7,7 @@ public abstract class Mission : MonoBehaviour
     public bool finished = false;
     public Text missionText;
     public GameObject checkmark;
+    // public Animator animator;
 
     private void Start()
     {
@@ -23,7 +24,7 @@ public abstract class Mission : MonoBehaviour
             checkmark.SetActive(true);
             SoundManager.PlaySound(SoundManager.Sound.applause);
             SoundManager.PlaySound(SoundManager.Sound.pencil);
-            //TODO add visual effect
+            GetComponent<Animator>().Play("pop");
         }
     }
 

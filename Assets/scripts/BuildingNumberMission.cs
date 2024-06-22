@@ -4,7 +4,7 @@ using UnityEngine.Serialization;
 class BuildingNumberMission : Mission
 {
     [FormerlySerializedAs("building")] public BuildingBlueprint buildingBlueprint;
-    public int goalNumber;
+    public int goalNumber = 5;
     
     public override bool CheckFinished()
     {

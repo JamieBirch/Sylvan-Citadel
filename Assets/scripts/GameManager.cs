@@ -31,12 +31,15 @@ public class GameManager : MonoBehaviour
     public Text wood;
     public Text tiles;
 
-    [FormerlySerializedAs("gameover")] public bool waitingForPlayer = false;
+    public bool waitingForPlayer = false;
 
     void Start()
     {
         _populationManager = PopulationManager.instance;
         _terrainManager = TerrainManager.instance;
+        
+        //create start monarch
+        AppointNewMonarch(CreateStartMonarch());
         
         //create terrain by creating tiles 
         startHex = _terrainManager.CreateStartTile();
@@ -51,6 +54,20 @@ public class GameManager : MonoBehaviour
         _populationManager.SpawnHumans(StartHumans, startHex);
         
         SoundManager.PlaySoundTrack();
+    }
+
+    private Monarch CreateStartMonarch()
+    {
+        // monarch.Name = NameGenerator.CreateHumanName();
+        // monarch.boon = new Founder();
+        List<Mission> monarchMissions = new List<Mission>();
+        monarchMissions.Add(new DifferentBiomesMission());
+        monarchMissions.Add(new ReachPopulationNumberMission());
+        monarchMissions.Add(new CollectResourceMission());
+        // monarch.missions = monarchMissions;
+        Monarch monarch = new Monarch(NameGenerator.CreateHumanName(), new Founder(), monarchMissions);
+
+        return monarch;
     }
 
     // Update is called once per frame
@@ -123,6 +140,7 @@ public class GameManager : MonoBehaviour
 
     public void ChooseMonarch(Monarch monarch)
     {
+        currentMonarch.boon.RollbackBoon();
         AppointNewMonarch(monarch);
         waitingForPlayer = false;
         Calendar.instance.Resume();
@@ -130,7 +148,6 @@ public class GameManager : MonoBehaviour
 
     private void AppointNewMonarch(Monarch monarch)
     {
-        currentMonarch.boon.RollbackBoon();
         currentMonarch = monarch;
         currentMonarch.boon.ImplementBoon();
         UpdateMonarchPanel();

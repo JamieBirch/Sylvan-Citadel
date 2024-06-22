@@ -19,13 +19,15 @@ public abstract class BuildingBlueprint : MonoBehaviour
     private void Start()
     {
         _constructionManager = ConstructionManager.instance;
-    }
-
-    private void Awake()
-    {
         int buildPriceDiscount = _constructionManager.buildPriceDiscount;
         buildingWoodPrice = CalculateCurrentPrice(buildPriceDiscount);
     }
+
+    /*private void Awake()
+    {
+        int buildPriceDiscount = _constructionManager.buildPriceDiscount;
+        buildingWoodPrice = CalculateCurrentPrice(buildPriceDiscount);
+    }*/
 
     private int CalculateCurrentPrice(int buildPriceDiscount)
     {

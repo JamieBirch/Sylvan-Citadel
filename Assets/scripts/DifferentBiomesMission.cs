@@ -3,7 +3,7 @@ using System.Linq;
 
 class DifferentBiomesMission : Mission
 {
-    public int goalNumber;
+    public int goalNumber = 3;
 
     public override string GiveWording()
     {

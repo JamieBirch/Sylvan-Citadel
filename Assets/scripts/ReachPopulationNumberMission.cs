@@ -1,6 +1,6 @@
 ﻿class ReachPopulationNumberMission : Mission
 {
-    public int goalNumber;
+    public int goalNumber = 30;
     
     public override bool CheckFinished()
     {

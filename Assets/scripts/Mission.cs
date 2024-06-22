@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public abstract class Mission : MonoBehaviour
+public abstract class Mission /*: MonoBehaviour*/
 {
     // public string wording;
     public bool finished = false;

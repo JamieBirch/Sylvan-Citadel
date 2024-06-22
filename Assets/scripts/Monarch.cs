@@ -13,5 +13,10 @@ public class Monarch
         this.boon = boon;
         this.missions = missions;
     }
+
+    public string GetNamePlusNickname()
+    {
+        return Name + " " + boon.Nickname;
+    }
     
 }

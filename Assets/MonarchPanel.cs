@@ -13,7 +13,7 @@ public class MonarchPanel : MonoBehaviour
     public List<MissionPrefab> SetNewMonarch(Monarch monarch)
     {
         Boon monarchBoon = monarch.boon;
-        MonarchNameText.text = monarch.Name + " " + monarchBoon.GetNickname();
+        MonarchNameText.text = monarch.GetNamePlusNickname();
 
         MonarchBoonText.text = monarchBoon.GetDescription();
 

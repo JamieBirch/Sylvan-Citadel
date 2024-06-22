@@ -120,7 +120,7 @@ public class GameManager : MonoBehaviour
     private void ShowMissionsCompletePanel()
     {
         MissionsCompleteCanvas.SetActive(true);
-        MissionsCompleteMonarchLLText.text = "Long live " + currentMonarch.Name + " " + currentMonarch.boon.Nickname + "!";
+        MissionsCompleteMonarchLLText.text = "Long live " + currentMonarch.GetNamePlusNickname() + "!";
         MissionsCompleteButtonText.text = "continue as " + currentMonarch.Name;
         
         Time.timeScale = 0f;

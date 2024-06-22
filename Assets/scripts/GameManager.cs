@@ -12,6 +12,9 @@ public class GameManager : MonoBehaviour
     public GameObject GameOverCanvas;
     public GameObject InfoCanvas;
     public GameObject PauseMenuCanvas;
+    public GameObject MissionsCompleteCanvas;
+    public Text MissionsCompleteMonarchLLText;
+    public Text MissionsCompleteButtonText;
 
     public Monarch currentMonarch;
     public MonarchPanel MonarchPanel;
@@ -116,15 +119,16 @@ public class GameManager : MonoBehaviour
 
     private void ShowMissionsCompletePanel()
     {
-        //TODO Show missions complete panel
-        //TODO text
+        MissionsCompleteCanvas.SetActive(true);
+        MissionsCompleteMonarchLLText.text = "Long live " + currentMonarch.Name + " " + currentMonarch.boon.Nickname + "!";
+        MissionsCompleteButtonText.text = "continue as " + currentMonarch.Name;
         
         Time.timeScale = 0f;
     }
 
     public void ContinueAsCurrentMonarch()
     {
-        //TODO Close missions complete panel
+        // MissionsCompleteCanvas.SetActive(false);
 
         waitingForPlayer = false;
         Calendar.instance.Resume();
@@ -132,6 +136,8 @@ public class GameManager : MonoBehaviour
 
     public void ChooseNewMonarchPanel()
     {
+        // MissionsCompleteCanvas.SetActive(false);
+
         //TODO generate children
         
         //TODO Show choose new Monarch panel

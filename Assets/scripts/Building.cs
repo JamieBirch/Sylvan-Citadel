@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class Building : MonoBehaviour
 {
     public OwnedTile tile;
-    public string name;
+    [FormerlySerializedAs("name")] public string Name;
     private bool selected;
 
     public GameObject BuildingInfo;
@@ -13,7 +14,7 @@ public class Building : MonoBehaviour
     public Text buildingNameUI;
     public Text descriptionUI;
 
-    public void Demolish()
+    public virtual void Demolish()
     {
         SoundManager.PlaySound(SoundManager.Sound.chop);
         tile.RemoveBuildingFromTile(this);

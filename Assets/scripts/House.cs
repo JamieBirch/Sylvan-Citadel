@@ -38,7 +38,7 @@ public class House : Building
         bedsAvailable++;
     }
     
-    public void Demolish()
+    public override void Demolish()
     {
         foreach (Human tenant in _tenants)
         {

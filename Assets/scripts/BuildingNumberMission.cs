@@ -8,7 +8,7 @@ class BuildingNumberMission : Mission
     
     public override bool CheckFinished()
     {
-        int buildingsCount = GameStats.OwnedTiles.SelectMany(tile => tile.buildings).Where(bd => bd.name == buildingBlueprint.name).Count();
+        int buildingsCount = GameStats.OwnedTiles.SelectMany(tile => tile.buildings).Where(bd => bd.Name == buildingBlueprint.name).Count();
         return buildingsCount >= goalNumber;
     }
 

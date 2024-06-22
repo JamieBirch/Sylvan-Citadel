@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -6,6 +7,8 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager instance;
+    
     private PopulationManager _populationManager;
     private TerrainManager _terrainManager;
 
@@ -15,6 +18,11 @@ public class GameManager : MonoBehaviour
     public GameObject MissionsCompleteCanvas;
     public Text MissionsCompleteMonarchLLText;
     public Text MissionsCompleteButtonText;
+    
+    public GameObject ChooseNewMonarchCanvas;
+    public GameObject monarchInfoContainer1;
+    public GameObject monarchInfoContainer2;
+    public GameObject monarchInfoPrefab;
 
     public Monarch currentMonarch;
     public MonarchPanel MonarchPanel;
@@ -35,6 +43,11 @@ public class GameManager : MonoBehaviour
     public Text tiles;
 
     public bool waitingForPlayer = false;
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     void Start()
     {
@@ -138,10 +151,19 @@ public class GameManager : MonoBehaviour
     {
         // MissionsCompleteCanvas.SetActive(false);
 
+        Monarch monarch1 = GenerateMonarch();
+        Monarch monarch2 = GenerateMonarch();
+
+        Instantiate(monarchInfoPrefab, monarchInfoContainer1.transform).GetComponent<CandidateInfo>().SetStuff(monarch1);
+        Instantiate(monarchInfoPrefab, monarchInfoContainer2.transform).GetComponent<CandidateInfo>().SetStuff(monarch2);
+
+        ChooseNewMonarchCanvas.SetActive(true);
+    }
+
+    private Monarch GenerateMonarch()
+    {
         //TODO generate children
-        
-        //TODO Show choose new Monarch panel
-        
+        throw new System.NotImplementedException();
     }
 
     public void ChooseMonarch(Monarch monarch)

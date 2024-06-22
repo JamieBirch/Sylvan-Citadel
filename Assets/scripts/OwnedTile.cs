@@ -139,13 +139,13 @@ public class OwnedTile : Tile
     {
         buildings.Add(buildingComponent);
         buildingComponent.tile = this;
-        tileStatsUI.AddBuildingField(buildingComponent.name);
+        tileStatsUI.AddBuildingField(buildingComponent.Name);
     }
     
     public void RemoveBuildingFromTile(Building buildingComponent)
     {
         buildings.Remove(buildingComponent);
-        tileStatsUI.RemoveBuildingField(buildingComponent.name);
+        tileStatsUI.RemoveBuildingField(buildingComponent.Name);
         flagsToDefault();
     }
 

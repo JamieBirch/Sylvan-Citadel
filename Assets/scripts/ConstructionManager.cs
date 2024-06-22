@@ -84,7 +84,7 @@ public class ConstructionManager : MonoBehaviour
         GameObject newBuilding = Instantiate(buildingBlueprint.buildingPrefab, position, 
             Quaternion.identity /*Quaternion.AngleAxis(buildingRotation, Vector3.up)*/, tile.transform);
         Building buildingComponent = newBuilding.GetComponent<Building>();
-        buildingComponent.name = buildingBlueprint.name;
+        buildingComponent.Name = buildingBlueprint.name;
         buildingComponent.buildingNameUI.text = buildingBlueprint.name;
         buildingComponent.descriptionUI.text = buildingBlueprint.description;
 

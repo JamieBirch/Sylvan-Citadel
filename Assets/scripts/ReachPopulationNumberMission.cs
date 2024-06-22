@@ -7,8 +7,8 @@
         return GameStats.GetPopulation() >= goalNumber;
     }
 
-    public override void GiveWording()
+    public override string GiveWording()
     {
-        wording = "Reach population " + goalNumber;
+        return "Reach population " + goalNumber;
     }
 }

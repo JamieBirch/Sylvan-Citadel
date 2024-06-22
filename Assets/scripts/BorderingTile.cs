@@ -9,7 +9,7 @@ public class BorderingTile : Tile
     public bool isPOI;
     // public BuildingBlueprint reward;
     
-    public static TileManager TileManager;
+    private static TileManager _tileManager;
     
     public Color availableColor;
     public Color nonAvailableColor;
@@ -30,7 +30,7 @@ public class BorderingTile : Tile
     // public Text holdTimerText;
     public Image holdTimerCircle;
     
-    public int defaultPrice;
+    // public int defaultPrice;
     public int humanPrice;
     
     private float holdTimer;
@@ -41,7 +41,7 @@ public class BorderingTile : Tile
 
     private void Start()
     {
-        TileManager = TileManager.instance;
+        _tileManager = TileManager.instance;
         
         humanPrice = definePrice();
         description = createDescription();
@@ -58,7 +58,7 @@ public class BorderingTile : Tile
     private void Update()
     {
         humanPrice = definePrice();
-        if (TileManager.IsTileObtainable(this))
+        if (_tileManager.IsTileObtainable(this))
         {
             isObtainable = true;
             rend.material.color = availableColor;
@@ -102,7 +102,7 @@ public class BorderingTile : Tile
         holdTimerCircle.fillAmount = holdTimer / holdTimerDefault;
         if (holdTimer <= 0)
         {
-            TileManager.BuyHex(gameObject);
+            _tileManager.BuyHex(gameObject);
         }
     }
 
@@ -167,7 +167,7 @@ public class BorderingTile : Tile
 
     private int definePrice()
     {
-        int price = defaultPrice;
+        int price = _tileManager.currentTilePrice;
         
         List<OwnedTile> ownedHexesAround = GetOwnedHexesAround();
         price -= ownedHexesAround.Count;

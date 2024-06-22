@@ -1,16 +1,37 @@
+using System;
 using UnityEngine;
 using UnityEngine.Serialization;
 
 public abstract class BuildingBlueprint : MonoBehaviour
 {
+    public static ConstructionManager _constructionManager;
+    
     public bool locked;
     public string name;
-    public int woodPrice;
+    [FormerlySerializedAs("woodPrice")] public int defaultWoodPrice;
+    public int buildingWoodPrice;
     public string description;
     public GameObject buildingPrefab;
     [FormerlySerializedAs("onlyOnePerTile")] public bool onlyBuildingOnTile;
     public bool blocksTerraforming;
     public bool blockTreeGrowth;
+
+    private void Start()
+    {
+        _constructionManager = ConstructionManager.instance;
+    }
+
+    private void Awake()
+    {
+        int buildPriceDiscount = _constructionManager.buildPriceDiscount;
+        buildingWoodPrice = CalculateCurrentPrice(buildPriceDiscount);
+    }
+
+    private int CalculateCurrentPrice(int buildPriceDiscount)
+    {
+        Debug.Log("calculating building price");
+        return defaultWoodPrice * ((100 - buildPriceDiscount) / 100);
+    }
 
     public virtual bool IsBuildable()
     {
@@ -46,7 +67,7 @@ public abstract class BuildingBlueprint : MonoBehaviour
 
     private bool EnoughWood()
     {
-        return GameStats.GetWood() >= woodPrice;
+        return GameStats.GetWood() >= buildingWoodPrice;
     }
 
     public abstract bool IsShowable();

@@ -809,10 +809,6 @@ MonoBehaviour:
   GameOverCanvas: {fileID: 1987385160}
   InfoCanvas: {fileID: 2133194244}
   PauseMenuCanvas: {fileID: 200642572}
-  missions:
-  - {fileID: 2098739376}
-  - {fileID: 213134331}
-  - {fileID: 434891803}
   StartHumans: 6
   StartStorageWood: 70
   StartStorageFood: 0
@@ -821,7 +817,7 @@ MonoBehaviour:
   food: {fileID: 994781285}
   wood: {fileID: 533910687}
   tiles: {fileID: 425336706}
-  gameover: 0
+  waitingForPlayer: 0
 --- !u!4 &107134972
 Transform:
   m_ObjectHideFlags: 0
@@ -865,6 +861,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activeTile: {fileID: 0}
+  defaultTilePrice: 0
+  currentTilePrice: 0
 --- !u!114 &107134976
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -917,6 +915,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BuildingPanel: {fileID: 626023709}
+  buildPriceDiscount: 0
 --- !u!114 &107134979
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1139,9 +1138,9 @@ RectTransform:
   m_Father: {fileID: 1829362693}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 208.33334, y: -22.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 60, y: 45}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &147618905
@@ -1550,7 +1549,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1400298329937334190, guid: 003fb6955f6dc844b80de78389603b19, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1400298329937334190, guid: 003fb6955f6dc844b80de78389603b19, type: 3}
       propertyPath: m_AnchorMin.x
@@ -1558,7 +1557,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1400298329937334190, guid: 003fb6955f6dc844b80de78389603b19, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1400298329937334190, guid: 003fb6955f6dc844b80de78389603b19, type: 3}
       propertyPath: m_SizeDelta.x
@@ -1598,11 +1597,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1400298329937334190, guid: 003fb6955f6dc844b80de78389603b19, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 75
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1400298329937334190, guid: 003fb6955f6dc844b80de78389603b19, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -36.666664
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1400298329937334190, guid: 003fb6955f6dc844b80de78389603b19, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1657,7 +1656,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a5b69e789b4379b993af2dec5a7b22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wording: 
   finished: 0
   missionText: {fileID: 213134329}
   checkmark: {fileID: 213134328}
@@ -1889,9 +1887,9 @@ RectTransform:
   m_Father: {fileID: 1829362693}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 41.666668, y: -22.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 60, y: 45}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &266837447
@@ -1963,6 +1961,102 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &272056591
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 272056592}
+  - component: {fileID: 272056595}
+  - component: {fileID: 272056594}
+  - component: {fileID: 272056593}
+  m_Layer: 5
+  m_Name: Boon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &272056592
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 272056591}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1785368840}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 190, y: 23.5}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &272056593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 272056591}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0.22352941, g: 0.015686275, b: 0.015686275, a: 1}
+  m_EffectDistance: {x: 1.5, y: -1.5}
+  m_UseGraphicAlpha: 1
+--- !u!114 &272056594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 272056591}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: fdf0aa78b36054a4fb83d921ef8d6356, type: 3}
+    m_FontSize: 11
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 1
+    m_MaxSize: 40
+    m_Alignment: 3
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: founder of a new settlement
+--- !u!222 &272056595
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 272056591}
+  m_CullTransparentMesh: 1
 --- !u!1 &299848781
 GameObject:
   m_ObjectHideFlags: 0
@@ -1996,12 +2090,12 @@ RectTransform:
   - {fileID: 213134327}
   - {fileID: 434891799}
   m_Father: {fileID: 1785368840}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 75, y: -75.875}
-  m_SizeDelta: {x: 145, y: 80}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 190, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &299848783
 MonoBehaviour:
@@ -2020,7 +2114,7 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 0
+  m_ChildAlignment: 3
   m_Spacing: 0
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
@@ -2252,7 +2346,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1400298329937334190, guid: 003fb6955f6dc844b80de78389603b19, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1400298329937334190, guid: 003fb6955f6dc844b80de78389603b19, type: 3}
       propertyPath: m_AnchorMin.x
@@ -2260,7 +2354,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1400298329937334190, guid: 003fb6955f6dc844b80de78389603b19, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1400298329937334190, guid: 003fb6955f6dc844b80de78389603b19, type: 3}
       propertyPath: m_SizeDelta.x
@@ -2300,11 +2394,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1400298329937334190, guid: 003fb6955f6dc844b80de78389603b19, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 75
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1400298329937334190, guid: 003fb6955f6dc844b80de78389603b19, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -63.333332
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1400298329937334190, guid: 003fb6955f6dc844b80de78389603b19, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2359,7 +2453,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54315fad1d33417c861f032938104891, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wording: 
   finished: 0
   missionText: {fileID: 434891801}
   checkmark: {fileID: 434891800}
@@ -2400,10 +2493,10 @@ RectTransform:
   m_Father: {fileID: 737257975}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 50, y: -134.375}
-  m_SizeDelta: {x: 100, y: 30}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &436223544
 MonoBehaviour:
@@ -3850,7 +3943,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   locked: 0
   name: House
-  woodPrice: 40
+  defaultWoodPrice: 40
+  buildingWoodPrice: 0
   description: Provides shelter for 4 villagers.
   buildingPrefab: {fileID: 8641935630557121694, guid: e08cabe3182b47143aadcb24c5b07ca6, type: 3}
   onlyBuildingOnTile: 0
@@ -4180,7 +4274,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   locked: 1
   name: Windmill
-  woodPrice: 90
+  defaultWoodPrice: 90
+  buildingWoodPrice: 0
   description: Produces food and provides place to pick it up.
   buildingPrefab: {fileID: 4421653983999014295, guid: 0e78bf33367e81348812ff7ca8f13927, type: 3}
   onlyBuildingOnTile: 0
@@ -4315,10 +4410,10 @@ RectTransform:
   m_Father: {fileID: 737257975}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 50, y: -85.625}
-  m_SizeDelta: {x: 100, y: 65}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 65}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &703013443
 GameObject:
@@ -5341,7 +5436,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   locked: 1
   name: Forester
-  woodPrice: 250
+  defaultWoodPrice: 250
+  buildingWoodPrice: 0
   description: 'Consistently provides wood. Takes care of dead trees. Takes entire
     tile. '
   buildingPrefab: {fileID: 3446166757399284502, guid: b9c40461b0719054998211e4c9a2cf51, type: 3}
@@ -6004,10 +6100,10 @@ RectTransform:
   m_Father: {fileID: 737257975}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 50, y: -46.875}
-  m_SizeDelta: {x: 100, y: 10}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &994781282
 GameObject:
@@ -7089,7 +7185,7 @@ RectTransform:
   - {fileID: 425336705}
   - {fileID: 1797072521}
   m_Father: {fileID: 1785368840}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -7843,7 +7939,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   locked: 1
   name: Well
-  woodPrice: 50
+  defaultWoodPrice: 50
+  buildingWoodPrice: 0
   description: Provides water source.
   buildingPrefab: {fileID: 1541975218879869188, guid: 419eb92ab2438bd44b33f1acb6513b9a, type: 3}
   onlyBuildingOnTile: 0
@@ -8178,7 +8275,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   locked: 1
   name: Storage
-  woodPrice: 70
+  defaultWoodPrice: 70
+  buildingWoodPrice: 0
   description: Provides place to pick up food produced by Windmills and other food
     sources.
   buildingPrefab: {fileID: 3330790554826253085, guid: 806e0b48d9d578b459dda2ee1f8835fd, type: 3}
@@ -8629,10 +8727,10 @@ RectTransform:
   m_Father: {fileID: 737257975}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 50, y: -28.125}
-  m_SizeDelta: {x: 100, y: 25}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1340781984
 GameObject:
@@ -8858,9 +8956,9 @@ RectTransform:
   m_Father: {fileID: 436223543}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 60, y: -15}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1372187481
@@ -9865,9 +9963,9 @@ RectTransform:
   m_Father: {fileID: 436223543}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 80, y: -15}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1726948601
@@ -10094,8 +10192,9 @@ GameObject:
   - component: {fileID: 1785368841}
   - component: {fileID: 1785368843}
   - component: {fileID: 1785368844}
+  - component: {fileID: 1785368845}
   m_Layer: 5
-  m_Name: game_stats
+  m_Name: monarch_panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10114,6 +10213,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1910443743}
+  - {fileID: 272056592}
   - {fileID: 299848782}
   - {fileID: 1135474882}
   m_Father: {fileID: 2133194248}
@@ -10121,8 +10221,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 80, y: -70}
-  m_SizeDelta: {x: 150, y: 120}
+  m_AnchoredPosition: {x: 105.73697, y: -70}
+  m_SizeDelta: {x: 200, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1785368841
 MonoBehaviour:
@@ -10188,6 +10288,21 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1785368845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1785368839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 723df04b85fb13a4caf9ff7e916d72ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MonarchName: {fileID: 1910443745}
+  MonarchBoon: {fileID: 272056594}
+  missions: {fileID: 299848781}
 --- !u!1 &1789882334
 GameObject:
   m_ObjectHideFlags: 0
@@ -10510,9 +10625,9 @@ RectTransform:
   m_Father: {fileID: 436223543}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 40, y: -15}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1797279542
@@ -11269,7 +11384,7 @@ GameObject:
   - component: {fileID: 1910443745}
   - component: {fileID: 1910443744}
   m_Layer: 5
-  m_Name: Title
+  m_Name: Monarch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11290,10 +11405,10 @@ RectTransform:
   m_Father: {fileID: 1785368840}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 75, y: -15.875}
-  m_SizeDelta: {x: 145, y: 23.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 190, y: 23.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1910443744
 MonoBehaviour:
@@ -11343,7 +11458,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Missions
+  m_Text: Bob "The Founder"
 --- !u!222 &1910443746
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -11840,7 +11955,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   locked: 1
   name: Orchard
-  woodPrice: 250
+  defaultWoodPrice: 250
+  buildingWoodPrice: 0
   description: 'Consistently provides fruits for storage. Takes care of dead trees.
     Takes entire tile. '
   buildingPrefab: {fileID: 2848225816592233711, guid: abf2b87d64015a242a3005670dc490e4, type: 3}
@@ -11883,9 +11999,9 @@ RectTransform:
   m_Father: {fileID: 436223543}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 20, y: -15}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1982493959
@@ -12333,7 +12449,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1400298329937334190, guid: 003fb6955f6dc844b80de78389603b19, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1400298329937334190, guid: 003fb6955f6dc844b80de78389603b19, type: 3}
       propertyPath: m_AnchorMin.x
@@ -12341,7 +12457,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1400298329937334190, guid: 003fb6955f6dc844b80de78389603b19, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1400298329937334190, guid: 003fb6955f6dc844b80de78389603b19, type: 3}
       propertyPath: m_SizeDelta.x
@@ -12381,11 +12497,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1400298329937334190, guid: 003fb6955f6dc844b80de78389603b19, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 75
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1400298329937334190, guid: 003fb6955f6dc844b80de78389603b19, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -10
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1400298329937334190, guid: 003fb6955f6dc844b80de78389603b19, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -12410,17 +12526,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1400298329937334190, guid: 003fb6955f6dc844b80de78389603b19, type: 3}
   m_PrefabInstance: {fileID: 2098739374}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2098739376 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2098739377, guid: 003fb6955f6dc844b80de78389603b19, type: 3}
-  m_PrefabInstance: {fileID: 2098739374}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da2e4172a7d746efbb6617b06ce6aae6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2109269820
 GameObject:
   m_ObjectHideFlags: 0
@@ -12455,9 +12560,9 @@ RectTransform:
   m_Father: {fileID: 1829362693}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 125, y: -22.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 60, y: 45}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &2109269822
@@ -12498,7 +12603,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &2133194245
 MonoBehaviour:
   m_ObjectHideFlags: 0

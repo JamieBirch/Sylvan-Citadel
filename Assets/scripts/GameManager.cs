@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -11,7 +12,10 @@ public class GameManager : MonoBehaviour
     public GameObject GameOverCanvas;
     public GameObject InfoCanvas;
     public GameObject PauseMenuCanvas;
-    public List<Mission> missions;
+
+    public Monarch currentMonarch;
+    public MonarchPanel MonarchPanel;
+    [FormerlySerializedAs("missions")] public List<MissionPrefab> missionObjects;
     
     public int StartHumans;
     
@@ -27,7 +31,7 @@ public class GameManager : MonoBehaviour
     public Text wood;
     public Text tiles;
 
-    public bool gameover = false;
+    [FormerlySerializedAs("gameover")] public bool waitingForPlayer = false;
 
     void Start()
     {
@@ -83,12 +87,58 @@ public class GameManager : MonoBehaviour
             Debug.Log("No population left!");
         }
 
-        if (CheckAllMissionsComplete() && !gameover)
+        if (CheckAllMissionsComplete() && !waitingForPlayer)
         {
-            Debug.Log("All Missions complete, game over");
-            gameover = true;
-            GameOver();
+            // Debug.Log("All Missions complete, game over");
+            waitingForPlayer = true;
+            // GameOver();
+
+            ShowMissionsCompletePanel();
         }
+    }
+
+    private void ShowMissionsCompletePanel()
+    {
+        //TODO Show missions complete panel
+        //TODO text
+        
+        Time.timeScale = 0f;
+    }
+
+    public void ContinueAsCurrentMonarch()
+    {
+        //TODO Close missions complete panel
+
+        waitingForPlayer = false;
+        Calendar.instance.Resume();
+    }
+
+    public void ChooseNewMonarchPanel()
+    {
+        //TODO generate children
+        
+        //TODO Show choose new Monarch panel
+        
+    }
+
+    public void ChooseMonarch(Monarch monarch)
+    {
+        AppointNewMonarch(monarch);
+        waitingForPlayer = false;
+        Calendar.instance.Resume();
+    }
+
+    private void AppointNewMonarch(Monarch monarch)
+    {
+        currentMonarch.boon.RollbackBoon();
+        currentMonarch = monarch;
+        currentMonarch.boon.ImplementBoon();
+        UpdateMonarchPanel();
+    }
+
+    private void UpdateMonarchPanel()
+    {
+        missionObjects = MonarchPanel.SetNewMonarch(currentMonarch);
     }
 
     private void GameOver()
@@ -102,9 +152,10 @@ public class GameManager : MonoBehaviour
 
     private bool CheckAllMissionsComplete()
     {
-        if (missions.Count > 0)
+        // List<Mission> missions = currentMonarch.missions;
+        if (missionObjects.Count > 0)
         {
-            return missions.All(mission => mission.finished);
+            return missionObjects.All(missionO => missionO.mission.finished);
         }
         else
         {

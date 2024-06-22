@@ -12,8 +12,8 @@ class BuildingNumberMission : Mission
         return buildingsCount >= goalNumber;
     }
 
-    public override void GiveWording()
+    public override string GiveWording()
     {
-        wording = "Build " + goalNumber + " " + buildingBlueprint.name + "s";
+        return "Build " + goalNumber + " " + buildingBlueprint.name + "s";
     }
 }

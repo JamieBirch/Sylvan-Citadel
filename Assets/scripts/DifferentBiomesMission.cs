@@ -5,9 +5,9 @@ class DifferentBiomesMission : Mission
 {
     public int goalNumber;
 
-    public override void GiveWording()
+    public override string GiveWording()
     {
-        wording = "Own " + goalNumber + " types of biomes";
+       return "Own " + goalNumber + " types of biomes";
     }
 
     public override bool CheckFinished()

@@ -187,7 +187,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_EffectColor: {r: 0.22352941, g: 0.015686275, b: 0.015686275, a: 1}
-  m_EffectDistance: {x: 2, y: -2}
+  m_EffectDistance: {x: 1, y: -1.5}
   m_UseGraphicAlpha: 0
 --- !u!1 &1400298329727255821
 GameObject:
@@ -278,8 +278,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1400298329937334190}
-  - component: {fileID: 2098739377}
   - component: {fileID: 5951382287746093527}
+  - component: {fileID: 7475069796839848942}
   m_Layer: 5
   m_Name: mission_ui_prefab
   m_TagString: Untagged
@@ -309,24 +309,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 145, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2098739377
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1400298329937334097}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da2e4172a7d746efbb6617b06ce6aae6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  wording: 
-  finished: 0
-  missionText: {fileID: 1400298329143972900}
-  checkmark: {fileID: 1400298329727255821}
-  animator: {fileID: 5951382287746093527}
-  goalNumber: 3
 --- !u!95 &5951382287746093527
 Animator:
   serializedVersion: 4
@@ -347,3 +329,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &7475069796839848942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1400298329937334097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ec0311889d4c4b44aa45c1e4c8a0331, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  missionText: {fileID: 1400298329143972900}
+  checkmark: {fileID: 1400298329727255821}
+  mission: {fileID: 0}

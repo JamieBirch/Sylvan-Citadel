@@ -15,7 +15,7 @@ public class BuildingButton : MonoBehaviour
     private void Start()
     {
         buildingName.text = buildingBlueprint.name;
-        buildingPrice.text = "wood: " + buildingBlueprint.woodPrice;
+        buildingPrice.text = "wood: " + buildingBlueprint.buildingWoodPrice;
         buildingDescription.text = buildingBlueprint.description;
     }
 

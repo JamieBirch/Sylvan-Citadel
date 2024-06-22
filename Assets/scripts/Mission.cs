@@ -3,20 +3,19 @@ using UnityEngine.UI;
 
 public abstract class Mission : MonoBehaviour
 {
-    public string wording;
+    // public string wording;
     public bool finished = false;
-    public Text missionText;
-    public GameObject checkmark;
+    // public Text missionText;
+    // public GameObject checkmark;
     // public Animator animator;
 
-    private void Start()
+    /*private void Start()
     {
-        GiveWording();
-        missionText.text = wording;
-    }
+        missionText.text = GiveWording();
+    }*/
 
     // Update is called once per frame
-    void Update()
+    /*void Update()
     {
         if (!finished && CheckFinished())
         {
@@ -26,8 +25,11 @@ public abstract class Mission : MonoBehaviour
             SoundManager.PlaySound(SoundManager.Sound.pencil);
             GetComponent<Animator>().Play("pop");
         }
-    }
+    }*/
 
     public abstract bool CheckFinished();
-    public abstract void GiveWording();
+
+    public abstract string GiveWording();
+    
+    
 }

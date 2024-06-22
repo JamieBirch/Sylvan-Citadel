@@ -7,6 +7,9 @@ public class TileManager : MonoBehaviour
 {
     public static TileManager instance;
     public GameObject activeTile;
+    public int defaultTilePrice;
+    public int currentTilePrice;
+    
     private TerrainManager _terrainManager;
     private ConstructionManager _constructionManager;
     private TerraformingManager _terraformingManager;
@@ -19,6 +22,8 @@ public class TileManager : MonoBehaviour
 
     private void Start()
     {
+        currentTilePrice = defaultTilePrice;
+        
         _terrainManager = TerrainManager.instance;
         _constructionManager = ConstructionManager.instance;
         _terraformingManager = TerraformingManager.instance;

@@ -7,7 +7,8 @@ public class ConstructionManager : MonoBehaviour
 
     // public GameObject BuildingsButtons;
     public GameObject BuildingPanel;
-    
+    public int buildPriceDiscount = 0;
+
     private void Awake()
     {
         instance = this;
@@ -49,7 +50,7 @@ public class ConstructionManager : MonoBehaviour
 
     public void Build(BuildingBlueprint buildingBlueprint, GameObject tile)
     {
-        int woodPrice = buildingBlueprint.GetComponent<BuildingBlueprint>().woodPrice;
+        int woodPrice = buildingBlueprint.GetComponent<BuildingBlueprint>().buildingWoodPrice;
 
         if (GameStats.GetWood() < woodPrice)
         {

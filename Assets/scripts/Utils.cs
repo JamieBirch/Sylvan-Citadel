@@ -1,3 +1,4 @@
+using System;
 using Random = System.Random;
 
 public static class Utils
@@ -31,5 +32,12 @@ public static class Utils
         Random random = new Random();
         float nextDouble = (float)random.NextDouble() * 100;
         return nextDouble > 50;
+    }
+    
+    public static T RandomEnumValue<T> ()
+    {
+        Random random = new Random();
+        var v = Enum.GetValues (typeof (T));
+        return (T) v.GetValue (random.Next(v.Length));
     }
 }

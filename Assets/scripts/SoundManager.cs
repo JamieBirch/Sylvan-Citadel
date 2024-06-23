@@ -5,7 +5,7 @@ public class SoundManager : MonoBehaviour
 {
     public SoundManager instance;
     
- public enum Sound
+    public enum Sound
     {
         ambient,
         new_tile, 

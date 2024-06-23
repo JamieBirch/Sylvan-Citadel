@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
     public Monarch currentMonarch;
     public MonarchPanel MonarchPanel;
     [FormerlySerializedAs("missions")] public List<MissionPrefab> missionObjects;
+    public int missionsNumber = 3;
     
     public int StartHumans;
     
@@ -77,9 +78,9 @@ public class GameManager : MonoBehaviour
         // monarch.Name = NameGenerator.CreateHumanName();
         // monarch.boon = new Founder();
         List<Mission> monarchMissions = new List<Mission>();
-        monarchMissions.Add(new DifferentBiomesMission());
-        monarchMissions.Add(new ReachPopulationNumberMission());
-        monarchMissions.Add(new CollectResourceMission());
+        monarchMissions.Add(new DifferentBiomesMission(2));
+        // monarchMissions.Add(new ReachPopulationCountMission(20));
+        // monarchMissions.Add(new CollectResourceMission(20, CollectableResource.food));
         // monarch.missions = monarchMissions;
         Monarch monarch = new Monarch(NameGenerator.CreateHumanName(), new Founder(), monarchMissions);
 
@@ -149,6 +150,7 @@ public class GameManager : MonoBehaviour
 
     public void ChooseNewMonarchPanel()
     {
+        // ChooseNewMonarchCanvas.SetActive(true);
         // MissionsCompleteCanvas.SetActive(false);
 
         Monarch monarch1 = GenerateMonarch();
@@ -156,18 +158,26 @@ public class GameManager : MonoBehaviour
 
         Instantiate(monarchInfoPrefab, monarchInfoContainer1.transform).GetComponent<CandidateInfo>().SetStuff(monarch1);
         Instantiate(monarchInfoPrefab, monarchInfoContainer2.transform).GetComponent<CandidateInfo>().SetStuff(monarch2);
-
-        ChooseNewMonarchCanvas.SetActive(true);
     }
 
     private Monarch GenerateMonarch()
     {
-        //TODO generate children
-        throw new System.NotImplementedException();
+        //TODO test
+        Boon boon = Utils.RandomEnumValue<BoonType>().GetBoon();
+        // Boon boon = new Founder();
+        List<Mission> monarchMissions = new List<Mission>();
+        MissionGeneration _missionGeneration = MissionGeneration.instance;
+        for (int i = 0; i < missionsNumber; i++)
+        {
+            Mission generatedMission = _missionGeneration.GenerateMission();
+            monarchMissions.Add(generatedMission);
+        }
+        return new Monarch(NameGenerator.CreateHumanName(), boon, monarchMissions);
     }
 
     public void ChooseMonarch(Monarch monarch)
     {
+        ChooseNewMonarchCanvas.SetActive(false);
         currentMonarch.boon.RollbackBoon();
         AppointNewMonarch(monarch);
         waitingForPlayer = false;

@@ -16,7 +16,7 @@ public class Monarch
 
     public string GetNamePlusNickname()
     {
-        return Name + " " + boon.Nickname;
+        return Name + " " + boon.GetNickname();
     }
     
 }

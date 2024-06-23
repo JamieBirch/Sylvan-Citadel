@@ -3,8 +3,17 @@ using System.Linq;
 
 class DifferentBiomesMission : Mission
 {
-    public int goalNumber = 3;
+    public int goalNumber;
 
+    public DifferentBiomesMission(int goalNumber)
+    {
+        this.goalNumber = goalNumber;
+    }
+    
+    public DifferentBiomesMission() :this(3)
+    {
+    }
+    
     public override string GiveWording()
     {
        return "Own " + goalNumber + " types of biomes";

@@ -1,7 +1,9 @@
-﻿public abstract class Boon
+﻿using UnityEngine;
+
+public abstract class Boon
 {
-    public string Nickname;
-    public string Description;
+    // public string Nickname;
+    // public string Description;
 
     public abstract void ImplementBoon();
     public abstract void RollbackBoon();
@@ -84,3 +86,28 @@ class Builder : Boon
     }
 }
 
+public enum BoonType
+{
+    founder,
+    builder,
+    conqueror
+}
+
+static class BoonLogic
+{
+    public static Boon GetBoon(this BoonType boonType)
+    {
+        switch (boonType)
+        {
+            case BoonType.founder:
+                return new Founder();
+            case BoonType.builder:
+                return new Builder();
+            case BoonType.conqueror:
+                return new Conqueror();
+            default:
+                Debug.Log("unknown boon type");
+                return new Founder();
+        }
+    }
+}

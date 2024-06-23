@@ -21,7 +21,6 @@ public class MissionGeneration : MonoBehaviour
 
     public Mission GenerateMission()
     {
-        //TODO test
         return Utils.RandomEnumValue<MissionType>().GetMission();
     }
 }

@@ -25,7 +25,7 @@ class ReachPopulationCountMission : Mission
     
     private static int GetNewPopulationGoalNumber()
     {
-        int newPopulationGoalNumber = GameStats.GetPopulation() / 10 * 15;
+        int newPopulationGoalNumber = (GameStats.GetPopulation() / 10 + 1) * 15;
         Debug.Log("new population goal set: " + newPopulationGoalNumber);
         return newPopulationGoalNumber;
     }

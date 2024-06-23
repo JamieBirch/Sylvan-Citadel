@@ -5,9 +5,9 @@ public class CandidateInfo : MonoBehaviour
 {
     public Text name;
     public Text boon;
-    public MissionPrefab m1;
-    public MissionPrefab m2;
-    public MissionPrefab m3;
+    public NewMissionInfo m1;
+    public NewMissionInfo m2;
+    // public NewMissionInfo m3;
 
     public Text buttonText;
     public Monarch monarch;
@@ -21,10 +21,9 @@ public class CandidateInfo : MonoBehaviour
 
         m1.missionText.text = monarch.missions[0].GiveWording();
         m2.missionText.text = monarch.missions[1].GiveWording();
-        m3.missionText.text = monarch.missions[2].GiveWording();
+        // m3.missionText.text = monarch.missions[2].GiveWording();
 
         buttonText.text = "continue as " + monarch.Name;
-
     }
 
     public void ChooseMonarch()

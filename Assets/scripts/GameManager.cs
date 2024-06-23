@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
     public Monarch currentMonarch;
     public MonarchPanel MonarchPanel;
     [FormerlySerializedAs("missions")] public List<MissionPrefab> missionObjects;
-    public int missionsNumber = 3;
+    public int missionsNumber = 2;
     
     public int StartHumans;
     
@@ -150,21 +150,29 @@ public class GameManager : MonoBehaviour
 
     public void ChooseNewMonarchPanel()
     {
-        // ChooseNewMonarchCanvas.SetActive(true);
-        // MissionsCompleteCanvas.SetActive(false);
+        ChooseNewMonarchCanvas.SetActive(true);
+        // Boon boon = Utils.RandomEnumValue<BoonType>().GetBoon();
 
-        Monarch monarch1 = GenerateMonarch();
-        Monarch monarch2 = GenerateMonarch();
+        Monarch monarch1 = GenerateMonarch(new Builder());
+        Monarch monarch2 = GenerateMonarch(new Conqueror());
 
+        //destroy previous candidates info
+        foreach(Transform child in monarchInfoContainer1.transform)
+        {
+            Destroy(child.gameObject);
+        }
+        foreach(Transform child in monarchInfoContainer2.transform)
+        {
+            Destroy(child.gameObject);
+        }
+        
+        //set new candidates
         Instantiate(monarchInfoPrefab, monarchInfoContainer1.transform).GetComponent<CandidateInfo>().SetStuff(monarch1);
         Instantiate(monarchInfoPrefab, monarchInfoContainer2.transform).GetComponent<CandidateInfo>().SetStuff(monarch2);
     }
 
-    private Monarch GenerateMonarch()
+    private Monarch GenerateMonarch(Boon boon)
     {
-        //TODO test
-        Boon boon = Utils.RandomEnumValue<BoonType>().GetBoon();
-        // Boon boon = new Founder();
         List<Mission> monarchMissions = new List<Mission>();
         MissionGeneration _missionGeneration = MissionGeneration.instance;
         for (int i = 0; i < missionsNumber; i++)

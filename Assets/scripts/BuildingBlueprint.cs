@@ -16,11 +16,14 @@ public abstract class BuildingBlueprint : MonoBehaviour
     public bool blocksTerraforming;
     public bool blockTreeGrowth;
 
-    private void Start()
+    /*private void Start()
     {
         _constructionManager = ConstructionManager.instance;
-        int buildPriceDiscount = _constructionManager.buildPriceDiscount;
-        buildingWoodPrice = CalculateCurrentPrice(buildPriceDiscount);
+    }*/
+
+    private void Awake()
+    {
+        _constructionManager = ConstructionManager.instance;
     }
 
     /*private void Awake()
@@ -29,10 +32,12 @@ public abstract class BuildingBlueprint : MonoBehaviour
         buildingWoodPrice = CalculateCurrentPrice(buildPriceDiscount);
     }*/
 
-    private int CalculateCurrentPrice(int buildPriceDiscount)
+    public void CalculateCurrentPrice()
     {
-        Debug.Log("calculating building price");
-        return defaultWoodPrice * ((100 - buildPriceDiscount) / 100);
+        int buildPriceDiscount = _constructionManager.buildPriceDiscount;
+        buildingWoodPrice = defaultWoodPrice * ((100 - buildPriceDiscount) / 100);
+        // Debug.Log("calculating building price");
+        // return defaultWoodPrice * ((100 - buildPriceDiscount) / 100);
     }
 
     public virtual bool IsBuildable()

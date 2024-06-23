@@ -15,13 +15,15 @@ public class BuildingButton : MonoBehaviour
     private void Start()
     {
         buildingName.text = buildingBlueprint.name;
-        buildingPrice.text = "wood: " + buildingBlueprint.buildingWoodPrice;
         buildingDescription.text = buildingBlueprint.description;
     }
 
     // Update is called once per frame
-    void Update()       
+    void Update()
     {
+        buildingBlueprint.CalculateCurrentPrice();
+        buildingPrice.text = "wood: " + buildingBlueprint.buildingWoodPrice;
+
         if (buildingBlueprint.IsBuildable())
         {
             // button.animator.Play("Normal");

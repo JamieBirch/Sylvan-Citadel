@@ -35,7 +35,7 @@ public abstract class BuildingBlueprint : MonoBehaviour
     public void CalculateCurrentPrice()
     {
         int buildPriceDiscount = _constructionManager.buildPriceDiscount;
-        buildingWoodPrice = defaultWoodPrice * ((100 - buildPriceDiscount) / 100);
+        buildingWoodPrice = (int)(defaultWoodPrice * ((100f -  buildPriceDiscount) / 100f));
         // Debug.Log("calculating building price");
         // return defaultWoodPrice * ((100 - buildPriceDiscount) / 100);
     }

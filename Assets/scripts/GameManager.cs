@@ -142,7 +142,10 @@ public class GameManager : MonoBehaviour
 
     public void ContinueAsCurrentMonarch()
     {
-        // MissionsCompleteCanvas.SetActive(false);
+        if (MissionsCompleteCanvas)
+        {
+            MissionsCompleteCanvas.SetActive(false);
+        }
 
         waitingForPlayer = false;
         Calendar.instance.Resume();

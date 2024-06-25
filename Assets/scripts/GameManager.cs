@@ -79,8 +79,8 @@ public class GameManager : MonoBehaviour
         // monarch.boon = new Founder();
         List<Mission> monarchMissions = new List<Mission>();
         monarchMissions.Add(new DifferentBiomesMission(2));
-        // monarchMissions.Add(new ReachPopulationCountMission(20));
-        // monarchMissions.Add(new CollectResourceMission(20, CollectableResource.food));
+        monarchMissions.Add(new ReachPopulationCountMission(20));
+        monarchMissions.Add(new CollectResourceMission(20, CollectableResource.food));
         // monarch.missions = monarchMissions;
         Monarch monarch = new Monarch(NameGenerator.CreateHumanName(), new Founder(), monarchMissions);
 
@@ -119,6 +119,7 @@ public class GameManager : MonoBehaviour
         {
             PlayerMessageService.instance.ShowMessage("No population left!");
             Debug.Log("No population left!");
+            //TODO game over
         }
 
         if (CheckAllMissionsComplete() && !waitingForPlayer)

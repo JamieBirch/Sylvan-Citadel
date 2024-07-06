@@ -179,9 +179,12 @@ public class GameManager : MonoBehaviour
     {
         List<Mission> monarchMissions = new List<Mission>();
         MissionGeneration _missionGeneration = MissionGeneration.instance;
-        for (int i = 0; i < missionsNumber; i++)
+
+        MissionType[] pickRandomMissionTypes = _missionGeneration.PickRandomMissionTypes(missionsNumber);
+
+        foreach (MissionType missionType in pickRandomMissionTypes)
         {
-            Mission generatedMission = _missionGeneration.GenerateMission();
+            Mission generatedMission = _missionGeneration.GenerateMission(missionType);
             monarchMissions.Add(generatedMission);
         }
         return new Monarch(NameGenerator.CreateHumanName(), boon, monarchMissions);

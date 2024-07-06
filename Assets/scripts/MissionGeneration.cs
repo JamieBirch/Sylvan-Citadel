@@ -1,4 +1,6 @@
-﻿using Unity.VisualScripting.Antlr3.Runtime.Misc;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class MissionGeneration : MonoBehaviour
@@ -22,6 +24,20 @@ public class MissionGeneration : MonoBehaviour
     public Mission GenerateMission()
     {
         return Utils.RandomEnumValue<MissionType>().GetMission();
+    }
+    
+    public Mission GenerateMission(MissionType missionType)
+    {
+        return missionType.GetMission();
+    }
+
+    public MissionType[] PickRandomMissionTypes(int missionCount)
+    {
+        IEnumerable<MissionType> pickedMissionTypes = Enum.GetValues(typeof(MissionType))
+            .OfType<MissionType>()
+            .OrderBy(e => Guid.NewGuid())
+            .Take(missionCount);
+        return pickedMissionTypes.ToArray();
     }
 }
 

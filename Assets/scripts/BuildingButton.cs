@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class BuildingButton : MonoBehaviour
 {
     public Button button;
+
     //sb BuildingBlueprint
     [FormerlySerializedAs("building")] public BuildingBlueprint buildingBlueprint;
     public GameObject tooltip;
@@ -31,6 +32,7 @@ public class BuildingButton : MonoBehaviour
         }
         else
         {
+            // button.animator.Play("Disabled");
             button.interactable = false;
         }
     }

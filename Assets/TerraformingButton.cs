@@ -8,13 +8,15 @@ public class TerraformingButton : MonoBehaviour
 
     private void Update()
     {
-        if (IsDoable())
+        if (!button.interactable && IsDoable())
         {
             button.interactable = true;
+            // button.animator.SetTrigger("Normal");
         }
-        else
+        else if (button.interactable && !IsDoable())
         {
             button.interactable = false;
+            // button.animator.SetTrigger("Disabled");
         }
     }
     
